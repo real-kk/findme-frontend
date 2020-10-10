@@ -10,17 +10,16 @@ import React from 'react';
 import { StyleSheet,  View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './Login';
-import UserScreen from './User';
-import MainScreen from './Main';
 
+import SignUp from './SignUp';
+import SignUpNext from './SignUpNext';
 const Stack = createStackNavigator();
 
 const StackScreen = ({Navigation}) => (
         <Stack.Navigator>
-          <Stack.Screen name="Login" component={LoginScreen}/>
-          <Stack.Screen name="Main" component={MainScreen}/>
-          <Stack.Screen name="User" component={UserScreen}/>
+          <Stack.Screen name="SignUp" component={SignUp}/>
+          <Stack.Screen name="SignUpNext" component={SignUpNext}/>
+
         </Stack.Navigator>
 )
 

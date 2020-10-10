@@ -8,6 +8,8 @@ target 'find_me' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'react-native-mail', :path => '../node_modules/react-native-mail'
+
   target 'find_meTests' do
     inherit! :complete
     # Pods for testing
