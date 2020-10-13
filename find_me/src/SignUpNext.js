@@ -17,7 +17,7 @@ class SignUpNext extends React.Component {
     render() {
         return (
             <View>
-                <Text>as</Text>
+                <Text></Text>
             </View>
         )
     }
