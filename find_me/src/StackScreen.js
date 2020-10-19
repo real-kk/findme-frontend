@@ -11,47 +11,62 @@ import { StyleSheet,  View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Login from './Login';
-import SignUp from './SignUp';
-import Main from './Main';
+import LoginScreen from './Login/LoginScreen';
+import SignUpScreen from './Login/SignUpScreen';
+import ExperienceStart from './Experience/ExperienceStart';
+import ExperienceMain from './Experience/ExperienceMain';
+
 const Stack = createStackNavigator();
 
-// function HomeStack() {
-//   return (
-//         <Stack.Navigator>
-//           <Stack.Screen 
-//             options={{headerShown: false}} 
-//             name="SignUp" 
-//             component={SignUp}
-//           />
-//           <Stack.Screen
-//             options={{headerShown: false}} 
-//             name="SignUpNext" 
-//             component={SignUpNext}
-//           />
-//         </Stack.Navigator>
-//   )
-// }
+const LoginStack = () => {
+  return (
+        <Stack.Navigator>
+          <Stack.Screen 
+            options={{headerShown: false}} 
+            name="Login" 
+            component={LoginScreen}
+          />
+          <Stack.Screen 
+            options={{headerShown: false}} 
+            name="SignUp" 
+            component={SignUpScreen}
+          />
+        </Stack.Navigator>
+  )
+}
+
+const ExperienceStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        options={{headerShown: false}} 
+        name="ExperienceStart" 
+        component={ExperienceStart}
+      />
+      <Stack.Screen 
+        options={{headerShown: false}} 
+        name="ExperienceMain" 
+        component={ExperienceMain}
+      />
+    </Stack.Navigator>
+  )
+}
+
 class StackScreen extends React.Component {
   render() {
     return (
-      <Stack.Navigator>
-        <Stack.Screen 
-          options={{headerShown: false}} 
-          name="Login" 
-          component={Login}
-        />
-        <Stack.Screen 
-          options={{headerShown: false}} 
-          name="SignUp" 
-          component={SignUp}
-        />
-        <Stack.Screen 
-          options={{headerShown: false}} 
-          name="Main" 
-          component={Main}
-        />
-    </Stack.Navigator>
+        <Stack.Navigator>
+          <Stack.Screen
+            options={{headerShown: false}}  
+            name="Login" 
+            component={LoginStack}
+          />
+          <Stack.Screen 
+            options={{headerShown: false}} 
+            name="Experience" 
+            component={ExperienceStack}
+          />
+        </Stack.Navigator>
     )
   }
 }

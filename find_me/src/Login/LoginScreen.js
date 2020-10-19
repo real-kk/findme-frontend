@@ -67,7 +67,7 @@ class Login extends React.Component {
                         style={styles.button}
                         onPress={() => {
                             //데이터 검사 후 로그인 페이지 넘어가기
-                            this.props.navigation.navigate('Main')
+                            this.props.navigation.navigate('Experience')
                         }}>
                     <Text style={styles.buttonTitle}>로그인</Text>
                     </TouchableOpacity>
