@@ -29,7 +29,8 @@ class SignUp extends React.Component {
           passwordFlag : false,
           authFlag: false,
           emailFlag: true,
-          value: ''
+          value: '',
+          user_type: false
         }
       }
     
@@ -56,7 +57,18 @@ class SignUp extends React.Component {
                         buttonSize={15}
                         labelStyle={{fontSize:15}}
                         selectedLabelStyle={{color:'red'}}
-                        onPress={(value) => {this.setState({value:value})}}
+                        onPress={(value, user_type) => {
+                            if(value == '1'){
+                                console.log('상담사')
+                                this.setState({user_type:true})
+                            }
+                            else{
+                                console.log('내담자')
+                                this.setState({user_type:false})
+                            }
+                            console.log(user_type)
+                            this.setState({value:value})
+                        }}
                     />
                 </View>
                 <View style={styles.emailContainer}>
@@ -140,7 +152,8 @@ class SignUp extends React.Component {
                                     username: this.state.name,
                                     email: this.state.email,
                                     password1: this.state.password,
-                                    password2: this.state.passwordConfirmation
+                                    password2: this.state.passwordConfirmation,
+                                    user_type : this.state.user_type
                                 })
                                 .then(res=> {
                                     console.log(res)
