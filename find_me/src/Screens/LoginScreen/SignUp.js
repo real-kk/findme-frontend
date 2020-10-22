@@ -34,7 +34,8 @@ class SignUp extends React.Component {
           passwordFlag : false,
           authFlag: false,
           emailFlag: true,
-          value: ''
+          value: '',
+          user_type: false
         }
       }
     
@@ -45,7 +46,8 @@ class SignUp extends React.Component {
             email: this.state.email,
             username: this.state.name,
             password: this.state.password,
-            password_confirmation: this.state.passwordConfirmation
+            password_confirmation: this.state.passwordConfirmation,
+            user_type: this.state.user_type
           }
           console.log(data)
           await this.props.requestSignup(data)
@@ -79,7 +81,18 @@ class SignUp extends React.Component {
                         buttonSize={15}
                         labelStyle={{fontSize:15}}
                         selectedLabelStyle={{color:'red'}}
-                        onPress={(value) => {this.setState({value:value})}}
+                        onPress={(value, user_type) => {
+                            if(value == '1'){
+                                console.log('상담사')
+                                this.setState({user_type:true})
+                            }
+                            else{
+                                console.log('내담자')
+                                this.setState({user_type:false})
+                            }
+                            console.log(user_type)
+                            this.setState({value:value})
+                        }}
                     />
                 </View>
                 <View style={styles.emailContainer}>
@@ -158,21 +171,7 @@ class SignUp extends React.Component {
                         style={{width: '30%', height:40, backgroundColor:'#AAF0D1', alignItems:'center', justifyContent:'center', marginLeft: 200}}
                         onPress={()=>{
                             if(this.state.passwordFlag && this.state.emailFlag && this.state.name != ''){
-                                // axios.post('http://ec2-13-209-32-113.ap-northeast-2.compute.amazonaws.com:8000/rest-auth/registration/',{
-                                // axios.post('/rest-auth/registration/',{
-                                //     username: this.state.name,
-                                //     email: this.state.email,
-                                //     password1: this.state.password,
-                                //     password2: this.state.passwordConfirmation
-                                // })
-                                // .then(res=> {
-                                //     console.log(res)
-                                //     this.props.navigation.navigate('Login')
-                                // })
-                                // .catch(err=> console.log(err))
-                                this.onClickSignUp()
-                                // alert("회원가입이 완료되었습니다.")
-                                
+                                this.onClickSignUp()                              
                             }
                             else {
                                 alert("don't pass next page")
