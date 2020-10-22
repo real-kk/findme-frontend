@@ -11,7 +11,12 @@ import React from 'react';
 import {TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-import axios from '../axiosConfig';
+import { connect } from 'react-redux';
+import { requestSignup } from '../../Store/actions/AuthAction';
+
+const mapDispatchToProps = (dispatch) => ({
+    requestSignup: (data) => dispatch(requestSignup(data))
+  })
 
 var radio_props = [
     {label: '내담자', value: 0 },
@@ -33,6 +38,24 @@ class SignUp extends React.Component {
         }
       }
     
+      onClickSignUp = async () => {
+        try {
+            console.log("haha")
+          const data = {
+            email: this.state.email,
+            username: this.state.name,
+            password: this.state.password,
+            password_confirmation: this.state.passwordConfirmation
+          }
+          console.log(data)
+          await this.props.requestSignup(data)
+          alert('회원가입에 성공하였습니다!')
+          this.props.navigation.navigate('Login')
+        } catch (e) {
+          alert('error' + e)
+        }
+      }
+
     render() {
         let reg = /^[a-zA-Z0-9_.+-]+@ajou.ac.kr/;
         getInitialState= () => {
@@ -136,18 +159,18 @@ class SignUp extends React.Component {
                         onPress={()=>{
                             if(this.state.passwordFlag && this.state.emailFlag && this.state.name != ''){
                                 // axios.post('http://ec2-13-209-32-113.ap-northeast-2.compute.amazonaws.com:8000/rest-auth/registration/',{
-                                axios.post('/rest-auth/registration/',{
-                                    username: this.state.name,
-                                    email: this.state.email,
-                                    password1: this.state.password,
-                                    password2: this.state.passwordConfirmation
-                                })
-                                .then(res=> {
-                                    console.log(res)
-                                    this.props.navigation.navigate('Login')
-                                })
-                                .catch(err=> console.log(err))
-                                
+                                // axios.post('/rest-auth/registration/',{
+                                //     username: this.state.name,
+                                //     email: this.state.email,
+                                //     password1: this.state.password,
+                                //     password2: this.state.passwordConfirmation
+                                // })
+                                // .then(res=> {
+                                //     console.log(res)
+                                //     this.props.navigation.navigate('Login')
+                                // })
+                                // .catch(err=> console.log(err))
+                                this.onClickSignUp()
                                 // alert("회원가입이 완료되었습니다.")
                                 
                             }
@@ -163,6 +186,8 @@ class SignUp extends React.Component {
         )
     }
 }
+
+export default connect(() => ({}), mapDispatchToProps)(SignUp)
 
 const styles = StyleSheet.create({
     container: {
@@ -230,4 +255,3 @@ const styles = StyleSheet.create({
 });
 
 
-export default SignUp;
