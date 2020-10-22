@@ -11,6 +11,7 @@ import React from 'react';
 import {TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import axios from '../axiosConfig';
 
 var radio_props = [
     {label: '내담자', value: 0 },
@@ -121,7 +122,6 @@ class SignUp extends React.Component {
                             } 
                             else {
                                 this.state.passwordFlag = false
-                                console.log("no")
                             }                
                         }}
                     />
@@ -135,8 +135,21 @@ class SignUp extends React.Component {
                         style={{width: '30%', height:40, backgroundColor:'#AAF0D1', alignItems:'center', justifyContent:'center', marginLeft: 200}}
                         onPress={()=>{
                             if(this.state.passwordFlag && this.state.emailFlag && this.state.name != ''){
-                                alert("회원가입이 완료되었습니다.")
-                                this.props.navigation.navigate('Login')
+                                // axios.post('http://ec2-13-209-32-113.ap-northeast-2.compute.amazonaws.com:8000/rest-auth/registration/',{
+                                axios.post('/rest-auth/registration/',{
+                                    username: this.state.name,
+                                    email: this.state.email,
+                                    password1: this.state.password,
+                                    password2: this.state.passwordConfirmation
+                                })
+                                .then(res=> {
+                                    console.log(res)
+                                    this.props.navigation.navigate('Login')
+                                })
+                                .catch(err=> console.log(err))
+                                
+                                // alert("회원가입이 완료되었습니다.")
+                                
                             }
                             else {
                                 alert("don't pass next page")
