@@ -20,13 +20,10 @@ const initialState = {
             return {
                 ...state,
                 login: {
+                    ...state.login,
                     status: 'SUCCESS'
                 },
-                status: {
-                    ...state.status,
-                    isLoggedIn: true,
-                    currentUser: action.email
-                }
+                ...action.response
             }
         case types.AUTH_LOGIN_FAILURE:
             return {
@@ -35,14 +32,14 @@ const initialState = {
                     status: 'FAILURE'
                 }
             }
-        // case types.AUTH_SIGNOUT:
-        //     return {
-        //         ...initialState
-        //     }
-        // case types.AUTH_STORE_USER_DATA:
-        //     return {
-        //         token: action.response.token
-        //     }
+        case types.AUTH_LOGOUT:
+            return {
+                ...initialState
+            }
+        case types.AUTH_STORE_USER_DATA:
+            return {
+                token: action.response.token
+            }
         default:
         return state
     }

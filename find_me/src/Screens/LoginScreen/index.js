@@ -9,7 +9,7 @@
 import React from 'react';
 import { StyleSheet,  View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
 import { requestLogin } from '../../Store/actions/AuthAction';
 import { connect } from 'react-redux'
 
@@ -44,7 +44,7 @@ var radio_props = [
                 password: this.state.pwInput,
                 user_type: this.state.value
             }
-            // await this.props.requestLogin(data)
+            await this.props.requestLogin(data)
         
         }
         render() {

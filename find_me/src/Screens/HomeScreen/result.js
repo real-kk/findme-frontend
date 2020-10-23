@@ -9,18 +9,21 @@
 import React from 'react';
 import { StyleSheet,  View, Text, Button, TextInput } from 'react-native';
 
-class TabUserScreen extends React.Component {
+
+class ResultScreen extends React.Component {
     render() {
         return (
             <View>
-                <Text>UserScreen</Text>
+                <Text style={styles.Test}>UserScreen</Text>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-
+    Test:{
+        marginTop: 10
+    }
 });
 
-export default TabUserScreen;
+export default ResultScreen;
