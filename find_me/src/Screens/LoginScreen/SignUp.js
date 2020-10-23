@@ -34,20 +34,18 @@ class SignUp extends React.Component {
           passwordFlag : false,
           authFlag: false,
           emailFlag: true,
-          value: '',
-          user_type: false
+          value: '0',
         }
       }
     
       onClickSignUp = async () => {
         try {
-            console.log("haha")
           const data = {
             email: this.state.email,
             username: this.state.name,
-            password: this.state.password,
-            password_confirmation: this.state.passwordConfirmation,
-            user_type: this.state.user_type
+            password1: this.state.password,
+            password2: this.state.passwordConfirmation,
+            user_type: this.state.value
           }
           console.log(data)
           await this.props.requestSignup(data)
@@ -60,11 +58,7 @@ class SignUp extends React.Component {
 
     render() {
         let reg = /^[a-zA-Z0-9_.+-]+@ajou.ac.kr/;
-        getInitialState= () => {
-            return {
-              value: 0,
-            }
-          };
+
         return (
             <View style={styles.container}>
                 
@@ -81,16 +75,7 @@ class SignUp extends React.Component {
                         buttonSize={15}
                         labelStyle={{fontSize:15}}
                         selectedLabelStyle={{color:'red'}}
-                        onPress={(value, user_type) => {
-                            if(value == '1'){
-                                console.log('상담사')
-                                this.setState({user_type:true})
-                            }
-                            else{
-                                console.log('내담자')
-                                this.setState({user_type:false})
-                            }
-                            console.log(user_type)
+                        onPress={(value) => {
                             this.setState({value:value})
                         }}
                     />

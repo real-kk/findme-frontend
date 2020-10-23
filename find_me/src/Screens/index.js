@@ -57,7 +57,6 @@ const mapStateToProps = (state) => ({
 
   function AuthStack() {
     return (
-      
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           options={{ headerShown: false }}
@@ -115,12 +114,16 @@ class StackScreen extends React.Component {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-            <Stack.Screen
-                options={{headerShown: false}}  
-                name="TabStack" 
-                component={TabStack}
-            />
-            
+              <Stack.Screen
+                  options={{headerShown: false}}  
+                  name="Login" 
+                  component={AuthStack}
+              />
+              <Stack.Screen
+                  options={{headerShown: false}}  
+                  name="TabStack" 
+                  component={TabStack}
+              />
             </Stack.Navigator>
         </NavigationContainer>
     )

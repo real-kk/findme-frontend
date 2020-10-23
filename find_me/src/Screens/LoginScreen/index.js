@@ -23,8 +23,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 var radio_props = [
-    {label: '내담자', value: 0 },
-    {label: '상담사', value: 1 }
+    {label: '내담자', value: '0' },
+    {label: '상담사', value: '1' }
   ];
 
   
@@ -33,18 +33,20 @@ var radio_props = [
           super(props)
           this.state = {
               emailInput: '',
-              pwInput: ''
+              pwInput: '',
+              value: '0'
             }
         }
 
-        // onclickLogin = async () => {
-        //     const data = {
-        //         email: this.state.emailInput,
-        //         password: this.state.pwInput
-        //         }
-        //     await this.props.requestLogin(data)
+        onclickLogin = async () => {
+            const data = {
+                email: this.state.emailInput,
+                password: this.state.pwInput,
+                user_type: this.state.value
+            }
+            // await this.props.requestLogin(data)
         
-        // }
+        }
         render() {
             return (
                 <View style={styles.container}>
@@ -87,7 +89,7 @@ var radio_props = [
                     <TouchableOpacity 
                         style={styles.button}
                         onPress={() => {
-                            // this.onclickLogin()
+                            this.onclickLogin()
                         }}>
                     <Text style={styles.buttonTitle}>로그인</Text>
                     </TouchableOpacity>

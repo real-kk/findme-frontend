@@ -4,43 +4,42 @@ import {
     AUTH_LOGIN_FAILURE,
     AUTH_SIGNUP,
     AUTH_SIGNUP_SUCCESS,
-    AUTH_SIGNUP_FAILURE
+    AUTH_SIGNUP_FAILURE,
+    AUTH_STORE_USER_DATA,
   } from './ActionTypes';
 import axios from '../../axiosConfig';
 
 /* LOGIN */
-export function requestLogin(email, password) {
-    return (dispatch) => {
-        // Inform Login API is starting
-        dispatch(login());
+// export function requestLogin(email, password) {
+//     return (dispatch) => {
+//         // Inform Login API is starting
+//         dispatch(login());
    
-        // API REQUEST
-        return axios.post('/rest-auth/login/', { email, password })
-        .then((response) => {
-            // SUCCEED
-            dispatch(loginSuccess(email));
-        }).catch((error) => {
-            // FAILED
-            dispatch(loginFailure());
-        });
-    };
-  }
+//         // API REQUEST
+//         return axios.post('/rest-auth/login/', { email, password })
+//         .then((response) => {
+//             // SUCCEED
+//             dispatch(loginSuccess(email));
+//         }).catch((error) => {
+//             // FAILED
+//             dispatch(loginFailure());
+//         });
+//     };
+//   }
   
-  export const requestSignup = (data) => {
-    return (dispatch) => {
-      console.log("pass")
-      dispatch(signup())
-      console.log("pass2")
-      return axios.post('/rest-auth/registration/', data)
-        .then(() => {
-            console.log("nnn")
-            console.log(response.data)
-          dispatch(signupSuccess())
-        }).catch((error) => {
-          dispatch(signupFailure(error))
-        })
-    }
+export const requestSignup = (data) => {
+  return (dispatch) => {
+    dispatch(signup())
+    return axios.post('/rest-auth/registration/', data)
+      .then((res) => {
+        console.log(res)
+        dispatch(signupSuccess())
+      }).catch((error) => {
+        console.log(error)
+        dispatch(signupFailure(error))
+      })
   }
+}
 
 //   export const requestSignout = () => {
 //     return (dispatch) => {
