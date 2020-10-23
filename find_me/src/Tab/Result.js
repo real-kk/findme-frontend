@@ -13,14 +13,16 @@ class ResultScreen extends React.Component {
     render() {
         return (
             <View>
-                <Text>Result</Text>
+                <Text style={styles.Test}>UserScreen</Text>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-
+    Test:{
+        marginTop: 10
+    }
 });
 
 export default ResultScreen;

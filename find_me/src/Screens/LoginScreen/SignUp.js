@@ -6,13 +6,13 @@
  * @flow strict-local
  */
 
-import 'react-native-gesture-handler';
-import React from 'react';
-import {TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native';
+import 'react-native-gesture-handler'
+import React from 'react'
+import {TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-import { connect } from 'react-redux';
-import { requestSignup } from '../../Store/actions/AuthAction';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button'
+import { connect } from 'react-redux'
+import { requestSignup } from '../../Store/actions/AuthAction'
 
 const mapDispatchToProps = (dispatch) => ({
     requestSignup: (data) => dispatch(requestSignup(data))

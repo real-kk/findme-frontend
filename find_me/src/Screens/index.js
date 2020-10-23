@@ -6,17 +6,17 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React from "react"
 import { Text } from "react-native"
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { connect } from "react-redux"
 
-import LoginScreen from './LoginScreen';
-import Signup from './LoginScreen/SignUp';
-import { NavigationContainer } from '@react-navigation/native';
-import TabUserScreen from '../Tab/Home';
-import ResultScreen from '../Tab/Result'
+import LoginScreen from "./LoginScreen"
+import Signup from "./LoginScreen/SignUp"
+import { NavigationContainer } from '@react-navigation/native'
+import TabUserScreen from "../Tab/Home"
+import ResultScreen from "../Tab/Result"
 
 import Icon from "react-native-vector-icons/Ionicons"
 
@@ -81,11 +81,9 @@ const mapStateToProps = (state) => ({
             let icon = "▲"
 
             if (route.name === 'Home') {
-              console.log('Hoooome')
               icon = <Icon name="ios-person" size={30} />
             } else if (route.name === 'Result') {
-              console.log('Reeeesult')
-              icon = <Icon name="md-person" size={30} />
+              icon = <Icon name="ios-search" size={30} />
             } 
             return <Text style={{ color: focused && "#FF6787" || "#FEFEFE", marginTop: 5 }}>{icon}</Text>
           }
