@@ -129,7 +129,15 @@ class SignUp extends React.Component {
                         placeholder="비밀번호 입력"
                         value={this.state.password}
                         secureTextEntry={true}
-                        onChangeText={(text) => this.setState({password: text})}
+                        onChangeText={(text) => {
+                            this.setState({password: text})
+                            if(this.state.passwordConfirmation === text){
+                                this.state.passwordFlag = true
+                            } 
+                            else {
+                                this.state.passwordFlag = false
+                            }
+                        }}
                     />
                     <TextInput style={styles.passwordConfirmation}
                         placeholder="비밀번호 재입력"
@@ -138,7 +146,6 @@ class SignUp extends React.Component {
                         onChangeText={(text) => {
                             this.setState({passwordConfirmation: text})
                             if(this.state.password === text){
-                                // alert("password same")
                                 this.state.passwordFlag = true
                             } 
                             else {

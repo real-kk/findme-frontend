@@ -14,11 +14,11 @@ import { NavigationContainer } from '@react-navigation/native'
 import { connect } from "react-redux"
 import Icon from "react-native-vector-icons/Ionicons"
 
-import LoginScreen from "./LoginScreen"
-import Signup from "./LoginScreen/SignUp"
+import LoginScreen from "./LoginScreen";
 import HomeScreen from './HomeScreen';
-import TabUserScreen from "./HomeScreen/index";
-import ResultScreen from "./HomeScreen/result";
+import ResultScreen from './ResultScreen';
+
+import Signup from "./LoginScreen/SignUp";
 
 import {
   getUserData,
@@ -40,22 +40,22 @@ const mapStateToProps = (state) => ({
   function HomeStack(){
     return(
       <Stack.Navigator>
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Home"
-        component={TabUserScreen}
-      />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={HomeScreen}
+        />
       </Stack.Navigator>
     )
   }
   function ResultStack(){
     return(
       <Stack.Navigator>
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Result"
-        component={ResultScreen}
-      />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Result"
+          component={ResultScreen}
+        />
       </Stack.Navigator>
     )
   }
