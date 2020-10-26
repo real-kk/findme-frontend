@@ -10,6 +10,8 @@ target 'find_me' do
 
   pod 'react-native-mail', :path => '../node_modules/react-native-mail'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'find_meTests' do
     inherit! :complete
     # Pods for testing

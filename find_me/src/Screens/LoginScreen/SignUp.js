@@ -6,11 +6,17 @@
  * @flow strict-local
  */
 
-import 'react-native-gesture-handler';
-import React from 'react';
-import {TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native';
+import 'react-native-gesture-handler'
+import React from 'react'
+import {TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button'
+import { connect } from 'react-redux'
+import { requestSignup } from '../../Store/actions/AuthAction'
+
+const mapDispatchToProps = (dispatch) => ({
+    requestSignup: (data) => dispatch(requestSignup(data))
+  })
 
 var radio_props = [
     {label: '내담자', value: 0 },
@@ -28,17 +34,31 @@ class SignUp extends React.Component {
           passwordFlag : false,
           authFlag: false,
           emailFlag: true,
-          value: ''
+          value: '0',
         }
       }
     
+      onClickSignUp = async () => {
+        try {
+          const data = {
+            email: this.state.email,
+            username: this.state.name,
+            password1: this.state.password,
+            password2: this.state.passwordConfirmation,
+            user_type: this.state.value
+          }
+          console.log(data)
+          await this.props.requestSignup(data)
+          alert('회원가입에 성공하였습니다!')
+          this.props.navigation.navigate('Login')
+        } catch (e) {
+          alert('error' + e)
+        }
+      }
+
     render() {
         let reg = /^[a-zA-Z0-9_.+-]+@ajou.ac.kr/;
-        getInitialState= () => {
-            return {
-              value: 0,
-            }
-          };
+
         return (
             <View style={styles.container}>
                 
@@ -55,7 +75,9 @@ class SignUp extends React.Component {
                         buttonSize={15}
                         labelStyle={{fontSize:15}}
                         selectedLabelStyle={{color:'red'}}
-                        onPress={(value) => {this.setState({value:value})}}
+                        onPress={(value) => {
+                            this.setState({value:value})
+                        }}
                     />
                 </View>
                 <View style={styles.emailContainer}>
@@ -107,7 +129,15 @@ class SignUp extends React.Component {
                         placeholder="비밀번호 입력"
                         value={this.state.password}
                         secureTextEntry={true}
-                        onChangeText={(text) => this.setState({password: text})}
+                        onChangeText={(text) => {
+                            this.setState({password: text})
+                            if(this.state.passwordConfirmation === text){
+                                this.state.passwordFlag = true
+                            } 
+                            else {
+                                this.state.passwordFlag = false
+                            }
+                        }}
                     />
                     <TextInput style={styles.passwordConfirmation}
                         placeholder="비밀번호 재입력"
@@ -116,12 +146,10 @@ class SignUp extends React.Component {
                         onChangeText={(text) => {
                             this.setState({passwordConfirmation: text})
                             if(this.state.password === text){
-                                // alert("password same")
                                 this.state.passwordFlag = true
                             } 
                             else {
                                 this.state.passwordFlag = false
-                                console.log("no")
                             }                
                         }}
                     />
@@ -135,8 +163,7 @@ class SignUp extends React.Component {
                         style={{width: '30%', height:40, backgroundColor:'#AAF0D1', alignItems:'center', justifyContent:'center', marginLeft: 200}}
                         onPress={()=>{
                             if(this.state.passwordFlag && this.state.emailFlag && this.state.name != ''){
-                                alert("회원가입이 완료되었습니다.")
-                                this.props.navigation.navigate('Login')
+                                this.onClickSignUp()                              
                             }
                             else {
                                 alert("don't pass next page")
@@ -150,6 +177,8 @@ class SignUp extends React.Component {
         )
     }
 }
+
+export default connect(() => ({}), mapDispatchToProps)(SignUp)
 
 const styles = StyleSheet.create({
     container: {
@@ -217,4 +246,3 @@ const styles = StyleSheet.create({
 });
 
 
-export default SignUp;

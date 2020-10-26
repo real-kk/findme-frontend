@@ -6,30 +6,20 @@
  * @flow strict-local
  */
 
-import React, { Component } from 'react';
-import { StyleSheet,  View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import AppNav from './src/Screens';
+import { StatusBar } from 'react-native'
+import { Provider } from 'react-redux'
+import configureStore from './src/Store/configureStore';
 
-import StackScreen from './src/StackScreen';
+const store = configureStore()
 
-
-const Stack = createStackNavigator();
-
-class App extends Component {
-
-  
-  render() {
-    return (
-      <NavigationContainer>
-        <StackScreen/>
-      </NavigationContainer>
-    )
-  }
+const App = () => {
+  return (
+    <Provider store={store}>
+      <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#00BCD4" translucent = {true}/>
+      <AppNav/>
+    </Provider>
+  ) 
 }
-
-const styles = StyleSheet.create({
- 
-});
-
-export default App;
+export default App

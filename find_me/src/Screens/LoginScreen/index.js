@@ -9,24 +9,47 @@
 import React from 'react';
 import { StyleSheet,  View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
+import { requestLogin } from '../../Store/actions/AuthAction';
+import { connect } from 'react-redux'
+
+const mapStateToProps = (state) => ({
+    token: state
+  })
+  
+const mapDispatchToProps = (dispatch) => ({
+    requestLogin: (data) => dispatch(requestLogin(data))
+  })
+
 
 var radio_props = [
-    {label: '내담자', value: 0 },
-    {label: '상담사', value: 1 }
+    {label: '내담자', value: '0' },
+    {label: '상담사', value: '1' }
   ];
 
-class Login extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-          emailInput: '',
-          pwInput: ''
+  
+  class LoginScreen extends React.Component {
+      constructor(props) {
+          super(props)
+          this.state = {
+              emailInput: '',
+              pwInput: '',
+              value: '0'
+            }
         }
-      }
-    render() {
-        return (
-            <View style={styles.container}>
+
+        onclickLogin = async () => {
+            const data = {
+                email: this.state.emailInput,
+                password: this.state.pwInput,
+                user_type: this.state.value
+            }
+            await this.props.requestLogin(data)
+        
+        }
+        render() {
+            return (
+                <View style={styles.container}>
                 <View style={styles.titleArea}>
                     <Text style={styles.title}>Find Me</Text>
                 </View>
@@ -66,15 +89,14 @@ class Login extends React.Component {
                     <TouchableOpacity 
                         style={styles.button}
                         onPress={() => {
-                            //데이터 검사 후 로그인 페이지 넘어가기
-                            this.props.navigation.navigate('Experience')
+                            this.onclickLogin()
                         }}>
                     <Text style={styles.buttonTitle}>로그인</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
                         onPress={()=>{
-                            this.props.navigation.navigate('SignUp')
+                            this.props.navigation.navigate('Signup')
                         }}
                     >
                         <Text style={styles.buttonTitle}>회원가입</Text>
@@ -84,6 +106,7 @@ class Login extends React.Component {
         )
     }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
 
 const styles = StyleSheet.create({
     container: {
@@ -130,4 +153,3 @@ const styles = StyleSheet.create({
 
 });
 
-export default Login;
