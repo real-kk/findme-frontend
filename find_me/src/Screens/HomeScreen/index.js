@@ -7,46 +7,63 @@
  */
 
 import React from 'react';
-import { StyleSheet,  View, Text, Button, TextInput, TouchableOpacity} from 'react-native';
-import { connect } from 'react-redux'
-import { requestLogout } from '../../Store/actions/AuthAction';
+import { StyleSheet,  View, Text, Screen,FlatList, TextInput, TouchableOpacity} from 'react-native';
+import axios from '../../axiosConfig';
 
-const mapStateToProps = (state) => ({
-    token: state
-  })
-  
-  const mapDispatchToProps = (dispatch) => ({
-    requestLogout: () => dispatch(requestLogout())
-  })
+  class HomeScreen extends React.Component {
+      constructor(){
+          super();
+          this.state={
+              datas: [
+                  {key:'0', data:'감정일기 작성'},
+                //   {key:'1', data:'bbb'},
+                //   {key:'2', data:'ccc'},
+                ],
+          }
+      }
 
-  
-  class TabUserScreen extends React.Component {
-      _onclickLogout = () => {
-          console.log("gfg")
-          this.props.requestLogout()
-          console.log("pass")
-          alert("로그아웃 되었다.")
+      _onPress = () => {
+          this.props.navigation.push('Diary')
       }
 
       render() {
         return (
-            <View>
-                <Text>NNNNNNNNNN</Text>
-                <Text>NNNNNNNNNN</Text>
-                <Text>NNNNNNNNNN</Text>
-                <Text>NNNNNNNNNN</Text>
-                <Text>NNNNNNNNNN</Text>
-               <TouchableOpacity 
-                        onPress={ this._onclickLogout.bind(this)}>
-                    <Text>로그아웃</Text>
-                    </TouchableOpacity>
+            <View style={styles.container}>
+                <FlatList
+                    data={this.state.datas}
+                    renderItem={({item})=>{
+                        return(
+                            <TouchableOpacity
+                                onPress={()=> this._onPress()}
+                            >
+                                <View style={styles.list}>
+                                    <Text>{item.data}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }}
+                />
             </View>
         )
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(TabUserScreen)
+export default HomeScreen
 
 const styles = StyleSheet.create({
+    container : {
+        flex: 1,
+        paddingTop: 50,
+        alignItems: 'center',
+        justifyContent:'center'
+    },
+    list: {
+        borderWidth: 1,
+        borderRadius: 8,
+        padding:40,
+        margin: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 
 });
 

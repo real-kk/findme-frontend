@@ -17,8 +17,12 @@ import Icon from "react-native-vector-icons/Ionicons"
 import LoginScreen from "./LoginScreen";
 import HomeScreen from './HomeScreen';
 import ResultScreen from './ResultScreen';
+import MypageScreen from './MypageScreen';
 
 import Signup from "./LoginScreen/SignUp";
+import DiaryScreen from './HomeScreen/diary';
+import wordcloudResultScreen from './ResultScreen/wordcloudResult';
+
 
 import {
   getUserData,
@@ -36,30 +40,7 @@ const mapStateToProps = (state) => ({
   const mapDispatchToProps = (dispatch) => ({
     storeUserData: (data) => dispatch(storeUserData(data)),
   })
-
-  function HomeStack(){
-    return(
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Home"
-          component={HomeScreen}
-        />
-      </Stack.Navigator>
-    )
-  }
-  function ResultStack(){
-    return(
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Result"
-          component={ResultScreen}
-        />
-      </Stack.Navigator>
-    )
-  }
-
+  
   function AuthStack() {
     return (
       <Stack.Navigator initialRouteName="Login">
@@ -77,40 +58,90 @@ const mapStateToProps = (state) => ({
     )
   }
 
+  function HomeStack(){
+    return(
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={HomeScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Diary"
+          component={DiaryScreen}
+        />
+      </Stack.Navigator>
+    )
+  }
+
+  function ResultStack(){
+    return(
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Result"
+          component={ResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="WordCloud"
+          component={wordcloudResultScreen}
+        />
+      </Stack.Navigator>
+    )
+  }
+
+  function MypageStack(){
+    return(
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Mypage"
+          component={MypageScreen}
+        />
+      </Stack.Navigator>
+    )
+  }
+
   function TabStack(){
     return(
         <Tab.Navigator 
-        screenOptions={({ route }) => ({
-        tabBarIcon: ({focused, color, size}) => {
-            let icon = "▲"
+          screenOptions={({ route }) => ({
+          tabBarIcon: ({focused, color, size}) => {
+              let icon = "▲"
 
-            if (route.name === 'Home') {
-              icon = <Icon name="ios-person" size={30} />
-            } else if (route.name === 'Result') {
-              icon = <Icon name="ios-search" size={30} />
-            } 
-            return <Text style={{ color: focused && "#FF6787" || "#FEFEFE", marginTop: 5 }}>{icon}</Text>
-          }
-          
-        })}
-        
-        >
-        <Tab.Screen 
-          options={{ headerShown: false }} 
-          name="Home"
-          component={HomeStack}
-          listeners={({navigation}) =>({
-            tabPress: e => {
-              navigation.navigate('Home', {refresh : true})
-            },
+              if (route.name === 'Home') {
+                icon = <Icon name="ios-person" size={30} />
+              } else if (route.name === 'Result') {
+                icon = <Icon name="ios-search" size={30} />
+              } 
+              return <Text style={{ color: focused && "#FF6787" || "#FEFEFE", marginTop: 5 }}>{icon}</Text>
+            }
+            
           })}
-        />
-      <Tab.Screen
-        options={{ headerShown: false }}
-        name="Result"
-        component={ResultStack}
-      />
-       </Tab.Navigator>
+          >
+          <Tab.Screen 
+            options={{ headerShown: false }} 
+            name="Home"
+            component={HomeStack}
+            listeners={({navigation}) =>({
+              tabPress: e => {
+                navigation.navigate('Home', {refresh : true})
+              },
+            })}
+          />
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name="Result"
+            component={ResultStack}
+          />
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name="Mypage"
+            component={MypageStack}
+          />
+        </Tab.Navigator>
       
     )
   }
