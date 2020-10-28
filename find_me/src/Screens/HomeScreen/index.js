@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { StyleSheet,  View, Text, Screen,FlatList, TextInput, TouchableOpacity} from 'react-native';
+import { Dimensions, StyleSheet,  View, Text, Image, FlatList, TextInput, TouchableOpacity} from 'react-native';
 import axios from '../../axiosConfig';
 
   class HomeScreen extends React.Component {
@@ -16,8 +16,8 @@ import axios from '../../axiosConfig';
           this.state={
               datas: [
                   {key:'0', data:'감정일기 작성'},
-                //   {key:'1', data:'bbb'},
-                //   {key:'2', data:'ccc'},
+                  {key:'1', data:'일일활동 기록'},
+                  {key:'2', data:'영상 촬영'},
                 ],
           }
       }
@@ -29,6 +29,7 @@ import axios from '../../axiosConfig';
       render() {
         return (
             <View style={styles.container}>
+                <Text style = {styles.logo}>Home</Text>
                 <FlatList
                     data={this.state.datas}
                     renderItem={({item})=>{
@@ -52,18 +53,21 @@ export default HomeScreen
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        paddingTop: 50,
-        alignItems: 'center',
-        justifyContent:'center'
+        paddingTop: '10%',
+        justifyContent:'center',
+        backgroundColor : '#fffff0',
     },
     list: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 8,
-        padding:40,
-        margin: 8,
+        padding:20,
+        marginTop : '25%',
+        marginHorizontal : '20%',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    logo : {
+       textAlign : 'center'
     }
-
 });
 

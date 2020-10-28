@@ -55,7 +55,7 @@ class DiaryScreen extends React.Component {
           <View style={styles.container}>
               <Text>Diary</Text>
               <TextInput
-                style={styles.diary}
+                style={styles.diaryname}
                 placeholder="제목"
                 value={this.state.diaryTitle}
                 onChangeText={(text) => {
@@ -63,7 +63,7 @@ class DiaryScreen extends React.Component {
                 }}
               />
               <TextInput
-                style={styles.diary}
+                style={styles.diarytext}
                 placeholder="감정일기를 작성하세요."
                 value={this.state.diaryContent}
                 onChangeText={(text) => {
@@ -71,7 +71,7 @@ class DiaryScreen extends React.Component {
                 }}
               />
               <TouchableOpacity
-                        style={{width: '30%', height:40, backgroundColor:'#AAF0D1', alignItems:'center', justifyContent:'center', marginLeft: 200}}
+                        style={{width: '30%', height:40, backgroundColor:'#AAF0D1', alignItems:'center', justifyContent:'center'}}
                         onPress={()=>{
                             this.submission();
                         }}
@@ -87,11 +87,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(DiaryScreen)
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        alignItems: 'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        backgroundColor : '#fffff0',
     },
-    diary: {
+    diaryname:{
         borderWidth: 1,
+        marginBottom : 10,
+        marginHorizontal: 10,
+    },
+    diarytext: {
+        borderWidth: 1,
+        paddingBottom : 300,
+        marginHorizontal: 10,
     }
 });
 

@@ -107,6 +107,7 @@ const mapStateToProps = (state) => ({
   function TabStack(){
     return(
         <Tab.Navigator 
+         
           screenOptions={({ route }) => ({
           tabBarIcon: ({focused, color, size}) => {
               let icon = "▲"

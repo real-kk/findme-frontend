@@ -16,9 +16,9 @@ class ResultScreen extends React.Component {
         super();
         this.state={
             datas: [
-                {key:'0', data:'감정일기 분석 결과'},
-                {key:'1', data:'워드클라우드 분석 결과'},
-              //   {key:'1', data:'bbb'},
+                {key:'0', data:'감정일기 분석 결과 확인'},
+                {key:'1', data:'일일 활동 통계 확인'},
+                {key:'2', data:'영상 분석 결과 확인'},
               //   {key:'2', data:'ccc'},
               ],
         }
@@ -31,6 +31,7 @@ class ResultScreen extends React.Component {
     render() {
       return (
         <View style={styles.container}>
+            <Text style = {styles.logo}>Result</Text>
             <FlatList
                 data={this.state.datas}
                 renderItem={({item})=>{
@@ -53,18 +54,22 @@ class ResultScreen extends React.Component {
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        paddingTop: 50,
-        alignItems: 'center',
-        justifyContent:'center'
+        paddingTop: '10%',
+        justifyContent:'center',
+        backgroundColor : '#fffff0',
     },
     list: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 8,
-        padding:40,
-        margin: 8,
+        padding:20,
+        marginTop : '25%',
+        marginHorizontal : '20%',
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+    logo : {
+        textAlign : 'center'
+     }
 });
 
 export default ResultScreen;
