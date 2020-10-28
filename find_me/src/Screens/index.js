@@ -173,7 +173,7 @@ class StackScreen extends React.Component {
                 <Stack.Screen
                     options={{headerShown: false}}  
                     name="Login" 
-                    component={AuthStack}
+                    component={TabStack}
                 />
               ) : (
                 <Stack.Screen

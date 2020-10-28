@@ -40,7 +40,7 @@ class ResultScreen extends React.Component {
                             onPress={()=> this._onPress()}
                         >
                             <View style={styles.list}>
-                                <Text>{item.data}</Text>
+                                <Text style={{color: '#ffffff' , fontWeight: '700'}}>{item.data}</Text>
                             </View>
                         </TouchableOpacity>
                     )
@@ -56,19 +56,22 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: '10%',
         justifyContent:'center',
-        backgroundColor : '#fffff0',
     },
     list: {
         borderWidth: 2,
         borderRadius: 8,
         padding:20,
-        marginTop : '25%',
+        marginTop : '5%',
         marginHorizontal : '20%',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor : '#00C78C',
+        borderColor : '#00C78C',
+       
     },
     logo : {
-        textAlign : 'center'
+        textAlign : 'center',
+        marginBottom : '50%',
      }
 });
 
