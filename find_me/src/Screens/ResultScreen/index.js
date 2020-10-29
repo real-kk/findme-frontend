@@ -19,11 +19,13 @@ class ResultScreen extends React.Component {
                 {key:'0', data:'감정일기 리스트'},
                 {key:'1', data:'일일 활동 통계 확인'},
                 {key:'2', data:'영상 분석 결과 확인'},
+                {key:'3', data:'워드클라우드와 그래프 확인'},
               ],
         }
     }
 
     render() {
+        
       return (
         <View style={styles.container}>
             <Text style = {styles.logo}>Result</Text>
@@ -41,6 +43,9 @@ class ResultScreen extends React.Component {
                                 }
                                 else if(item.key === '2'){
                                     this.props.navigation.push('VideoAnalysis')
+                                }
+                                else if(item.key === '3'){
+                                    this.props.navigation.push('AllResult')
                                 }
                             }}
                         >

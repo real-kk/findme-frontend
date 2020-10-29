@@ -27,16 +27,19 @@ import { connect } from 'react-redux'
         }
       }
 
+      getCounselorList = async () => {
+          const data = await axios.get('/users/?user_type=1', 
+          { headers: {
+              'Authorization' : `Token ${this.props.token.auth.token}`
+          }})
+          .then(({data})=>{
+              this.setState({counselorList: data.users})
+          })
+      }
+
+
       componentDidMount(){
-          getCounselorList = async () => {
-              const data = await axios.get('/users/?user_type=1', 
-              { headers: {
-                  'Authorization' : `Token ${this.props.token.auth.token}`
-              }})
-              await this.setState({counselorList: data.data.users})
-              console.log(this.state.counselorList[0].fields)
-          }
-          getCounselorList()
+          this.getCounselorList()
         }
         
     render() {

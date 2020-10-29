@@ -28,15 +28,20 @@ class DiaryResultList extends React.Component {
 
     }
 
+    getDiaryList = async () => {
+        axios.get('/diaries/', 
+        { headers: {
+            'Authorization' : `Token ${this.props.token.auth.token}`
+        }})
+        .then(({data})=>{
+            console.log(data)
+            this.setState({diaryList: data})
+        })
+        .catch(err=>console.log(err))
+    }
+
     componentDidMount(){
-        getDiaryList = async () => {
-            const data = await axios.get('/diaries/', 
-            { headers: {
-                'Authorization' : `Token ${this.props.token.auth.token}`
-            }})
-            await this.setState({diaryList: data.data})
-        }
-        getDiaryList()
+        this.getDiaryList()
     }
 
     render() {

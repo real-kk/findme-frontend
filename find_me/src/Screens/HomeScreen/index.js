@@ -8,11 +8,13 @@
 
 import React from 'react';
 import { Dimensions, StyleSheet,  View, Text, Image, FlatList, TextInput, TouchableOpacity} from 'react-native';
+import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
 import axios from '../../axiosConfig';
 
   class HomeScreen extends React.Component {
       constructor(){
           super();
+        //   this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
           this.state={
               datas: [
                   {key:'0', data:'감정일기 작성'},
@@ -21,6 +23,13 @@ import axios from '../../axiosConfig';
                 ],
           }
       }
+
+    //   componentDidMount(){
+    //       foreUpdateHandler = () =>{
+    //           this.forceUpdate();
+    //       };
+    //       foreUpdateHandler();
+    //   }
 
       _onPress = () => {
           this.props.navigation.push('Diary')

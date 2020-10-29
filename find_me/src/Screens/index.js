@@ -25,13 +25,14 @@ import Signup from "./LoginScreen/SignUp";
 import DiaryScreen from './HomeScreen/diary';
 import DailyScreen from './HomeScreen/daily';
 
-// import wordcloudResultScreen from './ResultScreen/wordcloudResult';
 import diarytextanalysisResultScreen from './ResultScreen/diarytextanalysisResult';
 import dailyanalysisResultScreen from './ResultScreen/dailyanalysisResult';
 import videoAnalysisResultScreen from './ResultScreen/videoanalysisResult';
 import diaryResultListScreen from './ResultScreen/diaryResultList';
 import diaryResultScreen from './ResultScreen/diaryResult';
 import CounselorDetailScreen from './CounelorsScreen/counselordetail';
+import AllResultScreen from './ResultScreen/allResult';
+
 
 import {
   getUserData,
@@ -102,11 +103,6 @@ const mapStateToProps = (state) => ({
           name="Result"
           component={ResultScreen}
         />
-        {/* <Stack.Screen
-          options={{ headerShown: false }}
-          name="WordCloud"
-          component={wordcloudResultScreen}
-        /> */}
         <Stack.Screen
           options={{ headerShown: false }}
           name="DiaryTextAnalysis"
@@ -131,6 +127,11 @@ const mapStateToProps = (state) => ({
           options={{ headerShown: false }}
           name="VideoAnalysis"
           component={videoAnalysisResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="AllResult"
+          component={AllResultScreen}
         />
       </Stack.Navigator>
     )
