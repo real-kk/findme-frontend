@@ -18,11 +18,20 @@ import LoginScreen from "./LoginScreen";
 import HomeScreen from './HomeScreen';
 import ResultScreen from './ResultScreen';
 import MypageScreen from './MypageScreen';
+import VideoScreen from './HomeScreen/video';
+import CounselorsScreen from './CounelorsScreen';
 
 import Signup from "./LoginScreen/SignUp";
 import DiaryScreen from './HomeScreen/diary';
-import wordcloudResultScreen from './ResultScreen/wordcloudResult';
+import DailyScreen from './HomeScreen/daily';
 
+// import wordcloudResultScreen from './ResultScreen/wordcloudResult';
+import diarytextanalysisResultScreen from './ResultScreen/diarytextanalysisResult';
+import dailyanalysisResultScreen from './ResultScreen/dailyanalysisResult';
+import videoAnalysisResultScreen from './ResultScreen/videoanalysisResult';
+import diaryResultListScreen from './ResultScreen/diaryResultList';
+import diaryResultScreen from './ResultScreen/diaryResult';
+import CounselorDetailScreen from './CounelorsScreen/counselordetail';
 
 import {
   getUserData,
@@ -71,6 +80,16 @@ const mapStateToProps = (state) => ({
           name="Diary"
           component={DiaryScreen}
         />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Daily"
+          component={DailyScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Video"
+          component={VideoScreen}
+        />
       </Stack.Navigator>
     )
   }
@@ -83,10 +102,52 @@ const mapStateToProps = (state) => ({
           name="Result"
           component={ResultScreen}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           options={{ headerShown: false }}
           name="WordCloud"
           component={wordcloudResultScreen}
+        /> */}
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="DiaryTextAnalysis"
+          component={diarytextanalysisResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="DiaryResultList"
+          component={diaryResultListScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="DiaryResult"
+          component={diaryResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="DailyAnalysis"
+          component={dailyanalysisResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="VideoAnalysis"
+          component={videoAnalysisResultScreen}
+        />
+      </Stack.Navigator>
+    )
+  }
+
+  function CounselorsStack(){
+    return(
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Counselors"
+          component={CounselorsScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CounselorDetail"
+          component={CounselorDetailScreen}
         />
       </Stack.Navigator>
     )
@@ -103,6 +164,7 @@ const mapStateToProps = (state) => ({
       </Stack.Navigator>
     )
   }
+
 
   function TabStack(){
     return(
@@ -136,6 +198,11 @@ const mapStateToProps = (state) => ({
             options={{ headerShown: false }}
             name="Result"
             component={ResultStack}
+          />
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name="Counselors"
+            component={CounselorsStack}
           />
           <Tab.Screen
             options={{ headerShown: false }}
@@ -173,7 +240,7 @@ class StackScreen extends React.Component {
                 <Stack.Screen
                     options={{headerShown: false}}  
                     name="Login" 
-                    component={TabStack}
+                    component={AuthStack}
                 />
               ) : (
                 <Stack.Screen

@@ -33,13 +33,12 @@ class DiaryScreen extends React.Component {
             title: this.state.diaryTitle,
             content: this.state.diaryContent
         }
-        console.log(this.props.token.auth.token)
-        console.log(`Token ${this.props.token.auth.token}`)
-        axios.post('/diaries/', data, 
-        { headers: {
-            'Authorization' : `Token ${this.props.token.auth.token}`
-        }
-    })
+
+        await axios.post('/diaries/', data, 
+            { headers: {
+                'Authorization' : `Token ${this.props.token.auth.token}`
+            }
+        })
         .then((res) => {
             console.log(res)
             this.state.diaryTitle = ''

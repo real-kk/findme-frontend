@@ -9,9 +9,17 @@
 import React from 'react';
 import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-native';
 import axios from '../../axiosConfig';
+import { connect } from 'react-redux'
 
+const mapStateToProps = (state) => ({
+    token: state
+  })
 
-class Wordcloud extends React.Component {
+const mapDispatchToProps = (dispatch) => ({
+    requestLogout: () => dispatch(requestLogout())
+  })
+
+class Diarytextanalysis extends React.Component {
     constructor(){
         super();
         
@@ -21,11 +29,13 @@ class Wordcloud extends React.Component {
     render() {
       return (
         <View style={styles.container}>
-            <Text>워드 클라우드 결과들~</Text>
+            <Text>텍스트 감성 분석 결과들~</Text>
         </View>
       )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Diarytextanalysis)
 
 const styles = StyleSheet.create({
     container : {
@@ -37,4 +47,3 @@ const styles = StyleSheet.create({
 
 });
 
-export default Wordcloud;

@@ -11,17 +11,16 @@ import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-nativ
 import axios from '../../axiosConfig';
 
 
-class Wordcloud extends React.Component {
+class Videoanalysis extends React.Component {
     constructor(){
         super();
         
     }
 
-
     render() {
       return (
         <View style={styles.container}>
-            <Text>워드 클라우드 결과들~</Text>
+            <Text>영상 분석 결과들~</Text>
         </View>
       )
   }
@@ -37,4 +36,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Wordcloud;
+export default Videoanalysis;

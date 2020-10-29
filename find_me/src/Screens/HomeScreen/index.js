@@ -35,7 +35,17 @@ import axios from '../../axiosConfig';
                     renderItem={({item})=>{
                         return(
                             <TouchableOpacity
-                                onPress={()=> this._onPress()}
+                                onPress={()=> {
+                                    if(item.key === '0'){
+                                        this.props.navigation.push('Diary')
+                                    }
+                                    else if(item.key === '1'){
+                                        this.props.navigation.push('Daily')
+                                    }
+                                    else if(item.key === '2'){
+                                        this.props.navigation.push('Video')
+                                    }
+                                }}
                             >
                                 <View style={styles.list}>
                                     <Text>{item.data}</Text>

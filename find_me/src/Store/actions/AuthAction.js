@@ -51,6 +51,7 @@ export function requestLogin(data) {
           axios.defaults.headers.common['Authorization'] = res.data.key;
           dispatch(loginSuccess());
           dispatch(storeUserData(res.data));
+          console.log(res.data.key)
       }).catch((error) => {
         // alert('Login Failed : ' + error)
         console.log(error)
