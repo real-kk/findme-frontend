@@ -32,7 +32,7 @@ import diaryResultListScreen from './ResultScreen/diaryResultList';
 import diaryResultScreen from './ResultScreen/diaryResult';
 import CounselorDetailScreen from './CounelorsScreen/counselordetail';
 import AllResultScreen from './ResultScreen/allResult';
-
+import DiaryTotalScreen from './ResultScreen/diaryTotal'
 
 import {
   getUserData,
@@ -127,6 +127,11 @@ const mapStateToProps = (state) => ({
           options={{ headerShown: false }}
           name="VideoAnalysis"
           component={videoAnalysisResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="DiaryTotal"
+          component={DiaryTotalScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}

@@ -36,7 +36,7 @@ class ResultScreen extends React.Component {
                         <TouchableOpacity
                             onPress={()=> {
                                 if(item.key === '0'){
-                                    this.props.navigation.push('DiaryResultList')
+                                    this.props.navigation.push('DiaryTotal')
                                 }
                                 else if(item.key === '1'){
                                     this.props.navigation.push('DailyAnalysis')
