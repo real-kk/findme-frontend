@@ -9,80 +9,48 @@
 import React from 'react';
 import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-native';
 import axios from '../../axiosConfig';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+import DiaryListScreen from './diaryList'
+import VideoScreen from './videoanalysisResult';
+import DiaryScreen from './dailyanalysisResult';
+import VideoAnalysisScreen from './videoanalysisResult';
+import diarytextanalysisResultScreen from './diarytextanalysisResult';
+import WordCloudResultScreen from './wordcloudResult';
+
+const Tab = createMaterialTopTabNavigator();
 
 
-class ResultScreen extends React.Component {
+class TopBar extends React.Component {
     constructor(){
-        super();
-        this.state={
-            datas: [
-                {key:'0', data:'감정일기 리스트'},
-                {key:'1', data:'일일 활동 통계 확인'},
-                {key:'2', data:'영상 분석 결과 확인'},
-                {key:'3', data:'워드클라우드와 그래프 확인'},
-              ],
-        }
+        super();     
     }
-
-    render() {
-        
-      return (
-        <View style={styles.container}>
-            <Text style = {styles.logo}>Result</Text>
-            <FlatList
-                data={this.state.datas}
-                renderItem={({item})=>{
-                    return(
-                        <TouchableOpacity
-                            onPress={()=> {
-                                if(item.key === '0'){
-                                    this.props.navigation.push('DiaryTotal')
-                                }
-                                else if(item.key === '1'){
-                                    this.props.navigation.push('DailyAnalysis')
-                                }
-                                else if(item.key === '2'){
-                                    this.props.navigation.push('VideoAnalysis')
-                                }
-                                else if(item.key === '3'){
-                                    this.props.navigation.push('AllResult')
-                                }
-                            }}
-                        >
-                            <View style={styles.list}>
-                                <Text style={{color: '#ffffff' , fontWeight: '700'}}>{item.data}</Text>
-                            </View>
-                        </TouchableOpacity>
-                    )
-                }}
-            />
-        </View>
-      )
-  }
+    render(){
+        return(
+            <View style={styles.container}>
+                <Tab.Navigator
+                    tabBarOptions={{
+                        scrollEnabled: true
+                    }}
+                >
+                    <Tab.Screen name="감정일기 리스트" component={DiaryListScreen} />
+                    <Tab.Screen name="워드 클라우드" component={WordCloudResultScreen} />
+                    <Tab.Screen name="감정 분석 그래프" component={diarytextanalysisResultScreen} />  
+                    <Tab.Screen name="영상 분석" component={VideoAnalysisScreen} />
+                </Tab.Navigator>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        paddingTop: '10%',
-        justifyContent:'center',
-    },
-    list: {
-        borderWidth: 2,
-        borderRadius: 8,
-        padding:20,
-        marginTop : '5%',
-        marginHorizontal : '20%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor : '#00C78C',
-        borderColor : '#00C78C',
+        paddingTop: '5%',
        
     },
-    logo : {
-        textAlign : 'center',
-        marginBottom : '50%',
-     }
+
 });
 
-export default ResultScreen;
+export default TopBar;
+

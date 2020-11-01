@@ -20,6 +20,7 @@ import ResultScreen from './ResultScreen';
 import MypageScreen from './MypageScreen';
 import VideoScreen from './HomeScreen/video';
 import CounselorsScreen from './CounelorsScreen';
+import TopBar from './ResultScreen';
 
 import Signup from "./LoginScreen/SignUp";
 import DiaryScreen from './HomeScreen/diary';
@@ -33,7 +34,7 @@ import diaryResultScreen from './ResultScreen/diaryResult';
 import CounselorDetailScreen from './CounelorsScreen/counselordetail';
 import CounselingRequestScreen from './CounelorsScreen/counselingRequest';
 import AllResultScreen from './ResultScreen/allResult';
-import DiaryTotalScreen from './ResultScreen/diaryTotal'
+
 
 import {
   getUserData,
@@ -101,8 +102,13 @@ const mapStateToProps = (state) => ({
       <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
-          name="DiaryTotal"
-          component={DiaryTotalScreen}
+          name="TopBar"
+          component={TopBar}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="DiaryList"
+          component={diaryListScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
@@ -113,11 +119,6 @@ const mapStateToProps = (state) => ({
           options={{ headerShown: false }}
           name="DiaryTextAnalysis"
           component={diarytextanalysisResultScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="DiaryResultList"
-          component={diaryListScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
