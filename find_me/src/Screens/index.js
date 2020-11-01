@@ -28,9 +28,10 @@ import DailyScreen from './HomeScreen/daily';
 import diarytextanalysisResultScreen from './ResultScreen/diarytextanalysisResult';
 import dailyanalysisResultScreen from './ResultScreen/dailyanalysisResult';
 import videoAnalysisResultScreen from './ResultScreen/videoanalysisResult';
-import diaryResultListScreen from './ResultScreen/diaryResultList';
+import diaryListScreen from './ResultScreen/diaryList';
 import diaryResultScreen from './ResultScreen/diaryResult';
 import CounselorDetailScreen from './CounelorsScreen/counselordetail';
+import CounselingRequestScreen from './CounelorsScreen/counselingRequest';
 import AllResultScreen from './ResultScreen/allResult';
 import DiaryTotalScreen from './ResultScreen/diaryTotal'
 
@@ -100,6 +101,11 @@ const mapStateToProps = (state) => ({
       <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
+          name="DiaryTotal"
+          component={DiaryTotalScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
           name="Result"
           component={ResultScreen}
         />
@@ -111,7 +117,7 @@ const mapStateToProps = (state) => ({
         <Stack.Screen
           options={{ headerShown: false }}
           name="DiaryResultList"
-          component={diaryResultListScreen}
+          component={diaryListScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
@@ -128,11 +134,7 @@ const mapStateToProps = (state) => ({
           name="VideoAnalysis"
           component={videoAnalysisResultScreen}
         />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="DiaryTotal"
-          component={DiaryTotalScreen}
-        />
+        
         <Stack.Screen
           options={{ headerShown: false }}
           name="AllResult"
@@ -154,6 +156,11 @@ const mapStateToProps = (state) => ({
           options={{ headerShown: false }}
           name="CounselorDetail"
           component={CounselorDetailScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CounselingRequest"
+          component={CounselingRequestScreen}
         />
       </Stack.Navigator>
     )

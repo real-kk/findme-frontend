@@ -53,7 +53,7 @@ import { connect } from 'react-redux'
                             <TouchableOpacity
                                 onPress = {()=> {
                                     this.props.navigation.navigate('CounselorDetail', {
-                                        diary: this.state.counselorList[index]
+                                        counselor: this.state.counselorList[index]
                                     })
                                 }}
                             >

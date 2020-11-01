@@ -3,6 +3,7 @@ import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-nativ
 import axios from '../../axiosConfig';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
+import DiaryListScreen from './diaryList'
 import VideoScreen from './videoanalysisResult';
 import DiaryScreen from './dailyanalysisResult';
 const Tab = createMaterialTopTabNavigator();
@@ -16,8 +17,9 @@ class diaryTotal extends React.Component {
         return(
             <View style={styles.container}>
                 <Tab.Navigator>
+                    <Tab.Screen name="감정일기 리스트" component={DiaryListScreen} />
                     <Tab.Screen name="워드 클라우드" component={VideoScreen} />
-                    <Tab.Screen name="감정 분석 그래프" component={DiaryScreen} />
+                    <Tab.Screen name="감정 분석 그래프" component={DiaryScreen} />  
                 </Tab.Navigator>
             </View>
         )

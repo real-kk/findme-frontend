@@ -10,6 +10,7 @@ import React from 'react';
 import { StyleSheet,  View, Text, TextInput, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
+import { ScrollView } from 'react-native-gesture-handler';
 
 const mapStateToProps = (state) => ({
     token: state
@@ -23,15 +24,32 @@ class CounselorDetail extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-      
+            counselor: this.props.route.params.counselor.fields
         }
     }
-
+    
     render() {
       return (
           <View style={styles.container}>
-              <Text>상담사 상세정보</Text>
-          </View>
+              <ScrollView>
+                <Text>상담사 정보</Text>
+                <Text>이메일: {this.state.counselor.email}</Text>
+                <Text>이름: {this.state.counselor.username}</Text>
+                <Text>소개: </Text>
+
+                <TouchableOpacity
+                    style={{borderWidth: 2}}
+                            onPress={()=>{
+                                this.props.navigation.navigate('CounselingRequest',{
+                                    counselorEmail: this.state.counselor.email
+                                })
+                            }}
+                            
+                        >
+                        <Text>상담 신청하기</Text>
+                </TouchableOpacity>
+            </ScrollView>
+        </View>
       )
     }
 }
