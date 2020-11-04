@@ -36,21 +36,22 @@ class TopBar extends React.Component {
         }
     }
 
-    // getDiaryList = async () => {
-    //     axios.get('/diaries/', 
-    //     { headers: {
-    //         'Authorization' : `Token ${this.props.token.auth.token}`
-    //     }})
-    //     .then(({data})=>{
-    //         console.log(data)
-    //         this.setState({diaryList: data})
-    //     })
-    //     .catch(err=>console.log(err))
-    // }
+    getDiaryList = async () => {
+        axios.get('/diaries/', 
+        { headers: {
+            'Authorization' : `Token ${this.props.token.auth.token}`
+        }})
+        .then(({data})=>{
+            console.log(data)
+            this.setState({diaryList: data})
+        })
+        .catch(err=>console.log(err))
+    }
 
-    // componentDidMount(){
-    //     this.getDiaryList()
-    // }
+    componentDidMount(){
+        console.log("dd")
+        this.getDiaryList()
+    }
     render(){
         return(
             <View style={styles.container}>

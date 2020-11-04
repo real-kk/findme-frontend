@@ -40,7 +40,6 @@ class DiaryScreen extends React.Component {
             }
         })
         .then((res) => {
-            console.log(res)
             this.state.diaryTitle = ''
             this.state.diaryContent = ''
             alert("제출이 완료되었습니다.")

@@ -43,6 +43,10 @@ class DiaryResultList extends React.Component {
     componentDidMount(){
         this.getDiaryList()
     }
+    
+    componentWillReceiveProps(nextProps){
+        console.log("componentWillReceiveProps: " + JSON.stringify(nextProps));
+      }
 
     render() {
       return (
