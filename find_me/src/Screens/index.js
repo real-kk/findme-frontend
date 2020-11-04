@@ -188,6 +188,75 @@ const mapStateToProps = (state) => ({
     )
   }
 
+  function UserStack(){
+    console.log(userType + ' in userstack')
+    return(
+      <Stack.Navigator>
+      {userType === '0' ? (
+        <Stack.Screen
+            options={{headerShown: false}}  
+            name="Client" 
+            component={TabStack}
+        />
+      ) : (
+        <Stack.Screen
+            options={{headerShown: false}}  
+            name="Counselor" 
+            component={CounselorStack}
+        />
+      )}
+    </Stack.Navigator>
+    )
+  }
+
+  function CounselorStack(){
+    return(
+        <Tab.Navigator 
+          navigationOptions = {({navigation}) => ({
+            tabBarOnPress : (scene, jumpToIndex) => {
+              console.log('onPress', scene.route);
+              jumpToIndex(scene.index)
+            }
+          })}
+            
+          screenOptions={({ route }) => ({
+          tabBarIcon: ({focused, color, size}) => {
+              let icon = "▲"
+
+              if (route.name === 'Home') {
+                icon = <Icon name="ios-person" size={30} />
+              } else if (route.name === 'Result') {
+                icon = <Icon name="ios-search" size={30} />
+              } 
+              return <Text style={{ color: focused && "#FF6787" || "#FEFEFE", marginTop: 5 }}>{icon}</Text>
+            }
+            
+          })}
+          >
+          <Tab.Screen 
+            options={{ headerShown: false }} 
+            name="Home"
+            component={HomeStack}
+            listeners={({navigation}) =>({
+              tabPress: e => {
+                navigation.navigate('Home', {refresh : true})
+              },
+            })}
+          />
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name="Result"
+            component={ResultStack}
+          />
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name="Mypage"
+            component={MypageStack}
+          />
+        </Tab.Navigator>
+      
+    )
+  }
 
   function TabStack(){
     return(
@@ -243,6 +312,8 @@ const mapStateToProps = (state) => ({
     )
   }
 
+var userType
+
 class StackScreen extends React.Component {
   constructor(props) {
     super(props)
@@ -250,7 +321,7 @@ class StackScreen extends React.Component {
       .then((data) => {
         let user = JSON.parse(data)
         let userToken = user[0][1];
-        let userType = user[1][1];
+        userType = user[1][1];
 
         console.log("유저타입:: "+userType, "유저토큰:: "+userToken)
         if (!data) {
@@ -297,8 +368,8 @@ class StackScreen extends React.Component {
               ) : (
                 <Stack.Screen
                     options={{headerShown: false}}  
-                    name="TabStack" 
-                    component={TabStack}
+                    name="User" 
+                    component={UserStack}
                 />
               )}
             </Stack.Navigator>
