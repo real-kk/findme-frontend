@@ -14,6 +14,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { connect } from "react-redux"
 import Icon from "react-native-vector-icons/Ionicons"
 
+
 import LoginScreen from "./LoginScreen";
 import HomeScreen from './HomeScreen';
 import ResultScreen from './ResultScreen';
@@ -26,18 +27,21 @@ import Signup from "./LoginScreen/SignUp";
 import DiaryScreen from './HomeScreen/diary';
 import DailyScreen from './HomeScreen/daily';
 
-import diarytextanalysisResultScreen from './ResultScreen/diarytextanalysisResult';
-import dailyanalysisResultScreen from './ResultScreen/dailyanalysisResult';
-import videoAnalysisResultScreen from './ResultScreen/videoanalysisResult';
+import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult';
+import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult';
+import videoAnalysisResultScreen from './ResultScreen/videoAnalysisResult';
 import diaryListScreen from './ResultScreen/diaryList';
-import diaryResultScreen from './ResultScreen/diaryResult';
-import CounselorDetailScreen from './CounelorsScreen/counselordetail';
+import diaryDetailScreen from './ResultScreen/diaryDetail';
+import CounselorDetailScreen from './CounelorsScreen/counselorDetail';
 import CounselingRequestScreen from './CounelorsScreen/counselingRequest';
-import AllResultScreen from './ResultScreen/allResult';
+import userModificationScreen from './MypageScreen/userModification';
+import applicationFormModificationScreen from './MypageScreen/applicationFormModification';
 
+import axios from '../axiosConfig';
 
 import {
   getUserData,
+  readStorage,
   storeUserData,
 } from "../Store/actions/AuthAction"
 ;
@@ -53,6 +57,7 @@ const mapStateToProps = (state) => ({
     storeUserData: (data) => dispatch(storeUserData(data)),
   })
   
+  const AuthStack = 
   function AuthStack() {
     return (
       <Stack.Navigator initialRouteName="Login">
@@ -118,29 +123,23 @@ const mapStateToProps = (state) => ({
         <Stack.Screen
           options={{ headerShown: false }}
           name="DiaryTextAnalysis"
-          component={diarytextanalysisResultScreen}
+          component={diaryTextAnalysisResultScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="DiaryResult"
-          component={diaryResultScreen}
+          name="DiaryDetail"
+          component={diaryDetailScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
           name="DailyAnalysis"
-          component={dailyanalysisResultScreen}
+          component={dailyAnalysisResultScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
           name="VideoAnalysis"
           component={videoAnalysisResultScreen}
-        />
-        
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="AllResult"
-          component={AllResultScreen}
-        />
+        />        
       </Stack.Navigator>
     )
   }
@@ -175,6 +174,16 @@ const mapStateToProps = (state) => ({
           name="Mypage"
           component={MypageScreen}
         />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="userModification"
+          component={userModificationScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="applicationFormModification"
+          component={applicationFormModificationScreen}
+        />
       </Stack.Navigator>
     )
   }
@@ -183,7 +192,13 @@ const mapStateToProps = (state) => ({
   function TabStack(){
     return(
         <Tab.Navigator 
-         
+          navigationOptions = {({navigation}) => ({
+            tabBarOnPress : (scene, jumpToIndex) => {
+              console.log('onPress', scene.route);
+              jumpToIndex(scene.index)
+            }
+          })}
+            
           screenOptions={({ route }) => ({
           tabBarIcon: ({focused, color, size}) => {
               let icon = "▲"
@@ -231,21 +246,44 @@ const mapStateToProps = (state) => ({
 class StackScreen extends React.Component {
   constructor(props) {
     super(props)
-    // Get token when app starts, if token not exists, go to login page
-    getUserData("userToken")
+    getUserData()
       .then((data) => {
+        let user = JSON.parse(data)
+        let userToken = user[0][1];
+        let userType = user[1][1];
+
+        console.log("유저타입:: "+userType, "유저토큰:: "+userToken)
         if (!data) {
           this.props.storeUserData({ token: null })
           return
         }
-        this.props.storeUserData({ token: data })
-        this.setState({ isLoggedin: data })
+        this.props.storeUserData({ token: userToken })
+        this.setState({ isLoggedin: userToken })
       })
       .catch((err) => {
         alert("Failed to login : ", err)
       })
-  }
 
+      // this.getUserType()
+    }
+
+    // getUserType = async () => {
+    //   axios.get('/users/type/', 
+    //   { headers: {
+    //     'Authorization' : `Token ${this.props.token}`
+    //   }})
+    //   .then((res)=>{
+    //     console.log(res)
+    //     // console.log('user type is : ' + data["user_type"])
+    //     // this.setState({user_type: data["user_type"]})
+    //     // console.log(this.state.user_type)
+        
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err)
+    //   })
+    // }
+    
   render() {
     return (
         <NavigationContainer>

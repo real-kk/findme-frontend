@@ -36,6 +36,9 @@ class CounselorDetail extends React.Component {
                 <Text>이메일: {this.state.counselor.email}</Text>
                 <Text>이름: {this.state.counselor.username}</Text>
                 <Text>소개: </Text>
+                <Text>상담 후기</Text>
+                
+                {/* 후기 리스트 쭉~~ */}
 
                 <TouchableOpacity
                     style={{borderWidth: 2}}

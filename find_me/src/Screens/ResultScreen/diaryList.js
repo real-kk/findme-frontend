@@ -54,7 +54,7 @@ class DiaryResultList extends React.Component {
                         return(
                             <TouchableOpacity
                                 onPress = {()=> {
-                                    this.props.navigation.navigate('DiaryResult', {
+                                    this.props.navigation.navigate('DiaryDetail', {
                                         diary: this.state.diaryList[index]
                                     })
                                 }}

@@ -24,9 +24,7 @@ class WordCloudResult extends React.Component {
         super();
         this.state={
            wordcloud: '',
-           graph:'',
            loading_wordcloud: true,
-           loading_graph: true,
         }
     }
 
@@ -40,7 +38,7 @@ class WordCloudResult extends React.Component {
                 wordcloud: data.image,
                 loading_wordcloud: false
             })
-            console.log(this.state.worldcloud)
+            console.log(this.state.wordcloud)
         })
         .catch(err=>console.log(err))
     }
@@ -60,7 +58,7 @@ class WordCloudResult extends React.Component {
                 /> :
                 <View>
                     <Image
-                        style={{width: 200, height: 200}}
+                        style={{width: 400, height: 400}}
                         source={{uri: this.state.wordcloud ? this.state.wordcloud : null}}
                     />
                 </View>

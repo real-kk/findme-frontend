@@ -20,8 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
   })
 
 var radio_props = [
-    {label: '내담자', value: 0 },
-    {label: '상담사', value: 1 }
+    {label: '내담자', value: '0' },
+    {label: '상담사', value: '1' }
   ];
   
 class SignUp extends React.Component {
@@ -180,7 +180,7 @@ class SignUp extends React.Component {
                                 this.onClickSignUp()                              
                             }
                             else {
-                                alert("don't pass next page")
+                                alert("can't pass next page")
                             }
                         }}
                     >
