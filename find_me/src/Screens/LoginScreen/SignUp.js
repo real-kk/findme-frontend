@@ -13,14 +13,15 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button'
 import { connect } from 'react-redux'
 import { requestSignup } from '../../Store/actions/AuthAction'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const mapDispatchToProps = (dispatch) => ({
     requestSignup: (data) => dispatch(requestSignup(data))
   })
 
 var radio_props = [
-    {label: '내담자', value: 0 },
-    {label: '상담사', value: 1 }
+    {label: '내담자', value: '0' },
+    {label: '상담사', value: '1' }
   ];
   
 class SignUp extends React.Component {
@@ -35,6 +36,7 @@ class SignUp extends React.Component {
           authFlag: false,
           emailFlag: true,
           value: '0',
+          introduce:'',
         }
       }
     
@@ -45,9 +47,9 @@ class SignUp extends React.Component {
             username: this.state.name,
             password1: this.state.password,
             password2: this.state.passwordConfirmation,
-            user_type: this.state.value
+            user_type: this.state.value,
+            introduce: this.state.introduce
           }
-          console.log(data)
           await this.props.requestSignup(data)
           alert('회원가입에 성공하였습니다!')
           this.props.navigation.navigate('Login')
@@ -60,6 +62,7 @@ class SignUp extends React.Component {
         let reg = /^[a-zA-Z0-9_.+-]+@ajou.ac.kr/;
 
         return (
+            <ScrollView>
             <View style={styles.container}>
                 
                 <View style={styles.titleContainer}>
@@ -92,14 +95,12 @@ class SignUp extends React.Component {
                             style={{width: '15%', height:40, backgroundColor:'#569CDA', alignItems:'center', justifyContent:'center', marginLeft: 40}}
                             onPress={()=>{
                                 if(reg.test(this.state.email)){
-                                    console.log("correct")
                                     alert('아주대학교 메일입니다.')
                                     this.setState({
                                         emailFlag: true,
                                     })
                                 } 
                                 else {
-                                    console.log("no")
                                     this.setState({
                                         emailFlag: false,
                                         email: ''
@@ -158,6 +159,19 @@ class SignUp extends React.Component {
                                                  : <Text></Text>}
                     </View>
                 </View>
+                
+                <View style={styles.passwordContainer}>
+                    <TextInput 
+                        style={styles.passwordConfirmation}
+                        placeholder="자기소개"
+                        value={this.state.introduce}
+                        onChangeText={(text) => {
+                        this.setState({introduce: text})                  
+                        }}
+                    />
+
+                </View>
+
                 <View style={styles.nextContainer}>
                     <TouchableOpacity
                         style={{width: '30%', height:40, backgroundColor:'#AAF0D1', alignItems:'center', justifyContent:'center', marginLeft: 200}}
@@ -166,7 +180,7 @@ class SignUp extends React.Component {
                                 this.onClickSignUp()                              
                             }
                             else {
-                                alert("don't pass next page")
+                                alert("can't pass next page")
                             }
                         }}
                     >
@@ -174,6 +188,7 @@ class SignUp extends React.Component {
                     </TouchableOpacity>
                 </View>
             </View>
+            </ScrollView>
         )
     }
 }

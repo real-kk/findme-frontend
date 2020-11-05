@@ -12,30 +12,48 @@ import {
   } from './ActionTypes';
 import axios from '../../axiosConfig';
 
-export const setUserData = async (key, data) => {
+
+export const setUserData = async (key, item) => {
   try {
-    await AsyncStorage.setItem('@FINDME:' + key, data)
+    await AsyncStorage.setItem(key, JSON.stringify(item))
   } catch (e) {
-    alert('err : ', e)
+    console.log(e)
   }
 }
 
-export const getUserData = async (key) => {
+export const saveStorage = (item) => {
+  setUserData("FINDME", item)
+}
+
+// export const readStorage = () => {
+//   console.log("DDDD")
+//   getUserData("FINDME").then(result => {
+//     let jsonObject = JSON.parse(result)
+//     console.log("readStorge")
+//     console.log(jsonObject)
+//   })
+// }
+
+
+export const getUserData = async () => {
   try {
-    const userData = await AsyncStorage.getItem('@FINDME:' + key)
+    const userData = await AsyncStorage.getItem('FINDME')
+    let user = JSON.parse(userData)
+    let userToken = user[0][1];
     if(userData === null) {
       return false
     }
-    axios.defaults.headers.common['Authorization'] = userData
+    axios.defaults.headers.common['Authorization'] = userToken
     return userData
   } catch(e) {
     alert('err : ', e)
   }
 }
 
+
 export const removeUserData = async (key) => {
   try {
-    await AsyncStorage.removeItem('@FINDME:' + key)
+    await AsyncStorage.removeItem('FINDME' + key)
   } catch (e) {
     alert('err : ', e)
   }
@@ -47,10 +65,16 @@ export function requestLogin(data) {
       dispatch(login());
       return axios.post('/rest-auth/login/', data)
       .then((res) => {
-          setUserData('userToken', res.data.key);
+          var obj = JSON.parse(res.config.data)
+          // console.log(obj.user_type)
+          var item = [['userToken', res.data.key],['userType', obj.user_type]]
+          saveStorage(item)
+          // setUserData('userToken', res.data.key);
+
           axios.defaults.headers.common['Authorization'] = res.data.key;
           dispatch(loginSuccess());
           dispatch(storeUserData(res.data));
+          // console.log(res.data.key)
       }).catch((error) => {
         // alert('Login Failed : ' + error)
         console.log(error)
@@ -63,7 +87,6 @@ export const requestSignup = (data) => {
     dispatch(signup())
     return axios.post('/rest-auth/registration/', data)
       .then((res) => {
-        console.log(res)
         dispatch(signupSuccess())
       }).catch((error) => {
         console.log(error)
@@ -71,6 +94,10 @@ export const requestSignup = (data) => {
       })
   }
 }
+
+
+
+
 
   export const requestLogout = () => {
     return (dispatch) => {
