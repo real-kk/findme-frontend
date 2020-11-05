@@ -19,13 +19,19 @@ import LoginScreen from "./LoginScreen";
 import HomeScreen from './HomeScreen';
 import ResultScreen from './ResultScreen';
 import MypageScreen from './MypageScreen';
-import VideoScreen from './HomeScreen/video';
+
 import CounselorsScreen from './CounelorsScreen';
 import TopBar from './ResultScreen';
+
+import CounselorHome from './CounselorHome';
+import CounselorApplyScreen from './CounselorHome/apply';
+import CounselorVideoScreen from './CounselorHome/video';
+import CounselorRecordScreen from './CounselorHome/record';
 
 import Signup from "./LoginScreen/SignUp";
 import DiaryScreen from './HomeScreen/diary';
 import DailyScreen from './HomeScreen/daily';
+import VideoScreen from './HomeScreen/video';
 
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult';
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult';
@@ -74,7 +80,32 @@ const mapStateToProps = (state) => ({
       </Stack.Navigator>
     )
   }
-
+  function CounselorHomeStack(){
+    return(
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={CounselorHome}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Apply"
+          component={CounselorApplyScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Video"
+          component={CounselorVideoScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Record"
+          component={CounselorRecordScreen}
+        />
+      </Stack.Navigator>
+    )
+  }
   function HomeStack(){
     return(
       <Stack.Navigator>
@@ -236,7 +267,7 @@ const mapStateToProps = (state) => ({
           <Tab.Screen 
             options={{ headerShown: false }} 
             name="Home"
-            component={HomeStack}
+            component={CounselorHomeStack}
             listeners={({navigation}) =>({
               tabPress: e => {
                 navigation.navigate('Home', {refresh : true})
@@ -261,7 +292,7 @@ const mapStateToProps = (state) => ({
   function TabStack(){
     return(
         <Tab.Navigator 
-          navigationOptions = {({navigation}) => ({
+          navigationOptions = {() => ({
             tabBarOnPress : (scene, jumpToIndex) => {
               console.log('onPress', scene.route);
               jumpToIndex(scene.index)
