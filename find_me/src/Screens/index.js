@@ -32,6 +32,8 @@ import Signup from "./LoginScreen/SignUp";
 import DiaryScreen from './HomeScreen/diary';
 import DailyScreen from './HomeScreen/daily';
 import VideoScreen from './HomeScreen/video';
+import recordVideo from './HomeScreen/recordVideo';
+import selectVideo from './HomeScreen/selectVideo';
 
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult';
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult';
@@ -133,6 +135,16 @@ const mapStateToProps = (state) => ({
           options={{ headerShown: false }}
           name="Video"
           component={VideoScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="RecordVideo"
+          component={recordVideo}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="SelectVideo"
+          component={selectVideo}
         />
       </Stack.Navigator>
     )
