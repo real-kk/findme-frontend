@@ -34,7 +34,6 @@ import { connect } from 'react-redux'
           }})
           .then(({data})=>{
               this.setState({counselorList: data.users})
-              console.log(data)
           })
       }
 

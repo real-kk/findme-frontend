@@ -35,7 +35,7 @@ class CounselorDetail extends React.Component {
                 <Text>상담사 정보</Text>
                 <Text>이메일: {this.state.counselor.email}</Text>
                 <Text>이름: {this.state.counselor.username}</Text>
-                <Text>소개: {this.state.counselor.introduce}</Text>
+                <Text>소개: </Text>
                 <Text>상담 후기</Text>
                 
                 {/* 후기 리스트 쭉~~ */}
