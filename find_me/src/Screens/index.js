@@ -42,7 +42,7 @@ import CounselorDetailScreen from './CounelorsScreen/counselorDetail';
 import CounselingRequestScreen from './CounelorsScreen/counselingRequest';
 import userModificationScreen from './MypageScreen/userModification';
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification';
-
+import ApplicationDetailScreen from './CounselorHome/ApplicationDetail';
 import axios from '../axiosConfig';
 
 import {
@@ -95,6 +95,11 @@ const mapStateToProps = (state) => ({
         />
         <Stack.Screen
           options={{ headerShown: false }}
+          name="ApplicationDetail"
+          component={ApplicationDetailScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
           name="Video"
           component={CounselorVideoScreen}
         />
@@ -129,6 +134,39 @@ const mapStateToProps = (state) => ({
           name="Video"
           component={VideoScreen}
         />
+      </Stack.Navigator>
+    )
+  }
+
+  function CounselorResultStack(){
+    return(
+      <Stack.Navigator>
+   
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Result"
+          component={ResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="DiaryTextAnalysis"
+          component={diaryTextAnalysisResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="DiaryDetail"
+          component={diaryDetailScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="DailyAnalysis"
+          component={dailyAnalysisResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="VideoAnalysis"
+          component={videoAnalysisResultScreen}
+        />        
       </Stack.Navigator>
     )
   }
@@ -292,7 +330,7 @@ const mapStateToProps = (state) => ({
   function TabStack(){
     return(
         <Tab.Navigator 
-          navigationOptions = {() => ({
+          navigationOptions = {({navigation}) => ({
             tabBarOnPress : (scene, jumpToIndex) => {
               console.log('onPress', scene.route);
               jumpToIndex(scene.index)
