@@ -39,6 +39,7 @@ class CounselorDetail extends React.Component {
             this.setState({
                 time_table: res.uri
             })
+            console.log(this.state.time_table)
         })
     }
 

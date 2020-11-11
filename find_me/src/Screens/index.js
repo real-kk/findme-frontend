@@ -35,6 +35,8 @@ import VideoScreen from './HomeScreen/video';
 import recordVideo from './HomeScreen/recordVideo';
 import selectVideo from './HomeScreen/selectVideo';
 
+import CounselorResult from './CounselorResult';
+
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult';
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult';
 import videoAnalysisResultScreen from './ResultScreen/videoAnalysisResult';
@@ -46,6 +48,7 @@ import userModificationScreen from './MypageScreen/userModification';
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification';
 import ApplicationDetailScreen from './CounselorHome/ApplicationDetail';
 import axios from '../axiosConfig';
+
 
 import {
   getUserData,
@@ -157,28 +160,8 @@ const mapStateToProps = (state) => ({
         <Stack.Screen
           options={{ headerShown: false }}
           name="Result"
-          component={ResultScreen}
+          component={CounselorResult}
         />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="DiaryTextAnalysis"
-          component={diaryTextAnalysisResultScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="DiaryDetail"
-          component={diaryDetailScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="DailyAnalysis"
-          component={dailyAnalysisResultScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="VideoAnalysis"
-          component={videoAnalysisResultScreen}
-        />        
       </Stack.Navigator>
     )
   }
@@ -327,7 +310,7 @@ const mapStateToProps = (state) => ({
           <Tab.Screen
             options={{ headerShown: false }}
             name="Result"
-            component={ResultStack}
+            component={CounselorResultStack}
           />
           <Tab.Screen
             options={{ headerShown: false }}

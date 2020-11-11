@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,  View, Text, Button, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet,  View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from '../../axiosConfig';
@@ -21,7 +21,7 @@ class ApplicationDetail extends React.Component {
         }
     }
     reject = async() => {
-        axios.delete('/counsels/4/', 
+        await axios.delete('/counsels/' + this.state.application.id + '/', 
             { headers: {
                 'Authorization' : `Token ${this.props.token.auth.token}`
             }
@@ -46,6 +46,16 @@ class ApplicationDetail extends React.Component {
         })
         .then((res) => {
             console.log(res)
+        })
+        .catch(err => console.log(err))
+
+        await axios.delete('/counsels/' + this.state.application.id + '/', 
+            { headers: {
+                'Authorization' : `Token ${this.props.token.auth.token}`
+            }
+        })
+        .then((res) => {
+            
             alert("승인 완료!")
             this.props.navigation.navigate('Home')
         })
@@ -53,7 +63,7 @@ class ApplicationDetail extends React.Component {
     }
 
     render() {
-       
+        console.log(this.state.application.time_table)
       return (
           <View style={styles.container}>
               <ScrollView>
@@ -63,9 +73,8 @@ class ApplicationDetail extends React.Component {
                 <Text>전공 : {this.state.application.major}</Text>
                 <Text>학번 : {this.state.application.student_number}</Text>
                 <Text>전화번호 : {this.state.application.phone_number}</Text>
-                <Text>시간표 : {this.state.application.time_table}</Text>
                 <Text>하고 싶은 말 :  {this.state.application.content}</Text>
-                <Text>하고 싶은 말 :  {this.state.application.client_email}</Text>
+                <Image source={{uri: this.state.application.time_table,}}/>
                 <TouchableOpacity
                     style={{borderWidth: 1}}
                             onPress={()=>{
