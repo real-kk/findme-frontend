@@ -36,6 +36,9 @@ import recordVideo from './HomeScreen/recordVideo';
 import selectVideo from './HomeScreen/selectVideo';
 
 import CounselorResult from './CounselorResult';
+import ResultHome from './CounselorResult/result';
+import TextResult from './CounselorResult/diaryText';
+import CloudResult from './CounselorResult/diaryCloud';
 
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult';
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult';
@@ -161,6 +164,21 @@ const mapStateToProps = (state) => ({
           options={{ headerShown: false }}
           name="Result"
           component={CounselorResult}
+        />
+         <Stack.Screen
+          options={{ headerShown: false }}
+          name="ResultHome"
+          component={ResultHome}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="TextResult"
+          component={TextResult}
+        />
+         <Stack.Screen
+          options={{ headerShown: false }}
+          name="WordCloudResult"
+          component={CloudResult}
         />
       </Stack.Navigator>
     )

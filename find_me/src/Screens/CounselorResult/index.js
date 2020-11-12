@@ -11,7 +11,6 @@ const mapDispatchToProps = (dispatch) => ({
     requestLogout: () => dispatch(requestLogout())
   })
 
-
 class CounselorResult extends React.Component {
     constructor(){
         super();
@@ -21,7 +20,7 @@ class CounselorResult extends React.Component {
     }
 
     getClientList = async () => {
-        await axios.get('/counsels/', 
+        await axios.get('/counsels/date/', 
         { headers: {
             'Authorization' : `Token ${this.props.token.auth.token}`
         }})
@@ -34,11 +33,30 @@ class CounselorResult extends React.Component {
     componentDidMount(){
         this.getClientList()
       }
-
+    
     render() {
         return (
             <View style={styles.container}>
                 <Text>상담중인 내담자 목록</Text>
+                <FlatList
+                    data={this.state.clientList}
+                    renderItem={({item, index})=>{
+                        return(
+                            <TouchableOpacity
+                                onPress = {()=> {
+                                    this.props.navigation.navigate('ResultHome', {
+                                        client: this.state.clientList[index]
+                                    })
+                                }}
+                            >
+                                <View style={styles.list}>
+                                    <Text>{'이름 : ' + item.client_username}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }}
+                    keyExtractor={(key, index) => index.toString()}
+                />
             </View>
         )
     }
