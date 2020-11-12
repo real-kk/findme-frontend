@@ -7,18 +7,18 @@
  */
 
 import React from 'react';
-import { Dimensions, StyleSheet,  View, Text, Image, FlatList, TextInput, TouchableOpacity} from 'react-native';
-import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
-import axios from '../../axiosConfig';
+import { StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
 
-  class VideoScreen extends React.Component {
+
+  class CounselorHome extends React.Component {
       constructor(){
           super();
         //   this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
           this.state={
               datas: [
-                  {key:'0', data:'동영상 촬영하기'},
-                  {key:'1', data:'갤러리에서 가져오기'},
+                  {key:'0', data:'상담신청 확인'},
+                  {key:'1', data:'영상 질문 등록'},
+                  {key:'2', data:'상담 녹음 파일 변환'},
                 ],
           }
       }
@@ -31,7 +31,7 @@ import axios from '../../axiosConfig';
     //   }
 
       _onPress = () => {
-          this.props.navigation.push('Diary')
+          this.props.navigation.push('Apply')
       }
 
       render() {
@@ -45,10 +45,13 @@ import axios from '../../axiosConfig';
                             <TouchableOpacity
                                 onPress={()=> {
                                     if(item.key === '0'){
-                                        this.props.navigation.push('RecordVideo')
+                                        this.props.navigation.push('Apply')
                                     }
                                     else if(item.key === '1'){
-                                        this.props.navigation.push('SelectVideo')
+                                        this.props.navigation.push('Video')
+                                    }
+                                    else if(item.key === '2'){
+                                        this.props.navigation.push('Record')
                                     }
                                 }}
                             >
@@ -63,7 +66,7 @@ import axios from '../../axiosConfig';
         )
     }
 }
-export default VideoScreen
+export default CounselorHome
 
 const styles = StyleSheet.create({
     container : {
