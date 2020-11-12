@@ -19,13 +19,26 @@ import LoginScreen from "./LoginScreen";
 import HomeScreen from './HomeScreen';
 import ResultScreen from './ResultScreen';
 import MypageScreen from './MypageScreen';
-import VideoScreen from './HomeScreen/video';
+
 import CounselorsScreen from './CounelorsScreen';
 import TopBar from './ResultScreen';
+
+import CounselorHome from './CounselorHome';
+import CounselorApplyScreen from './CounselorHome/apply';
+import CounselorVideoScreen from './CounselorHome/video';
+import CounselorRecordScreen from './CounselorHome/record';
 
 import Signup from "./LoginScreen/SignUp";
 import DiaryScreen from './HomeScreen/diary';
 import DailyScreen from './HomeScreen/daily';
+import VideoScreen from './HomeScreen/video';
+import recordVideo from './HomeScreen/recordVideo';
+import selectVideo from './HomeScreen/selectVideo';
+
+import CounselorResult from './CounselorResult';
+import ResultHome from './CounselorResult/result';
+import TextResult from './CounselorResult/diaryText';
+import CloudResult from './CounselorResult/diaryCloud';
 
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult';
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult';
@@ -36,8 +49,9 @@ import CounselorDetailScreen from './CounelorsScreen/counselorDetail';
 import CounselingRequestScreen from './CounelorsScreen/counselingRequest';
 import userModificationScreen from './MypageScreen/userModification';
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification';
-
+import ApplicationDetailScreen from './CounselorHome/ApplicationDetail';
 import axios from '../axiosConfig';
+
 
 import {
   getUserData,
@@ -74,7 +88,37 @@ const mapStateToProps = (state) => ({
       </Stack.Navigator>
     )
   }
-
+  function CounselorHomeStack(){
+    return(
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={CounselorHome}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Apply"
+          component={CounselorApplyScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="ApplicationDetail"
+          component={ApplicationDetailScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Video"
+          component={CounselorVideoScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Record"
+          component={CounselorRecordScreen}
+        />
+      </Stack.Navigator>
+    )
+  }
   function HomeStack(){
     return(
       <Stack.Navigator>
@@ -97,6 +141,44 @@ const mapStateToProps = (state) => ({
           options={{ headerShown: false }}
           name="Video"
           component={VideoScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="RecordVideo"
+          component={recordVideo}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="SelectVideo"
+          component={selectVideo}
+        />
+      </Stack.Navigator>
+    )
+  }
+
+  function CounselorResultStack(){
+    return(
+      <Stack.Navigator>
+   
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Result"
+          component={CounselorResult}
+        />
+         <Stack.Screen
+          options={{ headerShown: false }}
+          name="ResultHome"
+          component={ResultHome}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="TextResult"
+          component={TextResult}
+        />
+         <Stack.Screen
+          options={{ headerShown: false }}
+          name="WordCloudResult"
+          component={CloudResult}
         />
       </Stack.Navigator>
     )
@@ -188,6 +270,75 @@ const mapStateToProps = (state) => ({
     )
   }
 
+  function UserStack(){
+    console.log(userType + ' in userstack')
+    return(
+      <Stack.Navigator>
+      {userType === '0' ? (
+        <Stack.Screen
+            options={{headerShown: false}}  
+            name="Client" 
+            component={TabStack}
+        />
+      ) : (
+        <Stack.Screen
+            options={{headerShown: false}}  
+            name="Counselor" 
+            component={CounselorStack}
+        />
+      )}
+    </Stack.Navigator>
+    )
+  }
+
+  function CounselorStack(){
+    return(
+        <Tab.Navigator 
+          navigationOptions = {({navigation}) => ({
+            tabBarOnPress : (scene, jumpToIndex) => {
+              console.log('onPress', scene.route);
+              jumpToIndex(scene.index)
+            }
+          })}
+            
+          screenOptions={({ route }) => ({
+          tabBarIcon: ({focused, color, size}) => {
+              let icon = "▲"
+
+              if (route.name === 'Home') {
+                icon = <Icon name="ios-person" size={30} />
+              } else if (route.name === 'Result') {
+                icon = <Icon name="ios-search" size={30} />
+              } 
+              return <Text style={{ color: focused && "#FF6787" || "#FEFEFE", marginTop: 5 }}>{icon}</Text>
+            }
+            
+          })}
+          >
+          <Tab.Screen 
+            options={{ headerShown: false }} 
+            name="Home"
+            component={CounselorHomeStack}
+            listeners={({navigation}) =>({
+              tabPress: e => {
+                navigation.navigate('Home', {refresh : true})
+              },
+            })}
+          />
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name="Result"
+            component={CounselorResultStack}
+          />
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name="Mypage"
+            component={MypageStack}
+          />
+        </Tab.Navigator>
+      
+    )
+  }
 
   function TabStack(){
     return(
@@ -243,6 +394,8 @@ const mapStateToProps = (state) => ({
     )
   }
 
+var userType
+
 class StackScreen extends React.Component {
   constructor(props) {
     super(props)
@@ -250,7 +403,7 @@ class StackScreen extends React.Component {
       .then((data) => {
         let user = JSON.parse(data)
         let userToken = user[0][1];
-        let userType = user[1][1];
+        userType = user[1][1];
 
         console.log("유저타입:: "+userType, "유저토큰:: "+userToken)
         if (!data) {
@@ -297,8 +450,8 @@ class StackScreen extends React.Component {
               ) : (
                 <Stack.Screen
                     options={{headerShown: false}}  
-                    name="TabStack" 
-                    component={TabStack}
+                    name="User" 
+                    component={UserStack}
                 />
               )}
             </Stack.Navigator>

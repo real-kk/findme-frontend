@@ -51,9 +51,9 @@ export const getUserData = async () => {
 }
 
 
-export const removeUserData = async (key) => {
+export const removeUserData = async () => {
   try {
-    await AsyncStorage.removeItem('FINDME' + key)
+    await AsyncStorage.removeItem('FINDME')
   } catch (e) {
     alert('err : ', e)
   }
@@ -101,7 +101,7 @@ export const requestSignup = (data) => {
 
   export const requestLogout = () => {
     return (dispatch) => {
-      removeUserData('userToken')
+      removeUserData()
       dispatch(logout())
     }
   }
