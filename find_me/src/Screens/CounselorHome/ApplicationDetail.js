@@ -32,7 +32,7 @@ class ApplicationDetail extends React.Component {
             this.props.navigation.navigate('Home')
         })
         .catch(err => console.log(err))
-    }
+    }   
 
     submission = async () => {
         const data = {
@@ -63,7 +63,6 @@ class ApplicationDetail extends React.Component {
     }
 
     render() {
-        console.log(this.state.application.time_table)
       return (
           <View style={styles.container}>
               <ScrollView>

@@ -6,73 +6,69 @@
  * @flow strict-local
  */
 
-import React from "react"
-import { Text } from "react-native"
+import React from 'react'
+import { Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { NavigationContainer } from '@react-navigation/native'
-import { connect } from "react-redux"
-import Icon from "react-native-vector-icons/Ionicons"
+import { NavigationContainer, useNavigation } from '@react-navigation/native'
+import { connect } from 'react-redux'
+import Icon from 'react-native-vector-icons/Ionicons'
 
+import LoginScreen from './LoginScreen'
+import HomeScreen from './HomeScreen'
+import ResultScreen from './ResultScreen'
+import MypageScreen from './MypageScreen'
 
-import LoginScreen from "./LoginScreen";
-import HomeScreen from './HomeScreen';
-import ResultScreen from './ResultScreen';
-import MypageScreen from './MypageScreen';
+import CounselorsScreen from './CounelorsScreen'
+import TopBar from './ResultScreen'
 
-import CounselorsScreen from './CounelorsScreen';
-import TopBar from './ResultScreen';
+import CounselorHome from './CounselorHome'
+import CounselorApplyScreen from './CounselorHome/apply'
+import CounselorVideoScreen from './CounselorHome/video'
+import CounselorRecordScreen from './CounselorHome/record'
 
-import CounselorHome from './CounselorHome';
-import CounselorApplyScreen from './CounselorHome/apply';
-import CounselorVideoScreen from './CounselorHome/video';
-import CounselorRecordScreen from './CounselorHome/record';
+import Signup from './LoginScreen/SignUp'
+import DiaryScreen from './HomeScreen/diary'
+import DailyScreen from './HomeScreen/daily'
+import VideoScreen from './HomeScreen/video'
+import recordVideo from './HomeScreen/recordVideo'
+import selectVideo from './HomeScreen/selectVideo'
 
-import Signup from "./LoginScreen/SignUp";
-import DiaryScreen from './HomeScreen/diary';
-import DailyScreen from './HomeScreen/daily';
-import VideoScreen from './HomeScreen/video';
-import recordVideo from './HomeScreen/recordVideo';
-import selectVideo from './HomeScreen/selectVideo';
+import CounselorResult from './CounselorResult'
+import ResultHome from './CounselorResult/result'
+import TextResult from './CounselorResult/diaryText'
+import CloudResult from './CounselorResult/diaryCloud'
 
-import CounselorResult from './CounselorResult';
-import ResultHome from './CounselorResult/result';
-import TextResult from './CounselorResult/diaryText';
-import CloudResult from './CounselorResult/diaryCloud';
-
-import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult';
-import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult';
-import videoAnalysisResultScreen from './ResultScreen/videoAnalysisResult';
-import diaryListScreen from './ResultScreen/diaryList';
-import diaryDetailScreen from './ResultScreen/diaryDetail';
-import CounselorDetailScreen from './CounelorsScreen/counselorDetail';
-import CounselingRequestScreen from './CounelorsScreen/counselingRequest';
-import userModificationScreen from './MypageScreen/userModification';
-import applicationFormModificationScreen from './MypageScreen/applicationFormModification';
-import ApplicationDetailScreen from './CounselorHome/ApplicationDetail';
-import axios from '../axiosConfig';
-
+import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult'
+import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult'
+import videoAnalysisResultScreen from './ResultScreen/videoAnalysisResult'
+import diaryListScreen from './ResultScreen/diaryList'
+import diaryDetailScreen from './ResultScreen/diaryDetail'
+import CounselorDetailScreen from './CounelorsScreen/counselorDetail'
+import CounselingRequestScreen from './CounelorsScreen/counselingRequest'
+import userModificationScreen from './MypageScreen/userModification'
+import applicationFormModificationScreen from './MypageScreen/applicationFormModification'
+import ApplicationDetailScreen from './CounselorHome/ApplicationDetail'
+import axios from '../axiosConfig'
 
 import {
   getUserData,
-  readStorage,
-  storeUserData,
-} from "../Store/actions/AuthAction"
-;
+  storeUserData
+} from '../Store/actions/AuthAction'
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator()
+const Tab = createBottomTabNavigator()
 
 const mapStateToProps = (state) => ({
-    token: state.auth.token,
-  })
-  
-  const mapDispatchToProps = (dispatch) => ({
-    storeUserData: (data) => dispatch(storeUserData(data)),
-  })
-  
-  const AuthStack = 
-  function AuthStack() {
+  token: state.auth.token
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  storeUserData: (data) => dispatch(storeUserData(data))
+})
+
+const AuthStack =
+  function AuthStack () {
     return (
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
@@ -88,8 +84,8 @@ const mapStateToProps = (state) => ({
       </Stack.Navigator>
     )
   }
-  function CounselorHomeStack(){
-    return(
+function CounselorHomeStack () {
+  return (
       <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
@@ -117,10 +113,10 @@ const mapStateToProps = (state) => ({
           component={CounselorRecordScreen}
         />
       </Stack.Navigator>
-    )
-  }
-  function HomeStack(){
-    return(
+  )
+}
+function HomeStack () {
+  return (
       <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
@@ -153,13 +149,13 @@ const mapStateToProps = (state) => ({
           component={selectVideo}
         />
       </Stack.Navigator>
-    )
-  }
+  )
+}
 
-  function CounselorResultStack(){
-    return(
+function CounselorResultStack () {
+  return (
       <Stack.Navigator>
-   
+
         <Stack.Screen
           options={{ headerShown: false }}
           name="Result"
@@ -181,11 +177,11 @@ const mapStateToProps = (state) => ({
           component={CloudResult}
         />
       </Stack.Navigator>
-    )
-  }
+  )
+}
 
-  function ResultStack(){
-    return(
+function ResultStack () {
+  return (
       <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
@@ -221,13 +217,13 @@ const mapStateToProps = (state) => ({
           options={{ headerShown: false }}
           name="VideoAnalysis"
           component={videoAnalysisResultScreen}
-        />        
+        />
       </Stack.Navigator>
-    )
-  }
+  )
+}
 
-  function CounselorsStack(){
-    return(
+function CounselorsStack () {
+  return (
       <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
@@ -245,16 +241,18 @@ const mapStateToProps = (state) => ({
           component={CounselingRequestScreen}
         />
       </Stack.Navigator>
-    )
-  }
+  )
+}
 
-  function MypageStack(){
-    return(
+function MypageStack () {
+  const navigation = useNavigation()
+  return (
       <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
           name="Mypage"
           component={MypageScreen}
+          navigation={navigation}
         />
         <Stack.Screen
           options={{ headerShown: false }}
@@ -267,62 +265,65 @@ const mapStateToProps = (state) => ({
           component={applicationFormModificationScreen}
         />
       </Stack.Navigator>
-    )
-  }
+  )
+}
 
-  function UserStack(){
-    console.log(userType + ' in userstack')
-    return(
+function UserStack ({ navigation, route, userType }) {
+  if (route.params) {
+    console.log('screen userType: ' + route.params.userType)
+  }
+  return (
+
       <Stack.Navigator>
-      {userType === '0' ? (
+      {route.params.userType === '0' ? (
         <Stack.Screen
-            options={{headerShown: false}}  
-            name="Client" 
+            options={{ headerShown: false }}
+            name="Client"
             component={TabStack}
         />
       ) : (
         <Stack.Screen
-            options={{headerShown: false}}  
-            name="Counselor" 
+            options={{ headerShown: false }}
+            name="Counselor"
             component={CounselorStack}
         />
       )}
     </Stack.Navigator>
-    )
-  }
+  )
+}
 
-  function CounselorStack(){
-    return(
-        <Tab.Navigator 
-          navigationOptions = {({navigation}) => ({
-            tabBarOnPress : (scene, jumpToIndex) => {
-              console.log('onPress', scene.route);
+function CounselorStack () {
+  return (
+        <Tab.Navigator
+          navigationOptions = {({ navigation }) => ({
+            tabBarOnPress: (scene, jumpToIndex) => {
+              console.log('onPress', scene.route)
               jumpToIndex(scene.index)
             }
           })}
-            
+
           screenOptions={({ route }) => ({
-          tabBarIcon: ({focused, color, size}) => {
-              let icon = "▲"
+            tabBarIcon: ({ focused, color, size }) => {
+              let icon = '▲'
 
               if (route.name === 'Home') {
-                icon = <Icon name="ios-person" size={30} />
+                icon = <Icon name="ios-home" size={30} />
               } else if (route.name === 'Result') {
                 icon = <Icon name="ios-search" size={30} />
-              } 
-              return <Text style={{ color: focused && "#FF6787" || "#FEFEFE", marginTop: 5 }}>{icon}</Text>
+              }
+              return <Text style={{ color: focused && '#FF6787' || '#FEFEFE', marginTop: 5 }}>{icon}</Text>
             }
-            
+
           })}
           >
-          <Tab.Screen 
-            options={{ headerShown: false }} 
+          <Tab.Screen
+            options={{ headerShown: false }}
             name="Home"
             component={CounselorHomeStack}
-            listeners={({navigation}) =>({
+            listeners={({ navigation }) => ({
               tabPress: e => {
-                navigation.navigate('Home', {refresh : true})
-              },
+                navigation.navigate('Home', { refresh: true })
+              }
             })}
           />
           <Tab.Screen
@@ -336,42 +337,42 @@ const mapStateToProps = (state) => ({
             component={MypageStack}
           />
         </Tab.Navigator>
-      
-    )
-  }
 
-  function TabStack(){
-    return(
-        <Tab.Navigator 
-          navigationOptions = {({navigation}) => ({
-            tabBarOnPress : (scene, jumpToIndex) => {
-              console.log('onPress', scene.route);
+  )
+}
+
+function TabStack () {
+  return (
+        <Tab.Navigator
+          navigationOptions = {({ navigation }) => ({
+            tabBarOnPress: (scene, jumpToIndex) => {
+              console.log('onPress', scene.route)
               jumpToIndex(scene.index)
             }
           })}
-            
+
           screenOptions={({ route }) => ({
-          tabBarIcon: ({focused, color, size}) => {
-              let icon = "▲"
+            tabBarIcon: ({ focused, color, size }) => {
+              let icon = '▲'
 
               if (route.name === 'Home') {
-                icon = <Icon name="ios-person" size={30} />
+                icon = <Icon name="ios-home" size={30} />
               } else if (route.name === 'Result') {
                 icon = <Icon name="ios-search" size={30} />
-              } 
-              return <Text style={{ color: focused && "#FF6787" || "#FEFEFE", marginTop: 5 }}>{icon}</Text>
+              }
+              return <Text style={{ color: focused && '#FF6787' || '#FEFEFE', marginTop: 5 }}>{icon}</Text>
             }
-            
+
           })}
           >
-          <Tab.Screen 
-            options={{ headerShown: false }} 
+          <Tab.Screen
+            options={{ headerShown: false }}
             name="Home"
             component={HomeStack}
-            listeners={({navigation}) =>({
+            listeners={({ navigation }) => ({
               tabPress: e => {
-                navigation.navigate('Home', {refresh : true})
-              },
+                navigation.navigate('Home', { refresh: true })
+              }
             })}
           />
           <Tab.Screen
@@ -390,70 +391,29 @@ const mapStateToProps = (state) => ({
             component={MypageStack}
           />
         </Tab.Navigator>
-      
-    )
-  }
 
-var userType
+  )
+}
 
 class StackScreen extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    getUserData()
-      .then((data) => {
-        let user = JSON.parse(data)
-        let userToken = user[0][1];
-        userType = user[1][1];
+  }
 
-        console.log("유저타입:: "+userType, "유저토큰:: "+userToken)
-        if (!data) {
-          this.props.storeUserData({ token: null })
-          return
-        }
-        this.props.storeUserData({ token: userToken })
-        this.setState({ isLoggedin: userToken })
-      })
-      .catch((err) => {
-        alert("Failed to login : ", err)
-      })
-
-      // this.getUserType()
-    }
-
-    // getUserType = async () => {
-    //   axios.get('/users/type/', 
-    //   { headers: {
-    //     'Authorization' : `Token ${this.props.token}`
-    //   }})
-    //   .then((res)=>{
-    //     console.log(res)
-    //     // console.log('user type is : ' + data["user_type"])
-    //     // this.setState({user_type: data["user_type"]})
-    //     // console.log(this.state.user_type)
-        
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err)
-    //   })
-    // }
-    
-  render() {
+  render () {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-              {this.props.token === null ? (
+            <Stack.Navigator initialRouteName="Login">
                 <Stack.Screen
-                    options={{headerShown: false}}  
-                    name="Login" 
-                    component={AuthStack}
+                  options={{ headerShown: false }}
+                  name="Login"
+                  component={AuthStack}
                 />
-              ) : (
                 <Stack.Screen
-                    options={{headerShown: false}}  
-                    name="User" 
-                    component={UserStack}
+                  options={{ headerShown: false }}
+                  name="User"
+                  component={UserStack}
                 />
-              )}
             </Stack.Navigator>
         </NavigationContainer>
     )
@@ -461,6 +421,6 @@ class StackScreen extends React.Component {
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(StackScreen)

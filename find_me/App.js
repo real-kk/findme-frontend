@@ -6,11 +6,11 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import AppNav from './src/Screens';
+import React from 'react'
+import AppNav from './src/Screens'
 import { StatusBar } from 'react-native'
 import { Provider } from 'react-redux'
-import configureStore from './src/Store/configureStore';
+import configureStore from './src/Store/configureStore'
 
 const store = configureStore()
 
@@ -20,6 +20,6 @@ const App = () => {
       <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#00BCD4" translucent = {true}/>
       <AppNav/>
     </Provider>
-  ) 
+  )
 }
 export default App

@@ -44,10 +44,6 @@ class DiaryResultList extends React.Component {
         this.getDiaryList()
     }
     
-    componentWillReceiveProps(nextProps){
-        console.log("componentWillReceiveProps: " + JSON.stringify(nextProps));
-      }
-
     render() {
       return (
         <View style={styles.container}>

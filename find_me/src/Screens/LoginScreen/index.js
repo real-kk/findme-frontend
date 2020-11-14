@@ -13,12 +13,18 @@ import RadioForm from 'react-native-simple-radio-button';
 import { requestLogin } from '../../Store/actions/AuthAction';
 import { connect } from 'react-redux'
 
+import {
+    getUserData,
+    storeUserData,
+  } from "../../Store/actions/AuthAction"
+;
 const mapStateToProps = (state) => ({
     token: state
   })
   
 const mapDispatchToProps = (dispatch) => ({
-    requestLogin: (data) => dispatch(requestLogin(data))
+    requestLogin: (data) => dispatch(requestLogin(data)),
+    storeUserData: (data) => dispatch(storeUserData(data)),
   })
 
 
@@ -45,7 +51,35 @@ var radio_props = [
                 user_type: this.state.value
             }
             await this.props.requestLogin(data)
+
+            this.setState({
+                emailInput: '',
+                pwInput: '',
+            })
+
+            getUserData()
+            .then((data) => { 
+              
+                if (!data) {
+                    this.props.storeUserData({token : null})
+                    return
+                }
         
+                let user = JSON.parse(data)
+                let userToken = user[0][1];
+                let currentuserType = user[1][1];
+            
+                console.log(userToken + ' ' + currentuserType)
+                this.props.storeUserData({token : userToken})
+                console.log(userToken)
+                        
+                this.props.navigation.navigate('User', {userType: currentuserType});
+              //console.log(this.props.token + ' is it?')
+            })
+            .catch((err) => {
+                console.log(err)
+                alert("Failed to login!!!!!! : ", err)
+            })
         }
         render() {
             return (
@@ -90,7 +124,8 @@ var radio_props = [
                         style={styles.button}
                         onPress={() => {
                             this.onclickLogin()
-                        }}>
+                        }}
+                    >
                     <Text style={styles.buttonTitle}>로그인</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
