@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { StyleSheet,  View, ActivityIndicator, Image } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Image, Button } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 
@@ -62,7 +62,11 @@ class WordCloudResult extends React.Component {
                         source={{uri: this.state.wordcloud ? this.state.wordcloud : null}}
                     />
                 </View>
-                }
+            }
+
+            <Button title = "갱신하기"  onPress={() => this.getWordCloud()}>
+                   
+            </Button>
         </View>
       )
   }

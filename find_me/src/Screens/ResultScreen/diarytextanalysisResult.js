@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { StyleSheet,  View,  ActivityIndicator, Image } from 'react-native';
+import { StyleSheet, Button, View,  ActivityIndicator, Image } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 
@@ -61,7 +61,10 @@ class Diarytextanalysis extends React.Component {
                       source={{uri: this.state.graph ? this.state.graph : null}}
                   />
               </View>
-              }
+          }
+          <Button title = "갱신하기"  onPress={() => this.getGraph()}>
+            
+          </Button>
       </View>
     )
   }

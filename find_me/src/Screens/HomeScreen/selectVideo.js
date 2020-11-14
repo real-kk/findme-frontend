@@ -12,10 +12,7 @@ import CameraRoll from '@react-native-community/cameraroll'
 import {
   StyleSheet,
   Text,
-  View,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Dimensions
+  View
 } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 

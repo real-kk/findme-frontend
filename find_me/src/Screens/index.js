@@ -20,7 +20,6 @@ import ResultScreen from './ResultScreen'
 import MypageScreen from './MypageScreen'
 
 import CounselorsScreen from './CounelorsScreen'
-import TopBar from './ResultScreen'
 
 import CounselorHome from './CounselorHome'
 import CounselorApplyScreen from './CounselorHome/apply'
@@ -49,7 +48,6 @@ import CounselingRequestScreen from './CounelorsScreen/counselingRequest'
 import userModificationScreen from './MypageScreen/userModification'
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification'
 import ApplicationDetailScreen from './CounselorHome/ApplicationDetail'
-import axios from '../axiosConfig'
 
 import {
   getUserData,
@@ -183,20 +181,15 @@ function CounselorResultStack () {
 function ResultStack () {
   return (
       <Stack.Navigator>
-        <Stack.Screen
+         <Stack.Screen
           options={{ headerShown: false }}
-          name="TopBar"
-          component={TopBar}
+          name="Result"
+          component={ResultScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
           name="DiaryList"
           component={diaryListScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Result"
-          component={ResultScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
@@ -279,7 +272,7 @@ function UserStack ({ navigation, route, userType }) {
         <Stack.Screen
             options={{ headerShown: false }}
             name="Client"
-            component={TabStack}
+            component={ClientStack}
         />
       ) : (
         <Stack.Screen
@@ -341,7 +334,7 @@ function CounselorStack () {
   )
 }
 
-function TabStack () {
+function ClientStack () {
   return (
         <Tab.Navigator
           navigationOptions = {({ navigation }) => ({

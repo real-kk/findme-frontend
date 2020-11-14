@@ -24,6 +24,10 @@ class DiaryResultList extends React.Component {
         super();
         this.state = {
             diaryList: [],
+            refreshing : false,
+            isloading: true,
+            pageNum: 1,
+
         }       
 
     }
@@ -34,40 +38,51 @@ class DiaryResultList extends React.Component {
             'Authorization' : `Token ${this.props.token.auth.token}`
         }})
         .then(({data})=>{
-            console.log(data)
             this.setState({diaryList: data})
+            return data;
         })
-        .catch(err=>console.log(err))
+        .catch(err=>{
+            console.log(err)   
+        })
     }
 
     componentDidMount(){
         this.getDiaryList()
     }
     
+    handleRefresh = async() => {
+        this.setState({
+            diaryList: this.getDiaryList(),
+            pageNum: 1,
+            isLoading: false
+        }) 
+    }
+
     render() {
       return (
         <View style={styles.container}>
             <Text>리스트</Text>
             <FlatList
-                    data={this.state.diaryList}
-                    renderItem={({item, index})=>{
-                        return(
-                            <TouchableOpacity
-                                onPress = {()=> {
-                                    this.props.navigation.navigate('DiaryDetail', {
-                                        diary: this.state.diaryList[index]
-                                    })
-                                }}
-                            >
-                                <View style={styles.list}>
-                                    <Text>{item.create_date} | {item.title}</Text>
-                                </View>
-                            </TouchableOpacity>
-
-                        )
-                    }}
-                    keyExtractor={(key, index) => index.toString()}
-                />
+                data={this.state.diaryList}
+                renderItem={({item, index})=>{
+                    return(
+                        <TouchableOpacity
+                            onPress = {()=> {
+                                this.props.navigation.navigate('DiaryDetail', {
+                                    diary: this.state.diaryList[index]
+                                })
+                            }}>
+                            <View style={styles.list}>
+                                <Text>{item.create_date}</Text>
+                                <Text>{item.title}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                }}
+                keyExtractor={(key, index) => index.toString()}
+                refreshing={this.state.refreshing}
+                onRefresh={this.handleRefresh}
+            />
         </View>
       )
   }

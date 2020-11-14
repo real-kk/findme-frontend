@@ -7,8 +7,7 @@
  */
 
 import React from 'react';
-import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-native';
-import axios from '../../axiosConfig';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { connect } from 'react-redux'
 
@@ -36,22 +35,6 @@ class TopBar extends React.Component {
         }
     }
 
-    getDiaryList = async () => {
-        axios.get('/diaries/', 
-        { headers: {
-            'Authorization' : `Token ${this.props.token.auth.token}`
-        }})
-        .then(({data})=>{
-            console.log(data)
-            this.setState({diaryList: data})
-        })
-        .catch(err=>console.log(err))
-    }
-
-    componentDidMount(){
-        console.log("dd")
-        this.getDiaryList()
-    }
     render(){
         return(
             <View style={styles.container}>
