@@ -91,7 +91,7 @@ var radio_props = [
                         initial={0}
                         labelHorizontal={true}
                         formHorizontal={true}
-                        buttonColor={'#2196f3'}
+                        buttonColor={'#81BEF7'}
                         animation={true}
                         radioStyle={{paddingRight: 20}}
                         buttonSize={15}
@@ -100,7 +100,7 @@ var radio_props = [
                         onPress={(value) => {this.setState({value:value})}}
                     />
                 </View>
-                <View style={styles.formArea}>
+                <View style={styles.id}>
                     <TextInput
                         placeholder="Email"
                         value={this.state.emailInput}
@@ -108,6 +108,8 @@ var radio_props = [
                             this.setState({emailInput: text})             
                         }}
                     />
+                </View>
+                <View style={styles.pw}>
                     <TextInput
                         placeholder="Password"
                         secureTextEntry={true}
@@ -142,15 +144,15 @@ var radio_props = [
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
 
 const styles = StyleSheet.create({
-    container: {
+    container : {
         flex: 1,
-        backgroundColor: '#2ACAB9',
-        paddingLeft: wp('10%'),
-        paddingRight: wp('10%'),
-        justifyContent: 'center',
+        paddingTop: '10%',
+        alignItems: 'center',
+        justifyContent:'center',
+        backgroundColor: '#FAFAFA',
     },
     titleArea:{
-        width: '100%',
+        width: wp('100%'),
         padding: wp('10%'),
         alignItems: 'center',
     },
@@ -160,29 +162,37 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginBottom: 10  
     },
-    formArea: {
-        width: '100%',
-        backgroundColor:'#F0F5F4',
+    id: {
+        width: wp('70%'),
+        backgroundColor:'white',
+        alignItems: 'center'
+    },
+    pw: {
+        width: wp('70%'),
+        marginTop: 8,
+        backgroundColor:'white',
         alignItems: 'center'
     },
     buttonArea: {
-        width: '100%',
+        width: wp('50%'),
+        marginTop: 30,
         height: hp('5%'),
     },
     title: {
         fontSize: wp('10%'),
     },
     button: {
-        backgroundColor: "#569CDA",
-        width: "100%",
-        height: "100%",
+        backgroundColor: "#81BEF7",
+        borderRadius: 10,
+        width: wp('50%'),
+        height: hp('5%'),
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10
       },
-      buttonTitle: {
+    buttonTitle: {
         color: 'white',
-      }
+    }
 
 });
 
