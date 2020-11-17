@@ -10,6 +10,10 @@ import React from 'react';
 import { StyleSheet, Button, View,  ActivityIndicator, Image } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
 const mapStateToProps = (state) => ({
     token: state
@@ -44,7 +48,10 @@ class Diarytextanalysis extends React.Component {
   }
 
   componentDidMount(){
-    this.getGraph();
+    this.props.navigation.addListener('tabPress', e => {
+      this.getGraph()
+    })
+    this.getGraph()
   }
 
   render() {
@@ -57,14 +64,11 @@ class Diarytextanalysis extends React.Component {
               /> :
               <View>
                   <Image
-                      style={{width: 400, height: 400}}
+                      style={{width: wp('100%'), height: hp('58%')}}
                       source={{uri: this.state.graph ? this.state.graph : null}}
                   />
               </View>
           }
-          <Button title = "갱신하기"  onPress={() => this.getGraph()}>
-            
-          </Button>
       </View>
     )
   }
@@ -77,7 +81,8 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 50,
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        backgroundColor:'white'
     },
 
 });

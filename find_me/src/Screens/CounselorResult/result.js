@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
         justifyContent:'center',
     },
     list: {
-        borderWidth: 2,
-        borderRadius: 8,
+        borderWidth: 0.2,
+        borderRadius: 5,
         padding:20,
         marginTop : '15%',
         marginHorizontal : '20%',

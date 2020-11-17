@@ -13,7 +13,7 @@ class Videoanalysis extends React.Component {
   constructor () {
     super()
   }
-
+  
   render () {
     return (
         <View style={styles.container}>

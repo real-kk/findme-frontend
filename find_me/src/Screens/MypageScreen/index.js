@@ -11,6 +11,12 @@ import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-nativ
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 import { requestLogout } from '../../Store/actions/AuthAction';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp
+  } from 'react-native-responsive-screen'
+import { ceil } from 'react-native-reanimated';
 
 const mapStateToProps = (state) => ({
     token: state
@@ -22,29 +28,28 @@ const mapDispatchToProps = (dispatch) => ({
 
 class MypageScreen extends React.Component {
     constructor(){
-      super();
-    //   this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
-      this.state={
-          datas: [
-              {key:'0', data:'회원 정보 수정'},
-              {key:'1', data:'상담 신청서 수정'},
-              {key:'2', data:'상담 신청 현황 확인'},
+        super();
+        this.state={
+            datas: [
+                {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
+                {key:'1', data:'후기 작성', icon:'grease-pencil'},
+                {key:'2', data:'로그아웃', icon:'logout-variant'},
             ],
-      }
+        }
     }
 
     _onclickLogout = () => {
-        console.log("gfg")
         this.props.requestLogout()
-        this.props.navigation.navigate('Login');
-        console.log("pass")
+        this.props.navigation.navigate('Login')
         alert("로그아웃 되었다.")
     }
+
     render() {
       return (
           <View style={styles.container}>
-                <Text style = {styles.logo}>Home</Text>
+                <Text style = {styles.logo}>마이페이지</Text>
                 <FlatList
+                    showsVerticalScrollIndicator={false}
                     data={this.state.datas}
                     renderItem={({item})=>{
                         return(
@@ -54,51 +59,54 @@ class MypageScreen extends React.Component {
                                         this.props.navigation.push('userModification')
                                     }
                                     else if(item.key === '1'){
-                                        this.props.navigation.push('applicationFormModification')
+
                                     }
                                     else if(item.key === '2'){
-                                        // this.props.navigation.push('Video')
+                                        this._onclickLogout();
                                     }
                                 }}
                             >
                                 <View style={styles.list}>
-                                    <Text>{item.data}</Text>
+                                    <Icon name= {item.icon} size={20}/>   
+                                    <Text style={styles.text}>{item.data}</Text>
                                 </View>
                             </TouchableOpacity>
                         )
                     }}
                 />
 
-                            <TouchableOpacity
-                                onPress={()=> {
-                                    this._onclickLogout();
-                                }}
-                            >
-                                <View>
-                                    <Text>로그아웃</Text>
-                                </View>
-                            </TouchableOpacity>
             </View>
       )
   }
 }
 
+export default connect(mapStateToProps, mapDispatchToProps)(MypageScreen)
+
 const styles = StyleSheet.create({
   container : {
     flex: 1,
     paddingTop: '10%',
+    alignItems: 'center',
     justifyContent:'center',
-    backgroundColor : '#fffff0',
+    backgroundColor: '#FAFAFA',
+ 
   },
   list: {
-      borderWidth: 2,
-      borderRadius: 8,
-      padding:20,
-      marginTop : '25%',
-      marginHorizontal : '20%',
-      justifyContent: 'center',
-      alignItems: 'center',
+    borderWidth: 0.2,
+    borderRadius: 5,
+    padding: '5%',
+    marginTop : hp('10%'),
+    flexDirection:'row',
+    width: wp('60%'),
+    height: hp('10%'),
+    alignItems: "center",
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
+  text: {
+      marginLeft: 5,
+      fontSize: 20,
+  }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MypageScreen)
+

@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';
@@ -21,49 +13,30 @@ const mapDispatchToProps = (dispatch) => ({
     requestLogout: () => dispatch(requestLogout())
   })
 
-class CounselorDetail extends React.Component {
+class CounselingRequest extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             major: '',
             student_number: '',
             phone_number: '',
-            time_table: '',
             content: '',
             counselorEmail: this.props.route.params.counselorEmail
         }
        
     }
-    addImage = () => {
-        ImagePicker.launchImageLibrary({}, res => {
-            this.setState({
-                time_table: res.uri
-            })
-            console.log(this.state.time_table)
-        })
-    }
-
-    submission = async () => {
+    next = async () => {
         const data = {
             counselor: this.state.counselorEmail,
             major: this.state.major,
             student_number: this.state.student_number,
             phone_number: this.state.phone_number,
             content: this.state.content,
-            time_table: this.state.time_table,
         }
         console.log(data)
-        await axios.post('/counsels/', data, 
-            { headers: {
-                'Authorization' : `Token ${this.props.token.auth.token}`
-            }
+        this.props.navigation.navigate('CounselingRequest2', {
+            Apply_data: data
         })
-        .then((res) => {
-            console.log(res)
-            alert("제출이 완료되었습니다.")
-            this.props.navigation.navigate('Home')
-        })
-        .catch(err => console.log(err))
     }
 
     render() {
@@ -91,18 +64,6 @@ class CounselorDetail extends React.Component {
                                 this.setState({phone_number: text})             
                             }}
                 />
-                <TouchableOpacity
-                    style={{borderWidth: 2, marginBottom: 5}}
-                        onPress={()=>{
-                            this.addImage()
-                        }}
-                >
-                    <Text>시간표 가져오기</Text>
-                </TouchableOpacity>
-                <Image
-                    source={{uri: this.state.time_table ? this.state.time_table : null}}
-                    style={{width: 300, height:  400}}
-                />
                 <TextInput style={{borderWidth:2, marginBottom: 5, paddingBottom : 100}}
                             placeholder="하고싶은 말"
                             value={this.state.content}
@@ -114,17 +75,10 @@ class CounselorDetail extends React.Component {
                 <TouchableOpacity
                     style={{borderWidth: 2}}
                         onPress={()=>{
-                            // if(this.state.major != '' && this.state.phone_number != '' && this.state.student_number != ''){
-                            //     alert('상담 신청이 완료되었습니다.')
-                            //     this.props.navigation.navigate('Home')
-                            // }
-                            // else{
-                            //     alert('입력되지 않은 부분이 있습니다.')
-                            // }
-                            this.submission();
+                            this.next();
                         }}
                 >
-                    <Text>제출하기</Text>
+                    <Text>다음 페이지</Text>
                 </TouchableOpacity>
             </ScrollView>
 
@@ -132,7 +86,7 @@ class CounselorDetail extends React.Component {
       )
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(CounselorDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(CounselingRequest)
 
 const styles = StyleSheet.create({
     container : {
@@ -142,5 +96,3 @@ const styles = StyleSheet.create({
         backgroundColor : '#fffff0',
     },
 });
-
-

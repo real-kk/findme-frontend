@@ -45,12 +45,12 @@ import diaryListScreen from './ResultScreen/diaryList'
 import diaryDetailScreen from './ResultScreen/diaryDetail'
 import CounselorDetailScreen from './CounelorsScreen/counselorDetail'
 import CounselingRequestScreen from './CounelorsScreen/counselingRequest'
+import CounselingRequestScreen2 from './CounelorsScreen/counselingRequest2'
 import userModificationScreen from './MypageScreen/userModification'
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification'
 import ApplicationDetailScreen from './CounselorHome/ApplicationDetail'
 
 import {
-  getUserData,
   storeUserData
 } from '../Store/actions/AuthAction'
 
@@ -64,6 +64,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   storeUserData: (data) => dispatch(storeUserData(data))
 })
+
 
 const AuthStack =
   function AuthStack () {
@@ -179,12 +180,14 @@ function CounselorResultStack () {
 }
 
 function ResultStack () {
+  const navigation = useNavigation()
   return (
       <Stack.Navigator>
          <Stack.Screen
           options={{ headerShown: false }}
           name="Result"
           component={ResultScreen}
+          navigation={navigation}
         />
         <Stack.Screen
           options={{ headerShown: false }}
@@ -233,6 +236,11 @@ function CounselorsStack () {
           name="CounselingRequest"
           component={CounselingRequestScreen}
         />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CounselingRequest2"
+          component={CounselingRequestScreen2}
+        />
       </Stack.Navigator>
   )
 }
@@ -266,7 +274,6 @@ function UserStack ({ navigation, route, userType }) {
     console.log('screen userType: ' + route.params.userType)
   }
   return (
-
       <Stack.Navigator>
       {route.params.userType === '0' ? (
         <Stack.Screen
@@ -296,9 +303,9 @@ function CounselorStack () {
           })}
 
           screenOptions={({ route }) => ({
+            // eslint-disable-next-line react/display-name
             tabBarIcon: ({ focused, color, size }) => {
               let icon = '▲'
-
               if (route.name === 'Home') {
                 icon = <Icon name="ios-home" size={30} />
               } else if (route.name === 'Result') {
@@ -313,11 +320,6 @@ function CounselorStack () {
             options={{ headerShown: false }}
             name="Home"
             component={CounselorHomeStack}
-            listeners={({ navigation }) => ({
-              tabPress: e => {
-                navigation.navigate('Home', { refresh: true })
-              }
-            })}
           />
           <Tab.Screen
             options={{ headerShown: false }}
@@ -337,58 +339,55 @@ function CounselorStack () {
 function ClientStack () {
   return (
         <Tab.Navigator
-          navigationOptions = {({ navigation }) => ({
-            tabBarOnPress: (scene, jumpToIndex) => {
-              console.log('onPress', scene.route)
-              jumpToIndex(scene.index)
+        tabBarOptions={{
+          style: {
+            borderColor: 'white',
+            backgroundColor: 'white'
+          }
+        }}
+        screenOptions={({ route }) => ({
+          // eslint-disable-next-line react/display-name
+          tabBarIcon: ({ focused, color, size }) => {
+            let icon = '▲'
+            if (route.name === 'Home') {
+              icon = <Icon name="ios-home" size={25} />
+            } else if (route.name === 'Result') {
+              icon = <Icon name="ios-bar-chart-sharp" size={25} />
+            } else if (route.name === 'Mypage') {
+              icon = <Icon name="md-ellipsis-horizontal" size={25} />
+            } else if (route.name === 'Counselors') {
+              icon = <Icon name = "ios-people" size={25}/>
             }
-          })}
-
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let icon = '▲'
-
-              if (route.name === 'Home') {
-                icon = <Icon name="ios-home" size={30} />
-              } else if (route.name === 'Result') {
-                icon = <Icon name="ios-search" size={30} />
-              }
-              return <Text style={{ color: focused && '#FF6787' || '#FEFEFE', marginTop: 5 }}>{icon}</Text>
-            }
-
-          })}
-          >
-          <Tab.Screen
-            options={{ headerShown: false }}
-            name="Home"
-            component={HomeStack}
-            listeners={({ navigation }) => ({
-              tabPress: e => {
-                navigation.navigate('Home', { refresh: true })
-              }
-            })}
-          />
-          <Tab.Screen
-            options={{ headerShown: false }}
-            name="Result"
-            component={ResultStack}
-          />
-          <Tab.Screen
-            options={{ headerShown: false }}
-            name="Counselors"
-            component={CounselorsStack}
-          />
-          <Tab.Screen
-            options={{ headerShown: false }}
-            name="Mypage"
-            component={MypageStack}
-          />
-        </Tab.Navigator>
+            return <Text style={{ color: focused && '#FF6787' || 'gray', marginTop: 5 }}>{icon}</Text>
+          }})
+        }>
+        <Tab.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={HomeStack}
+        />
+         <Tab.Screen
+          options={{ headerShown: false }}
+          name="Result"
+          component={ResultStack}
+        />
+        <Tab.Screen
+          options={{ headerShown: false }}
+          name="Counselors"
+          component={CounselorsStack}
+        />
+        <Tab.Screen
+          options={{ headerShown: false }}
+          name="Mypage"
+          component={MypageStack}
+        />
+      </Tab.Navigator>
 
   )
 }
 
 class StackScreen extends React.Component {
+  // eslint-disable-next-line no-useless-constructor
   constructor (props) {
     super(props)
   }

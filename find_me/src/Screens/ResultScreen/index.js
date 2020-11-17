@@ -6,61 +6,72 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React from 'react'
+import { Button, StyleSheet, Text, View } from 'react-native'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { connect } from 'react-redux'
-
+import axios from '../../axiosConfig'
 
 import DiaryListScreen from './diaryList'
-import VideoAnalysisScreen from './videoAnalysisResult';
-import diaryTextAnalysisResultScreen from './diaryTextAnalysisResult';
-import WordCloudResultScreen from './wordCloudResult';
+import VideoAnalysisScreen from './videoAnalysisResult'
+import diaryTextAnalysisResultScreen from './diaryTextAnalysisResult'
+import WordCloudResultScreen from './wordCloudResult'
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createMaterialTopTabNavigator()
 const mapStateToProps = (state) => ({
-    token: state
-  })
+  token: state
+})
 
 const mapDispatchToProps = (dispatch) => ({
-    requestLogout: () => dispatch(requestLogout())
-  })
-
+  // eslint-disable-next-line no-undef
+  requestLogout: () => dispatch(requestLogout())
+})
 
 class TopBar extends React.Component {
-    constructor(){
-        super();     
-        this.state={
-            diaryList:[],
-        }
+  constructor () {
+    super()
+    this.state = {
+      diaryList: []
     }
+  }
 
-    render(){
-        return(
-            <View style={styles.container}>
-                <Tab.Navigator
-                    tabBarOptions={{
-                        scrollEnabled: true
-                    }}
-                >
-                    <Tab.Screen name="감정일기 리스트" component={DiaryListScreen} />
-                    <Tab.Screen name="워드 클라우드" component={WordCloudResultScreen} />
-                    <Tab.Screen name="감정 분석 그래프" component={diaryTextAnalysisResultScreen} />  
-                    <Tab.Screen name="영상 분석" component={VideoAnalysisScreen} />
-                </Tab.Navigator>
-            </View>
-        )
-    }
+  render () {
+    return (
+        <View style={styles.container}>
+          <Text style={styles.result}>분석 결과</Text>
+          <Tab.Navigator
+           tabBarOptions={{
+             labelStyle: { fontSize: 15 },
+             tabStyle: { width: 100 },
+             style: {
+               borderColor: 'transparent',
+               backgroundColor: 'white'
+             }
+           }}
+          >
+              <Tab.Screen name="감정일기 리스트" component={DiaryListScreen}
+              navigation={this.props.navigation}/>
+              <Tab.Screen name="워드 클라우드" component={WordCloudResultScreen}
+              navigation={this.props.navigation}/>
+              <Tab.Screen name="감정 분석 그래프" component={diaryTextAnalysisResultScreen}
+              navigation={this.props.navigation}/>
+              <Tab.Screen name="영상 분석" component={VideoAnalysisScreen}/>
+          </Tab.Navigator>
+        </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-    container : {
-        flex: 1,
-        paddingTop: '5%',
-       
-    },
+  container: {
+    flex: 1,
+    paddingTop: '10%',
+    backgroundColor: 'white',
+    justifyContent: 'center'
+  },
+  result: {
+    textAlign: 'center'
+  }
+})
 
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopBar);
-
+export default connect(mapStateToProps, mapDispatchToProps)(TopBar)

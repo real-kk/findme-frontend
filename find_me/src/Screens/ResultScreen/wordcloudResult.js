@@ -7,10 +7,14 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Image, Button, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
-
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp
+  } from 'react-native-responsive-screen'
+  
 const mapStateToProps = (state) => ({
     token: state
   })
@@ -18,6 +22,14 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     requestLogout: () => dispatch(requestLogout())
   })
+
+// getWordCloud = async () => {
+//     const data = await axios.post('/whole_content/', {},
+//     { headers: {
+//         'Authorization' : `Token ${this.props.token.auth.token}`
+//     }})
+//     return data
+// }
 
 class WordCloudResult extends React.Component {
     constructor(){
@@ -36,7 +48,7 @@ class WordCloudResult extends React.Component {
         .then(({data})=>{
             this.setState({
                 wordcloud: data.image,
-                loading_wordcloud: false
+                loading_wordcloud: false,
             })
             console.log(this.state.wordcloud)
         })
@@ -44,29 +56,33 @@ class WordCloudResult extends React.Component {
     }
 
     componentDidMount(){
-        this.getWordCloud();
+        this.props.navigation.addListener('tabPress', e => {
+            this.getWordCloud()
+        })
+        this.getWordCloud()
+        this._ismounted = true
     }
 
+    componentWillUnmount(){
+        this._ismounted = false
+    }
 
     render() {
+        
       return (
         <View style={styles.container}>
             {(this.state.loading_wordcloud == true || this.state.loading_graph == true) ?
                 <ActivityIndicator
-                    size = "large"
+                    size = "small"
                     color = "green"
                 /> :
                 <View>
                     <Image
-                        style={{width: 400, height: 400}}
+                        style={{width: wp('100%'), height: hp('58%')}}
                         source={{uri: this.state.wordcloud ? this.state.wordcloud : null}}
                     />
                 </View>
             }
-
-            <Button title = "갱신하기"  onPress={() => this.getWordCloud()}>
-                   
-            </Button>
         </View>
       )
   }
@@ -77,9 +93,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(WordCloudResult)
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        paddingTop: 50,
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        backgroundColor:'white'
     },
 
 });

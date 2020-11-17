@@ -10,6 +10,10 @@ import React from 'react';
 import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
 const mapStateToProps = (state) => ({
     token: state
@@ -27,7 +31,7 @@ class DiaryResultList extends React.Component {
             refreshing : false,
             isloading: true,
             pageNum: 1,
-
+            isLoading: false
         }       
 
     }
@@ -47,9 +51,21 @@ class DiaryResultList extends React.Component {
     }
 
     componentDidMount(){
+        this.props.navigation.addListener('tabPress', e => {
+            this.getDiaryList()
+        })
         this.getDiaryList()
+        this._ismounted = true
+
+        if (this._isMounted) {
+            this.setState({isLoading: false})
+        }
     }
     
+    componentWillUnmount(){
+        this._ismounted = false
+    }
+
     handleRefresh = async() => {
         this.setState({
             diaryList: this.getDiaryList(),
@@ -61,8 +77,8 @@ class DiaryResultList extends React.Component {
     render() {
       return (
         <View style={styles.container}>
-            <Text>리스트</Text>
             <FlatList
+                showsVerticalScrollIndicator={false}
                 data={this.state.diaryList}
                 renderItem={({item, index})=>{
                     return(
@@ -73,8 +89,8 @@ class DiaryResultList extends React.Component {
                                 })
                             }}>
                             <View style={styles.list}>
-                                <Text>{item.create_date}</Text>
-                                <Text>{item.title}</Text>
+                                <Text style={styles.title}>{item.title}</Text>
+                                <Text style={styles.content}>{item.create_date}</Text>
                             </View>
                         </TouchableOpacity>
                     )
@@ -93,17 +109,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(DiaryResultList);
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        paddingTop: 50,
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        backgroundColor:'#FAFAFA'
     },
     list: {
-        borderWidth: 2,
-        borderRadius: 8,
-        padding:20,
-        marginTop : '10%',
-        marginHorizontal : '20%',
+        borderWidth: 0.1,
+        borderRadius: 4,
+        padding: '5%',
+        marginVertical : '3%',
         justifyContent: 'center',
-        alignItems: 'center',
+        width: wp('98%'),
+        height: hp('15%'),
+        backgroundColor: 'white',
     },
+    title:{
+        marginLeft: '1%',
+        marginBottom: '8%',
+        fontSize: 18,
+    },
+    content:{
+        marginLeft: '1%',
+        color: 'gray',
+        fontSize: 10
+    }
 });
