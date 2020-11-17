@@ -35,14 +35,12 @@ class CounselorDetail extends React.Component {
   render () {
     return (
           <View style={styles.container}>
+              <Text>상담사 프로필</Text>
               <ScrollView>
                 <Text>{this.state.counselor.username} 상담사</Text>
                 <Text>{this.state.counselor.introduce}</Text>
                 <Text>이메일: {this.state.counselor.email}</Text>
                 <Text>상담 후기</Text>
-
-                {/* 후기 리스트 쭉~~ */}
-
                 <TouchableOpacity
                   onPress={() => {
                     this.props.navigation.navigate('CounselingRequest', {
@@ -77,5 +75,8 @@ const styles = StyleSheet.create({
   },
   apply: {
     color: '#ffffff'
+  },
+  username: {
+    fontSize: 20,
   }
 })

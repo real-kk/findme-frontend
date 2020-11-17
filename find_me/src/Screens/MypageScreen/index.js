@@ -16,7 +16,6 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
   } from 'react-native-responsive-screen'
-import { ceil } from 'react-native-reanimated';
 
 const mapStateToProps = (state) => ({
     token: state

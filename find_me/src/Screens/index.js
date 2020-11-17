@@ -27,7 +27,6 @@ import CounselorVideoScreen from './CounselorHome/clientList'
 import STTScreen from './CounselorHome/STT'
 import QuestionRegisterScreen from './CounselorHome/questionRegister'
 
-
 import Signup from './LoginScreen/SignUp'
 import DiaryScreen from './HomeScreen/diary'
 import DailyScreen from './HomeScreen/daily'
@@ -39,7 +38,6 @@ import CounselorResult from './CounselorResult'
 import ResultHome from './CounselorResult/result'
 import TextResult from './CounselorResult/diaryText'
 import CloudResult from './CounselorResult/diaryCloud'
-
 
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult'
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult'

@@ -42,7 +42,7 @@ const mapStateToProps = (state) => ({
         .then((res) => {
             console.log(res)
             alert("제출되었습니다.")
-            this.props.navigation.navigate('Video')
+            this.props.navigation.navigate('Home')
         })
         .catch(err => console.log(err))
     }

@@ -15,6 +15,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
 const mapStateToProps = (state) => ({
   token: state
@@ -30,6 +34,10 @@ class QuestionList extends React.Component {
     super();
     this.state = {
       questionList: '',
+      refreshing : false,
+      isloading: true,
+      pageNum: 1,
+      isLoading: false
     }
   }
 
@@ -40,13 +48,36 @@ class QuestionList extends React.Component {
     }})
     .then(({data})=>{
         console.log(data[0].id)
+        if(this._ismounted){
         this.setState({questionList: data})
+        }
+    })
+    .catch(err=>{
+      console.log(err)   
     })
   }
   
-  
   componentDidMount(){
+    this.props.navigation.addListener('tabPress', e => {
+      this.getQuestion()
+    })
     this.getQuestion()
+    this._ismounted = true
+
+    if (this._isMounted) {
+        this.setState({isLoading: false})
+    }
+  }
+  componentWillUnmount(){
+    this._ismounted = false
+  }
+
+  handleRefresh = async() => {
+    this.setState({
+        diaryList: this.getQuestion(),
+        pageNum: 1,
+        isLoading: false
+    }) 
   }
 
   resultConfirm = async (id) => {
@@ -64,52 +95,66 @@ class QuestionList extends React.Component {
         questionID: id,
         uri: data
       })
-  })
+    })
   }
 
   render () {
     return (
-        <View style={styles.container}>
-            <Text>질문 리스트</Text>
-                <FlatList
-                    data={this.state.questionList}
-                    renderItem={({item, index})=>{
-                        return(
-                            <TouchableOpacity
-                                onPress = {()=> {
-                                   this.resultConfirm(item.id)
-                                }}
-                            >
-                                <View style={styles.list}>
-                                    <Text>{'이름 : ' + item.counselor_username}</Text>
-                                    <Text>{'질문 : ' + item.question}</Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
-                    }}
-                    keyExtractor={(key, index) => index.toString()}
-                />
-        </View>
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.questionList}
+          renderItem={({item, index})=>{
+            return(
+              <TouchableOpacity
+                onPress = {()=> {
+                  this.resultConfirm(item.id)
+                }}
+              >
+                <View style={styles.list}>
+                  <Text style={styles.title}>{item.question}</Text>
+                  <Text style={styles.content}>{item.counselor_username + ' 상담사'}</Text>
+                </View>
+              </TouchableOpacity>
+            )
+          }}
+          keyExtractor={(key, index) => index.toString()}
+          refreshing={this.state.refreshing}
+          onRefresh={this.handleRefresh}
+        />
+      </View>
     )
   }
 }
 
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionList)
+
 const styles = StyleSheet.create({
   container : {
     flex: 1,
-    paddingTop: 50,
     alignItems: 'center',
-    justifyContent:'center'
-},
-list: {
-    borderWidth: 2,
-    borderRadius: 8,
-    padding:20,
-    marginTop : '10%',
-    marginHorizontal : '20%',
+    justifyContent:'center',
+    backgroundColor:'#FAFAFA'
+  },
+  list: {
+    borderWidth: 0.1,
+    borderRadius: 4,
+    padding: '5%',
+    marginVertical : '3%',
     justifyContent: 'center',
-    alignItems: 'center',
-},
+    width: wp('98%'),
+    height: hp('15%'),
+    backgroundColor: 'white',
+  },
+  title:{
+    marginLeft: '1%',
+    marginBottom: '8%',
+    fontSize: 18,
+  },
+  content:{
+    marginLeft: '1%',
+    color: 'gray',
+    fontSize: 13,
+  }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionList)
+

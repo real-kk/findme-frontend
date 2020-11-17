@@ -123,7 +123,7 @@ const mapStateToProps = (state) => ({
               }}
             //   ratio={this.state.ratio}
               style={styles.preview}
-              type={RNCamera.Constants.Type.back}
+              type={RNCamera.Constants.Type.front}
               flashMode={RNCamera.Constants.FlashMode.on}
             //   permissionDialogTitle={"Permission to use camera"}
             //   permissionDialogMessage={
@@ -133,7 +133,7 @@ const mapStateToProps = (state) => ({
                 title: 'Permission to use camera',
                 message: 'We need your permission to use your camera',
                 buttonPositive: 'Ok',
-                buttonNegative: 'Cancel',
+                buttonNegative: 'Cancel'
               }}
             />
             <View

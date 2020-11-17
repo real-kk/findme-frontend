@@ -39,7 +39,6 @@ class VideoAnalysisResult extends React.Component {
   render () {
     return (
         <View style={styles.container}>
-
             <TouchableOpacity
               onPress={()=>{
                 this.download()

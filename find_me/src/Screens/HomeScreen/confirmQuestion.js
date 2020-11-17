@@ -52,27 +52,26 @@ class confirmQuestion extends React.Component {
   render () {
     return (
         <View style={styles.container}>
-            <Text>질문 리스트</Text>
-                <FlatList
-                    data={this.state.questionList}
-                    renderItem={({item, index})=>{
-                        return(
-                            <TouchableOpacity
-                                onPress = {()=> {
-                                    this.props.navigation.navigate('RecordVideo', {
-                                        questionID: this.state.questionList[index].id
-                                    })
-                                }}
-                            >
-                                <View style={styles.list}>
-                                    <Text>{'이름 : ' + item.counselor_username}</Text>
-                                    <Text>{'질문 : ' + item.question}</Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
-                    }}
-                    keyExtractor={(key, index) => index.toString()}
-                />
+          <FlatList
+            data={this.state.questionList}
+            renderItem={({item, index})=>{
+              return(
+                <TouchableOpacity
+                  onPress = {()=> {
+                    this.props.navigation.navigate('RecordVideo', {
+                    questionID: this.state.questionList[index].id
+                    })
+                  }}
+                >
+                  <View style={styles.list}>
+                    <Text>{'이름 : ' + item.counselor_username}</Text>
+                    <Text>{'질문 : ' + item.question}</Text>
+                  </View>
+                </TouchableOpacity>
+              )
+            }}
+            keyExtractor={(key, index) => index.toString()}
+          />
         </View>
     )
   }

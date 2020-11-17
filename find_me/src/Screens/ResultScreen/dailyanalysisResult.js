@@ -8,7 +8,6 @@
 
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native'
-import axios from '../../axiosConfig'
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => ({
