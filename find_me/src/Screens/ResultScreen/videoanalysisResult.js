@@ -5,32 +5,78 @@
  * @format
  * @flow strict-local
  */
-
+import axios from '../../axiosConfig'
+import { connect } from 'react-redux'
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import Video from 'react-native-video'
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Linking,
+  View
+} from 'react-native'
 
-class Videoanalysis extends React.Component {
-  constructor () {
-    super()
+const mapStateToProps = (state) => ({
+  token: state
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  requestLogout: () => dispatch(requestLogout())
+})
+
+
+class VideoAnalysisResult extends React.Component {
+  constructor(){
+    super();
+  }
+
+  download = () => {
+    Linking.openURL(this.props.route.params.uri)
+
   }
 
   render () {
     return (
         <View style={styles.container}>
-            <Text>영상 분석 결과들~</Text>
+
+            <TouchableOpacity
+              onPress={()=>{
+                this.download()
+              }}
+            >
+              <View style={styles.store}>
+                <Text>저장하기</Text>
+              </View>
+            </TouchableOpacity>
+            <Video source={{uri: this.props.route.params.uri}}
+              controls
+              paused
+              resizeMode='cover'
+              playWhenInactive={true}
+              style={styles.backgroundVideo} 
+            />
+            <Text>DD</Text>
         </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 50,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-
+    container: {
+        flex: 1,
+        paddingTop: '10%',
+        justifyContent: 'center',
+        backgroundColor: '#fffff0'
+      },
+      backgroundVideo: {
+        flex:1,
+        width: '100%',
+      },
+      store: {
+          alignItems: 'center',
+          justifyContent: 'center',
+      }
 })
 
-export default Videoanalysis
+export default connect(mapStateToProps, mapDispatchToProps)(VideoAnalysisResult)

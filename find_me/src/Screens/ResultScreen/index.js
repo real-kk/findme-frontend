@@ -13,8 +13,8 @@ import { connect } from 'react-redux'
 
 
 import DiaryListScreen from './diaryList'
-import VideoAnalysisScreen from './videoAnalysisResult';
-import diaryTextAnalysisResultScreen from './diaryTextAnalysisResult';
+import QuestionListScreen from './questionList';
+import DiaryTextAnalysisResultScreen from './diaryTextAnalysisResult';
 import WordCloudResultScreen from './wordCloudResult';
 
 const Tab = createMaterialTopTabNavigator();
@@ -45,8 +45,8 @@ class TopBar extends React.Component {
                 >
                     <Tab.Screen name="감정일기 리스트" component={DiaryListScreen} />
                     <Tab.Screen name="워드 클라우드" component={WordCloudResultScreen} />
-                    <Tab.Screen name="감정 분석 그래프" component={diaryTextAnalysisResultScreen} />  
-                    <Tab.Screen name="영상 분석" component={VideoAnalysisScreen} />
+                    <Tab.Screen name="감정 분석 그래프" component={DiaryTextAnalysisResultScreen} />  
+                    <Tab.Screen name="영상 분석" component={QuestionListScreen} />
                 </Tab.Navigator>
             </View>
         )

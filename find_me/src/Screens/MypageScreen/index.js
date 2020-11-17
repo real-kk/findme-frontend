@@ -34,10 +34,8 @@ class MypageScreen extends React.Component {
     }
 
     _onclickLogout = () => {
-        console.log("gfg")
         this.props.requestLogout()
         this.props.navigation.navigate('Login');
-        console.log("pass")
         alert("로그아웃 되었다.")
     }
     render() {

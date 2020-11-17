@@ -35,9 +35,7 @@ export const saveStorage = (item) => {
 
 export const getUserData = async () => {
   try {
-    console.log('Hi')
     const userData = await AsyncStorage.getItem('FINDME')
-    console.log('Hello')
     const user = JSON.parse(userData)
     if (user === null) {
       return false
@@ -69,16 +67,13 @@ export function requestLogin (data) {
     return axios.post('/rest-auth/login/', data)
       .then((res) => {
         const obj = JSON.parse(res.config.data)
-        console.log('in request Login')
         const item = [['userToken', res.data.key], ['userType', obj.user_type]]
         saveStorage(item)
         // setUserData('userToken', res.data.key);
-        console.log('IT IS ' + item)// 여기까진 save가 된다
         axios.defaults.headers.common.Authorization = res.data.key
         dispatch(loginSuccess())
         dispatch(storeUserData(res.data))
 
-        // console.log(res.data.key)
       }).catch((error) => {
         // alert('Login Failed : ' + error)
         console.log(error)

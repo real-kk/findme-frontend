@@ -28,7 +28,6 @@ class DiaryResult extends React.Component {
   }
 
   render () {
-    // console.log(this.props.route.)
     return (
         <View style={styles.container}>
             <ScrollView>

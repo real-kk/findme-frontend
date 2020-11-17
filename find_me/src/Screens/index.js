@@ -23,31 +23,38 @@ import CounselorsScreen from './CounelorsScreen'
 
 import CounselorHome from './CounselorHome'
 import CounselorApplyScreen from './CounselorHome/apply'
-import CounselorVideoScreen from './CounselorHome/video'
-import CounselorRecordScreen from './CounselorHome/record'
+import CounselorVideoScreen from './CounselorHome/clientList'
+import STTScreen from './CounselorHome/STT'
+import QuestionRegisterScreen from './CounselorHome/questionRegister'
+
 
 import Signup from './LoginScreen/SignUp'
 import DiaryScreen from './HomeScreen/diary'
 import DailyScreen from './HomeScreen/daily'
-import VideoScreen from './HomeScreen/video'
 import recordVideo from './HomeScreen/recordVideo'
-import selectVideo from './HomeScreen/selectVideo'
+import confirmQuestion from './HomeScreen/confirmQuestion'
+import confirmVideo from './HomeScreen/confirmVideo'
 
 import CounselorResult from './CounselorResult'
 import ResultHome from './CounselorResult/result'
 import TextResult from './CounselorResult/diaryText'
 import CloudResult from './CounselorResult/diaryCloud'
 
+
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult'
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult'
-import videoAnalysisResultScreen from './ResultScreen/videoAnalysisResult'
+import questionListScreen from './ResultScreen/questionList'
 import diaryListScreen from './ResultScreen/diaryList'
 import diaryDetailScreen from './ResultScreen/diaryDetail'
+import videoAnalysisResultScreen from './ResultScreen/videoAnalysisResult'
+
 import CounselorDetailScreen from './CounelorsScreen/counselorDetail'
 import CounselingRequestScreen from './CounelorsScreen/counselingRequest'
+import CounselingRequestScreen2 from './CounelorsScreen/counselingRequest2'
 import userModificationScreen from './MypageScreen/userModification'
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification'
 import ApplicationDetailScreen from './CounselorHome/ApplicationDetail'
+
 
 import {
   getUserData,
@@ -65,7 +72,6 @@ const mapDispatchToProps = (dispatch) => ({
   storeUserData: (data) => dispatch(storeUserData(data))
 })
 
-const AuthStack =
   function AuthStack () {
     return (
       <Stack.Navigator initialRouteName="Login">
@@ -102,13 +108,18 @@ function CounselorHomeStack () {
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="Video"
+          name="ClientList"
           component={CounselorVideoScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="Record"
-          component={CounselorRecordScreen}
+          name="STT"
+          component={STTScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="QuestionRegister"
+          component={QuestionRegisterScreen}
         />
       </Stack.Navigator>
   )
@@ -133,18 +144,18 @@ function HomeStack () {
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="Video"
-          component={VideoScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
           name="RecordVideo"
           component={recordVideo}
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="SelectVideo"
-          component={selectVideo}
+          name="ConfirmQuestion"
+          component={confirmQuestion}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="ConfirmVideo"
+          component={confirmVideo}
         />
       </Stack.Navigator>
   )
@@ -208,7 +219,12 @@ function ResultStack () {
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="VideoAnalysis"
+          name="QuestionList"
+          component={questionListScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="VideoAnalysisResult"
           component={videoAnalysisResultScreen}
         />
       </Stack.Navigator>
@@ -232,6 +248,11 @@ function CounselorsStack () {
           options={{ headerShown: false }}
           name="CounselingRequest"
           component={CounselingRequestScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CounselingRequest2"
+          component={CounselingRequestScreen2}
         />
       </Stack.Navigator>
   )
@@ -290,7 +311,6 @@ function CounselorStack () {
         <Tab.Navigator
           navigationOptions = {({ navigation }) => ({
             tabBarOnPress: (scene, jumpToIndex) => {
-              console.log('onPress', scene.route)
               jumpToIndex(scene.index)
             }
           })}
@@ -339,7 +359,6 @@ function ClientStack () {
         <Tab.Navigator
           navigationOptions = {({ navigation }) => ({
             tabBarOnPress: (scene, jumpToIndex) => {
-              console.log('onPress', scene.route)
               jumpToIndex(scene.index)
             }
           })}

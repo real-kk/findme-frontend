@@ -73,7 +73,10 @@ class ApplicationDetail extends React.Component {
                 <Text>학번 : {this.state.application.student_number}</Text>
                 <Text>전화번호 : {this.state.application.phone_number}</Text>
                 <Text>하고 싶은 말 :  {this.state.application.content}</Text>
-                <Image source={{uri: this.state.application.time_table,}}/>
+  
+                <Image
+                    style={{height: 400, width: 300}} 
+                    source={{uri: this.state.application.time_table}}/>
                 <TouchableOpacity
                     style={{borderWidth: 1}}
                             onPress={()=>{

@@ -38,7 +38,6 @@ class WordCloudResult extends React.Component {
                 wordcloud: data.image,
                 loading_wordcloud: false
             })
-            console.log(this.state.wordcloud)
         })
         .catch(err=>console.log(err))
     }
