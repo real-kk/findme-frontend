@@ -58,7 +58,7 @@ import {
                                         this.props.navigation.push('Daily')
                                     }
                                     else if(item.key === '2'){
-                                        this.props.navigation.push('Video')
+                                        this.props.navigation.push('ConfirmQuestion')
                                     }
                                 }}
                             >

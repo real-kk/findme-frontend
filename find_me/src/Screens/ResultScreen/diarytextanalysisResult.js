@@ -42,7 +42,6 @@ class Diarytextanalysis extends React.Component {
               graph: data.line_graph,
               loading_graph: false,
           })
-          console.log(this.state.graph)
       })
       .catch(err=>console.log(err))
   }

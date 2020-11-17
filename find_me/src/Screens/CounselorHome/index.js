@@ -48,10 +48,10 @@ import { StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native
                                         this.props.navigation.push('Apply')
                                     }
                                     else if(item.key === '1'){
-                                        this.props.navigation.push('Video')
+                                        this.props.navigation.push('ClientList')
                                     }
                                     else if(item.key === '2'){
-                                        this.props.navigation.push('Record')
+                                        this.props.navigation.push('STT')
                                     }
                                 }}
                             >

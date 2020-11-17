@@ -3,6 +3,7 @@ import { StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native
 import { connect } from 'react-redux'
 import axios from '../../axiosConfig'
 
+
 const mapStateToProps = (state) => ({
     token: state
   })
@@ -11,46 +12,46 @@ const mapDispatchToProps = (dispatch) => ({
     requestLogout: () => dispatch(requestLogout())
   })
 
-
-class CounselorApplyScreen extends React.Component {
+class CounselorVideo extends React.Component {
     constructor(){
         super();
         this.state = {
-          applicationList: [],
+          clientList: [],
       }
     }
 
-    getApplicationList = async () => {
-        await axios.get('/counsels/', 
+    getClientList = async () => {
+        await axios.get('/counsels/date/', 
         { headers: {
             'Authorization' : `Token ${this.props.token.auth.token}`
         }})
         .then(({data})=>{
-            this.setState({applicationList: data})
+            this.setState({clientList: data})
         })
+      
     }
 
     componentDidMount(){
-        this.getApplicationList()
+        this.getClientList()
       }
-
+    
     render() {
         return (
             <View style={styles.container}>
-                <Text>상담사 신청 리스트</Text>
+                <Text>상담중인 내담자 목록</Text>
                 <FlatList
-                    data={this.state.applicationList}
+                    data={this.state.clientList}
                     renderItem={({item, index})=>{
                         return(
                             <TouchableOpacity
                                 onPress = {()=> {
-                                    this.props.navigation.navigate('ApplicationDetail', {
-                                        application : this.state.applicationList[index]
+                                    this.props.navigation.navigate('QuestionRegister', {
+                                        client: this.state.clientList[index]
                                     })
                                 }}
                             >
                                 <View style={styles.list}>
-                                    <Text>신청자 : {item.client_username}</Text>
+                                    <Text>{'이름 : ' + item.client_username}</Text>
                                 </View>
                             </TouchableOpacity>
                         )
@@ -62,7 +63,7 @@ class CounselorApplyScreen extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounselorApplyScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CounselorVideo);
 
 const styles = StyleSheet.create({
     container : {

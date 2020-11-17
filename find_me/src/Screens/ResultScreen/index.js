@@ -13,9 +13,9 @@ import { connect } from 'react-redux'
 import axios from '../../axiosConfig'
 
 import DiaryListScreen from './diaryList'
-import VideoAnalysisScreen from './videoAnalysisResult'
-import diaryTextAnalysisResultScreen from './diaryTextAnalysisResult'
-import WordCloudResultScreen from './wordCloudResult'
+import QuestionListScreen from './questionList';
+import DiaryTextAnalysisResultScreen from './diaryTextAnalysisResult';
+import WordCloudResultScreen from './wordCloudResult';
 
 const Tab = createMaterialTopTabNavigator()
 const mapStateToProps = (state) => ({
@@ -53,9 +53,9 @@ class TopBar extends React.Component {
               navigation={this.props.navigation}/>
               <Tab.Screen name="워드 클라우드" component={WordCloudResultScreen}
               navigation={this.props.navigation}/>
-              <Tab.Screen name="감정 분석 그래프" component={diaryTextAnalysisResultScreen}
+              <Tab.Screen name="감정 분석 그래프" component={DiaryTextAnalysisResultScreen}
               navigation={this.props.navigation}/>
-              <Tab.Screen name="영상 분석" component={VideoAnalysisScreen}/>
+              <Tab.Screen name="영상 분석" component={QuestionListScreen}/>
           </Tab.Navigator>
         </View>
     )

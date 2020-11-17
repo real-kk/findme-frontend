@@ -71,10 +71,8 @@ var radio_props = [
             
                 console.log(userToken + ' ' + currentuserType)
                 this.props.storeUserData({token : userToken})
-                console.log(userToken)
                         
                 this.props.navigation.navigate('User', {userType: currentuserType});
-              //console.log(this.props.token + ' is it?')
             })
             .catch((err) => {
                 console.log(err)
