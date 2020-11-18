@@ -31,6 +31,7 @@ class CounselingRequest2 extends React.Component {
     }
     addImage = () => {
         ImagePicker.launchImageLibrary({}, res => {
+            console.log(res.uri)
             this.setState({
                 time_table: res.uri
             })
@@ -52,11 +53,9 @@ class CounselingRequest2 extends React.Component {
           }
       })
       .then((res) => {
-          console.log("1")
           this.setState({
               id: res.data[1]
           })
-          console.log("2")
           axios.post(`/counsels/photo/${this.state.id}/` , photo, 
               { headers: {
                   'Authorization' : `Token ${this.props.token.auth.token}`,

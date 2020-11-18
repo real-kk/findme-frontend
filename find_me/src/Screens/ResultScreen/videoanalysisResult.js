@@ -45,7 +45,7 @@ class VideoAnalysisResult extends React.Component {
               }}
             >
               <View style={styles.store}>
-                <Text>저장하기</Text>
+                <Text>재생</Text>
               </View>
             </TouchableOpacity>
             <Video source={{uri: this.props.route.params.uri}}
@@ -55,7 +55,6 @@ class VideoAnalysisResult extends React.Component {
               playWhenInactive={true}
               style={styles.backgroundVideo} 
             />
-            <Text>DD</Text>
         </View>
     )
   }

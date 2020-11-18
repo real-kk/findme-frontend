@@ -152,7 +152,7 @@ class SignUp extends React.Component {
                             }}
                         />
                         <View>
-                            {this.state.passwordFlag ? <Text style={{marginLeft:20}}>비밀번호가 일치합니다!</Text>
+                            {this.state.passwordFlag ? <Text style={{marginLeft:20}}>비밀번호 일치!</Text>
                                                     : <Text></Text>}
                         </View>
                     </View>
