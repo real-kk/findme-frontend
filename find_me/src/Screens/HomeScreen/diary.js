@@ -58,13 +58,13 @@ class DiaryScreen extends React.Component {
     render() {
       return (
           <View style={styles.container}>
-            <Text style={styles.day}>{date}  /  {month}  /  {year}</Text>
+            <Text style={styles.day}>{year}  /  {month}  /  {date}</Text>
             <TextInput
                 style={styles.diaryname}
                 placeholder="일기 제목"
                 value={this.state.diaryTitle}
                 onChangeText={(text) => {
-                this.setState({diaryTitle: text})             
+                    this.setState({diaryTitle: text})             
                 }}
             />
             <TextInput
@@ -73,7 +73,7 @@ class DiaryScreen extends React.Component {
                 placeholder="하루 동안 있었던 일을 작성하세요"
                 value={this.state.diaryContent}
                 onChangeText={(text) => {
-                this.setState({diaryContent: text})             
+                    this.setState({diaryContent: text})             
                 }}
             />
             <TouchableOpacity
