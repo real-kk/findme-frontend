@@ -19,6 +19,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen'
+import counselorDetail from '../CounelorsScreen/counselorDetail'
 
 const mapStateToProps = (state) => ({
   token: state
@@ -80,23 +81,28 @@ class QuestionList extends React.Component {
     }) 
   }
 
-  resultConfirm = async (id) => {
-    console.log(`/tasks/process_videos/${id}/`)
-    // this.props.navigation.navigate('VideoAnalysisResult', {
-    //   questionID: id
-    // })
-    await axios.get(`/tasks/process_videos/${id}/`,
-    { headers: {
-      'Authorization' : `Token ${this.props.token.auth.token}`
-    }}) 
-    .then(({data})=>{
-      console.log(data)
-      this.props.navigation.navigate('VideoAnalysisResult', {
-        questionID: id,
-        uri: data
-      })
+  next = async (id) => {
+    this.props.navigation.navigate('VideoResult', {
+      questionID: id
     })
   }
+  // resultConfirm = async (id) => {
+  //   console.log(`/tasks/process_videos/${id}/`)
+  //   // this.props.navigation.navigate('VideoAnalysisResult', {
+  //   //   questionID: id
+  //   // })
+  //   await axios.get(`/tasks/process_videos/${id}/`,
+  //   { headers: {
+  //     'Authorization' : `Token ${this.props.token.auth.token}`
+  //   }}) 
+  //   .then(({data})=>{
+  //     console.log(data)
+  //     this.props.navigation.navigate('VideoAnalysisResult', {
+  //       questionID: id,
+  //       uri: data
+  //     })
+  //   })
+  // }
 
   render () {
     return (
@@ -107,7 +113,8 @@ class QuestionList extends React.Component {
             return(
               <TouchableOpacity
                 onPress = {()=> {
-                  this.resultConfirm(item.id)
+                  this.next(item.id)
+                  // this.resultConfirm(item.id)
                 }}
               >
                 <View style={styles.list}>

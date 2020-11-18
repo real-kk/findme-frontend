@@ -38,6 +38,9 @@ import CounselorResult from './CounselorResult'
 import ResultHome from './CounselorResult/result'
 import TextResult from './CounselorResult/diaryText'
 import CloudResult from './CounselorResult/diaryCloud'
+import Video from './CounselorResult/videoResult'
+import CounselorVideoGraph from './CounselorResult/videoGraph'
+import CounselorQuestionList from './CounselorResult/questionList'
 
 import CounselorMypageScreen from './CounselorMypage'
 
@@ -47,6 +50,8 @@ import questionListScreen from './ResultScreen/questionList'
 import diaryListScreen from './ResultScreen/diaryList'
 import diaryDetailScreen from './ResultScreen/diaryDetail'
 import videoAnalysisResultScreen from './ResultScreen/videoAnalysisResult'
+import videoGraphResultScreen from './ResultScreen/videoGraphResult'
+import videoResultScreen from './ResultScreen/videoResult'
 
 import CounselorDetailScreen from './CounelorsScreen/counselorDetail'
 import CounselingRequestScreen from './CounelorsScreen/counselingRequest'
@@ -185,6 +190,21 @@ function CounselorResultStack () {
           name="WordCloudResult"
           component={CloudResult}
         />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CounselorQuestionList"
+          component={CounselorQuestionList}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="VideoResult"
+          component={Video}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CounselorVideoGraph"
+          component={CounselorVideoGraph}
+        />
       </Stack.Navigator>
   )
 }
@@ -228,6 +248,16 @@ function ResultStack () {
           options={{ headerShown: false }}
           name="VideoAnalysisResult"
           component={videoAnalysisResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="VideoGraphResult"
+          component={videoGraphResultScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="VideoResult"
+          component={videoResultScreen}
         />
       </Stack.Navigator>
   )

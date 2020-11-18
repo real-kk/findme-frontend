@@ -63,7 +63,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
                                         })
                                     }
                                     else if(item.key === '2'){
-                                        this.props.navigation.push('Video')
+                                        this.props.navigation.push('CounselorQuestionList', {
+                                            email: this.props.route.params.client.client_email
+                                        })
                                     }
                                     else if(item.key === '3'){
                                         this.props.navigation.push('Daily')
