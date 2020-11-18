@@ -23,6 +23,8 @@ const mapStateToProps = (state) => ({
   class ConfirmVideo extends React.Component {
     constructor() {
         super();
+        this.state= {
+        }
     }
 
     submission = async (videoUri) => {
@@ -32,7 +34,15 @@ const mapStateToProps = (state) => ({
           type: "video/mp4",
           uri: videoUri
         });
-        await axios.post(`/tasks/videos/${this.props.route.params.questionID}/1/`, data, 
+        const time = new Date();
+        var date = time.getDate(); //Current Date
+        var month = time.getMonth() + 1; //Current Month
+        var year = time.getFullYear(); //Current Year
+        var hours = time.getHours(); //Current Hours
+        var min = time.getMinutes(); //Current Minutes
+        var sec = time.getSeconds(); //Current Seconds
+
+        await axios.post(`/tasks/videos/${this.props.route.params.questionID}/${year}-${month}-${date}_${hours}${min}${sec}/`, data, 
             { headers: {
                 'Authorization' : `Token ${this.props.token.auth.token}`,
                 'content-type': 'multipart/form-data'
