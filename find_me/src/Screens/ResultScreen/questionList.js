@@ -81,28 +81,25 @@ class QuestionList extends React.Component {
     }) 
   }
 
-  next = async (id) => {
-    this.props.navigation.navigate('VideoResult', {
-      questionID: id
-    })
-  }
-  // resultConfirm = async (id) => {
-  //   console.log(`/tasks/process_videos/${id}/`)
-  //   // this.props.navigation.navigate('VideoAnalysisResult', {
-  //   //   questionID: id
-  //   // })
-  //   await axios.get(`/tasks/process_videos/${id}/`,
-  //   { headers: {
-  //     'Authorization' : `Token ${this.props.token.auth.token}`
-  //   }}) 
-  //   .then(({data})=>{
-  //     console.log(data)
-  //     this.props.navigation.navigate('VideoAnalysisResult', {
-  //       questionID: id,
-  //       uri: data
-  //     })
+  // next = async (id) => {
+  //   this.props.navigation.navigate('VideoResult', {
+  //     questionID: id
   //   })
   // }
+  resultConfirm = async (id) => {
+    console.log(`/tasks/process_videos/${id}/`)
+    await axios.get(`/tasks/process_videos/${id}/`,
+    { headers: {
+      'Authorization' : `Token ${this.props.token.auth.token}`
+    }}) 
+    .then(({data})=>{
+      console.log(data)
+      this.props.navigation.navigate('VideoAnalysisResult', {
+        questionID: id,
+        uri: data
+      })
+    })
+  }
 
   render () {
     return (
@@ -113,8 +110,8 @@ class QuestionList extends React.Component {
             return(
               <TouchableOpacity
                 onPress = {()=> {
-                  this.next(item.id)
-                  // this.resultConfirm(item.id)
+                  // this.next(item.id)
+                  this.resultConfirm(item.id)
                 }}
               >
                 <View style={styles.list}>
@@ -128,6 +125,16 @@ class QuestionList extends React.Component {
           refreshing={this.state.refreshing}
           onRefresh={this.handleRefresh}
         />
+            <TouchableOpacity
+              onPress={()=>{
+                this.props.navigation.navigate('VideoGraphResult')
+              }}
+            >
+              <View>
+                <Text>그래프로 확인하기</Text>
+              </View>
+            </TouchableOpacity>
+        
       </View>
     )
   }

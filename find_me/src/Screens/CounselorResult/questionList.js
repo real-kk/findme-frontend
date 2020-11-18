@@ -63,8 +63,8 @@ class QuestionList extends React.Component {
     }}) 
     .then(({data})=>{
       console.log(data)
-      this.props.navigation.navigate('VideoResult', {
-        questionID: id,
+      this.props.navigation.navigate('VideoAnalysis', {
+          questionID: id,
           uri: data
       })
     })
@@ -99,6 +99,18 @@ class QuestionList extends React.Component {
                     }}
                     keyExtractor={(key, index) => index.toString()}
                 />
+
+              <TouchableOpacity
+              onPress={()=>{
+                this.props.navigation.navigate('CounselorVideoGraph', {
+                  email: this.props.route.params.email
+                })
+              }}
+            >
+              <View>
+                <Text>그래프로 확인하기</Text>
+              </View>
+            </TouchableOpacity>
                 </View>
            }
         </View>

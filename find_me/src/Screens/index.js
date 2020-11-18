@@ -41,6 +41,7 @@ import CloudResult from './CounselorResult/diaryCloud'
 import Video from './CounselorResult/videoResult'
 import CounselorVideoGraph from './CounselorResult/videoGraph'
 import CounselorQuestionList from './CounselorResult/questionList'
+import VideoAnalysis from './CounselorResult/videoAnalysisResult'
 
 import CounselorMypageScreen from './CounselorMypage'
 
@@ -199,6 +200,11 @@ function CounselorResultStack () {
           options={{ headerShown: false }}
           name="VideoResult"
           component={Video}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="VideoAnalysis"
+          component={VideoAnalysis}
         />
         <Stack.Screen
           options={{ headerShown: false }}

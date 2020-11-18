@@ -26,36 +26,40 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-class VideoAnalysisResult extends React.Component {
+class VideoAnalysis extends React.Component {
   constructor(){
     super();
   }
 
   download = () => {
     Linking.openURL(this.props.route.params.uri)
-
+    // console.log(this.props.route.params.uri)
   }
-  
+
   render () {
     return (
         <View style={styles.container}>
+
             <TouchableOpacity
               onPress={()=>{
                 this.download()
               }}
             >
               <View style={styles.store}>
-                <Text>재생</Text>
+                <Text>재생하기</Text>
               </View>
             </TouchableOpacity>
-            <Text>{this.props.route.params.uri}</Text>
-            <Video source={{uri: this.props.route.params.uri}}
+            
+            {/* <Video source={{uri: this.props.route.params.uri}}
+              ref={(ref) => {
+                this.player = ref
+              }}  
               controls
               paused
               resizeMode='cover'
               playWhenInactive={true}
               style={styles.backgroundVideo} 
-            />
+            /> */}
         </View>
     )
   }
@@ -78,4 +82,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(VideoAnalysisResult)
+export default connect(mapStateToProps, mapDispatchToProps)(VideoAnalysis)
