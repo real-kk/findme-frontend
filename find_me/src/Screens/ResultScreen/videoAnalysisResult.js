@@ -45,10 +45,10 @@ class VideoAnalysisResult extends React.Component {
               }}
             >
               <View style={styles.store}>
-                <Text>재생</Text>
+                <Text style={{fontSize:50}}>재생</Text>
               </View>
             </TouchableOpacity>
-            <Text>{this.props.route.params.uri}</Text>
+
             <Video source={{uri: this.props.route.params.uri}}
               controls
               paused
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
       },
       store: {
           alignItems: 'center',
+          marginTop: 50,
           justifyContent: 'center',
       }
 })

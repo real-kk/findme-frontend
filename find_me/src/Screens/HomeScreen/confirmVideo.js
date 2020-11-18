@@ -83,7 +83,7 @@ const mapStateToProps = (state) => ({
               }}
             >
               <View style={styles.submission}>
-                <Text>제출하기</Text>
+                <Text style={{fontSize: 50}}>제출하기</Text>
               </View>
             </TouchableOpacity>
 
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         width: '100%',
       },
       submission: {
-        marginTop: 30,
+        marginTop: 50,
         alignItems:'center',
         justifyContent: 'center'
       }
