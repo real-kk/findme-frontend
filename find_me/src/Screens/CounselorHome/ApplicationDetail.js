@@ -3,6 +3,11 @@ import { StyleSheet,  View, Text, Image, TextInput, TouchableOpacity } from 'rea
 import { connect } from 'react-redux'
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from '../../axiosConfig';
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp
+  } from 'react-native-responsive-screen'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const mapStateToProps = (state) => ({
     token: state
@@ -65,37 +70,41 @@ class ApplicationDetail extends React.Component {
     render() {
       return (
           <View style={styles.container}>
-              <ScrollView>
-                <Text>내담자 정보</Text>
-                
-                <Text>이름 : {this.state.application.client_username}</Text>
+                <View style={styles.list_head}>
+                <Icon name="person-circle" size={60} style={styles.image}></Icon>
+                <View style={styles.head_text}>
+                <Text style={styles.username}>이름 : {this.state.application.client_username}</Text>
+                <Text style={styles.introduce}> {this.state.application.content}</Text>
+                </View>
+                </View>
+                <View style={styles.list_body}>
                 <Text>전공 : {this.state.application.major}</Text>
                 <Text>학번 : {this.state.application.student_number}</Text>
                 <Text>전화번호 : {this.state.application.phone_number}</Text>
-                <Text>하고 싶은 말 :  {this.state.application.content}</Text>
-  
+               
+                <Text>시간표 이미지 </Text>
                 <Image
-                    style={{height: 400, width: 300}} 
+                    style={{height: wp('80%'), width: '100%'}} 
                     source={{uri: this.state.application.time_table}}/>
+                </View>
                 <TouchableOpacity
-                    style={{borderWidth: 1}}
+                   style={styles.apply}
                             onPress={()=>{
                                this.submission()
                             }}
                             
                         >
-                        <Text>상담 승인</Text>
+                    <Text>상담 승인</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={{borderWidth: 2}}
+                    style={styles.apply}
                             onPress={()=>{
                               this.reject()
                             }}
                             
                         >
-                        <Text>상담 반려</Text>
+                    <Text>상담 반려</Text>
                 </TouchableOpacity>
-            </ScrollView>
         </View>
         
       )
@@ -104,10 +113,44 @@ class ApplicationDetail extends React.Component {
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationDetail)
 
 const styles = StyleSheet.create({
-    container : {
+    container: {
         flex: 1,
         paddingTop: '10%',
+        backgroundColor: '#FAFAFA'
+      },
+      list_body: {
+        padding: '1%',
+        width: wp('100%'),
+        height: hp('65%'),
+        backgroundColor:'white',
+        flexDirection:'column',
+      },
+      list_head:{
+        flexDirection:'row',
+        alignItems: 'center',
+        height:hp('10%'),
+        backgroundColor:'white',
+      },
+      head_text:{
+        flexDirection:'column',  
+      },
+      apply: {
+        width: wp('100%'),
+        borderRadius: 2,
+        height: hp('5%'), 
+        backgroundColor:'#AAF0D1', 
+        alignItems:'center', 
         justifyContent:'center',
-        backgroundColor : '#fffff0',
-    },
+      },
+      username: {
+        marginLeft: wp('3%'),
+        fontSize: 19,
+        color: 'black',
+        fontWeight: '700',
+      },
+      introduce: {
+        marginLeft: wp('2%'),
+        fontSize: 15,
+        color: 'gray',
+      },
 });

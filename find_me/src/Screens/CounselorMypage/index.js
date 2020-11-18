@@ -24,13 +24,13 @@ const mapDispatchToProps = (dispatch) => ({
     requestLogout: () => dispatch(requestLogout())
   })
 
-class MypageScreen extends React.Component {
+class CounselorMypage extends React.Component {
     constructor(){
         super();
         this.state={
             datas: [
                 {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
-                {key:'1', data:'후기 작성', icon:'grease-pencil'},
+                {key:'1', data:'내 후기 확인', icon:'grease-pencil'},
                 {key:'2', data:'로그아웃', icon:'logout-variant'},
             ],
         }
@@ -57,7 +57,6 @@ class MypageScreen extends React.Component {
                                         this.props.navigation.push('userModification')
                                     }
                                     else if(item.key === '1'){
-
                                     }
                                     else if(item.key === '2'){
                                         this._onclickLogout();
@@ -78,7 +77,7 @@ class MypageScreen extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MypageScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(CounselorMypage)
 
 const styles = StyleSheet.create({
   container : {
@@ -106,5 +105,4 @@ const styles = StyleSheet.create({
       fontSize: 20,
   }
 });
-
 

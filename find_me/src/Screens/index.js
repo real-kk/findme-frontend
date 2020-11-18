@@ -39,6 +39,8 @@ import ResultHome from './CounselorResult/result'
 import TextResult from './CounselorResult/diaryText'
 import CloudResult from './CounselorResult/diaryCloud'
 
+import CounselorMypageScreen from './CounselorMypage'
+
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult'
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult'
 import questionListScreen from './ResultScreen/questionList'
@@ -282,6 +284,29 @@ function MypageStack () {
   )
 }
 
+function CounselorMypageStack () {
+  const navigation = useNavigation()
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="CounselorMypage"
+        component={CounselorMypageScreen}
+        navigation={navigation}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="userModification"
+        component={userModificationScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="applicationFormModification"
+        component={applicationFormModificationScreen}
+      />
+    </Stack.Navigator>
+  )
+}
 function UserStack ({ navigation, route, userType }) {
   if (route.params) {
     console.log('screen userType: ' + route.params.userType)
@@ -319,9 +344,11 @@ function CounselorStack () {
             tabBarIcon: ({ focused, color, size }) => {
               let icon = '▲'
               if (route.name === 'Home') {
-                icon = <Icon name="ios-home" size={30} />
+                icon = <Icon name="ios-home" size={25} />
               } else if (route.name === 'Result') {
-                icon = <Icon name="ios-search" size={30} />
+                icon = <Icon name="ios-bar-chart-sharp" size={25} />
+              } else if (route.name === 'Mypage') {
+                icon = <Icon name="md-ellipsis-horizontal" size={25} />
               }
               return <Text style={{ color: focused && '#FF6787' || '#FEFEFE', marginTop: 5 }}>{icon}</Text>
             }
@@ -341,7 +368,7 @@ function CounselorStack () {
           <Tab.Screen
             options={{ headerShown: false }}
             name="Mypage"
-            component={MypageStack}
+            component={CounselorMypageStack}
           />
         </Tab.Navigator>
 

@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 
 import React from 'react';
 import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
@@ -29,11 +22,12 @@ class CounselingRequest2 extends React.Component {
         }
        
     }
-    addImage = () => {
+      addImage = () => {
         ImagePicker.launchImageLibrary({}, res => {
             this.setState({
                 time_table: res.uri
             })
+            console.log(res.uri)
         })
     }
 
@@ -83,13 +77,13 @@ class CounselingRequest2 extends React.Component {
                     style={{borderWidth: 2, marginBottom: 5}}
                         onPress={()=>{
                             this.addImage()
-                        }}
+                    }}
                 >
                     <Text>시간표 가져오기</Text>
                 </TouchableOpacity>
                 <Image
                     source={{uri: this.state.time_table ? this.state.time_table : null}}
-                    style={{width: 300, height:  400}}
+                    style={{width: '99%', height:  400, justifyContent:'center'}}
                 />
                 <TouchableOpacity
                     style={{borderWidth: 2}}

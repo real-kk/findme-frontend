@@ -13,9 +13,9 @@ import { connect } from 'react-redux'
 import axios from '../../axiosConfig'
 
 import DiaryListScreen from './diaryList'
-import QuestionListScreen from './questionList';
-import DiaryTextAnalysisResultScreen from './diaryTextAnalysisResult';
-import WordCloudResultScreen from './wordCloudResult';
+import QuestionListScreen from './questionList'
+import DiaryTextAnalysisResultScreen from './diaryTextAnalysisResult'
+import WordCloudResultScreen from './wordCloudResult'
 
 const Tab = createMaterialTopTabNavigator()
 const mapStateToProps = (state) => ({

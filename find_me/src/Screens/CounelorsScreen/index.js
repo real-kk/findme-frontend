@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         marginLeft: wp('10%'),
         fontSize: 17,
         color: 'black',
-        fontWeight: '900',
+        fontWeight: '700',
     },
     text: {
         paddingTop: hp('1%'),

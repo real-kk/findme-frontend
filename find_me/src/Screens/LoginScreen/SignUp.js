@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     titleContainer: {
-        width: '100%',
+        width: '100%',  
         padding: wp('10%'),
         alignItems: 'center',
     },
