@@ -16,6 +16,10 @@ import DiaryListScreen from './diaryList'
 import QuestionListScreen from './questionList'
 import DiaryTextAnalysisResultScreen from './diaryTextAnalysisResult'
 import WordCloudResultScreen from './wordCloudResult'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
 const Tab = createMaterialTopTabNavigator()
 const mapStateToProps = (state) => ({
@@ -38,14 +42,14 @@ class TopBar extends React.Component {
   render () {
     return (
         <View style={styles.container}>
-          <Text style={styles.result}>분석 결과</Text>
+          <Text style={styles.result}>감정 분석 결과</Text>
           <Tab.Navigator
            tabBarOptions={{
-             labelStyle: { fontSize: 15 },
-             tabStyle: { width: 100 },
+             labelStyle: { fontSize: 16},
+             tabStyle: { width: wp('25%'), height: hp('8%')},
              style: {
-               borderColor: 'transparent',
-               backgroundColor: 'white'
+               borderColor: 'black',
+               backgroundColor: '#fff'
              }
            }}
           >
@@ -66,11 +70,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: '10%',
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     justifyContent: 'center'
   },
   result: {
-    textAlign: 'center'
+    fontSize: 23,
+    paddingLeft: wp('5%'),
+    marginTop: hp('3%'),
+    marginBottom: hp('2%'),
+    fontWeight: 'bold'
   }
 })
 

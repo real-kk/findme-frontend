@@ -75,9 +75,10 @@ class WordCloudResult extends React.Component {
                     size = "small"
                     color = "green"
                 /> :
-                <View>
+                <View styles={styles.result}>
+                    <Text style={styles.introduce}>워드 클라우드는 ~~을 토대로 만들어졌습니다</Text>
                     <Image
-                        style={{width: wp('100%'), height: hp('58%')}}
+                        style={{width: wp('100%'), height: hp('50%')}}
                         source={{uri: this.state.wordcloud ? this.state.wordcloud : null}}
                     />
                 </View>
@@ -92,10 +93,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(WordCloudResult)
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        alignItems: 'center',
-        justifyContent:'center',
+        alignItems:'center',    
         backgroundColor:'white'
     },
-
+    result:{
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    introduce: {
+        marginVertical:hp('3%'),
+        width: wp('88%'),
+       
+        padding: '5%',
+        backgroundColor:'#f2f2f2',
+        borderRadius: 5,
+        height:hp('10%'),
+    }
 });
 

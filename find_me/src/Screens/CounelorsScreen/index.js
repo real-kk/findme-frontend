@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { Dimensions, StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
+import { StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 import {
@@ -59,13 +59,14 @@ import Icon from 'react-native-vector-icons/Ionicons'
     render() {
       return (
         <View style={styles.container}>
-            <Text>상담사 리스트</Text>
+            <Text style={styles.result}>상담사 리스트</Text>
             <FlatList
                     showsVerticalScrollIndicator={false}
                     data={this.state.counselorList}
                     renderItem={({item, index})=>{
                         return(
                             <TouchableOpacity
+                                activeOpacity={0.95} 
                                 onPress = {()=> {
                                     this.props.navigation.navigate('CounselorDetail', {
                                         counselor: this.state.counselorList[index]
@@ -96,24 +97,33 @@ const styles = StyleSheet.create({
     container : {
         flex: 1,
         paddingTop: '10%',
-        alignItems: 'center',
         justifyContent:'center',
-        backgroundColor:'#FAFAFA'
+        backgroundColor:'white',
     },
     list: {
-        padding: '5%',
-        marginVertical : '2%',
-        width: wp('98%'),
-        height: hp('15%'),
-        backgroundColor:'white',
+        paddingHorizontal: '5%',
+        paddingVertical: hp('1%'),
+        marginVertical : hp('1%'),
+        height: hp('16%'),
+        width: wp('90%'),
+        marginLeft: wp('5%'),
+        backgroundColor:'#fafafa',
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        borderRadius: 7,
         flexDirection:'row',
+        elevation: 5,
     },
     image:{
-        paddingTop: hp('1%'),
+        justifyContent:'center',
     },
     list_side:{
         flexDirection:'column',
-        alignItems: 'flex-start',
     },
     title:{
         marginLeft: wp('10%'),
@@ -126,5 +136,12 @@ const styles = StyleSheet.create({
         marginLeft: wp('10%'),
         fontSize: 15,
         color:'gray',
+    },
+    result: {
+        fontSize: 23,
+        paddingLeft: wp('5%'),
+        marginTop: hp('3%'),
+        marginBottom: hp('2%'),
+        fontWeight: 'bold'
     }
 });

@@ -42,7 +42,7 @@ class CounselorResult extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>상담중인 내담자 목록</Text>
+                <Text style={styles.result}>상담중인 내담자 목록</Text>
                 <FlatList
                     data={this.state.clientList}
                     renderItem={({item, index})=>{
@@ -107,5 +107,12 @@ const styles = StyleSheet.create({
         marginLeft: wp('10%'),
         fontSize: 14,
         color:'gray',
-    }
+    },
+    result: {
+        fontSize: 23,
+        paddingLeft: wp('5%'),
+        marginTop: hp('3%'),
+        marginBottom: hp('2%'),
+        fontWeight: 'bold'
+      }
 });

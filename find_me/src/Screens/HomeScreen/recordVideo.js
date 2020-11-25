@@ -30,7 +30,7 @@ const mapStateToProps = (state) => ({
             recording: '',
             video: '',
             recordOptions: {
-                mute: false,
+        mute: false,
                 maxDuration: 5,
                 quality: RNCamera.Constants.VideoQuality['288p'],
               },

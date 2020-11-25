@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         padding: '5%',
         marginVertical : '3%',
         justifyContent: 'center',
-        width: wp('98%'),
+        width: wp('100%'),
         height: hp('15%'),
         backgroundColor: 'white',
     },

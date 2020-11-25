@@ -16,6 +16,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
 const mapStateToProps = (state) => ({
   token: state
@@ -80,8 +84,9 @@ class QuestionList extends React.Component {
                     color = "green"
                 /> :
               <View>
-                <Text>질문 리스트</Text>
+                <Text style={styles.result}>질문 리스트</Text>
                 <FlatList
+                    showsVerticalScrollIndicator={false}
                     data={this.state.questionList}
                     renderItem={({item, index})=>{
                         return(
@@ -91,8 +96,8 @@ class QuestionList extends React.Component {
                                 }}
                             >
                                 <View style={styles.list}>
-                                    <Text>{'이름 : ' + item.counselor_username}</Text>
-                                    <Text>{'질문 : ' + item.question}</Text>
+                                    <Text style={styles.title}>{'이름 : ' + item.counselor_username}</Text>
+                                    <Text style={styles.text}>{'질문 : ' + item.question}</Text>
                                 </View>
                             </TouchableOpacity>
                         )
@@ -109,19 +114,48 @@ class QuestionList extends React.Component {
 const styles = StyleSheet.create({
   container : {
     flex: 1,
-    paddingTop: 50,
-    alignItems: 'center',
-    justifyContent:'center'
-},
-list: {
-    borderWidth: 2,
-    borderRadius: 8,
-    padding:20,
-    marginTop : '10%',
-    marginHorizontal : '20%',
-    justifyContent: 'center',
-    alignItems: 'center',
-},
+    paddingTop: '10%',
+    justifyContent:'center',
+    backgroundColor:'white',
+  },
+  list: {
+    paddingHorizontal: '5%',
+    paddingVertical: hp('1%'),
+    marginVertical : hp('1%'),
+    height: hp('16%'),
+    width: wp('90%'),
+    marginLeft: wp('5%'),
+    backgroundColor:'#fafafa',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    borderRadius: 7,
+    flexDirection:'row',
+    elevation: 5,
+  },
+  result: {
+    fontSize: 23,
+    paddingLeft: wp('5%'),
+    marginTop: hp('3%'),
+    marginBottom: hp('2%'),
+    fontWeight: 'bold'
+  },
+  title:{
+    marginLeft: wp('10%'),
+    fontSize: 17,
+    color: 'black',
+    fontWeight: '700',
+  },
+  text: {
+    paddingTop: hp('1%'),
+    marginLeft: wp('10%'),
+    fontSize: 15,
+    color:'gray',
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionList)

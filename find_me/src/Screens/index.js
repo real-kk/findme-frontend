@@ -29,7 +29,6 @@ import QuestionRegisterScreen from './CounselorHome/questionRegister'
 
 import Signup from './LoginScreen/SignUp'
 import DiaryScreen from './HomeScreen/diary'
-import DailyScreen from './HomeScreen/daily'
 import recordVideo from './HomeScreen/recordVideo'
 import confirmQuestion from './HomeScreen/confirmQuestion'
 import confirmVideo from './HomeScreen/confirmVideo'
@@ -59,7 +58,6 @@ import CounselingRequestScreen2 from './CounelorsScreen/counselingRequest2'
 import userModificationScreen from './MypageScreen/userModification'
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification'
 import ApplicationDetailScreen from './CounselorHome/ApplicationDetail'
-
 
 import {
   storeUserData
@@ -144,8 +142,23 @@ function HomeStack () {
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="Daily"
-          component={DailyScreen}
+          name="Counselors"
+          component={CounselorsScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CounselorDetail"
+          component={CounselorDetailScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CounselingRequest"
+          component={CounselingRequestScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CounselingRequest2"
+          component={CounselingRequestScreen2}
         />
         <Stack.Screen
           options={{ headerShown: false }}
@@ -380,7 +393,7 @@ function CounselorStack () {
               } else if (route.name === 'Mypage') {
                 icon = <Icon name="md-ellipsis-horizontal" size={25} />
               }
-              return <Text style={{ color: focused && '#FF6787' || '#FEFEFE', marginTop: 5 }}>{icon}</Text>
+              return <Text style={{ color: focused && '#00C78C' || '#FEFEFE', marginTop: 5 }}>{icon}</Text>
             }
 
           })}
@@ -423,11 +436,9 @@ function ClientStack () {
             } else if (route.name === 'Result') {
               icon = <Icon name="ios-bar-chart-sharp" size={25} />
             } else if (route.name === 'Mypage') {
-              icon = <Icon name="md-ellipsis-horizontal" size={25} />
-            } else if (route.name === 'Counselors') {
-              icon = <Icon name = "ios-people" size={25}/>
+              icon = <Icon name="ios-person" size={25} />
             }
-            return <Text style={{ color: focused && '#FF6787' || 'gray', marginTop: 5 }}>{icon}</Text>
+            return <Text style={{ color: focused && '#00C78C' || 'gray', marginTop: 5 }}>{icon}</Text>
           }})
         }>
         <Tab.Screen
@@ -439,11 +450,6 @@ function ClientStack () {
           options={{ headerShown: false }}
           name="Result"
           component={ResultStack}
-        />
-        <Tab.Screen
-          options={{ headerShown: false }}
-          name="Counselors"
-          component={CounselorsStack}
         />
         <Tab.Screen
           options={{ headerShown: false }}
