@@ -12,6 +12,8 @@ target 'find_me' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'RNAudioRecord', :path => '../node_modules/react-native-audio-record'
+
   target 'find_meTests' do
     inherit! :complete
     # Pods for testing
