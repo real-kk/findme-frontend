@@ -87,7 +87,8 @@ export const requestSignup = (data) => {
     return axios.post('/rest-auth/registration/', data)
       .then((res) => {
         dispatch(signupSuccess())
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.log(error)
         dispatch(signupFailure(error))
       })
