@@ -8,12 +8,13 @@
 
 import 'react-native-gesture-handler'
 import React from 'react'
-import {TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native'
+import {TouchableOpacity, StyleSheet, View, Text, TextInput, Image } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button'
 import { connect } from 'react-redux'
 import { requestSignup } from '../../Store/actions/AuthAction'
 import { ScrollView } from 'react-native-gesture-handler'
+import ImagePicker from 'react-native-image-picker';
 
 const mapDispatchToProps = (dispatch) => ({
     requestSignup: (data) => dispatch(requestSignup(data))
@@ -42,15 +43,21 @@ class SignUp extends React.Component {
     
       onClickSignUp = async () => {
         try {
-          const data = {
-            email: this.state.email,
-            username: this.state.name,
-            password1: this.state.password,
-            password2: this.state.passwordConfirmation,
-            user_type: this.state.value,
-            introduce: this.state.introduce
-          }
-          await this.props.requestSignup(data)
+            const signUp = new FormData();
+            const introduce = {
+                email: this.state.email,
+                username: this.state.name,
+                password1: this.state.password,
+                password2: this.state.passwordConfirmation,
+                user_type: this.state.value,
+            }
+            signUp.append('image', {
+                uri: this.state.introduce,
+                type: 'image/png',
+                name: 'introduce.jpg'
+            })
+            signUp.append('introduce', introduce)
+          await this.props.requestSignup(signUp)
           alert('회원가입에 성공하였습니다!')
           this.props.navigation.navigate('Login')
         } catch (e) {
@@ -58,6 +65,15 @@ class SignUp extends React.Component {
         }
       }
 
+      addImage = () => {
+        ImagePicker.launchImageLibrary({}, res => {
+            console.log(res.uri)
+            this.setState({
+                introduce: res.uri
+            })
+            console.log(res.uri)
+        })
+    }
     render() {
         let reg = /^[a-zA-Z0-9_.+-]+@ajou.ac.kr/;
 
@@ -158,7 +174,19 @@ class SignUp extends React.Component {
                     </View>
                 
                     <View style={styles.introduceContainer}>
-                        <TextInput 
+                    <TouchableOpacity
+                        style={{borderWidth: 2, marginBottom: 5}}
+                            onPress={()=>{
+                                this.addImage()
+                        }}
+                    >
+                        <Text>사진 추가</Text>
+                    </TouchableOpacity>
+                    <Image
+                        source={{uri: this.state.introduce ? this.state.introduce : null}}
+                        style={{width: 80, height:  80, justifyContent:'center'}}
+                    />
+                        {/* <TextInput 
                             style={styles.introduce}
                             multiline={true}
                             placeholder="자기소개"
@@ -166,7 +194,7 @@ class SignUp extends React.Component {
                             onChangeText={(text) => {
                             this.setState({introduce: text})                  
                             }}
-                        />
+                        /> */}
                     </View>
 
                     <View style={styles.nextContainer}>
