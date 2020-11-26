@@ -58,7 +58,8 @@ class DiaryScreen extends React.Component {
     render() {
       return (
           <View style={styles.container}>
-            <Text style={styles.day}>{year}  /  {month}  /  {date}</Text>
+            <Text style={styles.day}> {year}년  {month}월  {date}일 </Text>
+            <Text style={styles.today}> 오늘 하루 어떠셨나요??</Text>
             <TextInput
                 style={styles.diaryname}
                 placeholder="일기 제목"
@@ -70,7 +71,7 @@ class DiaryScreen extends React.Component {
             <TextInput
                 multiline={true}
                 style={styles.diarytext}
-                placeholder="하루 동안 있었던 일을 작성하세요"
+                placeholder="하루 동안 있었던 일, 느꼈던 감정을 적어주세요"
                 value={this.state.diaryContent}
                 onChangeText={(text) => {
                     this.setState({diaryContent: text})             
@@ -82,7 +83,7 @@ class DiaryScreen extends React.Component {
                     this.submission();
                 }}
             >
-                <Text>제출</Text>
+                <Text style={{color:'white', fontSize:18}}>제출하기</Text>
             </TouchableOpacity>
           </View>
       )
@@ -95,36 +96,45 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems:'center', 
         justifyContent:'center',
-        backgroundColor:"#FAFAFA",
+    },
+    today:{
+        marginTop: hp('2%'),
+        fontSize: 20,
+        color: 'rgba(114,174,148,0.8)',
+        textAlign:'center',
+        fontFamily:'netmarbleL'
     },
     day:{
-        marginTop: hp('2%'),
         fontSize: 30,
-        fontFamily: 'sans-serif-light',
-        textDecorationLine: 'underline',
-        textAlign:'center'
+        color: 'rgba(114,174,148,0.8)',
+        textAlign:'center',
+        fontFamily:'netmarbleL'
     },
     diaryname:{
         borderRadius: 5,
-        backgroundColor: 'white',
+        backgroundColor:"#FAFAFA",
+        paddingHorizontal:wp('3%'),
         marginVertical: hp('2%'),
         width:wp('90%'),
+        fontFamily:'netmarbleL'
     },
     diarytext: {
         borderRadius: 5,
-        backgroundColor:'white',
+        paddingHorizontal:wp('3%'),
+        backgroundColor:"#FAFAFA",
         width:wp('90%'),
-        height: hp('50%'), 
+        height: hp('50%'),
+        fontFamily:'netmarbleL' 
     },
     submission:{
         marginVertical: hp('2%'),
         width: wp('90%'),
-        borderRadius: 2,
+        borderRadius: 50,
         height: hp('6%'), 
-        backgroundColor:'#AAF0D1', 
+        backgroundColor:'rgba(114,174,148,0.5)',
         alignItems:'center', 
         justifyContent:'center',
-        alignSelf:'auto'
+        
     }
 });
 

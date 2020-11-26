@@ -51,7 +51,7 @@ import {
                 uri: data
             })
         })
-        .catch(err=>console.log(err))
+        .catch(err=>console.log(err + 'why'))
     }
       render() {
         return (

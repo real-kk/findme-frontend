@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
+import { Platform, StatusBar, StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 import {
@@ -96,14 +96,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(CounselorsScreen);
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        paddingTop: '10%',
         justifyContent:'center',
-        backgroundColor:'white',
+        paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
     },
     list: {
         paddingHorizontal: '5%',
-        paddingVertical: hp('1%'),
-        marginVertical : hp('1%'),
+        paddingVertical: hp('2%'),
+        marginTop : hp('1.5%'),
+        marginBottom : hp('1.5%'),
         height: hp('16%'),
         width: wp('90%'),
         marginLeft: wp('5%'),
@@ -121,27 +121,32 @@ const styles = StyleSheet.create({
     },
     image:{
         justifyContent:'center',
+        paddingTop: hp('1%'),
     },
     list_side:{
         flexDirection:'column',
     },
     title:{
         marginLeft: wp('10%'),
+        paddingTop: hp('1%'),
         fontSize: 17,
         color: 'black',
-        fontWeight: '700',
+        fontFamily:'netmarbleL'
     },
     text: {
         paddingTop: hp('1%'),
         marginLeft: wp('10%'),
-        fontSize: 15,
+        fontSize: 14,
         color:'gray',
+        fontFamily:'netmarbleL'
     },
     result: {
         fontSize: 23,
         paddingLeft: wp('5%'),
-        marginTop: hp('3%'),
-        marginBottom: hp('2%'),
-        fontWeight: 'bold'
+        paddingTop: hp('3%'),
+        paddingBottom: hp('3%'),
+        fontFamily: 'netmarbleB',
+        color:'white',
+        backgroundColor:'rgba(114,174,148,0.9)',
     }
 });

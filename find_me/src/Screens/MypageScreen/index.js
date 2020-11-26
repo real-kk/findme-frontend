@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent:'center',
-    paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight,
+    paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
   },
   profile : {
     width:wp('100%'),

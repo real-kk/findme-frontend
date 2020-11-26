@@ -6,120 +6,122 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import { StyleSheet,  View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import CameraRoll from "@react-native-community/cameraroll";
-import axios from '../../axiosConfig';
-import { RNCamera } from 'react-native-camera';
+import React from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import CameraRoll from '@react-native-community/cameraroll'
+import axios from '../../axiosConfig'
+import { RNCamera } from 'react-native-camera'
 import { connect } from 'react-redux'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
 const mapStateToProps = (state) => ({
-    token: state
-  })
-  
-  const mapDispatchToProps = (dispatch) => ({
-    requestLogout: () => dispatch(requestLogout())
-  })
+  token: state
+})
 
-  class RecordVideo extends React.Component {
-    constructor() {
-        super();
-          this.state={
-            // ratio: '16:9',
-            uri:'',
-            recording: '',
-            video: '',
-            recordOptions: {
+const mapDispatchToProps = (dispatch) => ({
+  requestLogout: () => dispatch(requestLogout())
+})
+
+class RecordVideo extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      // ratio: '16:9',
+      uri: '',
+      recording: '',
+      video: '',
+      recordOptions: {
         mute: false,
-                maxDuration: 5,
-                quality: RNCamera.Constants.VideoQuality['288p'],
-              },
-          }
+        maxDuration: 5,
+        quality: RNCamera.Constants.VideoQuality['288p']
+      }
     }
+  }
 
-    async startRecording() {
-        this.setState({ recording: true });
-        // default to mp4 for android as codec is not set
-        const { uri, codec = "mp4" } = await this.camera.recordAsync();
-        this.setState({ recording: false, processing: true });
-        // const type = `video/${codec}`;
-        
-        // const data = new FormData();
-        // data.append("video", {
-        //   name: "video-upload",
-        //   type,
-        //   uri
-        // });
+  async startRecording () {
+    this.setState({ recording: true })
+    // default to mp4 for android as codec is not set
+    const { uri } = await this.camera.recordAsync()
+    this.setState({ recording: false, processing: true })
+    // const type = `video/${codec}`;
 
+    // const data = new FormData();
+    // data.append("video", {
+    //   name: "video-upload",
+    //   type,
+    //   uri
+    // });
 
-        // this.submission(data);
-        // console.log(data._parts[0][1].uri)
-        this.props.navigation.navigate('ConfirmVideo', {
-          questionID: this.props.route.params.questionID,
-          videoUri: uri
-        })
-        this.setState({ processing: false });
+    // this.submission(data);
+    // console.log(data._parts[0][1].uri)
+    this.props.navigation.navigate('ConfirmVideo', {
+      questionID: this.props.route.params.questionID,
+      videoUri: uri
+    })
+    this.setState({ processing: false })
+  }
 
-    }
+  // submission = async (data) => {
 
-    // submission = async (data) => {
+  //     await axios.post('/tasks/videos/', data,
+  //         { headers: {
+  //             'Authorization' : `Token ${this.props.token.auth.token}`,
+  //             'content-type': 'multipart/form-data'
+  //         }
+  //     })
+  //     .then((res) => {
+  //         console.log(res)
+  //         alert("제출되었습니다.")
+  //         this.props.navigation.navigate('SelectVideo')
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
 
-    //     await axios.post('/tasks/videos/', data, 
-    //         { headers: {
-    //             'Authorization' : `Token ${this.props.token.auth.token}`,
-    //             'content-type': 'multipart/form-data'
-    //         }
-    //     })
-    //     .then((res) => {
-    //         console.log(res)
-    //         alert("제출되었습니다.")
-    //         this.props.navigation.navigate('SelectVideo')
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-    // }
+  async stopRecording () {
+    await this.camera.stopRecording()
+  }
 
-    async stopRecording() {
-      await this.camera.stopRecording();
-    }
+  render () {
+    const { recording, processing } = this.state
 
-    render() {
-        const { recording, processing } = this.state;
-    
-        let button = (
+    let button = (
           <TouchableOpacity
             onPress={this.startRecording.bind(this)}
             style={styles.capture}
           >
             <Text style={{ fontSize: 14 }}> RECORD </Text>
           </TouchableOpacity>
-        );
-    
-        if (recording) {
-          button = (
+    )
+
+    if (recording) {
+      button = (
             <TouchableOpacity
               onPress={this.stopRecording.bind(this)}
               style={styles.capture}
             >
               <Text style={{ fontSize: 14 }}> STOP </Text>
             </TouchableOpacity>
-          );
-        }
-    
-        if (processing) {
-          button = (
+      )
+    }
+
+    if (processing) {
+      button = (
             <View style={styles.capture}>
               <ActivityIndicator animating size={18} />
             </View>
-          );
-        }
-    
-        return (
+      )
+    }
+
+    return (
           <View style={styles.container}>
             <RNCamera
               ref={ref => {
-                this.camera = ref;
+                this.camera = ref
               }}
             //   ratio={this.state.ratio}
               style={styles.preview}
@@ -137,35 +139,34 @@ const mapStateToProps = (state) => ({
               }}
             />
             <View
-              style={{ flex: 0, flexDirection: "row", justifyContent: "center" }}
+              style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}
             >
               {button}
             </View>
           </View>
-        );
-      }
+    )
+  }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(RecordVideo)
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'black',
-      },
-      capture: {
-        flex: 0,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        padding: 15,
-        paddingHorizontal: 20,
-        alignSelf: 'center',
-        margin: 20,
-      },
-      preview: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-      },
-});
-
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'black'
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    padding: 15,
+    paddingHorizontal: 20,
+    alignSelf: 'center',
+    margin: 20
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  }
+})

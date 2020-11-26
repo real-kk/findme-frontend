@@ -19,14 +19,19 @@
     "@react-navigation/native": "5.7.6",
     "@react-navigation/stack": "5.9.3",
     "axios": "0.20.0",
+    "buffer": "6.0.3",
+    "link": "0.1.5",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-audio-record": "0.2.2",
+    "react-native-audio-recorder-player": "2.6.0",
     "react-native-beautiful-video-recorder": "2.0.1",
     "react-native-camera": "3.40.0",
     "react-native-elements": "3.0.0-alpha.1",
     "react-native-gesture-handler": "1.8.0",
     "react-native-image-picker": "2.3.4",
     "react-native-mail": "6.0.0",
+    "react-native-naver-font": "1.0.0",
     "react-native-reanimated": "1.13.1",
     "react-native-responsive-screen": "1.4.1",
     "react-native-safe-area-context": "3.1.8",
@@ -73,5 +78,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }

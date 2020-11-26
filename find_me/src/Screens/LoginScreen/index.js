@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { StyleSheet,  View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StatusBar, StyleSheet,  View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import RadioForm from 'react-native-simple-radio-button';
 import { requestLogin } from '../../Store/actions/AuthAction';
@@ -82,6 +82,7 @@ var radio_props = [
         render() {
             return (
                 <View style={styles.container}>
+                <StatusBar hidden= {true}/>
                 <View style={styles.titleArea}>
                     <Text style={styles.title}>Find Me</Text>
                 </View>

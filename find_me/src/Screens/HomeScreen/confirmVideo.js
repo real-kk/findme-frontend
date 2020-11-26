@@ -23,6 +23,8 @@ const mapStateToProps = (state) => ({
   class ConfirmVideo extends React.Component {
     constructor() {
         super();
+        this.state= {
+        }
     }
 
     submission = async (videoUri) => {
@@ -32,8 +34,15 @@ const mapStateToProps = (state) => ({
           type: "video/mp4",
           uri: videoUri
         });
+        const time = new Date();
+        var date = time.getDate(); //Current Date
+        var month = time.getMonth() + 1; //Current Month
+        var year = time.getFullYear(); //Current Year
+        var hours = time.getHours(); //Current Hours
+        var min = time.getMinutes(); //Current Minutes
+        var sec = time.getSeconds(); //Current Seconds
 
-        await axios.post(`/tasks/videos/${this.props.route.params.questionID}/`, data, 
+        await axios.post(`/tasks/videos/${this.props.route.params.questionID}/${year}-${month}-${date}_${hours}${min}${sec}/`, data, 
             { headers: {
                 'Authorization' : `Token ${this.props.token.auth.token}`,
                 'content-type': 'multipart/form-data'
@@ -44,7 +53,25 @@ const mapStateToProps = (state) => ({
             alert("제출되었습니다.")
             this.props.navigation.navigate('Home')
         })
-        .catch(err => console.log(err))
+        .catch(function (error) {
+          if (error.response) {
+            // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+          else if (error.request) {
+            // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+            // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+            // Node.js의 http.ClientRequest 인스턴스입니다.
+            console.log(error.request);
+          }
+          else {
+            // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+            console.log('Error', error.message);
+          }
+          console.log(error.config);
+        });
     }
 
     render() {
@@ -55,8 +82,8 @@ const mapStateToProps = (state) => ({
                 this.submission(this.props.route.params.videoUri)
               }}
             >
-              <View style={styles.list}>
-                <Text>제출하기</Text>
+              <View style={styles.submission}>
+                <Text style={{fontSize: 50}}>제출하기</Text>
               </View>
             </TouchableOpacity>
 
@@ -84,6 +111,11 @@ const styles = StyleSheet.create({
         flex:1,
         width: '100%',
       },
+      submission: {
+        marginTop: 50,
+        alignItems:'center',
+        justifyContent: 'center'
+      }
       
 });
 

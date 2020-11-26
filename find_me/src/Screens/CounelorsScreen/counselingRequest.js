@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 import { ScrollView } from 'react-native-gesture-handler';
@@ -24,9 +24,23 @@ class CounselingRequest extends React.Component {
             student_number: '',
             phone_number: '',
             content: '',
-            counselorEmail: this.props.route.params.counselorEmail
+            counselorEmail: this.props.route.params.counselorEmail,
+            isFocused: false
         }
        
+    }
+    handleFocus = event => {
+        this.setState({isFocused : true})
+        if(this.props.onFocus){
+            this.props.onFocus(event)
+        }
+    }
+
+    handleBlur = event => {
+        this.setState({isFocused: false})
+        if(this.props.onBlur){
+            this.props.onBlur(event)
+        }
     }
     next = async () => {
         const data = {
@@ -45,32 +59,51 @@ class CounselingRequest extends React.Component {
     render() {
       return (
           <View style={styles.container}>
-            <Text>신청서 작성</Text>
+            <Text style={styles.result}>상담신청서 작성</Text>
             <View>
+                <View style={styles.input}>
+                <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>전공 : </Text>
                 <TextInput style={styles.title}
-                placeholder="전공"
                 value={this.state.major}
+                placeholder="ex) 소프트웨어학과"
+                underlineColorAndroid={'white'}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
                 onChangeText={(text) => {
                     this.setState({major: text})             
                 }}
                 />
+                </View>
+                <View style={styles.input}>
+                <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>학번 : </Text>
                 <TextInput style={styles.title}
-                placeholder="학번"
+                placeholder="ex) 201400000"
+                underlineColorAndroid={'white'}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
                 value={this.state.student_number}
                 onChangeText={(text) => {
                     this.setState({student_number: text})             
                 }}
                 />
+                </View>
+                <View style={styles.input}>
+                <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>전화번호 : </Text>
                 <TextInput style={styles.title}
-                placeholder="전화번호"
+                placeholder="ex) 010-1234-5678"
+                underlineColorAndroid={'white'}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
                 value={this.state.phone_number}
                 onChangeText={(text) => {
                     this.setState({phone_number: text})             
                 }}
                 />
+                </View>
+                <Text style={styles.text_title}>하고싶은 말</Text>
                 <TextInput style={styles.text}
                 multiline={true}
-                placeholder="하고싶은 말"
+                placeholder="상담사님께 하고 싶은 말을 적어주세요"
                 value={this.state.content}
                 onChangeText={(text) => {
                     this.setState({content: text})             
@@ -78,15 +111,16 @@ class CounselingRequest extends React.Component {
                 />
 
                 <TouchableOpacity
-                    style={styles.next}
                     onPress={()=>{
                         this.next();
                     }}
                 >
-                <Text>다음 페이지</Text>
+                <View style={styles.apply}>
+                    <Text style={{ color: 'white', fontSize: 18 }}>다음 페이지</Text>
+                </View>
                 </TouchableOpacity>
+            
             </View>
-
         </View>
       )
     }
@@ -96,31 +130,51 @@ export default connect(mapStateToProps, mapDispatchToProps)(CounselingRequest)
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        paddingTop: '10%',
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor : '#FAFAFA',
+        paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight
     },
-    next:{
-        marginVertical: hp('1%'),
-        width: wp('100%'),
-        borderRadius: 5,
-        height: hp('6%'), 
-        backgroundColor:'#AAF0D1', 
-        alignItems:'center', 
-        justifyContent:'center',
+    input:{
+        flexDirection: "row",
+        alignItems:'center',
+        marginLeft: wp('5%'),
+        marginTop: hp('2%'),
     },
     text: {
-        borderRadius: 5,
-        backgroundColor:'white',
-        width:wp('100%'),
-        height: hp('45%'),
-        marginVertical: hp('1%'),
+        borderRadius: 20,
+        borderColor:'rgba(114,174,148,0.5)',
+        borderWidth:2,
+        backgroundColor:'#fafafa',
+        marginVertical: hp('5%'),
+        marginHorizontal: wp('5%'),
+        paddingLeft:wp('5%'),
+        height:hp('30%'),
     },
     title: {
         borderRadius: 5,
-        backgroundColor: 'white',
-        marginVertical: hp('1%'),
-        width:wp('100%'),
+        width:wp('50%'),
     },
+    text_title: {
+        alignItems:'center',
+        marginLeft: wp('5%'),
+        marginTop: hp('3%'),
+        fontSize: 18 ,
+        fontFamily: 'netmarbleL'
+    },
+    result: {
+        fontSize: 23,
+        paddingLeft: wp('5%'),
+        paddingTop: hp('3%'),
+        paddingBottom: hp('3%'),
+        fontFamily: 'netmarbleB',
+        color:'white',
+        backgroundColor:'rgba(114,174,148,0.9)',
+    },
+    apply: {
+        marginLeft: wp('5%'),
+        width: wp('90%'),
+        borderRadius: 50,
+        height: hp('6%'),
+        backgroundColor: 'rgba(114,174,148,0.5)',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 });

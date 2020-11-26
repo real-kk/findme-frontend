@@ -140,9 +140,11 @@ const styles = StyleSheet.create({
   result: {
     fontSize: 23,
     paddingLeft: wp('5%'),
-    marginTop: hp('3%'),
-    marginBottom: hp('2%'),
-    fontWeight: 'bold'
+    paddingTop: hp('3%'),
+    paddingBottom: hp('3%'),
+    fontFamily: 'netmarbleB',
+    color:'white',
+    backgroundColor:'rgba(114,174,148,0.9)',
   },
   title:{
     marginLeft: wp('10%'),

@@ -7,7 +7,7 @@
  */
 
 import React from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { connect } from 'react-redux'
 import axios from '../../axiosConfig'
@@ -42,6 +42,7 @@ class TopBar extends React.Component {
   render () {
     return (
         <View style={styles.container}>
+          <StatusBar hidden= {true}/>
           <Text style={styles.result}>감정 분석 결과</Text>
           <Tab.Navigator
            tabBarOptions={{
@@ -69,17 +70,18 @@ class TopBar extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: '10%',
     backgroundColor: '#fff',
     justifyContent: 'center'
   },
   result: {
     fontSize: 23,
     paddingLeft: wp('5%'),
-    marginTop: hp('3%'),
-    marginBottom: hp('2%'),
-    fontWeight: 'bold'
-  }
+    paddingTop: hp('3%'),
+    paddingBottom: hp('3%'),
+    fontFamily: 'netmarbleB',
+    color:'white',
+    backgroundColor:'rgba(114,174,148,0.9)',
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopBar)

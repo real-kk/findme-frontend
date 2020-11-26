@@ -37,6 +37,7 @@ class WordCloudResult extends React.Component {
         this.state={
            wordcloud: '',
            loading_wordcloud: true,
+           visible: false,
         }
     }
 
@@ -78,7 +79,7 @@ class WordCloudResult extends React.Component {
                 <View styles={styles.result}>
                     <Text style={styles.introduce}>워드 클라우드는 ~~을 토대로 만들어졌습니다</Text>
                     <Image
-                        style={{width: wp('100%'), height: hp('50%')}}
+                        style={{width: wp('100%'), height: hp('50%') ,borderRadius: 400/ 2}}
                         source={{uri: this.state.wordcloud ? this.state.wordcloud : null}}
                     />
                 </View>

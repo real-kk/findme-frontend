@@ -1,10 +1,14 @@
 
 import React from 'react';
-import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { ImageBackground, StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 import { ScrollView } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp
+  } from 'react-native-responsive-screen'
 
 const mapStateToProps = (state) => ({
     token: state
@@ -71,29 +75,40 @@ class CounselingRequest2 extends React.Component {
     render() {
       return (
           <View style={styles.container}>
+            <Text style={styles.result}>상담신청서 작성</Text>
             <ScrollView>
+                <Text style={styles.text1}>상담 가능 시간표</Text>
+                <View style={{flexDirection:'row'}}>
+                <Text style={styles.text2}>학교 시간표 사진을 첨부해주세요</Text>
                 <TouchableOpacity
-                    style={{borderWidth: 2, marginBottom: 5}}
-                        onPress={()=>{
-                            this.addImage()
-                    }}
-                >
-                    <Text>시간표 가져오기</Text>
+                    style={styles.get_image}
+                    onPress={()=>{this.addImage()}}>
+                    <Text style={{ color: 'white', fontSize: 14 }}>시간표 가져오기</Text>
                 </TouchableOpacity>
+                </View>
                 <Image
                     source={{uri: this.state.time_table ? this.state.time_table : null}}
-                    style={{width: '99%', height:  400, justifyContent:'center'}}
+                    style={styles.time_table}
                 />
+                <View style={{flexDirection:'row'}}>
                 <TouchableOpacity
-                    style={{borderWidth: 2}}
+                    style={styles.submission}
+                        onPress={()=>{
+                            this.props.navigation.goBack()
+                        }}
+                >
+                    <Text style={{color:'white', fontSize:18}}>이전 페이지</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.submission}
                         onPress={()=>{
                             this.submission();
                         }}
                 >
-                    <Text>제출하기</Text>
+                <Text style={{color:'white', fontSize:18}}>제출하기</Text>
                 </TouchableOpacity>
+                </View>
             </ScrollView>
-
         </View>
       )
     }
@@ -103,8 +118,59 @@ export default connect(mapStateToProps, mapDispatchToProps)(CounselingRequest2)
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        paddingTop: '10%',
-        justifyContent:'center',
-        backgroundColor : '#fffff0',
+        paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight
     },
+    time_table : {
+        resizeMode:'stretch',
+        width:wp('90%'),
+        marginLeft:wp('5%'),
+        marginBottom:hp('3%'),
+        height:hp('55%'),
+        borderWidth: 2,
+        borderRadius: 5,
+    },
+    text1:{
+        marginTop: hp('2%'),
+        marginLeft: wp('5%'),
+        marginBottom: hp('2%'),
+        fontSize: 18,
+        fontFamily: 'netmarbleL'
+    },
+    text2:{
+        marginLeft: wp('5%'),
+        fontSize: 14,
+        color:'#aaa',
+        paddingTop: hp('0.2%'),
+        marginBottom: hp('3%'),
+        fontFamily: 'netmarbleL',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    get_image: {
+        marginLeft: wp('5%'),
+        width: wp('30%'),
+        borderRadius: 5,
+        height: hp('3'),
+        backgroundColor: 'rgba(114,174,148,0.5)',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    result: {
+        fontSize: 23,
+        paddingLeft: wp('5%'),
+        paddingTop: hp('3%'),
+        paddingBottom: hp('3%'),
+        fontFamily: 'netmarbleB',
+        color:'white',
+        backgroundColor:'rgba(114,174,148,0.9)',
+    },
+    submission:{    
+        borderRadius: 50,
+        height: hp('6%'), 
+        backgroundColor:'rgba(114,174,148,0.5)',
+        alignItems:'center', 
+        justifyContent:'center',
+        width: wp('40%'),
+        marginHorizontal:wp('5%'),
+    }
 });

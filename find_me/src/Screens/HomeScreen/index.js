@@ -113,8 +113,7 @@ const styles = StyleSheet.create({
     container : {
         flex: 1,
         alignItems: 'center',
-        paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight,
-       
+        paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
     },
     image: {
         flex: 1,
@@ -132,8 +131,8 @@ const styles = StyleSheet.create({
         marginTop:hp('4%'),
         fontSize:30, 
         color:'#fff', 
-        fontWeight:'bold',
         textAlign:'center',
+        fontFamily:'netmarbleB'
     },
     icon:{
         width: wp('60%'),
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
     activity:{
         marginLeft: wp('10%'),
         fontSize: 25,
-        fontWeight:'bold',
+        fontFamily:'netmarbleM'
     },
     list: {
         height:hp('11%'),
@@ -173,17 +172,19 @@ const styles = StyleSheet.create({
     list_text: {
         paddingTop: hp('2%'),
         fontSize: 25,
-        fontWeight:'bold',
+        fontFamily:'netmarbleM'
     },
     smallText:{
         fontSize: 18,
-        fontWeight:'bold',
+        fontFamily:'netmarbleM'
+        
     },
     explain:{
         paddingTop: hp('1%'),
         color: 'gray',
-        fontSize: 15,
+        fontSize: 14,
         flexDirection:'column',
+        fontFamily:'netmarbleL'
     }
 });
 

@@ -393,7 +393,7 @@ function CounselorStack () {
               } else if (route.name === 'Mypage') {
                 icon = <Icon name="md-ellipsis-horizontal" size={25} />
               }
-              return <Text style={{ color: focused && '#00C78C' || '#FEFEFE', marginTop: 5 }}>{icon}</Text>
+              return <Text style={{ color: focused && 'rgba(114,174,148,0.9)' || '#FEFEFE', marginTop: 5 }}>{icon}</Text>
             }
 
           })}
@@ -438,7 +438,7 @@ function ClientStack () {
             } else if (route.name === 'Mypage') {
               icon = <Icon name="ios-person" size={25} />
             }
-            return <Text style={{ color: focused && '#00C78C' || 'gray', marginTop: 5 }}>{icon}</Text>
+            return <Text style={{ color: focused && 'rgba(114,174,148,0.9)' || 'gray', marginTop: 5 }}>{icon}</Text>
           }})
         }>
         <Tab.Screen
