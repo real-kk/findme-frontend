@@ -21,10 +21,14 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class applicationFormModificationScreen extends React.Component {
+
+  submission = () => {
+
+  }
   render () {
     return (
           <View style={styles.container}>
-             <Text>상담신청서 수정</Text>
+             
           </View>
     )
   }

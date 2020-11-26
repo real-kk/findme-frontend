@@ -42,28 +42,17 @@ class SignUp extends React.Component {
       }
     
       onClickSignUp = async () => {
-        try {
-            const signUp = new FormData();
-            const introduce = {
-                email: this.state.email,
-                username: this.state.name,
-                password1: this.state.password,
-                password2: this.state.passwordConfirmation,
-                user_type: this.state.value,
-            }
-            signUp.append('image', {
-                uri: this.state.introduce,
-                type: 'image/png',
-                name: 'introduce.jpg'
-            })
-            signUp.append('introduce', introduce)
-          await this.props.requestSignup(signUp)
-          alert('회원가입에 성공하였습니다!')
-          this.props.navigation.navigate('Login')
-        } catch (e) {
-          alert('error' + e)
+        const data = {
+          email: this.state.email,
+          username: this.state.name,
+          password1: this.state.password,
+          password2: this.state.passwordConfirmation,
+          user_type: this.state.value,
         }
-      }
+        await this.props.requestSignup(data)
+        alert('회원가입에 성공하였습니다!')
+        this.props.navigation.navigate('Login')
+    }
 
       addImage = () => {
         ImagePicker.launchImageLibrary({}, res => {

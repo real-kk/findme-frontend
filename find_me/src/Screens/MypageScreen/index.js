@@ -11,6 +11,7 @@ import { Platform, StatusBar, Image, StyleSheet,  View, Text, TouchableOpacity, 
 import { connect } from 'react-redux'
 import { requestLogout } from '../../Store/actions/AuthAction'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import axios from '../../axiosConfig'
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
@@ -28,6 +29,12 @@ class MypageScreen extends React.Component {
     constructor(){
         super();
         this.state={
+            id: '',
+            name: '',
+            email: '',
+            link_man: '',
+            user_type: '',
+            image: '',
             datas: [
                 {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
                 {key:'1', data:'상담 신청 내역 조회', icon:'grease-pencil'},
@@ -42,6 +49,36 @@ class MypageScreen extends React.Component {
         alert("로그아웃 되었다.")
     }
 
+    componentDidMount(){
+      axios.get('/users/selfinfos/',
+      { headers: {
+        'Authorization' : `Token ${this.props.token.auth.token}`
+      }})
+      .then((res)=>{
+        this.setState({
+          id: res.data.id,
+          name: res.data.username,
+          email: res.data.email,
+          user_type: res.data.user_type,
+          image: 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image
+        })
+        console.log(this.state.image)
+        console.log(res.data)
+      })
+      .catch(err=>console.log(err))
+
+      axios.get('/counsels/date/',
+      { headers: {
+        'Authorization' : `Token ${this.props.token.auth.token}`
+      }})
+      .then((res)=>{
+        this.setState({
+          link_man: res.data[0].counselor_username
+        })
+      })
+      .catch(err=>console.log(err))
+    }
+
     render() {
       return (
           <View style={styles.container}>
@@ -49,13 +86,13 @@ class MypageScreen extends React.Component {
                     <View style = {styles.profile_image}>
                     <Image 
                     style={styles.user}
-                    source={{ uri: 'https://reactnative.dev/img/tiny_logo.png'}}/>
-                    <Text style={{fontSize:20, paddingTop:hp('2%'), fontWeight:'bold'}}>이름</Text>
+                    source={{uri: this.state.image ? this.state.image : null}}/>
+                    <Text style={{fontSize:20, paddingTop:hp('2%'), fontWeight:'bold'}}>{this.state.name}</Text>
                     </View>
                     <View style = {styles.profile_text}>
-                        <Text style={{fontSize:16, marginBottom:hp('1%')}}>이메일</Text>
-                        <Text style={{fontSize:16, marginBottom:hp('1%')}}>연결된 상담사</Text>
-                        <Text style={{fontSize:16 }}>자기 소개</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('1%')}}>이메일: {this.state.email}</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('1%')}}>연결된 상담사: {this.state.link_man}</Text>
+                        <Text style={{fontSize:16 }}>자기 소개: {this.state.introduce}</Text>
                     </View>
                     <View style={styles.circle}  />
                 </View>
@@ -68,7 +105,12 @@ class MypageScreen extends React.Component {
                             <TouchableOpacity
                                 onPress={()=> {
                                     if(item.key === '0'){
-                                        this.props.navigation.push('userModification')
+                                        this.props.navigation.push('userModification', {
+                                          id: this.state.id,
+                                          email: this.state.email,
+                                          name: this.state.name,
+                                          user_type: this.state.user_type,
+                                        })
                                     }
                                     else if(item.key === '1'){
 
