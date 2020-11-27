@@ -64,7 +64,7 @@ class MypageScreen extends React.Component {
           image: 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
           introduce: res.data.introduce === '' ? 'None!' : res.data.introduce
         })
-        console.log(this.state.id)
+        console.log(res.data)
       })
       .catch(err=>console.log(err))
 

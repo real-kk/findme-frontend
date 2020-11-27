@@ -34,11 +34,13 @@ class CounselorMypage extends React.Component {
             email: '',
             link_man: '',
             user_type: '',
+            introduce:'',
             image: '',
             datas: [
                 {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
                 {key:'2', data:'로그아웃', icon:'logout-variant'},
             ],
+            career: '',
         }
     }
 
@@ -59,9 +61,11 @@ class CounselorMypage extends React.Component {
           name: res.data.username,
           email: res.data.email,
           user_type: res.data.user_type,
-          image: 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image
+          introduce: res.data.introduce,
+          image: 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
+          career: res.data.career
         })
-        console.log(this.state.id)
+        console.log(res.data.username + 'hi')
       })
       .catch(err=>console.log(err))
 
@@ -75,7 +79,7 @@ class CounselorMypage extends React.Component {
         })
       })
       .catch(err=>console.log(err))
-    }
+    } 
     render() {
       return (
           <View style={styles.container}>
@@ -84,12 +88,12 @@ class CounselorMypage extends React.Component {
                     <Image 
                     style={styles.user}
                     source={{uri: this.state.image ? this.state.image : null}}/>
-                    <Text style={{fontSize:20, paddingTop:hp('2%'), fontWeight:'bold'}}>{this.state.name}</Text>
+                    <Text style={{fontSize:20, paddingTop:hp('2%'), fontWeight:'bold'}}>{this.state.username}</Text>
                     </View>
                     <View style = {styles.profile_text}>
                         <Text style={{fontSize:16, marginBottom:hp('1%')}}>이메일: {this.state.email}</Text>
-                        <Text style={{fontSize:16, marginBottom:hp('1%')}}>연결된 상담사: {this.state.link_man}</Text>
-                        <Text style={{fontSize:16 }}>자기 소개: {this.state.introduce}</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('1%')}}>자기 소개: {this.state.introduce}</Text>
+                        <Text style={{fontSize:16 }}>약력 : {this.state.career}</Text>
                     </View>
                     <View style={styles.circle}  />
                 </View>
@@ -106,6 +110,7 @@ class CounselorMypage extends React.Component {
                                             email: this.state.email,
                                             name: this.state.name,
                                             user_type: this.state.user_type,
+                                            career : this.state.career,
                                         })
                                     }
                                     // else if(item.key === '1'){

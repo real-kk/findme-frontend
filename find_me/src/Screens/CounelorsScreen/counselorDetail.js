@@ -47,7 +47,7 @@ class CounselorDetail extends React.Component {
           </View>
           <View style={styles.list_introduce}>
             <Text style={styles.title}>약력</Text>
-            <Text style={styles.introduce}>{this.state.counselor.introduce}</Text>
+            <Text style={styles.introduce}>{this.state.counselor.career}</Text>
           </View>
           <TouchableOpacity
             onPress={() => {
