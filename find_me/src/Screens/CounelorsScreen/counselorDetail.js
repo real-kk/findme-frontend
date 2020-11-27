@@ -57,7 +57,7 @@ class CounselorDetail extends React.Component {
               })
             }}>
             <View style={styles.apply}>
-              <Text style={{ color: 'white', fontSize: 18 }}>상담 신청하기</Text>
+              <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleL'}}>상담 신청하기</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
   },
   apply: {
     marginLeft: wp('5%'),
-    width: wp('92%'),
-    borderRadius: 50,
+    width: wp('90%'),
+    borderRadius: 5,
     height: hp('6%'),
     backgroundColor: 'rgba(114,174,148,0.5)',
     alignItems: 'center',
@@ -134,5 +134,6 @@ const styles = StyleSheet.create({
     fontFamily: 'netmarbleB',
     color:'white',
     backgroundColor:'rgba(114,174,148,0.9)',
+    marginBottom: hp('2%'),
   }
 })

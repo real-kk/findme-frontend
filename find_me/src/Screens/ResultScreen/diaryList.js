@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',
-        backgroundColor:'#FAFAFA'
     },
     list: {
         borderWidth: 0.1,

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ImageBackground, StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Platform, StatusBar, StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 import { ScrollView } from 'react-native-gesture-handler';
@@ -83,7 +83,7 @@ class CounselingRequest2 extends React.Component {
                 <TouchableOpacity
                     style={styles.get_image}
                     onPress={()=>{this.addImage()}}>
-                    <Text style={{ color: 'white', fontSize: 14 }}>시간표 가져오기</Text>
+                    <Text style={{ color: 'white', fontSize: 12, fontFamily:'netmarbleL'}}>시간표 가져오기</Text>
                 </TouchableOpacity>
                 </View>
                 <Image
@@ -93,19 +93,19 @@ class CounselingRequest2 extends React.Component {
                 <View style={{flexDirection:'row'}}>
                 <TouchableOpacity
                     style={styles.submission}
-                        onPress={()=>{
-                            this.props.navigation.goBack()
-                        }}
+                    onPress={()=>{
+                        this.props.navigation.goBack()
+                    }}
                 >
-                    <Text style={{color:'white', fontSize:18}}>이전 페이지</Text>
+                    <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL'}}>이전 페이지</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.submission}
-                        onPress={()=>{
-                            this.submission();
-                        }}
+                    onPress={()=>{
+                        this.submission();
+                    }}
                 >
-                <Text style={{color:'white', fontSize:18}}>제출하기</Text>
+                <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL'}}>제출하기</Text>
                 </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
         marginLeft: wp('5%'),
         fontSize: 14,
         color:'#aaa',
-        paddingTop: hp('0.2%'),
+        paddingTop: hp('0.5%'),
         marginBottom: hp('3%'),
         fontFamily: 'netmarbleL',
         alignItems: 'center',
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         backgroundColor:'rgba(114,174,148,0.9)',
     },
     submission:{    
-        borderRadius: 50,
+        borderRadius: 5,
         height: hp('6%'), 
         backgroundColor:'rgba(114,174,148,0.5)',
         alignItems:'center', 

@@ -116,7 +116,7 @@ class CounselingRequest extends React.Component {
                     }}
                 >
                 <View style={styles.apply}>
-                    <Text style={{ color: 'white', fontSize: 18 }}>다음 페이지</Text>
+                    <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleL' }}>다음 페이지</Text>
                 </View>
                 </TouchableOpacity>
             
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     apply: {
         marginLeft: wp('5%'),
         width: wp('90%'),
-        borderRadius: 50,
+        borderRadius: 5,
         height: hp('6%'),
         backgroundColor: 'rgba(114,174,148,0.5)',
         alignItems: 'center',

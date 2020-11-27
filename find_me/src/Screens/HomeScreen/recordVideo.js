@@ -7,7 +7,7 @@
  */
 
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Button, StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 import CameraRoll from '@react-native-community/cameraroll'
 import axios from '../../axiosConfig'
 import { RNCamera } from 'react-native-camera'
@@ -16,7 +16,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen'
-
 const mapStateToProps = (state) => ({
   token: state
 })
@@ -90,22 +89,22 @@ class RecordVideo extends React.Component {
     const { recording, processing } = this.state
 
     let button = (
-          <TouchableOpacity
-            onPress={this.startRecording.bind(this)}
-            style={styles.capture}
-          >
-            <Text style={{ fontSize: 14 }}> RECORD </Text>
-          </TouchableOpacity>
+      <TouchableOpacity
+        onPress={this.startRecording.bind(this)}
+        style={styles.record}
+      >
+        <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL'}}> RECORD </Text>
+      </TouchableOpacity>
     )
 
     if (recording) {
       button = (
-            <TouchableOpacity
-              onPress={this.stopRecording.bind(this)}
-              style={styles.capture}
-            >
-              <Text style={{ fontSize: 14 }}> STOP </Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+          onPress={this.stopRecording.bind(this)}
+          style={styles.record}
+        >
+          <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL'}}> STOP </Text>
+        </TouchableOpacity>
       )
     }
 
@@ -119,6 +118,7 @@ class RecordVideo extends React.Component {
 
     return (
           <View style={styles.container}>
+            <Text style={styles.result}>영상 녹화</Text>
             <RNCamera
               ref={ref => {
                 this.camera = ref
@@ -153,20 +153,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'black'
-  },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20
+    backgroundColor: 'white'
   },
   preview: {
     flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
+  },
+  record: {
+    marginVertical: hp('3%'),
+    width: wp('50%'),
+    height: hp('6%'),
+    backgroundColor: 'rgba(114,174,148,0.5)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius:5,
+  },
+  result: {
+    fontSize: 23,
+    paddingLeft: wp('5%'),
+    paddingTop: hp('3%'),
+    paddingBottom: hp('3%'),
+    fontFamily: 'netmarbleB',
+    color:'white',
+    backgroundColor:'rgba(114,174,148,0.9)'
   }
 })

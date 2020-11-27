@@ -66,9 +66,9 @@ class Diarytextanalysis extends React.Component {
                   color = "green"
               /> :
               <View style={styles.result}>
-                <Text style={styles.introduce}>그래프는 ~~을 토대로 만들어졌습니다</Text>
+               <Text style={styles.introduce}>감정 그래프를 통해 작성한 감정일기마다 나타나는 감정 점수의 변화를 알 수 있습니다</Text>
                   <Image
-                      style={{width: wp('100%'), height: hp('50%')}}
+                      style={{width: wp('100%') , height: hp('55%')}}
                       source={{uri: this.state.graph ? this.state.graph : null}}
                   />
               </View>
@@ -82,21 +82,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(Diarytextanalysis)
 
 const styles = StyleSheet.create({
     container : {
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor:'white'
+      flex: 1,
+      paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
+      backgroundColor:'white'
     },
     result:{
       alignItems:'center',
       justifyContent:'center',
     },
     introduce: {
-      marginVertical:hp('3%'),
-      width: wp('88%'),
-      padding: '5%',
-      backgroundColor:'#f2f2f2',
+      marginTop:hp('4%'),
+      marginBottom:hp('2%'),
       borderRadius: 5,
-      height:hp('10%'),
+      width:wp('80%'),
+      fontSize: 18,
+      fontFamily:'netmarbleL',
+      textAlign:'center',
+      color: 'gray',
+    
   }
 });
 

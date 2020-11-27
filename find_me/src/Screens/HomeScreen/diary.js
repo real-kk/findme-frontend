@@ -83,7 +83,7 @@ class DiaryScreen extends React.Component {
                     this.submission();
                 }}
             >
-                <Text style={{color:'white', fontSize:18}}>제출하기</Text>
+                <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL' }}>제출하기</Text>
             </TouchableOpacity>
           </View>
       )
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     submission:{
         marginVertical: hp('2%'),
         width: wp('90%'),
-        borderRadius: 50,
+        borderRadius: 5,
         height: hp('6%'), 
         backgroundColor:'rgba(114,174,148,0.5)',
         alignItems:'center', 

@@ -24,7 +24,7 @@ import CounselorsScreen from './CounelorsScreen'
 import CounselorHome from './CounselorHome'
 import CounselorApplyScreen from './CounselorHome/apply'
 import CounselorVideoScreen from './CounselorHome/clientList'
-import STTScreen from './CounselorHome/STT'
+import STTScreen from './CounselorHome/record'
 import QuestionRegisterScreen from './CounselorHome/questionRegister'
 
 import Signup from './LoginScreen/SignUp'
@@ -57,7 +57,7 @@ import CounselingRequestScreen from './CounelorsScreen/counselingRequest'
 import CounselingRequestScreen2 from './CounelorsScreen/counselingRequest2'
 import userModificationScreen from './MypageScreen/userModification'
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification'
-import ApplicationDetailScreen from './CounselorHome/ApplicationDetail'
+import ApplicationDetailScreen from './CounselorHome/applicationDetail'
 
 import {
   storeUserData

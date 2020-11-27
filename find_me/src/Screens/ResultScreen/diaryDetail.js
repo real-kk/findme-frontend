@@ -7,8 +7,7 @@
  */
 
 import React from 'react'
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, FlatList } from 'react-native'
-import axios from '../../axiosConfig'
+import { StyleSheet, View, Text, ScrollView, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import {
   widthPercentageToDP as wp,
@@ -34,20 +33,20 @@ class DiaryResult extends React.Component {
   render () {
     return (
         <View style={styles.container}>
-            <ScrollView>
-            <Text style={styles.date}>
-              {this.props.route.params.diary.create_date}
+          <Text style={styles.result}>감정일기 확인</Text>
+          <View>
+            <Text style={styles.diary}>
+             Diary
             </Text>
+            <View style={styles.inside}>
+            <Text style={styles.title}>{this.props.route.params.diary.title}</Text>
+            <Text style={styles.date}>{this.props.route.params.diary.create_date} </Text>
             <Text style={styles.text}>
               {this.props.route.params.diary.content}
             </Text>
-            </ScrollView>
-            <TouchableOpacity
-                style={styles.submission}
-            >
-                <Text>삭제하기</Text>
-            </TouchableOpacity>
-        </View>    
+            </View>
+          </View>
+        </View>
     )
   }
 }
@@ -57,42 +56,53 @@ export default connect(mapStateToProps, mapDispatchToProps)(DiaryResult)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FAFAFA'
+    paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight
   },
   date: {
-    borderRadius: 2,
-    marginTop: hp('10%'),
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 20,
-    width: wp('100%'),
-    marginHorizontal: wp('2%'),
-    backgroundColor: '#FAFAFA',
+    paddingTop: hp('2%'),
+    textAlign:'center',
+    fontFamily: 'netmarbleR',
+    fontSize: 14,
     color: 'gray'
   },
-
-  text: {
-    borderWidth: 0.1,
-    borderRadius: 5,
-    padding: wp('5%'),
-    height: hp('50%'),
-    marginTop: hp('3%'),
-    backgroundColor: 'white',
-    marginRight: wp('6%'),
-    marginLeft: wp('2%'),
-    fontWeight: '900',
-    fontSize: 15,
-  },
-
-  submission:{
-    marginVertical: hp('2%'),
-    width: wp('50%'),
+  diary: {
+    marginTop: hp('2%'),
     borderRadius: 2,
-    height: hp('6%'), 
-    backgroundColor:'#AAF0D1', 
-    alignItems:'center', 
-    justifyContent:'center',
-  }
+    fontSize: 40,
+    width: wp('100%'),
+    color: 'gray',
+    fontFamily: 'Niconne-Regular',
+    textAlign: 'center'
+  },
+  inside: {
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: '#fafafa',
+    borderColor: '#fafafa',
+    height: hp('70%'),
+    marginTop: hp('2%'),
+    marginRight: wp('5%'),
+    marginLeft: wp('5%'),
+  },
+  title: {
+    paddingTop: hp('3%'),
+    textAlign:'center',
+    fontFamily: 'netmarbleR',
+    fontSize: 25,
+  },
+  text: {
+    paddingTop: hp('5%'),
+    fontSize: 15,
+    fontFamily:'netmarbleL',
+    paddingHorizontal: wp('5%'),
+  },
+  result: {
+    fontSize: 23,
+    paddingLeft: wp('5%'),
+    paddingTop: hp('3%'),
+    paddingBottom: hp('3%'),
+    fontFamily: 'netmarbleB',
+    color:'white',
+    backgroundColor:'rgba(114,174,148,0.9)',
+  },
 })
