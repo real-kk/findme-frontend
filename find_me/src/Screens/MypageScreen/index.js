@@ -38,7 +38,7 @@ class MypageScreen extends React.Component {
             image: '',
             datas: [
                 {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
-                {key:'1', data:'상담 신청 내역 조회', icon:'grease-pencil'},
+                {key:'1', data:'상담 신청서 수정', icon:'grease-pencil'},
                 {key:'2', data:'로그아웃', icon:'logout-variant'},
             ],
         }
@@ -64,7 +64,7 @@ class MypageScreen extends React.Component {
           image: 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
           introduce: res.data.introduce === '' ? 'None!' : res.data.introduce
         })
-        console.log(res.data)
+        console.log(this.state.id)
       })
       .catch(err=>console.log(err))
 
@@ -78,6 +78,16 @@ class MypageScreen extends React.Component {
         })
       })
       .catch(err=>console.log(err))
+
+      // axios.get('/counsels/',
+      // { headers: {
+      //   'Authorization' : `Token ${this.props.token.auth.token}`
+      // }})
+      // .then((res)=>{
+      //   console.log("신청서")
+      //   console.log(res)
+      // })
+      // .catch(err=>console.log(err))
     }
 
     render() {
@@ -117,6 +127,7 @@ class MypageScreen extends React.Component {
                                         })
                                     }
                                     else if(item.key === '1'){
+                                      this.props.navigation.push('applicationFormModification')
                                     }
                                     else if(item.key === '2'){
                                         this._onclickLogout();

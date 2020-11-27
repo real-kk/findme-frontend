@@ -42,6 +42,7 @@ import CounselorVideoGraph from './CounselorResult/videoGraph'
 import CounselorQuestionList from './CounselorResult/questionList'
 
 import CounselorMypageScreen from './CounselorMypage'
+import userModification2Screen from './CounselorMypage/userModification'
 
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult'
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult'
@@ -57,6 +58,7 @@ import CounselingRequestScreen from './CounelorsScreen/counselingRequest'
 import CounselingRequestScreen2 from './CounelorsScreen/counselingRequest2'
 import userModificationScreen from './MypageScreen/userModification'
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification'
+import applicationFormModification2Screen from './MypageScreen/applicationFormModification2'
 import ApplicationDetailScreen from './CounselorHome/applicationDetail'
 
 import {
@@ -323,6 +325,11 @@ function MypageStack () {
           name="applicationFormModification"
           component={applicationFormModificationScreen}
         />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="applicationFormModification2"
+          component={applicationFormModification2Screen}
+        />
       </Stack.Navigator>
   )
 }
@@ -340,7 +347,7 @@ function CounselorMypageStack () {
       <Stack.Screen
         options={{ headerShown: false }}
         name="userModification"
-        component={userModificationScreen}
+        component={userModification2Screen}
       />
       <Stack.Screen
         options={{ headerShown: false }}

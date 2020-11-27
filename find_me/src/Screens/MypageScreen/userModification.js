@@ -60,13 +60,22 @@ class userModificationScreen extends React.Component {
     console.log(this.state.username + '!!!!!!!!!!')
     data.append('user_type', this.props.route.params.user_type)
     data.append('email', this.props.route.params.email)
+    const time = new Date();
+    var date = time.getDate(); //Current Date
+    var month = time.getMonth() + 1; //Current Month
+    var year = time.getFullYear(); //Current Year
+    var hours = time.getHours(); //Current Hours
+    var min = time.getMinutes(); //Current Minutes
+    var sec = time.getSeconds(); //Current Seconds
+
     data.append('image', {
       uri: this.state.image,
       type: 'image/png',
       name: `${year}-${month}-${date}_${hours}${min}${sec}.jpg`
     })
     data.append('introduce', this.state.introduce)
-
+    console.log(this.props.route.params.id)
+    console.log(data._parts)
     await axios.put(`/users/${this.props.route.params.id}/`, data,
       { headers: {
           'Authorization' : `Token ${this.props.token.auth.token}`
