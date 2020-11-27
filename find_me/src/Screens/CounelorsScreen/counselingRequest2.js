@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight
     },
     time_table : {
-        resizeMode:'stretch',
         width:wp('90%'),
         marginLeft:wp('5%'),
         marginBottom:hp('3%'),

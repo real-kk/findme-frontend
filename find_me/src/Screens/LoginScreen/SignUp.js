@@ -162,29 +162,7 @@ class SignUp extends React.Component {
                         </View>
                     </View>
                 
-                    <View style={styles.introduceContainer}>
-                    <TouchableOpacity
-                        style={{borderWidth: 2, marginBottom: 5}}
-                            onPress={()=>{
-                                this.addImage()
-                        }}
-                    >
-                        <Text>사진 추가</Text>
-                    </TouchableOpacity>
-                    <Image
-                        source={{uri: this.state.introduce ? this.state.introduce : null}}
-                        style={{width: 80, height:  80, justifyContent:'center'}}
-                    />
-                        {/* <TextInput 
-                            style={styles.introduce}
-                            multiline={true}
-                            placeholder="자기소개"
-                            value={this.state.introduce}
-                            onChangeText={(text) => {
-                            this.setState({introduce: text})                  
-                            }}
-                        /> */}
-                    </View>
+                 
 
                     <View style={styles.nextContainer}>
                         <TouchableOpacity
@@ -252,13 +230,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     passwordConfirmationContainer: {
-        width: '100%',
-        marginTop: 10,
-        alignItems: 'center',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    introduceContainer: {
         width: '100%',
         marginTop: 10,
         alignItems: 'center',

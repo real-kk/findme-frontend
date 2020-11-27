@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
+import { Image, StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux'
 import axios from '../../axiosConfig'
 import {
@@ -55,10 +55,13 @@ class CounselorResult extends React.Component {
                                 }}
                             >
                                 <View style={styles.list}>
-                                    <Icon name="person-outline" size={40} style={styles.image}></Icon>
+                                    <Image 
+                                    style={styles.user}
+                                    source={{uri: item.client_image === null ? 
+                                    'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/noimage.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.client_image}}/>
                                     <View style={styles.list_side}>
-                                    <Text style={styles.title}>{item.client_username}</Text>
-                                    <Text style={styles.text}>{item.client_email}</Text>
+                                        <Text style={styles.title}>{item.client_username}</Text>
+                                        <Text style={styles.text}>{item.client_email}</Text>
                                     </View>
                                 </View>
                             </TouchableOpacity>
@@ -80,6 +83,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent:'center',
         backgroundColor:'#FAFAFA'
+    },
+    user:{
+        width: wp('20%'),
+        height: hp('10%'),
+        borderRadius: 200,
     },
     list: {
         padding: '5%',

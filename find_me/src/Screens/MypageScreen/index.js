@@ -34,6 +34,7 @@ class MypageScreen extends React.Component {
             email: '',
             link_man: '',
             user_type: '',
+            introduce: '',
             image: '',
             datas: [
                 {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
@@ -57,12 +58,12 @@ class MypageScreen extends React.Component {
       .then((res)=>{
         this.setState({
           id: res.data.id,
-          name: res.data.username,
+          name: res.data.username === null ? 'None' : res.data.username,
           email: res.data.email,
           user_type: res.data.user_type,
-          image: 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image
+          image: 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
+          introduce: res.data.introduce === '' ? 'None!' : res.data.introduce
         })
-        console.log(this.state.image)
         console.log(res.data)
       })
       .catch(err=>console.log(err))
@@ -82,17 +83,18 @@ class MypageScreen extends React.Component {
     render() {
       return (
           <View style={styles.container}>
+                <Text style={styles.logo}>FIND ME</Text>
                 <View style={styles.profile}>
                     <View style = {styles.profile_image}>
                     <Image 
                     style={styles.user}
                     source={{uri: this.state.image ? this.state.image : null}}/>
-                    <Text style={{fontSize:20, paddingTop:hp('2%'), fontWeight:'bold'}}>{this.state.name}</Text>
+                    <Text style={{fontSize:20, paddingTop:hp('2%'), fontFamily:'netmarbleB', textAlign:'center'}}>{this.state.name}</Text>
                     </View>
                     <View style = {styles.profile_text}>
-                        <Text style={{fontSize:16, marginBottom:hp('1%')}}>이메일: {this.state.email}</Text>
-                        <Text style={{fontSize:16, marginBottom:hp('1%')}}>연결된 상담사: {this.state.link_man}</Text>
-                        <Text style={{fontSize:16 }}>자기 소개: {this.state.introduce}</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('1%'), fontFamily:'netmarbleR', color:'white'}}>이메일{'\n'}{this.state.email}</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('1%'), fontFamily:'netmarbleR', color:'white'}}>연결된 상담사{'\n'}{this.state.link_man}</Text>
+                        <Text style={{fontSize:16, fontFamily:'netmarbleR', color:'white'}}>자기 소개{'\n'}{this.state.introduce}</Text>
                     </View>
                     <View style={styles.circle}  />
                 </View>
@@ -110,10 +112,11 @@ class MypageScreen extends React.Component {
                                           email: this.state.email,
                                           name: this.state.name,
                                           user_type: this.state.user_type,
+                                          image: this.state.image,
+                                          introduce: this.state.introduce,
                                         })
                                     }
                                     else if(item.key === '1'){
-
                                     }
                                     else if(item.key === '2'){
                                         this._onclickLogout();
@@ -143,29 +146,40 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
   },
+  logo:{
+    paddingTop: hp('4%'),
+    fontSize:30, 
+    color:'#fff', 
+    textAlign:'center',
+    fontFamily:'netmarbleB',
+    backgroundColor:'rgba(114,174,148,0.9)',
+    width:wp('100%'),
+  },
   profile : {
     width:wp('100%'),
-    height:hp('40%'),
+    height:hp('32%'),
     backgroundColor:'rgba(114,174,148,0.9)',
     flexDirection:'row',
     alignItems:'center',
-    paddingLeft:wp('10%'),
+    paddingLeft:wp('5%'),
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
+    marginBottom:hp('2%'),
+  },
+  profile_image:{
+    marginLeft:wp('1%'),
   },
   user:{
-    width:wp('20%'),
-    height:hp('10%'),
-    borderRadius:200
+    width: wp('30%'),
+    height: hp('15%'),
+    borderRadius: 200,
   },
   profile_text:{
+    marginTop:hp('1%'),
     paddingLeft:wp('10%'),
     fontSize:20,
   },
-  profile_image:{
-    flexDirection: 'column',
-    alignItems:'center',
-  },
+  
   list: {
     width: wp('100%'),
     height: hp('10%'),

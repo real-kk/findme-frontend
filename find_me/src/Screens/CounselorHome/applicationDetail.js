@@ -71,7 +71,10 @@ class ApplicationDetail extends React.Component {
       return (
           <View style={styles.container}>
                 <View style={styles.list_head}>
-                <Icon name="person-circle" size={60} style={styles.image}></Icon>
+                <Image 
+                style={styles.user}
+                source={{uri: this.state.application.client_image === null ? 
+                'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/noimage.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + this.state.application.client_image}}/>
                 <View style={styles.head_text}>
                 <Text style={styles.username}>이름 : {this.state.application.client_username}</Text>
                 <Text style={styles.introduce}> {this.state.application.content}</Text>
@@ -117,6 +120,11 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: '10%',
         backgroundColor: '#FAFAFA'
+      },
+      user:{
+        width: wp('20%'),
+        height: hp('10%'),
+        borderRadius: 200,
       },
       list_body: {
         padding: '1%',

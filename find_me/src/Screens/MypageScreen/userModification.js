@@ -31,6 +31,7 @@ class userModificationScreen extends React.Component {
     this.state = {
         image: '',
         introduce: '',
+        username:'',
     }
   }
 
@@ -40,19 +41,29 @@ class userModificationScreen extends React.Component {
         this.setState({
             image: res.uri
         })
-        console.log(res.uri)
+        console.log(res.uri + 'hi')
+        console.log(this.props.image)
     })
   }
 
   submission = async() => {
     const data =new FormData();
-    data.append('name', this.props.route.params.name)
+    const time = new Date();
+    var date = time.getDate(); //Current Date
+    var month = time.getMonth() + 1; //Current Month
+    var year = time.getFullYear(); //Current Year
+    var hours = time.getHours(); //Current Hours
+    var min = time.getMinutes(); //Current Minutes
+    var sec = time.getSeconds(); //Current Seconds
+
+    data.append('username', this.state.username)
+    console.log(this.state.username + '!!!!!!!!!!')
     data.append('user_type', this.props.route.params.user_type)
     data.append('email', this.props.route.params.email)
     data.append('image', {
       uri: this.state.image,
       type: 'image/png',
-      name: 'image.jpg'
+      name: `${year}-${month}-${date}_${hours}${min}${sec}.jpg`
     })
     data.append('introduce', this.state.introduce)
 
@@ -62,40 +73,60 @@ class userModificationScreen extends React.Component {
       }})
       .then((res)=>{
           console.log(res)
-          this.props.navigation.navigate('Mypage')
+          this.props.navigation.push('Mypage')
       })
       .catch(err=>console.log(err))
   }
   render () {
     return (
-          <View style={styles.container}>
-             <Text>회원정보 수정</Text>
-             <Text>이름: {this.props.route.params.name}</Text>
-             <Text>이메일: {this.props.route.params.email}</Text>
-             <TouchableOpacity
-                    style={styles.get_image}
-                    onPress={()=>{this.addImage()}}>
-                    <Text style={{ color: 'white', fontSize: 14 }}>사진 가져오기</Text>
-              </TouchableOpacity>
-              <Image
-                    source={{uri: this.state.image ? this.state.image : null}}
-                    style={styles.image}
-              />
-              <TextInput style={styles.input}
-                            placeholder= "약력 작성"
-                            value={this.state.introduce}
-                            onChangeText={(text) => {
-                                this.setState({introduce: text})             
-                            }}
-              />
-             <TouchableOpacity
-                onPress = {()=> {
-                  this.submission();
-                }}
-             >
-                  <Text>수정 완료</Text>
-             </TouchableOpacity>
-          </View>
+      <View style={styles.container}>
+        <Text style={styles.result}>회원정보 수정</Text>
+        <Text>프로필 사진</Text>
+        <Image
+          source={{uri: this.state.image ? this.state.image : this.props.route.params.image}}
+          style={styles.image}
+        />
+        <TouchableOpacity
+          style={styles.get_image}
+          onPress={()=>{this.addImage()}}>
+          <Text style={{ color: 'white', fontSize: 12, fontFamily:'netmarbleL'}}>사진 가져오기</Text>
+        </TouchableOpacity>
+        <View style={styles.input}>
+        <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>이름 : </Text>
+        <TextInput style={styles.title}
+          underlineColorAndroid={'white'}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          placeholder={this.props.route.params.name}
+          placeholderTextColor='black'
+          value={this.state.content}
+          onChangeText={(text) => {
+            this.setState({username: text})             
+        }}/>
+        </View>
+        <View style={styles.input}>
+        <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>자기소개 : </Text>
+        <TextInput style={styles.title}
+          underlineColorAndroid={'white'}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          placeholder={this.props.route.params.introduce}
+          placeholderTextColor='black'
+          value={this.state.content}
+          onChangeText={(text) => {
+            this.setState({introduce: text})             
+        }}/>
+        </View>
+        
+             
+        <TouchableOpacity
+          onPress = {()=> {
+            this.submission();
+          }}
+        >
+          <Text>수정 완료</Text>
+        </TouchableOpacity>
+      </View>
     )
   }
 }
@@ -103,11 +134,20 @@ class userModificationScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
+  },
+  input:{
+    flexDirection: "row",
+    alignItems:'center',
+    marginLeft: wp('5%'),
+    marginTop: hp('2%'),
+  },
+  title: {
+    borderRadius: 5,
+    width:wp('50%'),
+    fontSize:18,
   },
   get_image: {
-    marginLeft: wp('5%'),
     width: wp('30%'),
     borderRadius: 5,
     height: hp('3'),
@@ -116,14 +156,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   image : {
-    resizeMode:'stretch',
-    width:wp('90%'),
-    marginLeft:wp('5%'),
+    marginLeft: wp('20%'),
+    width:wp('60%'),
     marginBottom:hp('3%'),
-    height:hp('55%'),
-    borderWidth: 2,
-    borderRadius: 5,
-},
+    height:hp('30%'),
+    borderRadius:200,
+  },
+  result: {
+    fontSize: 23,
+    paddingLeft: wp('5%'),
+    paddingTop: hp('3%'),
+    paddingBottom: hp('3%'),
+    fontFamily: 'netmarbleB',
+    color:'white',
+    backgroundColor:'rgba(114,174,148,0.9)',
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(userModificationScreen)

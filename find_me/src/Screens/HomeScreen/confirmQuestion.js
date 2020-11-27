@@ -13,7 +13,8 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Image
 } from 'react-native'
 import {
   widthPercentageToDP as wp,
@@ -43,7 +44,7 @@ class confirmQuestion extends React.Component {
         'Authorization' : `Token ${this.props.token.auth.token}`
     }})
     .then(({data})=>{
-        console.log(data[0].id)
+        console.log(data)
         this.setState({questionList: data})
     })
   }
@@ -79,7 +80,10 @@ class confirmQuestion extends React.Component {
                   }}
                 >
                   <View style={styles.list}>
-                    <Icon name="person-circle" size={40} style={styles.image}></Icon>
+                    <Image 
+                      style={styles.user}
+                      source={{uri: item.counselor_image === "" ? 
+                      'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/noimage.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.counselor_image}}/>
                     <View style={styles.list_side}>
                       <Text style={styles.title}>{'상담사 : ' + item.counselor_username}</Text>
                       <Text style={styles.text}>{'질문 : ' + item.question}</Text>
@@ -100,6 +104,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent:'center',
     paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
+  },
+  user:{
+    width: wp('20%'),
+    height: hp('10%'),
+    borderRadius: 200,
   },
   list: {
     paddingHorizontal: '5%',

@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { Platform, StatusBar, StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
+import { Image, Platform, StatusBar, StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 import {
@@ -39,6 +39,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
           }})
           .then(({data})=>{
               this.setState({counselorList: data.users})
+              console.log(data.users)
           })
       }
 
@@ -74,10 +75,13 @@ import Icon from 'react-native-vector-icons/Ionicons'
                                 }}
                             >
                             <View style={styles.list}>
-                                <Icon name="person-circle" size={40} style={styles.image}></Icon>
+                                <Image 
+                                    style={styles.user}
+                                    source={{uri: item.fields.image === "" ? 
+                                    'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/noimage.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.fields.image}}/>
                                 <View style={styles.list_side}>
-                                <Text style={styles.title}>{item.fields.username + ' 상담사'}</Text>
-                                <Text style={styles.text}>{item.fields.introduce}</Text>
+                                    <Text style={styles.title}>{item.fields.username + ' 상담사'}</Text>
+                                    <Text style={styles.text}>{item.fields.introduce}</Text>
                                 </View>
                             </View>
                                
@@ -98,6 +102,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center',
         paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
+    },
+    user:{
+        width: wp('20%'),
+        height: hp('10%'),
+        borderRadius: 200,
     },
     list: {
         paddingHorizontal: '5%',
