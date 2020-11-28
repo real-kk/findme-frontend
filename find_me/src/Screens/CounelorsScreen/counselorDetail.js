@@ -38,16 +38,21 @@ class CounselorDetail extends React.Component {
           <Text style={styles.result}>상담사 프로필</Text>
           <View style={styles.list}>
             <Image
-            source={require('../../../images/camera.png')}
-            style={styles.image}/>
+            style={styles.image}
+            source={{
+              uri: this.state.counselor.image === ''
+              // eslint-disable-next-line multiline-ternary
+                ? 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + this.state.counselor.image
+            }}/>
             <View style={styles.list_side}>
               <Text style={styles.username}>{this.state.counselor.username} 상담사</Text>
               <Text style={styles.email}>{this.state.counselor.email}</Text>
+              <Text style={styles.introduce}>{this.state.counselor.introduce}</Text>
             </View>
           </View>
           <View style={styles.list_introduce}>
             <Text style={styles.title}>약력</Text>
-            <Text style={styles.introduce}>{this.state.counselor.career}</Text>
+            <Text style={styles.career}>{this.state.counselor.career}</Text>
           </View>
           <TouchableOpacity
             onPress={() => {
@@ -57,7 +62,7 @@ class CounselorDetail extends React.Component {
               })
             }}>
             <View style={styles.apply}>
-              <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleL'}}>상담 신청하기</Text>
+              <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleL' }}>상담 신청하기</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -77,19 +82,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   list_side: {
-    marginVertical: '2%',
+    marginTop: hp('2%'),
     flexDirection: 'column'
   },
   list_introduce: {
-    marginVertical: '2%',
-    width: wp('98%'),
-    height: hp('46%'),
+    marginTop: wp('4%'),
+    width: wp('95%'),
+    height: hp('44%'),
     flexDirection: 'column'
   },
   title: {
     marginLeft: wp('5%'),
     fontFamily: 'netmarbleL',
-    fontSize: 19
+    fontSize: 22
   },
   apply: {
     marginLeft: wp('5%'),
@@ -103,28 +108,42 @@ const styles = StyleSheet.create({
   image: {
     width: wp('40%'),
     height: hp('20%'),
-    resizeMode: 'stretch',
     marginLeft: wp('5%'),
-    borderRadius: 200
+    borderRadius: 200,
+    borderWidth: 2,
+    borderColor: 'rgba(114,174,148,0.9)'
   },
   username: {
     marginLeft: wp('10%'),
     fontSize: 19,
     color: 'black',
     marginBottom: hp('2%'),
-    fontFamily: 'netmarbleL'
+    width: wp('40%'),
+    fontFamily: 'netmarbleM'
+  },
+  career: {
+    marginLeft: wp('5%'),
+    fontSize: 18,
+    marginTop: hp('2%'),
+    borderRadius: 5,
+    backgroundColor: '#fafafa',
+    height: hp('35%'),
+    fontFamily: 'netmarbleL',
+    padding: '5%'
   },
   introduce: {
-    marginLeft: wp('5%'),
+    marginLeft: wp('10%'),
     fontSize: 15,
-    color: 'gray',
-    marginBottom: hp('2%'),
-    fontFamily: 'netmarbleR'
+    width: wp('40%'),
+    fontFamily: 'netmarbleL'
   },
   email: {
     marginLeft: wp('10%'),
-    fontSize: 14,
-    fontFamily: 'netmarbleL'
+    fontSize: 13,
+    fontFamily: 'netmarbleL',
+    marginBottom: hp('2%'),
+    width: wp('40%'),
+    color: 'gray'
   },
   result: {
     fontSize: 23,
@@ -132,8 +151,8 @@ const styles = StyleSheet.create({
     paddingTop: hp('3%'),
     paddingBottom: hp('3%'),
     fontFamily: 'netmarbleB',
-    color:'white',
-    backgroundColor:'rgba(114,174,148,0.9)',
-    marginBottom: hp('2%'),
+    color: 'white',
+    backgroundColor: 'rgba(114,174,148,0.9)',
+    marginBottom: hp('2%')
   }
 })

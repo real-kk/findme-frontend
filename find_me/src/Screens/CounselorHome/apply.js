@@ -60,7 +60,7 @@ class CounselorApplyScreen extends React.Component {
                                     <Image 
                                     style={styles.user}
                                     source={{uri: item.client_image === null ? 
-                                    'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/noimage.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.client_image}}/>
+                                    'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.client_image}}/>
                                     <View style={styles.list_side}>
                                     <Text style={styles.title}>신청자 : {item.client_username}</Text>
                                     <Text style={styles.text}>{item.client_introduce}</Text>

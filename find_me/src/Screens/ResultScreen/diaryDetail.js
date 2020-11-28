@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   date: {
     paddingTop: hp('2%'),
     textAlign:'center',
-    fontFamily: 'netmarbleR',
+    fontFamily: 'netmarbleL',
     fontSize: 14,
     color: 'gray'
   },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   title: {
     paddingTop: hp('3%'),
     textAlign:'center',
-    fontFamily: 'netmarbleR',
+    fontFamily: 'netmarbleM',
     fontSize: 25,
   },
   text: {

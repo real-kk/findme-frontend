@@ -82,7 +82,7 @@ class applicationFormModificationScreen extends React.Component {
   render () {
     return (
           <View style={styles.container}>
-            <Text style={styles.result}>상담신청서 작성</Text>
+            <Text style={styles.result}>상담신청서 수정</Text>
             <ScrollView>
                 <Text style={styles.text1}>상담 가능 시간표</Text>
                 <View style={{flexDirection:'row'}}>
@@ -90,7 +90,7 @@ class applicationFormModificationScreen extends React.Component {
                 <TouchableOpacity
                     style={styles.get_image}
                     onPress={()=>{this.addImage()}}>
-                    <Text style={{ color: 'white', fontSize: 14 }}>시간표 가져오기</Text>
+                    <Text style={{ color: 'white', fontSize: 12, fontFamily:'netmarbleL'}}>시간표 가져오기</Text>
                 </TouchableOpacity>
                 </View>
                 <Image
@@ -125,60 +125,59 @@ const styles = StyleSheet.create({
   container : {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight
-  },
-  time_table : {
-      resizeMode:'stretch',
-      width:wp('90%'),
-      marginLeft:wp('5%'),
-      marginBottom:hp('3%'),
-      height:hp('55%'),
-      borderWidth: 2,
-      borderRadius: 5,
-  },
-  text1:{
-      marginTop: hp('2%'),
-      marginLeft: wp('5%'),
-      marginBottom: hp('2%'),
-      fontSize: 18,
-      fontFamily: 'netmarbleL'
-  },
-  text2:{
-      marginLeft: wp('5%'),
-      fontSize: 14,
-      color:'#aaa',
-      paddingTop: hp('0.2%'),
-      marginBottom: hp('3%'),
-      fontFamily: 'netmarbleL',
-      alignItems: 'center',
-      justifyContent: 'center',
-  },
-  get_image: {
-      marginLeft: wp('5%'),
-      width: wp('30%'),
-      borderRadius: 5,
-      height: hp('3'),
-      backgroundColor: 'rgba(114,174,148,0.5)',
-      alignItems: 'center',
-      justifyContent: 'center'
-  },
-  result: {
-      fontSize: 23,
-      paddingLeft: wp('5%'),
-      paddingTop: hp('3%'),
-      paddingBottom: hp('3%'),
-      fontFamily: 'netmarbleB',
-      color:'white',
-      backgroundColor:'rgba(114,174,148,0.9)',
-  },
-  submission:{    
-      borderRadius: 50,
-      height: hp('6%'), 
-      backgroundColor:'rgba(114,174,148,0.5)',
-      alignItems:'center', 
-      justifyContent:'center',
-      width: wp('40%'),
-      marginHorizontal:wp('5%'),
-  }
+},
+time_table : {
+    width:wp('90%'),
+    marginLeft:wp('5%'),
+    marginBottom:hp('3%'),
+    height:hp('54%'),
+    borderWidth: 2,
+    borderRadius: 5,
+},
+text1:{
+    marginTop: hp('2%'),
+    marginLeft: wp('5%'),
+    marginBottom: hp('2%'),
+    fontSize: 18,
+    fontFamily: 'netmarbleL'
+},
+text2:{
+    marginLeft: wp('5%'),
+    fontSize: 14,
+    color:'#aaa',
+    paddingTop: hp('0.5%'),
+    marginBottom: hp('3%'),
+    fontFamily: 'netmarbleL',
+    alignItems: 'center',
+    justifyContent: 'center',
+},
+get_image: {
+    marginLeft: wp('5%'),
+    width: wp('30%'),
+    borderRadius: 5,
+    height: hp('3'),
+    backgroundColor: 'rgba(114,174,148,0.5)',
+    alignItems: 'center',
+    justifyContent: 'center'
+},
+result: {
+    fontSize: 23,
+    paddingLeft: wp('5%'),
+    paddingTop: hp('3%'),
+    paddingBottom: hp('3%'),
+    fontFamily: 'netmarbleB',
+    color:'white',
+    backgroundColor:'rgba(114,174,148,0.9)',
+},
+submission:{    
+    borderRadius: 5,
+    height: hp('6%'), 
+    backgroundColor:'rgba(114,174,148,0.5)',
+    alignItems:'center', 
+    justifyContent:'center',
+    width: wp('40%'),
+    marginHorizontal:wp('5%'),
+}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(applicationFormModificationScreen)

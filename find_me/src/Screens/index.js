@@ -49,8 +49,8 @@ import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult'
 import questionListScreen from './ResultScreen/questionList'
 import diaryListScreen from './ResultScreen/diaryList'
 import diaryDetailScreen from './ResultScreen/diaryDetail'
-import videoAnalysisResultScreen from './ResultScreen/videoAnalysisResult'
-import videoGraphResultScreen from './ResultScreen/videoGraphResult'
+
+
 import videoResultScreen from './ResultScreen/videoResult'
 
 import CounselorDetailScreen from './CounelorsScreen/counselorDetail'
@@ -261,45 +261,8 @@ function ResultStack () {
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="VideoAnalysisResult"
-          component={videoAnalysisResultScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="VideoGraphResult"
-          component={videoGraphResultScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
           name="VideoResult"
           component={videoResultScreen}
-        />
-      </Stack.Navigator>
-  )
-}
-
-function CounselorsStack () {
-  return (
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Counselors"
-          component={CounselorsScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="CounselorDetail"
-          component={CounselorDetailScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="CounselingRequest"
-          component={CounselingRequestScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="CounselingRequest2"
-          component={CounselingRequestScreen2}
         />
       </Stack.Navigator>
   )

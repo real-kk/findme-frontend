@@ -91,7 +91,7 @@ class userModificationScreen extends React.Component {
         <TouchableOpacity
           style={styles.get_image}
           onPress={()=>{this.addImage()}}>
-          <Text style={{ color: 'white', fontSize: 12, fontFamily:'netmarbleL'}}>사진 가져오기</Text>
+          <Text style={{ color: 'rgba(114,174,148,0.5)', fontSize: 15, fontFamily:'netmarbleB'}}>사진 가져오기</Text>
         </TouchableOpacity>
         <View style={styles.input}>
         <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>이름 : </Text>
@@ -138,7 +138,7 @@ class userModificationScreen extends React.Component {
             this.submission();
           }}
         >
-          <Text>수정 완료</Text>
+          <Text style={{fontSize: 18}}>수정 완료</Text>
         </TouchableOpacity>
       </View>
     )

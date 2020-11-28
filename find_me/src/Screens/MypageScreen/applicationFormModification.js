@@ -79,7 +79,9 @@ class applicationFormModificationScreen extends React.Component {
   render () {
     return (
           <View style={styles.container}>
+            <Text style={styles.result}>상담신청서 수정</Text>
              <View>
+                <Text style={styles.link_man}>신청 상담사 : {this.props.route.params.link_man}</Text>
                 <View style={styles.input}>
                 <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>전공 : </Text>
                 <TextInput style={styles.title}
@@ -147,54 +149,68 @@ class applicationFormModificationScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container : {
-    flex: 1,
-    paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight
-  },
-  input:{
-    flexDirection: "row",
-    alignItems:'center',
-    marginLeft: wp('5%'),
-    marginTop: hp('2%'),
-  },
-  text: {
-      borderRadius: 20,
-      borderColor:'rgba(114,174,148,0.5)',
-      borderWidth:2,
-      backgroundColor:'#fafafa',
-      marginVertical: hp('5%'),
-      marginHorizontal: wp('5%'),
-      paddingLeft:wp('5%'),
-      height:hp('30%'),
-  },
-  title: {
-      borderRadius: 5,
-      width:wp('50%'),
-  },
-  text_title: {
-      alignItems:'center',
-      marginLeft: wp('5%'),
+        flex: 1,
+        paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight
+    },
+    input:{
+        flexDirection: "row",
+        alignItems:'center',
+        marginLeft: wp('5%'),
+        marginTop: hp('2%'),
+    },
+    link_man:{
+      marginLeft: wp('15%'),
       marginTop: hp('3%'),
-      fontSize: 18 ,
-      fontFamily: 'netmarbleL'
-  },
-  result: {
-      fontSize: 23,
-      paddingLeft: wp('5%'),
-      paddingTop: hp('3%'),
-      paddingBottom: hp('3%'),
-      fontFamily: 'netmarbleB',
-      color:'white',
-      backgroundColor:'rgba(114,174,148,0.9)',
-  },
-  apply: {
-      marginLeft: wp('5%'),
-      width: wp('90%'),
-      borderRadius: 50,
-      height: hp('6%'),
+      fontSize: 18 , 
+      fontFamily: 'netmarbleM',
       backgroundColor: 'rgba(114,174,148,0.5)',
-      alignItems: 'center',
-      justifyContent: 'center'
-  }
+      color: 'white',
+      width: 'auto',
+      paddingVertical:hp('0.4%'),
+      paddingLeft: wp('3%'),
+      borderBottomLeftRadius:5,
+      borderTopLeftRadius: 5,
+    },
+    text: {
+        borderRadius: 20,
+        borderColor:'rgba(114,174,148,0.5)',
+        borderWidth:2,
+        backgroundColor:'#fafafa',
+        marginTop: hp('3%'),
+        marginBottom: hp('5%'),
+        marginHorizontal: wp('5%'),
+        paddingLeft:wp('5%'),
+        height:hp('26%'),
+    },
+    title: {
+        borderRadius: 5,
+        width:wp('50%'),
+    },
+    text_title: {
+        alignItems:'center',
+        marginLeft: wp('5%'),
+        marginTop: hp('3%'),
+        fontSize: 18 ,
+        fontFamily: 'netmarbleL'
+    },
+    result: {
+        fontSize: 23,
+        paddingLeft: wp('5%'),
+        paddingTop: hp('3%'),
+        paddingBottom: hp('3%'),
+        fontFamily: 'netmarbleB',
+        color:'white',
+        backgroundColor:'rgba(114,174,148,0.9)',
+    },
+    apply: {
+        marginLeft: wp('5%'),
+        width: wp('90%'),
+        borderRadius: 5,
+        height: hp('6%'),
+        backgroundColor: 'rgba(114,174,148,0.5)',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(applicationFormModificationScreen)

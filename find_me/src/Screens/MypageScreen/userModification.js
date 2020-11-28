@@ -29,9 +29,9 @@ class userModificationScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        image: '',
-        introduce: '',
-        username:'',
+        image: this.props.route.params.image,
+        introduce: this.props.route.params.introduce,
+        username: this.props.route.params.name,
     }
   }
 
@@ -82,50 +82,51 @@ class userModificationScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.result}>회원정보 수정</Text>
-        <Text>프로필 사진</Text>
         <Image
-          source={{uri: this.state.image ? this.state.image : this.props.route.params.image}}
+          source={{uri: this.state.image}}
           style={styles.image}
         />
         <TouchableOpacity
           style={styles.get_image}
           onPress={()=>{this.addImage()}}>
-          <Text style={{ color: 'white', fontSize: 12, fontFamily:'netmarbleL'}}>사진 가져오기</Text>
+          <Text style={{ color: 'rgba(114,174,148,0.5)', fontSize: 15, fontFamily:'netmarbleB'}}>사진 가져오기</Text>
         </TouchableOpacity>
+        <Text style={styles.id}>{this.props.route.params.email}</Text>
         <View style={styles.input}>
-        <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>이름 : </Text>
+        <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>이름 : </Text>
         <TextInput style={styles.title}
-          underlineColorAndroid={'white'}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
-          placeholder={this.props.route.params.name}
-          placeholderTextColor='black'
-          value={this.state.content}
+          placeholder="ex) 홍길동"
+          value={this.state.username}
           onChangeText={(text) => {
             this.setState({username: text})             
         }}/>
         </View>
         <View style={styles.input}>
-        <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>자기소개 : </Text>
-        <TextInput style={styles.title}
-          underlineColorAndroid={'white'}
+        <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>자기소개 : </Text>
+        <TextInput style={styles.introduce}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
-          placeholder={this.props.route.params.introduce}
-          placeholderTextColor='black'
-          value={this.state.content}
+          placeholder="자신을 한 줄로 소개해주세요"
+          value={this.state.introduce}
           onChangeText={(text) => {
             this.setState({introduce: text})             
         }}/>
         </View>
         
-             
+        <View style={styles.input}>
+        <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>연결된 상담사 : </Text>
+        <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>{this.props.route.params.link_man}</Text>
+        </View>
         <TouchableOpacity
           onPress = {()=> {
             this.submission();
           }}
         >
-          <Text>수정 완료</Text>
+         <View style={styles.apply}>
+            <Text style={{ color: 'white', fontSize: 18 }}>수정 완료</Text>
+          </View>
         </TouchableOpacity>
       </View>
     )
@@ -141,26 +142,46 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems:'center',
     marginLeft: wp('5%'),
-    marginTop: hp('2%'),
+    marginTop: hp('3.5%'),
   },
   title: {
     borderRadius: 5,
-    width:wp('50%'),
+    width:wp('78%'),
     fontSize:18,
+    backgroundColor:'#fafafa',
+    paddingLeft:wp('5%'),
+  },
+  introduce:{
+    borderRadius: 5,
+    width:wp('70%'),
+    fontSize:18,
+    backgroundColor:'#fafafa',
+    paddingLeft:wp('5%'),
+  },
+  id:{
+    borderRadius:5,
+    borderWidth:0.5,
+    width:wp('40%'),
+    textAlign:'center',
+    marginLeft:wp('30%'),
+    borderColor:'gray',
+    fontFamily: 'netmarbleM',
+    marginBottom:hp('1%'),
   },
   get_image: {
+    marginLeft: wp('35%'),
     width: wp('30%'),
-    borderRadius: 5,
     height: hp('3'),
-    backgroundColor: 'rgba(114,174,148,0.5)',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom:hp('1%')
   },
   image : {
-    marginLeft: wp('20%'),
-    width:wp('60%'),
-    marginBottom:hp('3%'),
-    height:hp('30%'),
+    marginTop:hp('4%'),
+    marginLeft: wp('24%'),
+    width:wp('52%'),
+    marginBottom:hp('2%'),
+    height:hp('26%'),
     borderRadius:200,
   },
   result: {
@@ -171,6 +192,16 @@ const styles = StyleSheet.create({
     fontFamily: 'netmarbleB',
     color:'white',
     backgroundColor:'rgba(114,174,148,0.9)',
+  },
+  apply: {
+    marginTop: hp('5%'),
+    marginLeft: wp('5%'),
+    width: wp('90%'),
+    borderRadius: 5,
+    height: hp('6%'),
+    backgroundColor: 'rgba(114,174,148,0.5)',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 

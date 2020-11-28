@@ -74,7 +74,7 @@ class ApplicationDetail extends React.Component {
                 <Image 
                 style={styles.user}
                 source={{uri: this.state.application.client_image === null ? 
-                'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/noimage.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + this.state.application.client_image}}/>
+                'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + this.state.application.client_image}}/>
                 <View style={styles.head_text}>
                 <Text style={styles.username}>이름 : {this.state.application.client_username}</Text>
                 <Text style={styles.introduce}> {this.state.application.content}</Text>

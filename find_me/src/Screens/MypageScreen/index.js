@@ -61,7 +61,8 @@ class MypageScreen extends React.Component {
           name: res.data.username === null ? 'None' : res.data.username,
           email: res.data.email,
           user_type: res.data.user_type,
-          image: 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
+          image: res.data.image === "" ? 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' 
+          :'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
           introduce: res.data.introduce === '' ? 'None!' : res.data.introduce
         })
         console.log(res.data)
@@ -74,8 +75,9 @@ class MypageScreen extends React.Component {
       }})
       .then((res)=>{
         this.setState({
-          link_man: res.data[0].counselor_username
+          link_man: res.data[0].counselor_username === undefined ? '없음' : res.data[0].counselor_username
         })
+        console.log(this.state.link_man)
       })
       .catch(err=>console.log(err))
 
@@ -99,12 +101,15 @@ class MypageScreen extends React.Component {
                     <Image 
                     style={styles.user}
                     source={{uri: this.state.image ? this.state.image : null}}/>
-                    <Text style={{fontSize:20, paddingTop:hp('2%'), fontFamily:'netmarbleB', textAlign:'center'}}>{this.state.name}</Text>
+                    <Text style={{ fontSize:18, paddingTop:hp('1.5%'), fontFamily:'netmarbleB', textAlign:'center'}}>{this.state.name}</Text>
                     </View>
                     <View style = {styles.profile_text}>
-                        <Text style={{fontSize:16, marginBottom:hp('1%'), fontFamily:'netmarbleR', color:'white'}}>이메일{'\n'}{this.state.email}</Text>
-                        <Text style={{fontSize:16, marginBottom:hp('1%'), fontFamily:'netmarbleR', color:'white'}}>연결된 상담사{'\n'}{this.state.link_man}</Text>
-                        <Text style={{fontSize:16, fontFamily:'netmarbleR', color:'white'}}>자기 소개{'\n'}{this.state.introduce}</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('0.5%'), fontFamily:'netmarbleM', color:'gray'}}>이메일</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('1%'), fontFamily:'netmarbleL', color:'white'}}>{this.state.email}</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('0.5%'), fontFamily:'netmarbleM', color:'gray'}}>연결된 상담사</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('1%'), fontFamily:'netmarbleL', color:'white'}}>{this.state.link_man}</Text>
+                        <Text style={{fontSize:16, marginBottom:hp('0.5%'), fontFamily:'netmarbleM', color:'gray'}}>자기 소개</Text>
+                        <Text style={{fontSize:16, fontFamily:'netmarbleL', color:'white'}}>{this.state.introduce}</Text>
                     </View>
                     <View style={styles.circle}  />
                 </View>
@@ -124,10 +129,14 @@ class MypageScreen extends React.Component {
                                           user_type: this.state.user_type,
                                           image: this.state.image,
                                           introduce: this.state.introduce,
+                                          link_man: this.state.link_man,
                                         })
                                     }
                                     else if(item.key === '1'){
-                                      this.props.navigation.push('applicationFormModification')
+                                      this.props.navigation.push('applicationFormModification', {
+                                        link_man: this.state.link_man,
+                                        name: this.state.name,
+                                      })
                                     }
                                     else if(item.key === '2'){
                                         this._onclickLogout();
@@ -184,6 +193,9 @@ const styles = StyleSheet.create({
     width: wp('30%'),
     height: hp('15%'),
     borderRadius: 200,
+    borderWidth:2,
+    borderColor:'white'
+
   },
   profile_text:{
     marginTop:hp('1%'),

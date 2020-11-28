@@ -86,23 +86,6 @@ class QuestionList extends React.Component {
       questionID: id
     })
   }
-  // resultConfirm = async (id) => {
-  //   console.log(`/tasks/process_videos/${id}/`)
-  //   // this.props.navigation.navigate('VideoAnalysisResult', {
-  //   //   questionID: id
-  //   // })
-  //   await axios.get(`/tasks/process_videos/${id}/`,
-  //   { headers: {
-  //     'Authorization' : `Token ${this.props.token.auth.token}`
-  //   }}) 
-  //   .then(({data})=>{
-  //     console.log(data)
-  //     this.props.navigation.navigate('VideoAnalysisResult', {
-  //       questionID: id,
-  //       uri: data
-  //     })
-  //   })
-  // }
 
   render () {
     return (
@@ -155,12 +138,14 @@ const styles = StyleSheet.create({
   title:{
     marginLeft: '1%',
     marginBottom: '8%',
+    fontFamily: 'netmarbleM',
     fontSize: 18,
   },
   content:{
     marginLeft: '1%',
     color: 'gray',
     fontSize: 13,
+    fontFamily: 'netmarbleL',
   }
 })
 

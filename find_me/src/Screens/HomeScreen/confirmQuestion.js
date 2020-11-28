@@ -83,10 +83,10 @@ class confirmQuestion extends React.Component {
                     <Image 
                       style={styles.user}
                       source={{uri: item.counselor_image === "" ? 
-                      'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/noimage.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.counselor_image}}/>
+                      'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.counselor_image}}/>
                     <View style={styles.list_side}>
                       <Text style={styles.title}>{'상담사 : ' + item.counselor_username}</Text>
-                      <Text style={styles.text}>{'질문 : ' + item.question}</Text>
+                      <Text style={styles.text}>{item.question}</Text>
                     </View>
                   </View>          
                 </TouchableOpacity>
@@ -106,16 +106,20 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
   },
   user:{
+    marginTop: hp('2.3%'),
     width: wp('20%'),
     height: hp('10%'),
     borderRadius: 200,
+    borderWidth:2,
+    borderColor:'rgba(114,174,148,0.9)',
+    alignItems:'center',
+    justifyContent:'center',
   },
   list: {
     paddingHorizontal: '5%',
-    paddingVertical: hp('1.5%'),
     marginTop : hp('1.5%'),
-    marginBottom : hp('1%'),
-    height: hp('16%'),
+    marginBottom : hp('1.5%'),
+    height: hp('15%'),
     width: wp('90%'),
     marginLeft: wp('5%'),
     backgroundColor:'#fafafa',
@@ -132,6 +136,7 @@ const styles = StyleSheet.create({
   },
   list_side:{
     flexDirection:'column',
+    marginTop: hp('1.5%'),
   },
   result: {
     fontSize: 23,
@@ -145,16 +150,16 @@ const styles = StyleSheet.create({
   title:{
     marginLeft: wp('10%'),
     paddingTop: hp('1%'),
-    fontSize: 17,
-    color: 'black',
+    fontSize: 14,
+    color: 'gray',
     fontFamily:'netmarbleL'
   },
   text: {
+    width: wp('55%'),
     paddingTop: hp('1%'),
     marginLeft: wp('10%'),
-    fontSize: 14,
-    color:'gray',
-    fontFamily:'netmarbleL'
+    fontSize: 17,
+    fontFamily:'netmarbleM'
   },
 })
 

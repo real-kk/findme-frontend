@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         width:wp('90%'),
         marginLeft:wp('5%'),
         marginBottom:hp('3%'),
-        height:hp('55%'),
+        height:hp('54%'),
         borderWidth: 2,
         borderRadius: 5,
     },

@@ -46,7 +46,7 @@ class TopBar extends React.Component {
           <Text style={styles.result}>감정 분석 결과</Text>
           <Tab.Navigator
            tabBarOptions={{
-             labelStyle: { fontSize: 16},
+             labelStyle: { fontSize: 16, fontFamily:'netmarbleM'},
              tabStyle: { width: wp('25%'), height: hp('8%')},
              style: {
                borderColor: 'black',

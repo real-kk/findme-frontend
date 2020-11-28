@@ -43,10 +43,19 @@ class WordCloudResult extends React.Component {
             'Authorization' : `Token ${this.props.token.auth.token}`
         }})
         .then(({data})=>{
-            this.setState({
-                wordcloud: data.image,
+            console.log(data + '!!!!')
+            if(typeof data == 'string'){
+                this.setState({
+                wordcloud: data,
                 loading_wordcloud: false,
-            })
+                })
+            }
+            else{
+                this.setState({
+                    wordcloud: data.image,
+                    loading_wordcloud: false,
+                })
+            }
         })
         .catch(err=>console.log(err))
     }

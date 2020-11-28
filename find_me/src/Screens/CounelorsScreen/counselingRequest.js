@@ -143,10 +143,11 @@ const styles = StyleSheet.create({
         borderColor:'rgba(114,174,148,0.5)',
         borderWidth:2,
         backgroundColor:'#fafafa',
-        marginVertical: hp('5%'),
+        marginTop: hp('3%'),
+        marginBottom: hp('5%'),
         marginHorizontal: wp('5%'),
         paddingLeft:wp('5%'),
-        height:hp('30%'),
+        height:hp('32%'),
     },
     title: {
         borderRadius: 5,

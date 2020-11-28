@@ -126,10 +126,12 @@ const styles = StyleSheet.create({
         marginLeft: '1%',
         marginBottom: '8%',
         fontSize: 18,
+        fontFamily:'netmarbleM'
     },
     content:{
         marginLeft: '1%',
         color: 'gray',
-        fontSize: 10
+        fontSize: 11,
+        fontFamily:'netmarbleL'
     }
 })
