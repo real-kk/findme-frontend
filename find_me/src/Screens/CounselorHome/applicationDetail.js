@@ -34,7 +34,7 @@ class ApplicationDetail extends React.Component {
         .then((res) => {
             console.log(res)
             alert("반려 완료!")
-            this.props.navigation.navigate('Home')
+            this.props.navigation.push('Home')
         })
         .catch(err => console.log(err))
     }   
@@ -62,52 +62,56 @@ class ApplicationDetail extends React.Component {
         .then((res) => {
             
             alert("승인 완료!")
-            this.props.navigation.navigate('Home')
+            this.props.navigation.push('Home')
         })
         .catch(err => console.log(err))
     }
 
     render() {
       return (
-          <View style={styles.container}>
-                <View style={styles.list_head}>
-                <Image 
-                style={styles.user}
-                source={{uri: this.state.application.client_image === null ? 
-                'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + this.state.application.client_image}}/>
+        <View style={styles.container}>
+            <Text style={styles.result}>신청서 상세 정보</Text>
+              <View style={styles.list_head}>
+                <View>
+                  <Image 
+                  style={styles.user}
+                  source={{uri: this.state.application.client_image === null ? 
+                  'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + this.state.application.client_image}}/>
+                  <Text style={styles.username}>{this.state.application.client_username}</Text>
+                </View>
                 <View style={styles.head_text}>
-                <Text style={styles.username}>이름 : {this.state.application.client_username}</Text>
-                <Text style={styles.introduce}> {this.state.application.content}</Text>
+                
+                  <Text style={styles.profile}>전공 : {this.state.application.major}</Text>
+                  <Text style={styles.profile}>학번 : {this.state.application.student_number}</Text>
+                  <Text style={styles.profile}>전화번호 : {this.state.application.phone_number}</Text>
+                  <Text style={styles.profile}>하고 싶은 말 : {this.state.application.client_introduce}</Text>
                 </View>
-                </View>
-                <View style={styles.list_body}>
-                <Text>전공 : {this.state.application.major}</Text>
-                <Text>학번 : {this.state.application.student_number}</Text>
-                <Text>전화번호 : {this.state.application.phone_number}</Text>
-               
-                <Text>시간표 이미지 </Text>
+              </View>
+              <View style={styles.list_body}>
+                
+                <Text style={{fontSize: 17, fontFamily:'netmarbleL', marginVertical:hp('1%')}}>수업 시간표</Text>
                 <Image
-                    style={{height: wp('80%'), width: '100%'}} 
+                    style={{height: hp('40%'), width: wp('80%'), marginBottom: hp('2%')}} 
                     source={{uri: this.state.application.time_table}}/>
-                </View>
+              </View>
+              <View style={{flexDirection:'row'}}>
                 <TouchableOpacity
-                   style={styles.apply}
-                            onPress={()=>{
-                               this.submission()
-                            }}
-                            
-                        >
-                    <Text>상담 승인</Text>
+                  style={styles.submission}
+                    onPress={()=>{
+                    this.submission()
+                  }}  
+                >
+                  <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleB'}}>상담 승인</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.apply}
-                            onPress={()=>{
-                              this.reject()
-                            }}
-                            
-                        >
-                    <Text>상담 반려</Text>
+                  style={styles.submission}
+                    onPress={()=>{
+                      this.reject()
+                    }}
+                >
+                  <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleB'}}>상담 반려</Text>
                 </TouchableOpacity>
+              </View>
         </View>
         
       )
@@ -116,49 +120,62 @@ class ApplicationDetail extends React.Component {
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationDetail)
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: '10%',
-        backgroundColor: '#FAFAFA'
-      },
-      user:{
-        width: wp('20%'),
-        height: hp('10%'),
-        borderRadius: 200,
-      },
-      list_body: {
-        padding: '1%',
-        width: wp('100%'),
-        height: hp('65%'),
-        backgroundColor:'white',
-        flexDirection:'column',
-      },
-      list_head:{
-        flexDirection:'row',
-        alignItems: 'center',
-        height:hp('10%'),
-        backgroundColor:'white',
-      },
-      head_text:{
-        flexDirection:'column',  
-      },
-      apply: {
-        width: wp('100%'),
-        borderRadius: 2,
-        height: hp('5%'), 
-        backgroundColor:'#AAF0D1', 
-        alignItems:'center', 
-        justifyContent:'center',
-      },
-      username: {
-        marginLeft: wp('3%'),
-        fontSize: 19,
-        color: 'black',
-        fontWeight: '700',
-      },
-      introduce: {
-        marginLeft: wp('2%'),
-        fontSize: 15,
-        color: 'gray',
-      },
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight
+  },
+  profile:{
+    marginLeft:wp('5%'), 
+    marginBottom:hp('1.5%'),
+    fontSize: 17, 
+    fontFamily:'netmarbleL'
+  },
+  user:{
+    width: wp('30%'),
+    height: hp('15%'),
+    borderRadius: 200,
+    borderWidth:2,
+    borderColor:'rgba(114,174,148,0.9)',
+  },
+  username:{
+    paddingTop:hp('1%'),
+    marginLeft:wp('9.5%'),
+    fontSize: 17, 
+    fontFamily:'netmarbleB',
+    paddingBottom:hp('2%')
+  },
+  list_body: {
+    
+    flexDirection:'column',
+    alignItems:'center',
+  },
+  list_head:{
+    flexDirection:'row',
+    paddingTop:hp('2%'),
+    paddingLeft: wp('5%'),
+    backgroundColor:'#FAFAFA'
+  },
+  head_text:{
+    flexDirection:'column', 
+    marginTop:hp('1.7%'),
+    width:wp('60%'),
+  },
+  submission:{    
+    borderRadius: 5,
+    height: hp('6%'), 
+    backgroundColor:'rgba(114,174,148,0.5)',
+    alignItems:'center', 
+    justifyContent:'center',
+    width: wp('40%'),
+    marginHorizontal:wp('5%'),
+  },
+  result: {
+    fontSize: 23,
+    paddingLeft: wp('5%'),
+    paddingTop: hp('3%'),
+    paddingBottom: hp('3%'),
+    fontFamily: 'netmarbleB',
+    color: 'white',
+    backgroundColor: 'rgba(114,174,148,0.9)',
+  }
 });

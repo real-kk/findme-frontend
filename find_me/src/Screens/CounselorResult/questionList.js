@@ -40,12 +40,11 @@ class QuestionList extends React.Component {
   }
 
   getQuestion = async () => {
-    await axios.get('/tasks/questions_counselor?client=' + this.props.route.params.email, 
+    await axios.get('/tasks/questions_counselor?client=' + this.props.email, 
     { headers: {
         'Authorization' : `Token ${this.props.token.auth.token}`
     }})
     .then(({data})=>{
-        console.log(data)
         this.setState({
           questionList: data,
           loading_question: false
@@ -66,10 +65,10 @@ class QuestionList extends React.Component {
       'Authorization' : `Token ${this.props.token.auth.token}`
     }}) 
     .then(({data})=>{
-      console.log(data)
-      this.props.navigation.navigate('VideoResult', {
+      console.log(data + '????')
+      this.props.route.navigation.navigate('VideoResult', {
         questionID: id,
-          uri: data
+        uri: data
       })
     })
   }
@@ -77,36 +76,27 @@ class QuestionList extends React.Component {
 
   render () {
     return (
-        <View style={styles.container}>
-          {(this.state.loading_wordcloud == true || this.state.loading_graph == true) ?
-                <ActivityIndicator
-                    size = "large"
-                    color = "green"
-                /> :
-              <View>
-                <Text style={styles.result}>질문 리스트</Text>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={this.state.questionList}
-                    renderItem={({item, index})=>{
-                        return(
-                            <TouchableOpacity
-                                onPress = {()=> {
-                                   this.next(item.id)
-                                }}
-                            >
-                                <View style={styles.list}>
-                                    <Text style={styles.title}>{'이름 : ' + item.counselor_username}</Text>
-                                    <Text style={styles.text}>{'질문 : ' + item.question}</Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
-                    }}
-                    keyExtractor={(key, index) => index.toString()}
-                />
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.questionList}
+          renderItem={({item, index})=>{
+            return(
+              <TouchableOpacity
+                onPress = {()=> {
+                  console.log(item.id + '!!')
+                  this.next(item.id)
+                  // this.resultConfirm(item.id)
+                }}
+              >
+                <View style={styles.list}>
+                <Text style={styles.title}>{'질문 : ' + item.question}</Text>
                 </View>
-           }
-        </View>
+              </TouchableOpacity>
+            )
+          }}
+          keyExtractor={(key, index) => index.toString()}
+        />
+      </View>
     )
   }
 }
@@ -114,50 +104,33 @@ class QuestionList extends React.Component {
 const styles = StyleSheet.create({
   container : {
     flex: 1,
-    paddingTop: '10%',
+    alignItems: 'center',
     justifyContent:'center',
-    backgroundColor:'white',
+    backgroundColor:'#FAFAFA'
   },
   list: {
-    paddingHorizontal: '5%',
-    paddingVertical: hp('1%'),
-    marginVertical : hp('1%'),
-    height: hp('16%'),
-    width: wp('90%'),
-    marginLeft: wp('5%'),
-    backgroundColor:'#fafafa',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    borderRadius: 7,
-    flexDirection:'row',
-    elevation: 5,
-  },
-  result: {
-    fontSize: 23,
-    paddingLeft: wp('5%'),
-    paddingTop: hp('3%'),
-    paddingBottom: hp('3%'),
-    fontFamily: 'netmarbleB',
-    color:'white',
-    backgroundColor:'rgba(114,174,148,0.9)',
+    borderWidth: 0.1,
+    borderRadius: 4,
+    padding: '5%',
+    marginVertical : '3%',
+    justifyContent: 'center',
+    width: wp('98%'),
+    height: hp('15%'),
+    backgroundColor: 'white',
   },
   title:{
-    marginLeft: wp('10%'),
-    fontSize: 17,
-    color: 'black',
-    fontWeight: '700',
+    marginLeft: '1%',
+    marginBottom: '8%',
+    fontFamily: 'netmarbleM',
+    fontSize: 18,
   },
-  text: {
-    paddingTop: hp('1%'),
-    marginLeft: wp('10%'),
-    fontSize: 15,
-    color:'gray',
-  },
+  content:{
+    marginLeft: '1%',
+    color: 'gray',
+    fontSize: 13,
+    fontFamily: 'netmarbleL',
+  }
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionList)

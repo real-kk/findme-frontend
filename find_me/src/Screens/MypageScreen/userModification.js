@@ -125,7 +125,7 @@ class userModificationScreen extends React.Component {
           }}
         >
          <View style={styles.apply}>
-            <Text style={{ color: 'white', fontSize: 18 }}>수정 완료</Text>
+            <Text style={{ color: 'white', fontSize: 18,  fontFamily: 'netmarbleB'}}>수정 완료</Text>
           </View>
         </TouchableOpacity>
       </View>

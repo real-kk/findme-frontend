@@ -21,6 +21,9 @@ class CounselorApplyScreen extends React.Component {
         super();
         this.state = {
           applicationList: [],
+          refreshing : false,
+          isLoading: false,
+          pageNum: 1,
       }
     }
 
@@ -36,9 +39,24 @@ class CounselorApplyScreen extends React.Component {
     }
 
     componentDidMount(){
+        this.props.navigation.addListener('tabPress', e => {
+            this.getApplicationList()
+        })
         this.getApplicationList()
-      }
+        this._ismounted = true
 
+        if (this._isMounted) {
+            this.setState({isLoading: false})
+        }
+    }
+
+    handleRefresh = async() => {
+        this.setState({
+            diaryList: this.getApplicationList(),
+            pageNum: 1,
+            isLoading: false
+        }) 
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -63,12 +81,15 @@ class CounselorApplyScreen extends React.Component {
                                     'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.client_image}}/>
                                     <View style={styles.list_side}>
                                     <Text style={styles.title}>신청자 : {item.client_username}</Text>
-                                    <Text style={styles.text}>{item.client_introduce}</Text>
+                                    <Text style={styles.text}>{item.client_email}</Text>
+                                    <Text style={styles.text}>{item.content}</Text>
                                     </View>
                                 </View>
                             </TouchableOpacity>
                         )
                     }}
+                    refreshing={this.state.refreshing}
+                    onRefresh={this.handleRefresh}
                     keyExtractor={(key, index) => index.toString()}
                 />
             </View>
@@ -85,16 +106,20 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
     },
     user:{
+        marginTop: hp('2.3%'),
         width: wp('20%'),
         height: hp('10%'),
         borderRadius: 200,
+        borderWidth:2,
+        borderColor:'rgba(114,174,148,0.9)',
+        alignItems:'center',
+        justifyContent:'center',
     },
     list: {
         paddingHorizontal: '5%',
-        paddingVertical: hp('2%'),
         marginTop : hp('1.5%'),
         marginBottom : hp('1.5%'),
-        height: hp('16%'),
+        height: hp('15%'),
         width: wp('90%'),
         marginLeft: wp('5%'),
         backgroundColor:'#fafafa',
@@ -115,15 +140,18 @@ const styles = StyleSheet.create({
     },
     list_side:{
         flexDirection:'column',
+        marginTop: hp('1.5%'),
     },
     title:{
         marginLeft: wp('10%'),
         paddingTop: hp('1%'),
+        width: wp('55%'),
         fontSize: 17,
         color: 'black',
-        fontFamily:'netmarbleL'
+        fontFamily:'netmarbleM'
     },
     text: {
+        width: wp('55%'),
         paddingTop: hp('1%'),
         marginLeft: wp('10%'),
         fontSize: 14,

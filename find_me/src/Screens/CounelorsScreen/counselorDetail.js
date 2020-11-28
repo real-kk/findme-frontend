@@ -62,7 +62,7 @@ class CounselorDetail extends React.Component {
               })
             }}>
             <View style={styles.apply}>
-              <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleL' }}>상담 신청하기</Text>
+              <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>상담 신청하기</Text>
             </View>
           </TouchableOpacity>
         </View>

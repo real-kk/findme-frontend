@@ -96,7 +96,7 @@ const mapStateToProps = (state) => ({
                 this.props.navigation.goBack()
               }}
             >
-              <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleL'}}>재촬영</Text>
+              <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleB'}}>재촬영</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -105,7 +105,7 @@ const mapStateToProps = (state) => ({
                 this.submission(this.props.route.params.videoUri)
               }}
             >
-              <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleL'}}>제출하기</Text>
+              <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleB'}}>제출하기</Text>
             </TouchableOpacity>
 
             </View>  

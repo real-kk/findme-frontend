@@ -92,7 +92,7 @@ const mapDispatchToProps = (dispatch) => ({
                 }}
                 >
                 <View style={styles.store}>
-                    <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleL' }}>영상 재생</Text>
+                    <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>영상 재생</Text>
                 </View>
                 </TouchableOpacity>
             </View>

@@ -116,7 +116,7 @@ class CounselingRequest extends React.Component {
                     }}
                 >
                 <View style={styles.apply}>
-                    <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleL' }}>다음 페이지</Text>
+                    <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleB' }}>다음 페이지</Text>
                 </View>
                 </TouchableOpacity>
             

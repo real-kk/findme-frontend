@@ -83,7 +83,7 @@ class DiaryScreen extends React.Component {
                     this.submission();
                 }}
             >
-                <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL' }}>제출하기</Text>
+                <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleB' }}>제출하기</Text>
             </TouchableOpacity>
           </View>
       )

@@ -93,7 +93,7 @@ class RecordVideo extends React.Component {
         onPress={this.startRecording.bind(this)}
         style={styles.record}
       >
-        <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL'}}> RECORD </Text>
+        <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleB'}}> RECORD </Text>
       </TouchableOpacity>
     )
 
@@ -103,7 +103,7 @@ class RecordVideo extends React.Component {
           onPress={this.stopRecording.bind(this)}
           style={styles.record}
         >
-          <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL'}}> STOP </Text>
+          <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleB'}}> STOP </Text>
         </TouchableOpacity>
       )
     }

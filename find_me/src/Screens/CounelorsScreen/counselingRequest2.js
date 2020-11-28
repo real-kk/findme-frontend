@@ -97,7 +97,7 @@ class CounselingRequest2 extends React.Component {
                         this.props.navigation.goBack()
                     }}
                 >
-                    <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL'}}>이전 페이지</Text>
+                    <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleB'}}>이전 페이지</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.submission}
@@ -105,7 +105,7 @@ class CounselingRequest2 extends React.Component {
                         this.submission();
                     }}
                 >
-                <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleL'}}>제출하기</Text>
+                <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleB'}}>제출하기</Text>
                 </TouchableOpacity>
                 </View>
             </ScrollView>

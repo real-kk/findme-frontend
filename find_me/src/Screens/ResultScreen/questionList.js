@@ -19,7 +19,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen'
-import counselorDetail from '../CounelorsScreen/counselorDetail'
 
 const mapStateToProps = (state) => ({
   token: state
