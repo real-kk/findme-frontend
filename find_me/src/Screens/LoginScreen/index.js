@@ -92,7 +92,9 @@ var radio_props = [
                         initial={0}
                         labelHorizontal={true}
                         formHorizontal={true}
-                        buttonColor={'#81BEF7'}
+                        buttonColor={'rgba(114,174,148,0.5)'}
+                        selectedButtonColor={'green'}
+                        selectedLabelColor={'green'}
                         animation={true}
                         radioStyle={{paddingRight: 20}}
                         buttonSize={15}
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
         fontSize: wp('10%'),
     },
     button: {
-        backgroundColor: "#81BEF7",
+        backgroundColor: 'rgba(114,174,148,0.9)',
         borderRadius: 10,
         width: wp('50%'),
         height: hp('5%'),
