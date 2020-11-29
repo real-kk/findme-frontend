@@ -43,6 +43,8 @@ import CounselorQuestionList from './CounselorResult/questionList'
 
 import CounselorMypageScreen from './CounselorMypage'
 import userModification2Screen from './CounselorMypage/userModification'
+import clientListScreen from './CounselorMypage/clientList'
+import clientDetailScreen from './CounselorMypage/clientDetail'
 
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult'
 import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult'
@@ -313,9 +315,19 @@ function CounselorMypageStack () {
       />
       <Stack.Screen
         options={{ headerShown: false }}
+        name="clientList"
+        component={clientListScreen}
+      />
+       <Stack.Screen
+        options={{ headerShown: false }}
+        name="clientDetail"
+        component={ clientDetailScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
         name="applicationFormModification"
         component={applicationFormModificationScreen}
-      />
+      />  
     </Stack.Navigator>
   )
 }

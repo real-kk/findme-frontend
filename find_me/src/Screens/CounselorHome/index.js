@@ -21,7 +21,7 @@ class CounselorHome extends React.Component {
                 {key:'0', data:'영상 질문 등록', icon: require('../../../images/camera.png'),
                 explain:'내담자에게 궁금한 것을 물어보세요'},
                 {key:'1', data:'상담 녹음 및 파일 변환', icon:require('../../../images/record.png'),
-                explain:'상담 녹음 내용을 확인하세요'}
+                explain:'상담 녹음 및 녹음 내용을 확인하세요'}
             ],
             data: [
                 {key:'0', data:'상담 신청 확인', 

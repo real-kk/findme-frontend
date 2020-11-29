@@ -122,6 +122,9 @@ class CounselorMypage extends React.Component {
                       image: this.state.image
                     })
                   }
+                  else if(item.key === '1'){
+                    this.props.navigation.push('clientList')
+                  }
                   else if(item.key === '2'){
                     this._onclickLogout();
                   }
