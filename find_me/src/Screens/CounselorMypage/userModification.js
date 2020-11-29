@@ -29,10 +29,10 @@ class userModificationScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        image: '',
-        introduce: '',
-        username:'',
-        career:'',
+      image: this.props.route.params.image,
+      introduce: this.props.route.params.introduce,
+      username: this.props.route.params.name,
+      career : this.props.route.params.career
     }
   }
 
@@ -56,7 +56,7 @@ class userModificationScreen extends React.Component {
     var min = time.getMinutes(); //Current Minutes
     var sec = time.getSeconds(); //Current Seconds
     
-    data.append('username', this.props.route.params.username)
+    data.append('username', this.state.username)
     data.append('user_type', this.props.route.params.user_type)
     data.append('email', this.props.route.params.email)
     data.append('image', {
@@ -83,9 +83,10 @@ class userModificationScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.result}>회원정보 수정</Text>
-        <Text>프로필 사진</Text>
+        <View style={{flexDirection:'row'}}> 
+        <View style={{flexDirection:'column'}}> 
         <Image
-          source={{uri: this.state.image ? this.state.image : this.props.route.params.image}}
+          source={{uri: this.state.image}}
           style={styles.image}
         />
         <TouchableOpacity
@@ -93,52 +94,55 @@ class userModificationScreen extends React.Component {
           onPress={()=>{this.addImage()}}>
           <Text style={{ color: 'rgba(114,174,148,0.5)', fontSize: 15, fontFamily:'netmarbleB'}}>사진 가져오기</Text>
         </TouchableOpacity>
+        <Text style={styles.id}>{this.props.route.params.email}</Text>
+        </View>
+        <View style={{flexDirection:'column',  marginTop:hp('5%'), marginLeft:wp('5%')}}>
         <View style={styles.input}>
-        <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>이름 : </Text>
+        <Text style={{fontSize: 18 , fontFamily: 'netmarbleB', marginTop:hp('1%')}}>이름</Text>
         <TextInput style={styles.title}
-          underlineColorAndroid={'white'}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
-          placeholder={this.props.route.params.name}
-          placeholderTextColor='black'
-          value={this.state.content}
+          underlineColorAndroid={'rgba(114,174,148,0.5)'}
+          placeholder="ex) 홍길동"
+          value={this.state.username}
           onChangeText={(text) => {
             this.setState({username: text})             
         }}/>
         </View>
         <View style={styles.input}>
-        <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>자기소개 : </Text>
-        <TextInput style={styles.title}
-          underlineColorAndroid={'white'}
+        <Text style={{fontSize: 18 , fontFamily: 'netmarbleB',  marginTop:hp('1%')}}>자기소개</Text>
+        <TextInput style={styles.introduce}
+          multiline={true}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
-          placeholder={this.props.route.params.introduce}
-          placeholderTextColor='black'
-          value={this.state.content}
+          underlineColorAndroid={'rgba(114,174,148,0.5)'}
+          placeholder="자신을 한 줄로 소개해주세요"
+          value={this.state.introduce}
           onChangeText={(text) => {
             this.setState({introduce: text})             
         }}/>
         </View>
-        <View style={styles.input}>
-        <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>약력 : </Text>
-        <TextInput style={styles.title}
-          underlineColorAndroid={'white'}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          placeholder={this.props.route.params.career}
-          placeholderTextColor='black'
-          value={this.state.content}
+        </View>
+        </View>
+        <Text style={{marginLeft:wp('5%'), fontSize: 18 , fontFamily: 'netmarbleB'}}>약력</Text>
+        <View style={styles.career}>
+        <TextInput
+          style={{fontFamily:'netmarbleL', fontSize:15,}}
+          multiline={true}
+          placeholder="경력 사항을 적어주세요"
+          value={this.state.career}
           onChangeText={(text) => {
             this.setState({career: text})             
         }}/>
         </View>
-             
         <TouchableOpacity
           onPress = {()=> {
             this.submission();
           }}
         >
-          <Text style={{fontSize: 18}}>수정 완료</Text>
+         <View style={styles.apply}>
+            <Text style={{ color: 'white', fontSize: 18,  fontFamily: 'netmarbleB'}}>수정 완료</Text>
+          </View>
         </TouchableOpacity>
       </View>
     )
@@ -146,34 +150,57 @@ class userModificationScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
- container: {
+  container: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight,
   },
   input:{
-    flexDirection: "row",
-    alignItems:'center',
-    marginLeft: wp('5%'),
-    marginTop: hp('2%'),
+    flexDirection: "column",
   },
   title: {
-    borderRadius: 5,
+    fontFamily:'netmarbleL',
     width:wp('50%'),
-    fontSize:18,
+    fontSize:15,
+  },
+  introduce:{
+    fontFamily:'netmarbleL',
+    width:wp('50%'),
+    fontSize:15,
+  },
+  career:{
+    borderRadius: 5,
+    marginLeft:wp('5%'),
+    marginTop:hp('1%'),
+    width:wp('90%'),
+    height:hp('30%'),
+    backgroundColor:'#fafafa',
+    padding:wp('5%'),
+  },
+  id:{
+    fontSize:12,
+    marginLeft:wp('5%'),
+    borderRadius:5,
+    borderWidth:0.5,
+    width:wp('35%'),
+    textAlign:'center',
+    borderColor:'gray',
+    fontFamily: 'netmarbleM',
+    marginBottom:hp('4%'),
   },
   get_image: {
+    marginLeft:wp('8%'),
     width: wp('30%'),
-    borderRadius: 5,
-    height: hp('3'),
-    backgroundColor: 'rgba(114,174,148,0.5)',
+    height: hp('3%'),
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom:hp('0.5%')
   },
   image : {
-    marginLeft: wp('20%'),
-    width:wp('60%'),
-    marginBottom:hp('3%'),
-    height:hp('30%'),
+    marginLeft:wp('5%'),
+    marginTop:hp('4%'),
+    width:wp('36%'),
+    marginBottom:hp('1%'),
+    height:hp('18%'),
     borderRadius:200,
   },
   result: {
@@ -184,6 +211,16 @@ const styles = StyleSheet.create({
     fontFamily: 'netmarbleB',
     color:'white',
     backgroundColor:'rgba(114,174,148,0.9)',
+  },
+  apply: {
+    marginTop: hp('3%'),
+    marginLeft: wp('5%'),
+    width: wp('90%'),
+    borderRadius: 5,
+    height: hp('6%'),
+    backgroundColor: 'rgba(114,174,148,0.5)',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 

@@ -111,7 +111,6 @@ class MypageScreen extends React.Component {
                         <Text style={{fontSize:16, marginBottom:hp('0.5%'), fontFamily:'netmarbleM', color:'gray'}}>자기 소개</Text>
                         <Text style={{fontSize:16, fontFamily:'netmarbleL', color:'white'}}>{this.state.introduce}</Text>
                     </View>
-                    <View style={styles.circle}  />
                 </View>
                 
                 <FlatList 

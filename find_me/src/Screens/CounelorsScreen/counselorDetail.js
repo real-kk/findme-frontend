@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   list_side: {
-    marginTop: hp('2%'),
+    marginTop: hp('3%'),
     flexDirection: 'column'
   },
   list_introduce: {
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(114,174,148,0.9)'
   },
   username: {
-    marginLeft: wp('10%'),
+    marginLeft: wp('7%'),
     fontSize: 19,
     color: 'black',
     marginBottom: hp('2%'),
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   career: {
     marginLeft: wp('5%'),
-    fontSize: 18,
+    fontSize: 15,
     marginTop: hp('2%'),
     borderRadius: 5,
     backgroundColor: '#fafafa',
@@ -132,13 +132,13 @@ const styles = StyleSheet.create({
     padding: '5%'
   },
   introduce: {
-    marginLeft: wp('10%'),
+    marginLeft: wp('7%'),
     fontSize: 15,
     width: wp('40%'),
     fontFamily: 'netmarbleL'
   },
   email: {
-    marginLeft: wp('10%'),
+    marginLeft: wp('7%'),
     fontSize: 13,
     fontFamily: 'netmarbleL',
     marginBottom: hp('2%'),

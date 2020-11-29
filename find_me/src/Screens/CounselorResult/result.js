@@ -46,9 +46,8 @@ class ResultHome extends React.Component {
               // eslint-disable-next-line react/no-children-prop
               children={() => <WordCloudResult email={this.props.route.params.client.client_email} />}/>
               <Tab.Screen name="영상 분석"
-              navigation={this.props.navigation}
               // eslint-disable-next-line react/no-children-prop
-              children={() => <CounselorQuestionList email={this.props.route.params.client.client_email} />}/>
+              children={({navigation}) => <CounselorQuestionList email={this.props.route.params.client.client_email} navigation={navigation} />}/>
             </Tab.Navigator>
         </View>
     )

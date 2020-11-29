@@ -8,6 +8,7 @@
 import axios from '../../axiosConfig'
 import { connect } from 'react-redux'
 import React from 'react'
+
 import {
   StyleSheet,
   FlatList,
@@ -20,7 +21,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen'
-
 const mapStateToProps = (state) => ({
   token: state
 })
@@ -59,16 +59,16 @@ class QuestionList extends React.Component {
   }
 
   next = async (id) => {
-    console.log(id)
+    console.log(id + '><')
     await axios.get(`/tasks/process_videos/${id}/`,
     { headers: {
       'Authorization' : `Token ${this.props.token.auth.token}`
     }}) 
     .then(({data})=>{
-      console.log(data + '????')
-      this.props.route.navigation.navigate('VideoResult', {
+      this.props.navigation.navigate('VideoResult', {
         questionID: id,
-        uri: data
+        uri: data,
+        email: this.props.email
       })
     })
   }

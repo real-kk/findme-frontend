@@ -36,15 +36,15 @@ const mapDispatchToProps = (dispatch) => ({
           }
       }
     confirmGraph = async() => {
-        await axios.post('/tasks/sentiment_graphs/', {},
+        await axios.post('/tasks/sentiment_graphs/', {id : this.props.route.params.questionID},
         { headers: {
           'Authorization' : `Token ${this.props.token.auth.token}`
         }})
         .then(({data})=>{
-            console.log(data)
+            console.log(data + '!!')
             this.setState({
                 name: data.client_username,
-                graph: data.image,
+                graph: data.graph,
                 loading_wordcloud: false,
             })  
         })

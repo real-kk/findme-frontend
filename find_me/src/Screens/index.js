@@ -184,7 +184,6 @@ function HomeStack () {
 function CounselorResultStack () {
   return (
       <Stack.Navigator>
-
         <Stack.Screen
           options={{ headerShown: false }}
           name="Result"

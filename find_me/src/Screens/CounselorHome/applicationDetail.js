@@ -85,13 +85,14 @@ class ApplicationDetail extends React.Component {
                   <Text style={styles.profile}>학번 : {this.state.application.student_number}</Text>
                   <Text style={styles.profile}>전화번호 : {this.state.application.phone_number}</Text>
                   <Text style={styles.profile}>하고 싶은 말 : {this.state.application.client_introduce}</Text>
+                  <Text style={styles.profile}>수업 시간표</Text>
                 </View>
               </View>
               <View style={styles.list_body}>
                 
-                <Text style={{fontSize: 17, fontFamily:'netmarbleL', marginVertical:hp('1%')}}>수업 시간표</Text>
+                
                 <Image
-                    style={{height: hp('40%'), width: wp('80%'), marginBottom: hp('2%')}} 
+                    style={{height: hp('40%'), width: wp('80%'), marginVertical: hp('2%')}} 
                     source={{uri: this.state.application.time_table}}/>
               </View>
               <View style={{flexDirection:'row'}}>
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     marginLeft:wp('5%'), 
     marginBottom:hp('1.5%'),
     fontSize: 17, 
-    fontFamily:'netmarbleL'
+    fontFamily:'netmarbleM'
   },
   user:{
     width: wp('30%'),
