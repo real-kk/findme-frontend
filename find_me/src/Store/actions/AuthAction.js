@@ -1,17 +1,16 @@
 import AsyncStorage from '@react-native-community/async-storage'
 
 import {
-    AUTH_LOGIN,
-    AUTH_LOGIN_SUCCESS,
-    AUTH_LOGIN_FAILURE,
-    AUTH_SIGNUP,
-    AUTH_SIGNUP_SUCCESS,
-    AUTH_SIGNUP_FAILURE,
-    AUTH_LOGOUT,
-    AUTH_STORE_USER_DATA,
-  } from './ActionTypes';
-import axios from '../../axiosConfig';
-
+  AUTH_LOGIN,
+  AUTH_LOGIN_SUCCESS,
+  AUTH_LOGIN_FAILURE,
+  AUTH_SIGNUP,
+  AUTH_SIGNUP_SUCCESS,
+  AUTH_SIGNUP_FAILURE,
+  AUTH_LOGOUT,
+  AUTH_STORE_USER_DATA
+} from './ActionTypes'
+import axios from '../../axiosConfig'
 
 export const setUserData = async (key, item) => {
   try {
@@ -22,7 +21,7 @@ export const setUserData = async (key, item) => {
 }
 
 export const saveStorage = (item) => {
-  setUserData("FINDME", item)
+  setUserData('FINDME', item)
 }
 
 // export const readStorage = () => {
@@ -34,22 +33,24 @@ export const saveStorage = (item) => {
 //   })
 // }
 
-
 export const getUserData = async () => {
   try {
     const userData = await AsyncStorage.getItem('FINDME')
-    let user = JSON.parse(userData)
-    let userToken = user[0][1];
-    if(userData === null) {
+    const user = JSON.parse(userData)
+    if (user === null) {
       return false
     }
-    axios.defaults.headers.common['Authorization'] = userToken
+    const userToken = user[0][1]
+    if (userData === null) {
+      return false
+    }
+
+    axios.defaults.headers.common.Authorization = userToken
     return userData
-  } catch(e) {
+  } catch (e) {
     alert('err : ', e)
   }
 }
-
 
 export const removeUserData = async () => {
   try {
@@ -60,110 +61,105 @@ export const removeUserData = async () => {
 }
 
 /* LOGIN */
-export function requestLogin(data) {
+export function requestLogin (data) {
   return (dispatch) => {
-      dispatch(login());
-      return axios.post('/rest-auth/login/', data)
+    dispatch(login())
+    return axios.post('/rest-auth/login/', data)
       .then((res) => {
-          var obj = JSON.parse(res.config.data)
-          // console.log(obj.user_type)
-          var item = [['userToken', res.data.key],['userType', obj.user_type]]
-          saveStorage(item)
-          // setUserData('userToken', res.data.key);
+        const obj = JSON.parse(res.config.data)
+        const item = [['userToken', res.data.key], ['userType', obj.user_type]]
+        saveStorage(item)
+        // setUserData('userToken', res.data.key);
+        axios.defaults.headers.common.Authorization = res.data.key
+        dispatch(loginSuccess())
+        dispatch(storeUserData(res.data))
 
-          axios.defaults.headers.common['Authorization'] = res.data.key;
-          dispatch(loginSuccess());
-          dispatch(storeUserData(res.data));
-          // console.log(res.data.key)
       }).catch((error) => {
         // alert('Login Failed : ' + error)
         console.log(error)
-      });
-  };
+      })
+  }
 }
-  
+
 export const requestSignup = (data) => {
   return (dispatch) => {
     dispatch(signup())
     return axios.post('/rest-auth/registration/', data)
       .then((res) => {
         dispatch(signupSuccess())
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.log(error)
         dispatch(signupFailure(error))
       })
   }
 }
 
-
-
-
-
-  export const requestLogout = () => {
-    return (dispatch) => {
-      removeUserData()
-      dispatch(logout())
-    }
+export const requestLogout = () => {
+  return (dispatch) => {
+    removeUserData()
+    dispatch(logout())
   }
-  
-  export const logout = () => {
-    return {
-      type: AUTH_LOGOUT
-    }
-  }
-  
-  export const login = () => {
-    return {
-      type: AUTH_LOGIN
-    }
-  }
-
-  export const signup = () => {
-    return {
-      type: AUTH_SIGNUP
-    }
-  }
-
-  export function loginSuccess() {
-    return {
-        type: AUTH_LOGIN_SUCCESS,
-    };
-}
-export function loginFailure() {
-    return {
-        type: AUTH_LOGIN_FAILURE
-    };
 }
 
-  export const storeUserData = (response) => {
-    return {
-      type: AUTH_STORE_USER_DATA,
-      response
-    }
+export const logout = () => {
+  return {
+    type: AUTH_LOGOUT
   }
-  
-  export const signupSuccess = () => {
-    return {
-      type: AUTH_SIGNUP_SUCCESS
-    }
+}
+
+export const login = () => {
+  return {
+    type: AUTH_LOGIN
   }
-  
-  export const signupFailure = (error) => {
-    return {
-      type: AUTH_SIGNUP_FAILURE,
-      error
-    }
+}
+
+export const signup = () => {
+  return {
+    type: AUTH_SIGNUP
   }
-  
-  export const signinSuccess = () => {
-    return {
-      type: AUTH_SIGNIN_SUCCESS
-    }
+}
+
+export function loginSuccess () {
+  return {
+    type: AUTH_LOGIN_SUCCESS
   }
-  
-  export const signinFailure = (error) => {
-    return {
-      type: AUTH_SIGNIN_FAILURE,
-      error
-    }
+}
+export function loginFailure () {
+  return {
+    type: AUTH_LOGIN_FAILURE
   }
+}
+
+export const storeUserData = (response) => {
+  return {
+    type: AUTH_STORE_USER_DATA,
+    response
+  }
+}
+
+export const signupSuccess = () => {
+  return {
+    type: AUTH_SIGNUP_SUCCESS
+  }
+}
+
+export const signupFailure = (error) => {
+  return {
+    type: AUTH_SIGNUP_FAILURE,
+    error
+  }
+}
+
+export const signinSuccess = () => {
+  return {
+    type: AUTH_SIGNIN_SUCCESS
+  }
+}
+
+export const signinFailure = (error) => {
+  return {
+    type: AUTH_SIGNIN_FAILURE,
+    error
+  }
+}

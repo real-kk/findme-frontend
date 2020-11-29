@@ -6,61 +6,103 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import { StyleSheet,  View, Text, ScrollView, TouchableOpacity, FlatList } from 'react-native';
-import axios from '../../axiosConfig';
+import React from 'react'
+import { StyleSheet, View, Text, ScrollView, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
 const mapStateToProps = (state) => ({
-    token: state
-  })
+  token: state
+})
 
 const mapDispatchToProps = (dispatch) => ({
-    requestLogout: () => dispatch(requestLogout())
-  })
-
+  requestLogout: () => dispatch(requestLogout())
+})
 
 class DiaryResult extends React.Component {
-    constructor(){
-        super();
-        this.state = {
+  constructor () {
+    super()
+    this.state = {
 
-        }       
     }
-    render() {
-        // console.log(this.props.route.)
-      return (
+  }
+
+  render () {
+    return (
         <View style={styles.container}>
-            <ScrollView>
-                <Text  style={styles.text}>
-                    날짜: {this.props.route.params.diary.create_date}      
-                </Text>
-                <Text  style={styles.text}>
-                    제목: {this.props.route.params.diary.title}        
-                </Text>
-                <Text  style={styles.text}>
-                    내용: {this.props.route.params.diary.content}      
-                </Text>
-            </ScrollView>
-            
-              
+          <Text style={styles.result}>감정일기 확인</Text>
+          <View>
+            <Text style={styles.diary}>
+             Diary
+            </Text>
+            <View style={styles.inside}>
+            <Text style={styles.title}>{this.props.route.params.diary.title}</Text>
+            <Text style={styles.date}>{this.props.route.params.diary.create_date} </Text>
+            <Text style={styles.text}>
+              {this.props.route.params.diary.content}
+            </Text>
+            </View>
+          </View>
         </View>
-      )
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiaryResult);
+export default connect(mapStateToProps, mapDispatchToProps)(DiaryResult)
 
 const styles = StyleSheet.create({
-    container : {
-        flex: 1,
-        paddingTop: 50,
-        alignItems: 'center',
-        justifyContent:'center'
-    },
-    text: {
-        marginTop : '25%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === 'android' ? 0 : StatusBar.currentHeight
+  },
+  date: {
+    paddingTop: hp('2%'),
+    textAlign:'center',
+    fontFamily: 'netmarbleL',
+    fontSize: 14,
+    color: 'gray'
+  },
+  diary: {
+    marginTop: hp('2%'),
+    borderRadius: 2,
+    fontSize: 40,
+    width: wp('100%'),
+    color: 'gray',
+    fontFamily: 'Niconne-Regular',
+    textAlign: 'center'
+  },
+  inside: {
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: '#fafafa',
+    borderColor: '#fafafa',
+    height: hp('70%'),
+    marginTop: hp('2%'),
+    marginRight: wp('5%'),
+    marginLeft: wp('5%'),
+  },
+  title: {
+    paddingTop: hp('3%'),
+    textAlign:'center',
+    fontFamily: 'netmarbleM',
+    fontSize: 25,
+  },
+  text: {
+    paddingTop: hp('5%'),
+    fontSize: 15,
+    fontFamily:'netmarbleL',
+    paddingHorizontal: wp('5%'),
+  },
+  result: {
+    fontSize: 23,
+    paddingLeft: wp('5%'),
+    paddingTop: hp('3%'),
+    paddingBottom: hp('3%'),
+    fontFamily: 'netmarbleB',
+    color:'white',
+    backgroundColor:'rgba(114,174,148,0.9)',
+  },
+})

@@ -7,18 +7,25 @@
  */
 
 import React from 'react';
-import { StyleSheet,  View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Image, StatusBar, StyleSheet,  View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import RadioForm from 'react-native-simple-radio-button';
 import { requestLogin } from '../../Store/actions/AuthAction';
 import { connect } from 'react-redux'
-
+import Icon from 'react-native-vector-icons/Fontisto'
+import Icons from 'react-native-vector-icons/Ionicons'
+import {
+    getUserData,
+    storeUserData,
+  } from "../../Store/actions/AuthAction"
+;
 const mapStateToProps = (state) => ({
     token: state
   })
   
 const mapDispatchToProps = (dispatch) => ({
-    requestLogin: (data) => dispatch(requestLogin(data))
+    requestLogin: (data) => dispatch(requestLogin(data)),
+    storeUserData: (data) => dispatch(storeUserData(data)),
   })
 
 
@@ -45,13 +52,42 @@ var radio_props = [
                 user_type: this.state.value
             }
             await this.props.requestLogin(data)
+
+            this.setState({
+                emailInput: '',
+                pwInput: '',
+            })
+
+            getUserData()
+            .then((data) => { 
+              
+                if (!data) {
+                    this.props.storeUserData({token : null})
+                    return
+                }
         
+                let user = JSON.parse(data)
+                let userToken = user[0][1];
+                let currentuserType = user[1][1];
+            
+                console.log(userToken + ' ' + currentuserType)
+                this.props.storeUserData({token : userToken})
+                        
+                this.props.navigation.navigate('User', {userType: currentuserType});
+            })
+            .catch((err) => {
+                console.log(err)
+                alert("Failed to login!!!!!! : ", err)
+            })
         }
         render() {
             return (
                 <View style={styles.container}>
+                <StatusBar hidden= {true}/>
+                <Image source={require('../../../images/ajou.png')} style={styles.image}/>
                 <View style={styles.titleArea}>
-                    <Text style={styles.title}>Find Me</Text>
+                    <Text style={styles.title}>Find</Text>
+                    <Text style={styles.title2}>Me</Text>
                 </View>
                 <View style={styles.radioContainer}>
                     <RadioForm
@@ -59,7 +95,9 @@ var radio_props = [
                         initial={0}
                         labelHorizontal={true}
                         formHorizontal={true}
-                        buttonColor={'#2196f3'}
+                        buttonColor={'rgba(114,174,148,0.5)'}
+                        selectedButtonColor={'green'}
+                        selectedLabelColor={'green'}
                         animation={true}
                         radioStyle={{paddingRight: 20}}
                         buttonSize={15}
@@ -68,29 +106,44 @@ var radio_props = [
                         onPress={(value) => {this.setState({value:value})}}
                     />
                 </View>
-                <View style={styles.formArea}>
+                <View style={styles.id}>
+                    <View style ={{flexDirection:'row', alignItems:'center'}}>
+                    <Icon name="email" size={20} style={{paddingRight:wp('3%')}}/>
                     <TextInput
+                        style={{width:wp('70%')}}
                         placeholder="Email"
                         value={this.state.emailInput}
+                        onFocus={this.handleFocus}
+                        underlineColorAndroid={'rgba(114,174,148,0.9)'}
                         onChangeText={(text) => {
                             this.setState({emailInput: text})             
                         }}
                     />
+                    </View>
+                </View>
+                <View style={styles.pw}>
+                <View style ={{flexDirection:'row', alignItems:'center'}}>
+                    <Icons name="lock-closed-outline" size={20} style={{paddingRight:wp('3%')}}/>
                     <TextInput
+                        style={{width:wp('70%')}}
                         placeholder="Password"
                         secureTextEntry={true}
+                        onFocus={this.handleFocus}
+                        underlineColorAndroid={'rgba(114,174,148,0.9)'}
                         value={this.state.pwInput}
                         onChangeText={(text) => {
                             this.setState({pwInput: text})             
                         }}
                     />
                 </View>
+                </View>
                 <View style={styles.buttonArea}>
                     <TouchableOpacity 
                         style={styles.button}
                         onPress={() => {
                             this.onclickLogin()
-                        }}>
+                        }}
+                    >
                     <Text style={styles.buttonTitle}>로그인</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -109,47 +162,67 @@ var radio_props = [
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
 
 const styles = StyleSheet.create({
-    container: {
+    container : {
         flex: 1,
-        backgroundColor: '#2ACAB9',
-        paddingLeft: wp('10%'),
-        paddingRight: wp('10%'),
-        justifyContent: 'center',
+        paddingTop: hp('10%'),
+        alignItems: 'center',
+        backgroundColor: '#FAFAFA',
     },
     titleArea:{
-        width: '100%',
-        padding: wp('10%'),
+        width: wp('100%'),
+        paddingHorizontal: wp('26%'),
+        paddingTop: hp('5%'),
+        paddingBottom: hp('2%'),
         alignItems: 'center',
+        flexDirection: 'row'
     },
     radioContainer: {
         width: '100%',
-        paddingLeft: wp('8%'),
+        paddingLeft: wp('7%'),
         alignItems:'center',
         marginBottom: 10  
     },
-    formArea: {
-        width: '100%',
-        backgroundColor:'#F0F5F4',
-        alignItems: 'center'
+    id: {
+        width: wp('80%'),
+        marginTop: hp('2%'),
+    },
+    pw: {
+        width: wp('80%'),
+        marginTop: 8,
     },
     buttonArea: {
-        width: '100%',
+        width: wp('100%'),
+        marginTop: 30,
+        marginLeft:wp('20%'),
         height: hp('5%'),
     },
     title: {
-        fontSize: wp('10%'),
+        fontSize: 50,
+        fontFamily: 'NanumSquare_acEB',
+    },
+    title2: {
+        fontSize: 50,
+        color: 'rgba(114,174,148,0.9)',
+        fontFamily: 'NanumSquare_acEB'
+    },
+    image:{
+        width:wp('42%'),
+        height:hp('22%')
     },
     button: {
-        backgroundColor: "#569CDA",
-        width: "100%",
-        height: "100%",
+        backgroundColor: 'rgba(114,174,148,0.9)',
+        borderRadius: 5,
+        width: wp('80%'),
+        height: hp('5%'),
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10
+        marginBottom: hp('2%')
       },
-      buttonTitle: {
+    buttonTitle: {
         color: 'white',
-      }
+        fontFamily:'netmarbleB',
+        fontSize: 18,
+    }
 
 });
 

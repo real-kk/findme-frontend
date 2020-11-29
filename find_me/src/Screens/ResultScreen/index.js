@@ -6,78 +6,82 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-native';
-import axios from '../../axiosConfig';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React from 'react'
+import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { connect } from 'react-redux'
-
+import axios from '../../axiosConfig'
 
 import DiaryListScreen from './diaryList'
-import VideoAnalysisScreen from './videoAnalysisResult';
-import diaryTextAnalysisResultScreen from './diaryTextAnalysisResult';
-import WordCloudResultScreen from './wordCloudResult';
+import QuestionListScreen from './questionList'
+import DiaryTextAnalysisResultScreen from './diaryTextAnalysisResult'
+import WordCloudResultScreen from './wordCloudResult'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen'
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createMaterialTopTabNavigator()
 const mapStateToProps = (state) => ({
-    token: state
-  })
+  token: state
+})
 
 const mapDispatchToProps = (dispatch) => ({
-    requestLogout: () => dispatch(requestLogout())
-  })
-
+  // eslint-disable-next-line no-undef
+  requestLogout: () => dispatch(requestLogout())
+})
 
 class TopBar extends React.Component {
-    constructor(){
-        super();     
-        this.state={
-            diaryList:[],
-        }
+  constructor () {
+    super()
+    this.state = {
+      diaryList: []
     }
+  }
 
-    getDiaryList = async () => {
-        axios.get('/diaries/', 
-        { headers: {
-            'Authorization' : `Token ${this.props.token.auth.token}`
-        }})
-        .then(({data})=>{
-            console.log(data)
-            this.setState({diaryList: data})
-        })
-        .catch(err=>console.log(err))
-    }
-
-    componentDidMount(){
-        console.log("dd")
-        this.getDiaryList()
-    }
-    render(){
-        return(
-            <View style={styles.container}>
-                <Tab.Navigator
-                    tabBarOptions={{
-                        scrollEnabled: true
-                    }}
-                >
-                    <Tab.Screen name="감정일기 리스트" component={DiaryListScreen} />
-                    <Tab.Screen name="워드 클라우드" component={WordCloudResultScreen} />
-                    <Tab.Screen name="감정 분석 그래프" component={diaryTextAnalysisResultScreen} />  
-                    <Tab.Screen name="영상 분석" component={VideoAnalysisScreen} />
-                </Tab.Navigator>
-            </View>
-        )
-    }
+  render () {
+    return (
+        <View style={styles.container}>
+          <StatusBar hidden= {true}/>
+          <Text style={styles.result}>감정 분석 결과</Text>
+          <Tab.Navigator
+           tabBarOptions={{
+             labelStyle: { fontSize: 16, fontFamily:'netmarbleM'},
+             tabStyle: { width: wp('25%'), height: hp('8%')},
+             style: {
+               borderColor: 'black',
+               backgroundColor: '#fff'
+             }
+           }}
+          >
+              <Tab.Screen name="감정일기 리스트" component={DiaryListScreen}
+              navigation={this.props.navigation}/>
+              <Tab.Screen name="워드 클라우드" component={WordCloudResultScreen}
+              navigation={this.props.navigation}/>
+              <Tab.Screen name="감정 분석 그래프" component={DiaryTextAnalysisResultScreen}
+              navigation={this.props.navigation}/>
+              <Tab.Screen name="영상 분석" component={QuestionListScreen}/>
+          </Tab.Navigator>
+        </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-    container : {
-        flex: 1,
-        paddingTop: '5%',
-       
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center'
+  },
+  result: {
+    fontSize: 23,
+    paddingLeft: wp('5%'),
+    paddingTop: hp('3%'),
+    paddingBottom: hp('3%'),
+    fontFamily: 'netmarbleB',
+    color:'white',
+    backgroundColor:'rgba(114,174,148,0.9)',
+  },
+})
 
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopBar);
-
+export default connect(mapStateToProps, mapDispatchToProps)(TopBar)
