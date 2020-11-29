@@ -36,6 +36,16 @@ class MypageScreen extends React.Component {
             user_type: '',
             introduce: '',
             image: '',
+
+            client_email: '',
+            client_name: '',
+            content: '',
+            time_table: '',
+            student_number: '',
+            phone_number: '',
+            major: '',
+            counselor_email: '',
+            flag: false,
             datas: [
                 {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
                 {key:'1', data:'상담 신청서 수정', icon:'grease-pencil'},
@@ -63,9 +73,8 @@ class MypageScreen extends React.Component {
           user_type: res.data.user_type,
           image: res.data.image === "" ? 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' 
           :'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
-          introduce: res.data.introduce === '' ? 'None!' : res.data.introduce
+          introduce: res.data.introduce === '' ? 'None!' : res.data.introduce,
         })
-        console.log(res.data)
       })
       .catch(err=>console.log(err))
 
@@ -81,15 +90,33 @@ class MypageScreen extends React.Component {
       })
       .catch(err=>console.log(err))
 
-      // axios.get('/counsels/',
-      // { headers: {
-      //   'Authorization' : `Token ${this.props.token.auth.token}`
-      // }})
-      // .then((res)=>{
-      //   console.log("신청서")
-      //   console.log(res)
-      // })
-      // .catch(err=>console.log(err))
+      axios.get('/counsels/',
+      { headers: {
+        'Authorization' : `Token ${this.props.token.auth.token}`
+      }})
+      .then((res)=>{
+        console.log("신청서")
+        if(res.data == ''){
+          this.setState({
+            flag: false,
+          })
+        }
+        else{
+          this.setState({
+            client_email: res.data[0].client_email,
+            name: res.data[0].client_username,
+            content: res.data[0].content,
+            phone_number: res.data[0].phone_number,
+            student_number: res.data[0].student_number,
+            time_table: res.data[0].time_table,
+            major: res.data[0].major,
+            id: res.data[0].id,
+            counselor_email: res.data[0].counselor_email,
+            flag: true,
+          })
+        }
+      })
+      .catch(err=>console.log(err))
     }
 
     render() {
@@ -132,10 +159,23 @@ class MypageScreen extends React.Component {
                                         })
                                     }
                                     else if(item.key === '1'){
-                                      this.props.navigation.push('applicationFormModification', {
-                                        link_man: this.state.link_man,
-                                        name: this.state.name,
-                                      })
+                                      if(this.state.flag == false){
+                                        alert("상담 신청서가 없습니다!")
+                                      }
+                                      else{
+                                        this.props.navigation.push('applicationFormModification', {
+                                          link_man: this.state.link_man,
+                                          client_email: this.state.client_email,
+                                          client_name: this.state.client_name,
+                                          content: this.state.content,
+                                          phone_number: this.state.phone_number,
+                                          student_number: this.state.student_number,
+                                          time_table: this.state.time_table,
+                                          major: this.state.major,
+                                          id: this.state.id,
+                                          counselor_email: this.state.counselor_email,
+                                        })
+                                      }
                                     }
                                     else if(item.key === '2'){
                                         this._onclickLogout();

@@ -20,7 +20,11 @@ class CounselorResult extends React.Component {
     constructor(){
         super();
         this.state = {
-          clientList: [],
+        clientList: [],
+        refreshing : false,
+        isloading: true,
+        pageNum: 1,
+        isLoading: false
       }
     }
 
@@ -31,14 +35,31 @@ class CounselorResult extends React.Component {
         }})
         .then(({data})=>{
             this.setState({clientList: data})
+            return data
         })
       
     }
 
     componentDidMount(){
         this.getClientList()
+        this._ismounted = true
+
+        if (this._isMounted) {
+            this.setState({isLoading: false})
+        }
       }
-    
+
+    componentWillUnmount(){
+        this._ismounted = false
+    }
+
+    handleRefresh = async() => {
+        this.setState({
+            clientList: this.getClientList(),
+            pageNum: 1,
+            isLoading: false
+        }) 
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -71,6 +92,8 @@ class CounselorResult extends React.Component {
                         )
                     }}
                     keyExtractor={(key, index) => index.toString()}
+                    refreshing={this.state.refreshing}
+                    onRefresh={this.handleRefresh}
                 />
             </View>
         )

@@ -40,26 +40,17 @@ class applicationFormModificationScreen extends React.Component {
   }
   
   componentDidMount(){
-    axios.get('/counsels/',
-      { headers: {
-        'Authorization' : `Token ${this.props.token.auth.token}`
-      }})
-      .then((res)=>{
-        console.log("신청서")
-        console.log(res.data[0])
         this.setState({
-          client_email: res.data.[0].client_email,
-          name: res.data[0].client_username,
-          content: res.data[0].content,
-          phone_number: res.data[0].phone_number,
-          student_number: res.data[0].student_number,
-          time_table: res.data[0].time_table,
-          major: res.data[0].major,
-          id: res.data[0].id,
-          counselor_email: res.data[0].counselor_email,
+          client_email: this.props.route.params.client_email,
+          name: this.props.route.params.client_name,
+          content: this.props.route.params.content,
+          phone_number: this.props.route.params.phone_number,
+          student_number: this.props.route.params.student_number,
+          time_table: this.props.route.params.time_table,
+          major: this.props.route.params.major,
+          id: this.props.route.params.id,
+          counselor_email: this.props.route.params.counselor_email,
         })
-      })
-      .catch(err=>console.log(err))
   }
 
   next = () => {

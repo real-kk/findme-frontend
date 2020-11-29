@@ -41,7 +41,7 @@ class CounselingRequest2 extends React.Component {
       photo.append('time_table', {
           uri: this.state.time_table,
           type: 'image/png',
-          name: 'time_table.jpg'
+          name: `time_table.jpg`
       })
 
       console.log(this.props.route.params.Apply_data)
@@ -54,7 +54,7 @@ class CounselingRequest2 extends React.Component {
           this.setState({
               id: res.data[1]
           })
-          axios.post(`/counsels/photo/${this.state.id}/` , photo, 
+          axios.post(`/counsels/photo/${this.state.id}/`, photo, 
               { headers: {
                   'Authorization' : `Token ${this.props.token.auth.token}`,
                   'content-type': 'multipart/form-data'

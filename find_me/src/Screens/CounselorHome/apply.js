@@ -24,6 +24,7 @@ class CounselorApplyScreen extends React.Component {
           refreshing : false,
           isLoading: false,
           pageNum: 1,
+          isloading: true,
       }
     }
 

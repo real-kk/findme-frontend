@@ -22,11 +22,14 @@ class ApplicationDetail extends React.Component {
         super(props)
         this.state = {
             application: this.props.route.params.application,
-            type : -1
+            type : -1,
+            id: '',
+            not_exist: -1,
         }
     }
     reject = async() => {
-        await axios.delete('/counsels/' + this.state.application.id + '/', 
+      console.log('/counsels/' + this.state.application.id + '/?counsel_date_id=' + this.state.not_exist)
+        await axios.delete('/counsels/' + this.state.application.id + '/?counsel_date_id=' + this.state.not_exist,
             { headers: {
                 'Authorization' : `Token ${this.props.token.auth.token}`
             }
@@ -36,25 +39,46 @@ class ApplicationDetail extends React.Component {
             alert("반려 완료!")
             this.props.navigation.push('Home')
         })
-        .catch(err => console.log(err))
+        .catch(function (error) {
+          if (error.response) {
+            // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+          else if (error.request) {
+            // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+            // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+            // Node.js의 http.ClientRequest 인스턴스입니다.
+            console.log(error.request);
+          }
+          else {
+            // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+            console.log('Error', error.message);
+          }
+          console.log(error.config);
+        });
+        // .catch(err => console.log(err))
     }   
 
     submission = async () => {
         const data = {
             client: this.state.application.client_email,
         }
-        console.log(data)
         await axios.post('/counsels/date/', data, 
             { headers: {
                 'Authorization' : `Token ${this.props.token.auth.token}`
             }
         })
         .then((res) => {
-            console.log(res)
+            console.log(res.data.id)
+            this.setState({
+              id: res.data.id
+            })
         })
         .catch(err => console.log(err))
-
-        await axios.delete('/counsels/' + this.state.application.id + '/', 
+        console.log("$$")
+        await axios.delete('/counsels/' + this.state.application.id + '/?counsel_date_id='+this.state.id, 
             { headers: {
                 'Authorization' : `Token ${this.props.token.auth.token}`
             }
@@ -84,7 +108,7 @@ class ApplicationDetail extends React.Component {
                   <Text style={styles.profile}>전공 : {this.state.application.major}</Text>
                   <Text style={styles.profile}>학번 : {this.state.application.student_number}</Text>
                   <Text style={styles.profile}>전화번호 : {this.state.application.phone_number}</Text>
-                  <Text style={styles.profile}>하고 싶은 말 : {this.state.application.client_introduce}</Text>
+                  <Text style={styles.profile}>하고 싶은 말 : {this.state.application.content}</Text>
                   <Text style={styles.profile}>수업 시간표</Text>
                 </View>
               </View>
