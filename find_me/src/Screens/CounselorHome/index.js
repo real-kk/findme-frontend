@@ -29,14 +29,6 @@ class CounselorHome extends React.Component {
             ]
         }
     }
-
-    //   componentDidMount(){
-    //       foreUpdateHandler = () =>{
-    //           this.forceUpdate();
-    //       };
-    //       foreUpdateHandler();
-    //   }
-
     _onPress = () => {
         this.props.navigation.push('Apply')
     }

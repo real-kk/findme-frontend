@@ -8,11 +8,9 @@
 import axios from '../../axiosConfig'
 import { connect } from 'react-redux'
 import React from 'react'
-
 import {
   StyleSheet,
   FlatList,
-  ActivityIndicator,
   Text,
   TouchableOpacity,
   View
@@ -59,7 +57,6 @@ class QuestionList extends React.Component {
   }
 
   next = async (id) => {
-    console.log(id + '><')
     await axios.get(`/tasks/process_videos/${id}/`,
     { headers: {
       'Authorization' : `Token ${this.props.token.auth.token}`
@@ -83,9 +80,7 @@ class QuestionList extends React.Component {
             return(
               <TouchableOpacity
                 onPress = {()=> {
-                  console.log(item.id + '!!')
                   this.next(item.id)
-                  // this.resultConfirm(item.id)
                 }}
               >
                 <View style={styles.list}>

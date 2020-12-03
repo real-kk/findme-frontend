@@ -42,7 +42,6 @@ const mapStateToProps = (state) => ({
             }
         })
         .then(res=>{
-            console.log(res)
             this.state.question = ''
             alert("질문 등록이 완료되었습니다.")
             this.props.navigation.navigate('Home')

@@ -30,7 +30,6 @@ class ClientWordCloudResult extends React.Component {
             'Authorization' : `Token ${this.props.token.auth.token}`
         }})
         .then(({data})=>{
-            console.log(data + '!!!!')
             if(typeof data == 'string'){
                 this.setState({
                 wordcloud: data,

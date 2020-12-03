@@ -7,10 +7,8 @@
  */
 
 import React from 'react';
-import { Dimensions, StyleSheet,  View, Text, Image, ActivityIndicator} from 'react-native';
-import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
+import { StyleSheet,  View, Image } from 'react-native';
 import axios from '../../axiosConfig';
-import Icon from 'react-native-vector-icons/AntDesign'
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
@@ -29,26 +27,21 @@ import { connect } from 'react-redux'
   class videoGraphResult extends React.Component {
       constructor(){
           super();
-        //   this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
           this.state={
             graph: '',
             name: '',
-            // loading_graph: true,
           }
       }
 
       confirmGraph = async() => {
-          console.log(this.props.route.params.email)
           await axios.get(`/tasks/sentiment_graphs?client=${this.props.route.params.email}`,
           { headers: {
             'Authorization' : `Token ${this.props.token.auth.token}`
             }})
             .then(({data})=>{
-                console.log(data)
                 this.setState({
                     name: data.client_username,
                     graph: data.image,
-                    // loading_wordcloud: false,
                 })  
             })
             .catch(err=>console.log(err))

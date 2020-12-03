@@ -332,9 +332,7 @@ function CounselorMypageStack () {
   )
 }
 function UserStack ({ navigation, route, userType }) {
-  if (route.params) {
-    console.log('screen userType: ' + route.params.userType)
-  }
+
   return (
       <Stack.Navigator>
       {route.params.userType === '0' ? (
@@ -364,7 +362,6 @@ function CounselorStack () {
           })}
 
           screenOptions={({ route }) => ({
-            // eslint-disable-next-line react/display-name
             tabBarIcon: ({ focused, color, size }) => {
               let icon = '▲'
               if (route.name === 'Home') {
@@ -409,7 +406,6 @@ function ClientStack () {
           }
         }}
         screenOptions={({ route }) => ({
-          // eslint-disable-next-line react/display-name
           tabBarIcon: ({ focused, color, size }) => {
             let icon = '▲'
             if (route.name === 'Home') {
@@ -443,7 +439,6 @@ function ClientStack () {
 }
 
 class StackScreen extends React.Component {
-  // eslint-disable-next-line no-useless-constructor
   constructor (props) {
     super(props)
   }

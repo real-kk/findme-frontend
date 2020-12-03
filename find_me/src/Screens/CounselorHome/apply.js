@@ -6,7 +6,7 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
 } from 'react-native-responsive-screen'
-import Icon from 'react-native-vector-icons/Ionicons'
+
 const mapStateToProps = (state) => ({
     token: state
   })
@@ -35,7 +35,6 @@ class CounselorApplyScreen extends React.Component {
         }})
         .then(({data})=>{
             this.setState({applicationList: data})
-            console.log(data)
         })
     }
 

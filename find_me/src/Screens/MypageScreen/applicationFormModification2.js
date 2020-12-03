@@ -57,7 +57,6 @@ class applicationFormModificationScreen extends React.Component {
       'Authorization' : `Token ${this.props.token.auth.token}`
     }})
     .then(res=> {
-      console.log(res)
       this.props.navigation.push('Mypage')
     })
     .catch(err=> {
@@ -70,14 +69,12 @@ class applicationFormModificationScreen extends React.Component {
         this.setState({
             time_table: res.uri
         })
-        console.log(this.state.time_table)
     })
   }
   componentDidMount(){
     this.setState({
       time_table: this.props.route.params.Apply_data.time_table
     })
-    console.log(this.props.route.params.Apply_data.time_table)
   }
   render () {
     return (

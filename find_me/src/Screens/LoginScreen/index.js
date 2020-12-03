@@ -70,7 +70,6 @@ var radio_props = [
                 let userToken = user[0][1];
                 let currentuserType = user[1][1];
             
-                console.log(userToken + ' ' + currentuserType)
                 this.props.storeUserData({token : userToken})
                         
                 this.props.navigation.navigate('User', {userType: currentuserType});

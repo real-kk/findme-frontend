@@ -67,7 +67,6 @@ class CounselorMypage extends React.Component {
           :'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
         career: res.data.career
       })
-      console.log(res.data.user_type + 'hi')
     })
     .catch(err=>console.log(err))
 
@@ -79,7 +78,6 @@ class CounselorMypage extends React.Component {
       this.setState({
         link_man: res.data.length
       })
-      console.log(res.data.length)
     })
     .catch(err=>console.log(err))
   } 

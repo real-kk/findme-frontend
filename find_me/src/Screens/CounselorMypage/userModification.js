@@ -38,23 +38,21 @@ class userModificationScreen extends React.Component {
 
   addImage = () => {
     ImagePicker.launchImageLibrary({}, res => {
-        console.log(res.uri)
         this.setState({
             image: res.uri
         })
-        console.log(res.uri)
     })
   }
 
   submission = async() => {
     const data =new FormData();
     const time = new Date();
-    var date = time.getDate(); //Current Date
-    var month = time.getMonth() + 1; //Current Month
-    var year = time.getFullYear(); //Current Year
-    var hours = time.getHours(); //Current Hours
-    var min = time.getMinutes(); //Current Minutes
-    var sec = time.getSeconds(); //Current Seconds
+    var date = time.getDate();
+    var month = time.getMonth() + 1;
+    var year = time.getFullYear();
+    var hours = time.getHours();
+    var min = time.getMinutes();
+    var sec = time.getSeconds();
     
     data.append('username', this.state.username)
     data.append('user_type', this.props.route.params.user_type)
@@ -66,14 +64,11 @@ class userModificationScreen extends React.Component {
     })
     data.append('introduce', this.state.introduce)
     data.append('career',this.state.career)
-    console.log(this.props.route.params.id)
-    console.log(data._parts)
     await axios.put(`/users/${this.props.route.params.id}/`, data,
       { headers: {
           'Authorization' : `Token ${this.props.token.auth.token}`
       }})
       .then((res)=>{
-          console.log(res)
           this.props.navigation.push('CounselorMypage')
       })
       .catch(err=>console.log(err))

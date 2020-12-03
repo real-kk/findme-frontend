@@ -19,8 +19,8 @@ const mapDispatchToProps = (dispatch) => ({
     requestLogout: () => dispatch(requestLogout())
   })
 var date = new Date().getDate()
-var month = new Date().getMonth() + 1; //To get the Current Month
-var year = new Date().getFullYear(); //To get the Current Year
+var month = new Date().getMonth() + 1;
+var year = new Date().getFullYear();
 
 import {
     widthPercentageToDP as wp,

@@ -7,9 +7,7 @@
  */
 
 import React from 'react'
-import { Button, StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
-import CameraRoll from '@react-native-community/cameraroll'
-import axios from '../../axiosConfig'
+import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import { connect } from 'react-redux'
 import {
@@ -28,58 +26,22 @@ class RecordVideo extends React.Component {
   constructor () {
     super()
     this.state = {
-      // ratio: '16:9',
       uri: '',
       recording: '',
-      video: '',
-      recordOptions: {
-        mute: false,
-        maxDuration: 5,
-        quality: RNCamera.Constants.VideoQuality['288p']
-      }
     }
   }
 
   async startRecording () {
     this.setState({ recording: true })
-    // default to mp4 for android as codec is not set
     const { uri } = await this.camera.recordAsync()
     this.setState({ recording: false, processing: true })
-    // const type = `video/${codec}`;
 
-    // const data = new FormData();
-    // data.append("video", {
-    //   name: "video-upload",
-    //   type,
-    //   uri
-    // });
-
-    // this.submission(data);
-    // console.log(data._parts[0][1].uri)
     this.props.navigation.navigate('ConfirmVideo', {
       questionID: this.props.route.params.questionID,
       videoUri: uri
     })
     this.setState({ processing: false })
   }
-
-  // submission = async (data) => {
-
-  //     await axios.post('/tasks/videos/', data,
-  //         { headers: {
-  //             'Authorization' : `Token ${this.props.token.auth.token}`,
-  //             'content-type': 'multipart/form-data'
-  //         }
-  //     })
-  //     .then((res) => {
-  //         console.log(res)
-  //         alert("제출되었습니다.")
-  //         this.props.navigation.navigate('SelectVideo')
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }
 
   async stopRecording () {
     await this.camera.stopRecording()
@@ -123,14 +85,9 @@ class RecordVideo extends React.Component {
               ref={ref => {
                 this.camera = ref
               }}
-            //   ratio={this.state.ratio}
               style={styles.preview}
               type={RNCamera.Constants.Type.front}
               flashMode={RNCamera.Constants.FlashMode.on}
-            //   permissionDialogTitle={"Permission to use camera"}
-            //   permissionDialogMessage={
-            //     "We need your permission to use your camera phone"
-            //   }
               androidCameraPermissionOptions={{
                 title: 'Permission to use camera',
                 message: 'We need your permission to use your camera',

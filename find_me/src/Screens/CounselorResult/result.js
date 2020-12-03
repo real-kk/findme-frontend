@@ -7,10 +7,8 @@
  */
 
 import React from 'react'
-import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { StatusBar, StyleSheet, Text, View } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { connect } from 'react-redux'
-import axios from '../../axiosConfig'
 
 import TextResult from './diaryText'
 import WordCloudResult from './diaryCloud'
@@ -40,13 +38,10 @@ class ResultHome extends React.Component {
             }}
             >
             <Tab.Screen name="감정 분석 그래프"
-              // eslint-disable-next-line react/no-children-prop
               children={() => <TextResult email={this.props.route.params.client.client_email} />}/>
               <Tab.Screen name="워드 클라우드"
-              // eslint-disable-next-line react/no-children-prop
               children={() => <WordCloudResult email={this.props.route.params.client.client_email} />}/>
               <Tab.Screen name="영상 분석"
-              // eslint-disable-next-line react/no-children-prop
               children={({navigation}) => <CounselorQuestionList email={this.props.route.params.client.client_email} navigation={navigation} />}/>
             </Tab.Navigator>
         </View>

@@ -19,7 +19,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  // eslint-disable-next-line no-undef
   requestLogout: () => dispatch(requestLogout())
 })
 
@@ -27,7 +26,6 @@ class CounselorDetail extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      // eslint-disable-next-line react/prop-types
       counselor: this.props.route.params.counselor.fields
     }
   }
@@ -41,7 +39,6 @@ class CounselorDetail extends React.Component {
             style={styles.image}
             source={{
               uri: this.state.counselor.image === ''
-              // eslint-disable-next-line multiline-ternary
                 ? 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + this.state.counselor.image
             }}/>
             <View style={styles.list_side}>
@@ -56,7 +53,6 @@ class CounselorDetail extends React.Component {
           </View>
           <TouchableOpacity
             onPress={() => {
-              // eslint-disable-next-line react/prop-types
               this.props.navigation.navigate('CounselingRequest', {
                 counselorEmail: this.state.counselor.email
               })

@@ -1,12 +1,10 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Image } from 'react-native'
 import { connect } from 'react-redux'
-import { ScrollView } from 'react-native-gesture-handler'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen'
-import Icon from 'react-native-vector-icons/Ionicons'
 
 const mapStateToProps = (state) => ({
   token: state

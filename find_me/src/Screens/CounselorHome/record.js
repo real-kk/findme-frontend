@@ -2,13 +2,7 @@ import React from 'react';
 import { StyleSheet,  View, Text, FlatList, TouchableOpacity, Platform} from 'react-native';
 import { connect } from 'react-redux'
 import axios from '../../axiosConfig'
-import AudioRecorderPlayer, { 
-    AVEncoderAudioQualityIOSType,
-    AVEncodingOption, 
-    AudioEncoderAndroidType,
-    AudioSet,
-    AudioSourceAndroidType, 
-} from 'react-native-audio-recorder-player';
+import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -25,32 +19,21 @@ const mapDispatchToProps = (dispatch) => ({
     requestLogout: () => dispatch(requestLogout())
   })
 
-// const audioRecorderPlayer = new AudioRecorderPlayer();
-
 class STT extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggingIn: false,
       recordSecs: 0,
       recordTime: '00:00:00',
-      currentPositionSec: 0,
-      currentDurationSec: 0,
-      playTime: '00:00:00',
-      duration: '00:00:00',
-      recordFlag: false,
-      recordfile: '',
-
-      //임시
       audioFile: '',
       recording: false,
       loaded: false,
       paused: true
     }
     this.audioRecorderPlayer = new AudioRecorderPlayer()
-    this.audioRecorderPlayer.setSubscriptionDuration(0.09) // optional. Default is 0.1
+    this.audioRecorderPlayer.setSubscriptionDuration(0.09)
   }
-///////////////////////////////////////////////////////////
+
   async componentDidMount() {
     const options = {
       sampleRate: 16000,
@@ -60,16 +43,12 @@ class STT extends React.Component {
     };
     
     AudioRecord.init(options);
-    
     AudioRecord.on('data', data => {
       const chunk = Buffer.from(data, 'base64')
-      // console.log('chunk size', chunk.byteLength);
-      // do something with audio chunk
     });
   }
 
   onStartRecord = async() => {
-    console.log('start record');
     this.setState({ audioFile: '', recording: true, loaded: false })
     AudioRecord.start()
       
@@ -87,10 +66,8 @@ class STT extends React.Component {
 
   onStopRecord = async () => {
     if (!this.state.recording) return
-    console.log('stop record')
     let audioFile = await AudioRecord.stop()
     await this.audioRecorderPlayer.stopRecorder()
-    console.log(audioFile)
     this.setState({ audioFile, recording: false })
   }
 
@@ -101,7 +78,6 @@ class STT extends React.Component {
       name: "test.wav",
       type: "audio/wav"
     })
-    console.log(data._parts)
     await axios.post('/voices/', data, 
       { headers: {
         'Authorization' : `Token ${this.props.token.auth.token}`,
@@ -109,7 +85,6 @@ class STT extends React.Component {
         }
       })
     .then(res=>{
-      console.log(res)
       alert("메일로 전송되었습니다.")
       this.props.navigation.navigate('Home')
     })

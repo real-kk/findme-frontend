@@ -6,7 +6,6 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
 } from 'react-native-responsive-screen'
-import Icon from 'react-native-vector-icons/Ionicons'
 
 const mapStateToProps = (state) => ({
     token: state
@@ -31,7 +30,6 @@ class CounselorVideo extends React.Component {
             'Authorization' : `Token ${this.props.token.auth.token}`
         }})
         .then(({data})=>{
-            console.log(data)
             this.setState({clientList: data})
         })
       

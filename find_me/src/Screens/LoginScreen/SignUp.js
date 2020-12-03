@@ -57,11 +57,9 @@ class SignUp extends React.Component {
 
       addImage = () => {
         ImagePicker.launchImageLibrary({}, res => {
-            console.log(res.uri)
             this.setState({
                 introduce: res.uri
             })
-            console.log(res.uri)
         })
     }
     render() {

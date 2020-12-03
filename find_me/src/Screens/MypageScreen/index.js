@@ -86,7 +86,6 @@ class MypageScreen extends React.Component {
         this.setState({
           link_man: res.data[0].counselor_username === undefined ? '없음' : res.data[0].counselor_username
         })
-        console.log(this.state.link_man)
       })
       .catch(err=>console.log(err))
 
@@ -95,7 +94,6 @@ class MypageScreen extends React.Component {
         'Authorization' : `Token ${this.props.token.auth.token}`
       }})
       .then((res)=>{
-        console.log("신청서")
         if(res.data == ''){
           this.setState({
             flag: false,

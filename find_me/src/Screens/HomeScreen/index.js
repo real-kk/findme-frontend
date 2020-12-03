@@ -8,9 +8,7 @@
 
 import React from 'react';
 import { Platform, StatusBar, ImageBackground, StyleSheet,  View, Text, Image, FlatList, TextInput, TouchableOpacity} from 'react-native';
-import { ForceTouchGestureHandler } from 'react-native-gesture-handler';
-import axios from '../../axiosConfig';
-import Icon from 'react-native-vector-icons/AntDesign'
+
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
@@ -19,7 +17,6 @@ import {
   class HomeScreen extends React.Component {
       constructor(){
           super();
-        //   this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
           this.state={
             datas: [
                 {key:'0', data:'상담 신청', icon: require('../../../images/coffee.png'),
@@ -33,13 +30,6 @@ import {
             ]
           }
       }
-
-    //   componentDidMount(){
-    //       foreUpdateHandler = () =>{
-    //           this.forceUpdate();
-    //       };
-    //       foreUpdateHandler();
-    //   }
 
       _onPress = () => {
           this.props.navigation.push('Diary')

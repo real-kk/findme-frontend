@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Platform, StatusBar, StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 import { ScrollView } from 'react-native-gesture-handler';
@@ -28,11 +28,9 @@ class CounselingRequest2 extends React.Component {
     }
       addImage = () => {
         ImagePicker.launchImageLibrary({}, res => {
-            console.log(res.uri)
             this.setState({
                 time_table: res.uri
             })
-            console.log(res.uri)
         })
     }
 
@@ -43,8 +41,6 @@ class CounselingRequest2 extends React.Component {
           type: 'image/png',
           name: `time_table.jpg`
       })
-
-      console.log(this.props.route.params.Apply_data)
       await axios.post('/counsels/', this.props.route.params.Apply_data, 
           { headers: {
               'Authorization' : `Token ${this.props.token.auth.token}`,
@@ -61,7 +57,6 @@ class CounselingRequest2 extends React.Component {
               }
           })
           .then((res) => {
-              console.log(res)
               alert("제출이 완료되었습니다.")
               this.props.navigation.navigate('Counselors')
           })

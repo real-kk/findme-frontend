@@ -19,7 +19,6 @@ import {
   class VideoResult extends React.Component {
       constructor(){
           super();
-        //   this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
           this.state={
             video: '',
             graph: '',
@@ -28,13 +27,11 @@ import {
           }
       }
     confirmGraph = async() => {
-        console.log(this.props.route.params.email)
         await axios.get(`/tasks/sentiment_graphs?id=${this.props.route.params.questionID}`,
         { headers: {
           'Authorization' : `Token ${this.props.token.auth.token}`
           }})
           .then(({data})=>{
-              console.log(data)
               this.setState({
                   name: data.client_username,
                   graph: data.graph,
@@ -45,7 +42,6 @@ import {
     }
 
     resultConfirm = async (id) => {
-        console.log(id)
         await axios.get(`/tasks/process_videos/${id}/`,
             { headers: {
             'Authorization' : `Token ${this.props.token.auth.token}`

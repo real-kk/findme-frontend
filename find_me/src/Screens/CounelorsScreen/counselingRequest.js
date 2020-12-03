@@ -1,8 +1,6 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import axios from '../../axiosConfig';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
-import { ScrollView } from 'react-native-gesture-handler';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
@@ -50,7 +48,6 @@ class CounselingRequest extends React.Component {
             phone_number: this.state.phone_number,
             content: this.state.content,
         }
-        console.log(data)
         this.props.navigation.navigate('CounselingRequest2', {
             Apply_data: data
         })
