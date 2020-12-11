@@ -48,8 +48,9 @@ class MypageScreen extends React.Component {
             flag: false,
             datas: [
                 {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
-                {key:'1', data:'상담 신청서 수정', icon:'grease-pencil'},
-                {key:'2', data:'로그아웃', icon:'logout-variant'},
+                {key:'1', data:'비밀번호 수정', icon:'account-circle-outline'},
+                {key:'2', data:'상담 신청서 수정', icon:'grease-pencil'},
+                {key:'3', data:'로그아웃', icon:'logout-variant'},
             ],
         }
     }
@@ -157,6 +158,9 @@ class MypageScreen extends React.Component {
                                         })
                                     }
                                     else if(item.key === '1'){
+                                      this.props.navigation.push('passwordModification')
+                                    }
+                                    else if(item.key === '2'){
                                       if(this.state.flag == false){
                                         alert("상담 신청서가 없습니다!")
                                       }
@@ -175,7 +179,7 @@ class MypageScreen extends React.Component {
                                         })
                                       }
                                     }
-                                    else if(item.key === '2'){
+                                    else if(item.key === '3'){
                                         this._onclickLogout();
                                     }
                                 }}

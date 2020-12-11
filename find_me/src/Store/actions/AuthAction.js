@@ -61,6 +61,32 @@ export const removeUserData = async () => {
 }
 
 /* LOGIN */
+// export function requestLogin (data) {
+//   return (dispatch) => {
+//     dispatch(login())
+//     return axios.post('/rest-auth/login/', data)
+//       .then((res) => {
+//         axios.get('/users/type/',
+//         { headers: {
+//             'Authorization' : `Token ${res.data.key}`
+//         }})
+//         .then(({data})=>{
+//           // const obj = JSON.parse(res.config.data)
+//           const item = [['userToken', res.data.key], ['userType', data.user_type]]
+//           console.log(item)
+//           saveStorage(item)
+//           axios.defaults.headers.common.Authorization = res.data.key
+//           dispatch(loginSuccess())
+//           dispatch(storeUserData(res.data))
+//         }) 
+//         .catch(err=>console.log(err))
+//       }).catch((error) => {
+//         console.log(error)
+//       })
+//   }
+// }
+
+/* LOGIN */
 export function requestLogin (data) {
   return (dispatch) => {
     dispatch(login())

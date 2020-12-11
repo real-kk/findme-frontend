@@ -68,6 +68,7 @@ class QuestionList extends React.Component {
         email: this.props.email
       })
     })
+    .catch(err=>console.log(err))
   }
 
 

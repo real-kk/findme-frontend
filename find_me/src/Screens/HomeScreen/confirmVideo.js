@@ -39,6 +39,7 @@ const mapStateToProps = (state) => ({
           uri: videoUri
         });
         const time = new Date();
+        var year = time.getFullYear();
         var date = time.getDate();
         var month = time.getMonth() + 1;
         var hours = time.getHours();

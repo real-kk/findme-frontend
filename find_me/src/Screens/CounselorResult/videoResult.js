@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linking, StyleSheet,  View, Text, Image, FlatList, TextInput, TouchableOpacity} from 'react-native';
+import { Linking, StyleSheet,  View, Text, Image, Modal, TouchableOpacity} from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 
@@ -22,7 +22,9 @@ import {
           this.state={
             video: '',
             graph: '',
+            modal: false,
             name: '',
+            modal: true,
             loading_graph: true,
           }
       }
@@ -66,12 +68,70 @@ import {
     render() {
         return (
             <View style={styles.container}>
-               
+                {/* {this.state.modal == false ?
+                    <View>
+                        <Modal
+                            visible
+                        >
+
+                        </Modal>
+                    </View> : 
+                    <View></View>
+                } */}
+                <Modal
+                    visible = {this.state.modal}
+                    animationType={'fade'}
+                >
+                    <TouchableOpacity
+                        onPress={()=>{
+                            this.setState({
+                                modal: false,
+                            })
+                        }}
+                        >
+                        <Text>감정점수는 이렇게 읽어야합니다</Text>
+                        <View style={styles.store}>
+                            <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>close</Text>
+                        </View>
+                    </TouchableOpacity>  
+                </Modal>
                 <Text style={styles.result}>영상 분석 결과</Text>
                 <Text style={styles.introduce}>
                     영상에서 표정 분석 결과를 총 8가지의 감정 점수 변화를 
                     시간에 따른 그래프로 표현한 결과 값입니다
                 </Text>
+                <TouchableOpacity
+                onPress={()=>{
+                    this.setState({modal: true})
+                }}
+                >
+                <View style={{alignItems:'center'}}>
+                    <Text style={{ color: 'black', fontSize: 18, fontFamily: 'netmarbleB' }}>?</Text>
+                </View>
+                </TouchableOpacity>
+                <Modal
+                    transparent={true}
+                    visible = {this.state.modal}
+                    overlayBackground={'rgba(0, 0, 0, 0.75)'}
+                    closeOnTouchOutside={true}
+                    animationType={'fade'}
+                >
+                    <View style={{backgroundColor: 'white', marginTop: 30}}>
+                        <View style={{backgroundColor:'yellow', margin:50, padding: 40, justifyContent:'center', alignItems:'center'}}>
+                            <Text>그래프는 이렇게 읽어야합니다</Text>
+                            <Text>여기다가 이미지 추가</Text>
+                            <TouchableOpacity
+                                onPress={()=>{
+                                    this.setState({
+                                        modal: false,
+                                    })
+                                }}
+                                >
+                                <Text style={{ color: 'black', fontSize: 18, fontFamily: 'netmarbleB' }}>close</Text>
+                            </TouchableOpacity>  
+                        </View>
+                    </View>
+                </Modal>
                 <Image
                     style={{marginTop:hp('2%'), width: wp('100%'), height: hp('55%')}}
                     source={{uri: this.state.graph ? this.state.graph : null}}

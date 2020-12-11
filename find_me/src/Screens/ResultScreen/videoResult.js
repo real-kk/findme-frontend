@@ -7,10 +7,9 @@
  */
 
 import React from 'react';
-import { Linking, StyleSheet,  View, Text, Image, TouchableOpacity } from 'react-native';
+import { Linking, StyleSheet,  View, Text, Image, Modal, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
-
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
@@ -25,14 +24,15 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
   class VideoResult extends React.Component {
-      constructor(){
-          super();
+      constructor(props){
+          super(props);
         //   this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
           this.state={
             video: '',
             graph: '',
             name: '',
             loading_graph: true,
+            modal: false,
           }
       }
     confirmGraph = async() => {
@@ -73,6 +73,7 @@ const mapDispatchToProps = (dispatch) => ({
     componentWillUnmount(){
         this._ismounted = false
     }
+
       render() {
         return (
             <View style={styles.container}>
@@ -82,6 +83,39 @@ const mapDispatchToProps = (dispatch) => ({
                     영상에서 표정 분석 결과를 총 8가지의 감정 점수 변화를 
                     시간에 따른 그래프로 표현한 결과 값입니다
                 </Text>
+
+                <TouchableOpacity
+                onPress={()=>{
+                    this.setState({modal: true})
+                }}
+                >
+                <View style={{alignItems:'center'}}>
+                    <Text style={{ color: 'black', fontSize: 18, fontFamily: 'netmarbleB' }}>?</Text>
+                </View>
+                </TouchableOpacity>
+                <Modal
+                    transparent={true}
+                    visible = {this.state.modal}
+                    overlayBackground={'rgba(0, 0, 0, 0.75)'}
+                    closeOnTouchOutside={true}
+                    animationType={'fade'}
+                >
+                    <View style={{backgroundColor: 'white', marginTop: 30}}>
+                        <View style={{backgroundColor:'yellow', margin:50, padding: 40, justifyContent:'center', alignItems:'center'}}>
+                            <Text>그래프는 이렇게 읽어야합니다</Text>
+                            <Text>여기다가 이미지 추가</Text>
+                            <TouchableOpacity
+                                onPress={()=>{
+                                    this.setState({
+                                        modal: false,
+                                    })
+                                }}
+                                >
+                                <Text style={{ color: 'black', fontSize: 18, fontFamily: 'netmarbleB' }}>close</Text>
+                            </TouchableOpacity>  
+                        </View>
+                    </View>
+                </Modal>
                 <Image
                     style={{marginTop:hp('2%'), width: wp('100%'), height: hp('55%')}}
                     source={{uri: this.state.graph ? this.state.graph : null}}

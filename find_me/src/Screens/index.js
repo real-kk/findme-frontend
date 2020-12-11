@@ -61,6 +61,8 @@ import CounselingRequestScreen2 from './CounelorsScreen/counselingRequest2'
 import userModificationScreen from './MypageScreen/userModification'
 import applicationFormModificationScreen from './MypageScreen/applicationFormModification'
 import applicationFormModification2Screen from './MypageScreen/applicationFormModification2'
+import passwordModificationScreen from './MypageScreen/passwordModification'
+
 import ApplicationDetailScreen from './CounselorHome/applicationDetail'
 
 import {
@@ -288,6 +290,11 @@ function MypageStack () {
           options={{ headerShown: false }}
           name="applicationFormModification"
           component={applicationFormModificationScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="passwordModification"
+          component={passwordModificationScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
