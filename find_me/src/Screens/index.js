@@ -6,12 +6,12 @@
  * @flow strict-local
  */
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
-import { connect } from 'react-redux'
+import { connect, useStore } from 'react-redux'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import LoginScreen from './LoginScreen'
@@ -78,9 +78,9 @@ const mapDispatchToProps = (dispatch) => ({
   storeUserData: (data) => dispatch(storeUserData(data))
 })
 
-const AuthStack =
-  function AuthStack () {
-    return (
+function AuthStack (route) {
+ 
+  return (
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           options={{ headerShown: false }}
@@ -332,8 +332,9 @@ function CounselorMypageStack () {
   )
 }
 function UserStack ({ navigation, route, userType }) {
-
+  console.log(route.params.userType)
   return (
+  
       <Stack.Navigator>
       {route.params.userType === '0' ? (
         <Stack.Screen
@@ -444,6 +445,7 @@ class StackScreen extends React.Component {
   }
 
   render () {
+    console.log(this.props.token)
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Login">

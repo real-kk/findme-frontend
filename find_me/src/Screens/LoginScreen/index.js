@@ -169,15 +169,14 @@ const styles = StyleSheet.create({
     },
     titleArea:{
         width: wp('100%'),
-        paddingHorizontal: wp('26%'),
         paddingTop: hp('5%'),
         paddingBottom: hp('2%'),
-        alignItems: 'center',
+        justifyContent:'center',
         flexDirection: 'row'
     },
     radioContainer: {
         width: '100%',
-        paddingLeft: wp('7%'),
+        marginLeft: wp('2%'),
         alignItems:'center',
         marginBottom: 10  
     },
@@ -205,8 +204,9 @@ const styles = StyleSheet.create({
         fontFamily: 'NanumSquare_acEB'
     },
     image:{
-        width:wp('42%'),
-        height:hp('22%')
+        width:wp('50%'),
+        height:hp('20%'),
+        resizeMode:'contain',
     },
     button: {
         backgroundColor: 'rgba(114,174,148,0.9)',

@@ -8,12 +8,11 @@
 
 import 'react-native-gesture-handler'
 import React from 'react'
-import {TouchableOpacity, ImageBackground, StyleSheet, View, Text, TextInput, Image } from 'react-native'
+import { TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button'
+import RadioForm from 'react-native-simple-radio-button'
 import { connect } from 'react-redux'
 import { requestSignup } from '../../Store/actions/AuthAction'
-import { ScrollView } from 'react-native-gesture-handler'
 import ImagePicker from 'react-native-image-picker';
 
 const mapDispatchToProps = (dispatch) => ({
@@ -51,7 +50,7 @@ class SignUp extends React.Component {
           introduce: this.state.introduce
         }
         await this.props.requestSignup(data)
-        alert('회원가입에 성공하였습니다!')
+        alert('작성하신 이메일로 전송된 메일을 통해 인증하신 뒤 로그인이 가능합니다!!')
         this.props.navigation.navigate('Login')
     }
 
@@ -72,15 +71,18 @@ class SignUp extends React.Component {
                         <Text style={styles.title}>회원가입</Text>
                     </View>
                     <View style={styles.radioContainer}>
+                        <Text style={{marginRight:wp('5%'), fontFamily:'netmarbleM'}}>유저 타입</Text>
                         <RadioForm
                             radio_props={radio_props}
                             initial={0}
                             labelHorizontal={true}
                             buttonColor={'rgba(114,174,148,0.5)'}
+                            radioStyle={{paddingRight: 20}}
+                            formHorizontal={true}
                             selectedButtonColor={'green'}
                             selectedLabelColor={'green'}
                             animation={true}
-                            buttonSize={15}
+                            buttonSize={13}
                             labelStyle={{fontSize:15}}
                             onPress={(value) => {
                                 this.setState({value:value})
@@ -115,12 +117,12 @@ class SignUp extends React.Component {
                                     }
                                 }}
                             >
-                            <Text>인증</Text>
+                            <Text style={{color:'white', fontFamily:'netmarbleB', fontSize: 15}}>인증</Text>
                             </TouchableOpacity>
                     </View>
 
                     <View style={styles.nameContainer}>
-                    <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%')}}>이름 *</Text>
+                    <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%'), fontFamily:'netmarbleM'}}>이름 *</Text>
                         <TextInput style={styles.input}
                             placeholder="name"
                             value={this.state.name}
@@ -131,7 +133,7 @@ class SignUp extends React.Component {
                     </View>
 
                     <View style={styles.passwordContainer}> 
-                    <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%')}}>비밀번호 *</Text>
+                    <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%'), fontFamily:'netmarbleM'}}>비밀번호 *</Text>
                         <TextInput style={styles.input}
                             placeholder="비밀번호 입력"
                             value={this.state.password}
@@ -148,7 +150,7 @@ class SignUp extends React.Component {
                         />
                     </View>
                     <View style={styles.passwordConfirmationContainer}>
-                    <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%')}}>비밀번호 재입력 *</Text>
+                    <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%'),  fontFamily:'netmarbleM'}}>비밀번호 재입력 *</Text>
                         <TextInput style={styles.input}
                             placeholder="비밀번호 재입력"
                             value={this.state.passwordConfirmation}
@@ -164,15 +166,16 @@ class SignUp extends React.Component {
                             }}
                         />
                         <View>
-                            {this.state.passwordFlag ? <Text style={{marginLeft:20, color: 'red'}}>비밀번호 일치!</Text>
-                                                    : <Text></Text>}
+                            {this.state.passwordFlag ? <Text style={{marginLeft:20, color: 'red'}}>비밀번호가 일치합니다!</Text>
+                                                    : <Text style={{marginLeft:20, color: 'red'}}>비밀번호가 일치하지 않습니다!</Text>}
                         </View>
                     </View>
 
                     <View style={styles.introduceContainer}>
-                    <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%')}}>자기소개 *</Text>
+                    <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%'), fontFamily:'netmarbleM'}}>자기소개 *</Text>
                         <TextInput style={styles.input_introduce}
-                            placeholder="한 줄로 자기소개를 해주세요"
+                            placeholder="한 줄로 자기 소개를 해주세요 (20자 이내)"
+                            maxLength={20}
                             value={this.state.introduce}
                             onChangeText={(text) => {
                                 this.setState({introduce: text})            
@@ -193,7 +196,7 @@ class SignUp extends React.Component {
                                 }
                             }}
                         >
-                            <Text>가입 완료</Text>
+                            <Text style={{color:'white', fontFamily:'netmarbleB', fontSize: 15}}>가입 완료</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -212,8 +215,8 @@ const styles = StyleSheet.create({
     title: {
         // backgroundColor: 'rgba(114,174,148,0.9)',
         marginTop:hp('3%'),
-        fontSize:30, 
-        color:'black', 
+        fontSize:25, 
+        color:'white', 
         textAlign:'center',
         fontFamily:'netmarbleB'
     },
@@ -225,12 +228,13 @@ const styles = StyleSheet.create({
     },
     radioContainer: {
         width: wp('100%'),
-        marginTop: hp('3%'),
-        alignItems:'center'         
+        marginTop: hp('5%'),
+        marginLeft: wp('10%'),
+        flexDirection:'row'
     },
     emailText: {
         width: '100%',
-        marginTop: wp('10%'),
+        marginTop: wp('5%'),
     },
     emailContainer: {
         width: '100%',
@@ -241,7 +245,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'white',
         width: wp('70%'),
         borderColor: 'gray',
-        borderWidth: 1,
+        borderWidth: 0.2,
         // border: 'black',
         height: hp('6%'),
         marginLeft: wp('5%')
@@ -271,7 +275,7 @@ const styles = StyleSheet.create({
        // backgroundColor: 'white',
        width: wp('90%'),
        borderColor: 'gray',
-       borderWidth: 1,
+       borderWidth: 0.2,
        // border: 'black',
        height: hp('6%'),
        marginLeft: wp('5%')
@@ -281,6 +285,7 @@ const styles = StyleSheet.create({
         width: wp('15%'), 
         height: hp('6%'), 
         borderRadius: 10,
+    
         backgroundColor:'rgba(114,174,148,0.5)', 
         alignItems:'center', 
         justifyContent:'center', 

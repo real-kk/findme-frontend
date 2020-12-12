@@ -89,7 +89,7 @@ class DiaryResultList extends React.Component {
                                 })
                             }}>
                             <View style={styles.list}>
-                                <Text style={styles.title}>{item.title}</Text>
+                                <Text style={styles.title}>{index + 1} 번째 일기</Text>
                                 <Text style={styles.content}>{item.create_date}</Text>
                             </View>
                         </TouchableOpacity>

@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import { StyleSheet, Text, View,  ActivityIndicator, Image } from 'react-native';
 import axios from '../../axiosConfig';
@@ -68,7 +60,7 @@ class Diarytextanalysis extends React.Component {
               <View style={styles.result}>
                <Text style={styles.introduce}>감정 그래프를 통해 작성한 감정일기마다 나타나는 감정 점수의 변화를 알 수 있습니다</Text>
                   <Image
-                      style={{width: wp('100%') , height: hp('55%')}}
+                      style={{marginLeft:wp('5%'), width: wp('100%') , height: hp('55%')}}
                       source={{uri: this.state.graph ? this.state.graph : null}}
                   />
               </View>
@@ -102,4 +94,3 @@ const styles = StyleSheet.create({
     
   }
 });
-
