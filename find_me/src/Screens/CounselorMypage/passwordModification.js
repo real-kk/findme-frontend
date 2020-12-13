@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import axios from '../../axiosConfig'
 import { connect } from 'react-redux'
 import { requestLogout } from '../../Store/actions/AuthAction'
@@ -39,7 +39,7 @@ class passwordModificationScreen extends React.Component {
       }})
       .then((res)=>{
           alert("비밀번호 변경이 완료되었습니다.")
-          this.props.navigation.push('Mypage')
+          this.props.navigation.push('CounselorMypage')
       })
       .catch((err)=>{
         if(err.response.status === 400){

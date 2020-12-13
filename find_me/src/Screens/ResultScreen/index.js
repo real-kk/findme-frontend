@@ -1,17 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react'
-import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { StatusBar, StyleSheet, Text, View } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { connect } from 'react-redux'
-import axios from '../../axiosConfig'
-
 import DiaryListScreen from './diaryList'
 import QuestionListScreen from './questionList'
 import DiaryTextAnalysisResultScreen from './diaryTextAnalysisResult'

@@ -4,6 +4,7 @@ module.exports = {
     es2021: true
   },
   extends: [
+    'eslint-disable-next-line react/prop-types',
     'plugin:react/recommended',
     'standard'
   ],

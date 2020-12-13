@@ -1,14 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react'
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity ,Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
+import axios from '../../axiosConfig'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -25,12 +18,20 @@ const mapDispatchToProps = (dispatch) => ({
 class DiaryResult extends React.Component {
   constructor () {
     super()
-    this.state = {
-
-    }
+ 
   }
-  delete = () => {
-    
+  deleteDiary = () => {
+    axios.delete('/diaries/' + this.props.route.params.diary.id + '/', 
+    { headers: {
+        'Authorization' : `Token ${this.props.token.auth.token}`
+    }})
+    .then(()=>{
+        alert('삭제 완료!')
+        this.props.navigation.navigate('Result')
+    })
+    .catch(err=>{
+        console.log(err)   
+    })
   }
 
   render () {
@@ -47,30 +48,13 @@ class DiaryResult extends React.Component {
             <Text style={styles.text}>
               {this.props.route.params.diary.content}
             </Text>
-            </ScrollView>
-
-            {/* <TouchableOpacity
-              onPress = {()=> {
-                
-              }}>
-              <Text>수정</Text>
-            </TouchableOpacity> */}
-
-            <TouchableOpacity
-              onPress = {()=> {
-                this.delete();
-              }}>
-              <Text>삭제</Text>
-            </TouchableOpacity>
+            </ScrollView>   
           </View>
           <TouchableOpacity
-            onPress={() => {
-              /* this.props.navigation.navigate('CounselingRequest', {
-              }) */
-            }}
-                >
+            onPress={()=>{this.deleteDiary()}}>
+
             <View style={styles.store}>
-              <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>수정하기</Text>
+              <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>삭제하기</Text>
             </View>
         </TouchableOpacity>
         </ScrollView>

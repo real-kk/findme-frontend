@@ -1,13 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react'
-import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'react-native'
+import { ScrollView, StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'react-native'
 import axios from '../../axiosConfig'
 import { connect } from 'react-redux'
 import { requestLogout } from '../../Store/actions/AuthAction'
@@ -29,9 +21,9 @@ class userModificationScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        image: this.props.route.params.image,
-        introduce: this.props.route.params.introduce,
-        username: this.props.route.params.name,
+      image: this.props.route.params.image,
+      introduce: this.props.route.params.introduce,
+      username: this.props.route.params.name,
     }
   }
 
@@ -73,7 +65,7 @@ class userModificationScreen extends React.Component {
   }
   render () {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.result}>회원정보 수정</Text>
         <Image
           source={{uri: this.state.image}}
@@ -86,32 +78,29 @@ class userModificationScreen extends React.Component {
         </TouchableOpacity>
         <Text style={styles.id}>{this.props.route.params.email}</Text>
         <View style={styles.input}>
-        <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>이름 : </Text>
-        <TextInput style={styles.title}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          placeholder="ex) 홍길동"
-          value={this.state.username}
-          onChangeText={(text) => {
-            this.setState({username: text})             
-        }}/>
+          <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>연결된 상담사  </Text>
+          <Text style={{fontSize: 18 }}>{this.props.route.params.link_man}</Text>
         </View>
         <View style={styles.input}>
-        <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>자기소개 : </Text>
-        <TextInput style={styles.introduce}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          placeholder="자신을 한 줄로 소개해주세요"
-          value={this.state.introduce}
-          onChangeText={(text) => {
-            this.setState({introduce: text})             
-        }}/>
+          <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>이름</Text>
+          <TextInput style={styles.title}
+            placeholder="ex) 홍길동"
+            value={this.state.username}
+            onChangeText={(text) => {
+              this.setState({username: text})             
+          }}/>
+        </View>
+        <View style={styles.input}>
+          <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>자기소개</Text>
+          <TextInput style={styles.introduce}
+            placeholder="자신을 한 줄로 소개해주세요"
+            value={this.state.introduce}
+            onChangeText={(text) => {
+              this.setState({introduce: text})             
+          }}/>
         </View>
         
-        <View style={styles.input}>
-        <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>연결된 상담사 : </Text>
-        <Text style={{fontSize: 18 , fontFamily: 'netmarbleL'}}>{this.props.route.params.link_man}</Text>
-        </View>
+        
         <TouchableOpacity
           onPress = {()=> {
             this.submission();
@@ -121,7 +110,7 @@ class userModificationScreen extends React.Component {
             <Text style={{ color: 'white', fontSize: 18,  fontFamily: 'netmarbleB'}}>수정 완료</Text>
           </View>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -135,21 +124,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems:'center',
     marginLeft: wp('5%'),
-    marginTop: hp('3.5%'),
+    marginTop: hp('2%'),
   },
   title: {
     borderRadius: 5,
-    width:wp('78%'),
-    fontSize:18,
+    fontSize:15,
+    width: wp('70%'),
     backgroundColor:'#fafafa',
-    paddingLeft:wp('5%'),
+    paddingLeft:wp('2%'),
+    marginLeft: wp('11%'),
   },
   introduce:{
     borderRadius: 5,
-    width:wp('70%'),
-    fontSize:18,
+    fontSize:15,
+    width: wp('70%'),
     backgroundColor:'#fafafa',
-    paddingLeft:wp('5%'),
+    paddingLeft:wp('2%'),
+    marginLeft:wp('3%'),
   },
   id:{
     borderRadius:5,
@@ -164,7 +155,7 @@ const styles = StyleSheet.create({
   get_image: {
     marginLeft: wp('35%'),
     width: wp('30%'),
-    height: hp('3'),
+    height: hp('3%'),
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom:hp('1%')
@@ -172,9 +163,9 @@ const styles = StyleSheet.create({
   image : {
     marginTop:hp('4%'),
     marginLeft: wp('24%'),
-    width:wp('52%'),
-    marginBottom:hp('2%'),
-    height:hp('26%'),
+    width:wp('50%'),
+    marginBottom:hp('1%'),
+    height:hp('25%'),
     borderRadius:200,
   },
   result: {

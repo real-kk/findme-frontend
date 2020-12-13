@@ -38,18 +38,17 @@ class clientDetail extends React.Component {
                   <Text style={styles.username}>{this.state.application.client_username}</Text>
                 </View>
                 <View style={styles.head_text}>
-
                   <Text style={styles.profile}>전공 : {this.state.application.major}</Text>
                   <Text style={styles.profile}>학번 : {this.state.application.student_number}</Text>
                   <Text style={styles.profile}>전화번호 : {this.state.application.phone_number}</Text>
-                  <Text style={styles.profile}>하고 싶은 말 : {this.state.application.client_introduce}</Text>
+                  <Text style={styles.profile}>하고 싶은 말 : {this.state.application.content}</Text>
                   <Text style={styles.profile}>수업 시간표</Text>
                 </View>
               </View>
               <View style={styles.list_body}>
 
                 <Image
-                    style={{ height: hp('40%'), width: wp('80%'), marginVertical: hp('2%') }}
+                    style={{ height: hp('45%'), width: wp('100%'), marginVertical: hp('2%'), resizeMode:'contain' }}
                     source={{ uri: this.state.application.time_table }}/>
               </View>
         </View>

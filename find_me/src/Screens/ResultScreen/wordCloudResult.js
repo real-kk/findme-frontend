@@ -1,13 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React, { useState } from 'react';
-import {StyleSheet, Text, View, ActivityIndicator, Image, Button, TouchableOpacity } from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, View, ActivityIndicator, Image} from 'react-native';
 import axios from '../../axiosConfig';
 import { connect } from 'react-redux'
 
@@ -43,7 +35,6 @@ class WordCloudResult extends React.Component {
             'Authorization' : `Token ${this.props.token.auth.token}`
         }})
         .then(({data})=>{
-            console.log(data + '!!!!')
             if(typeof data == 'string'){
                 this.setState({
                 wordcloud: data,

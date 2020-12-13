@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import 'react-native-gesture-handler'
 import React from 'react'
 import { TouchableOpacity, StyleSheet, View, Text, TextInput } from 'react-native'
@@ -13,7 +5,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import RadioForm from 'react-native-simple-radio-button'
 import { connect } from 'react-redux'
 import { requestSignup } from '../../Store/actions/AuthAction'
-import ImagePicker from 'react-native-image-picker';
 
 const mapDispatchToProps = (dispatch) => ({
     requestSignup: (data) => dispatch(requestSignup(data))
@@ -34,7 +25,7 @@ class SignUp extends React.Component {
           passwordConfirmation: '',
           passwordFlag : false,
           authFlag: false,
-          emailFlag: true,
+          emailFlag: false,
           value: '0',
           introduce:'',
         }
@@ -54,13 +45,6 @@ class SignUp extends React.Component {
         this.props.navigation.navigate('Login')
     }
 
-      addImage = () => {
-        ImagePicker.launchImageLibrary({}, res => {
-            this.setState({
-                introduce: res.uri
-            })
-        })
-    }
     render() {
         let reg = /^[a-zA-Z0-9_.+-]+@ajou.ac.kr/;
 
@@ -71,7 +55,7 @@ class SignUp extends React.Component {
                         <Text style={styles.title}>회원가입</Text>
                     </View>
                     <View style={styles.radioContainer}>
-                        <Text style={{marginRight:wp('5%')}}>유저 타입 *</Text>
+                        <Text style={{marginRight:wp('5%'), fontFamily:'netmarbleM'}}>유저 타입 *</Text>
                         <RadioForm
                             radio_props={radio_props}
                             initial={0}
@@ -90,7 +74,7 @@ class SignUp extends React.Component {
                         />
                     </View>
                     <View style={styles.emailText}>
-                        <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%')}}>이메일 *</Text>
+                        <Text style={{marginLeft: wp('5%'), marginBottom:hp('1%'), fontFamily:'netmarbleM'}}>이메일 *</Text>
                     </View>
                     <View style={styles.emailContainer}>
                         <TextInput style={styles.input}
@@ -192,7 +176,7 @@ class SignUp extends React.Component {
                                     this.onClickSignUp()                              
                                 }
                                 else {
-                                    alert("can't login")
+                                    alert("다시 확인해주세요")
                                 }
                             }}
                         >

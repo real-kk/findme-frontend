@@ -1,14 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react'
 import {
-  Platform, StatusBar, ImageBackground, StyleSheet, View, Text, Image, FlatList, BackHandler, TouchableOpacity
+  Platform, StatusBar, ImageBackground, StyleSheet, 
+  View, Text, Image, FlatList, TouchableOpacity
 } from 'react-native'
 
 import {
@@ -39,7 +32,7 @@ class HomeScreen extends React.Component {
           key: '0',
           data: '일기 쓰기',
           icon: 'form',
-          explain: '오늘의 감정을 글로 나타내 보세요'
+          explain: '오늘의 감정을 글로 나타내 보세요' + '\n' + '일기는 하루에 한 번 작성 가능합니다'
         }
       ]
     }
@@ -47,62 +40,57 @@ class HomeScreen extends React.Component {
 
   render () {
     return (
-            <View style={styles.container}>
-               <ImageBackground source={require('../../../images/back.png')} style={styles.image}>
+      <View style={styles.container}>
+        <ImageBackground source={require('../../../images/back.png')} style={styles.image}>
+          <Text style={styles.logo}>FIND ME</Text>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={this.state.data}
+            renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+              activeOpacity={0.97}
+              onPress={() => {
+              if (item.key === '0') {
+                this.props.navigation.navigate('Diary')
+              }
+            }}>
+                <View style={styles.diary}>
+                  <Image source={require('../../../images/moon.png')} style={styles.icon}/>
+                    <Text style={styles.list_text}>{item.data}</Text>
+                    <Text style={styles.explain}>{item.explain}</Text>
+                </View>
+              </TouchableOpacity>
+            )
+          }}/>
 
-                <Text style={styles.logo}>FIND ME</Text>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={this.state.data}
-                    renderItem={({ item }) => {
-                      return (
-                            <TouchableOpacity
-                                activeOpacity={0.97}
-                                onPress={() => {
-                                  if (item.key === '0') {
-                                    this.props.navigation.navigate('Diary')
-                                  }
-                                }}
-                            >
-                                <View style={styles.diary}>
-                                    <Image source={require('../../../images/moon.png')} style={styles.icon}/>
-                                    <Text style={styles.list_text}>{item.data}</Text>
-                                    <Text style={styles.explain}>{item.explain}</Text>
-                                </View>
-                            </TouchableOpacity>
-                      )
-                    }}
-                />
+          <Text style={styles.activity}>다른 활동</Text>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={this.state.datas}
+            renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  if (item.key === '0') {
+                    this.props.navigation.push('Counselors')
+                  } else if (item.key === '1') {
+                    this.props.navigation.push('ConfirmQuestion')
+                  }
+            }}>
+                <View style={styles.list}>
+                  <Image source={item.icon} style={styles.smallIcon}/>
+                  <View>
+                    <Text style={styles.smallText}>{item.data}</Text>
+                    <Text style={styles.explain}>{item.explain}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            )
+          }}/>
 
-                <Text style={styles.activity}>다른 활동</Text>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={this.state.datas}
-                    renderItem={({ item }) => {
-                      return (
-                            <TouchableOpacity
-                                onPress={() => {
-                                  if (item.key === '0') {
-                                    this.props.navigation.push('Counselors')
-                                  } else if (item.key === '1') {
-                                    this.props.navigation.push('ConfirmQuestion')
-                                  }
-                                }}
-                            >
-                                <View style={styles.list}>
-                                    <Image source={item.icon} style={styles.smallIcon}/>
-                                    <View>
-                                    <Text style={styles.smallText}>{item.data}</Text>
-                                    <Text style={styles.explain}>{item.explain}</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                      )
-                    }}
-                />
-
-            </ImageBackground>
-            </View>
+        </ImageBackground>
+      </View>
     )
   }
 }
@@ -176,13 +164,13 @@ const styles = StyleSheet.create({
   smallText: {
     fontSize: 18,
     fontFamily: 'netmarbleM'
-
   },
   explain: {
     paddingTop: hp('1%'),
     color: 'gray',
     fontSize: 14,
     flexDirection: 'column',
-    fontFamily: 'netmarbleL'
+    fontFamily: 'netmarbleL',
+    textAlign: 'center'
   }
 })

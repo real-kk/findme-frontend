@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import { Platform, StatusBar, Image, StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-native'
 import { connect } from 'react-redux'
@@ -25,6 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
     requestLogout: () => dispatch(requestLogout())
   })
 
+
 class MypageScreen extends React.Component {
     constructor(){
         super();
@@ -36,7 +29,7 @@ class MypageScreen extends React.Component {
             user_type: '',
             introduce: '',
             image: '',
-
+            counselor_name:'',
             client_email: '',
             client_name: '',
             content: '',
@@ -53,6 +46,36 @@ class MypageScreen extends React.Component {
                 {key:'3', data:'로그아웃', icon:'logout-variant'},
             ],
         }
+    }
+    getUser = () => {
+      axios.get('/counsels/',
+      { headers: {
+        'Authorization' : `Token ${this.props.token.auth.token}`
+      }})
+      .then((res)=>{
+
+        if(res.data == ''){
+          this.setState({
+            flag: false,
+          })
+        }
+        else{
+          this.setState({
+            counselor_name: res.data[0].counselor_username,
+            client_email: res.data[0].client_email,
+            name: res.data[0].client_username,
+            content: res.data[0].content,
+            phone_number: res.data[0].phone_number,
+            student_number: res.data[0].student_number,
+            time_table: res.data[0].time_table,
+            major: res.data[0].major,
+            id: res.data[0].id,
+            counselor_email: res.data[0].counselor_email,
+            flag: true,
+          })
+        }
+      })
+      .catch(err=>console.log(err))
     }
 
     _onclickLogout = () => {
@@ -104,32 +127,7 @@ class MypageScreen extends React.Component {
       })
       .catch(err=>console.log(err))
 
-      axios.get('/counsels/',
-      { headers: {
-        'Authorization' : `Token ${this.props.token.auth.token}`
-      }})
-      .then((res)=>{
-        if(res.data == ''){
-          this.setState({
-            flag: false,
-          })
-        }
-        else{
-          this.setState({
-            client_email: res.data[0].client_email,
-            name: res.data[0].client_username,
-            content: res.data[0].content,
-            phone_number: res.data[0].phone_number,
-            student_number: res.data[0].student_number,
-            time_table: res.data[0].time_table,
-            major: res.data[0].major,
-            id: res.data[0].id,
-            counselor_email: res.data[0].counselor_email,
-            flag: true,
-          })
-        }
-      })
-      .catch(err=>console.log(err))
+      this.getUser()
     }
 
     render() {
@@ -175,12 +173,14 @@ class MypageScreen extends React.Component {
                                       this.props.navigation.push('passwordModification')
                                     }
                                     else if(item.key === '2'){
+                                      
+                                      this.getUser()
                                       if(this.state.flag == false){
                                         alert("상담 신청서가 없습니다!")
                                       }
                                       else{
                                         this.props.navigation.push('applicationFormModification', {
-                                          link_man: this.state.link_man,
+                                          link_man: this.state.counselor_name,
                                           client_email: this.state.client_email,
                                           client_name: this.state.client_name,
                                           content: this.state.content,

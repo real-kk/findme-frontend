@@ -1,17 +1,9 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
-import { connect, useStore } from 'react-redux'
+import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import LoginScreen from './LoginScreen'
@@ -45,9 +37,9 @@ import CounselorMypageScreen from './CounselorMypage'
 import userModification2Screen from './CounselorMypage/userModification'
 import clientListScreen from './CounselorMypage/clientList'
 import clientDetailScreen from './CounselorMypage/clientDetail'
+import passwordModification2Screen from './CounselorMypage/passwordModification'
 
 import diaryTextAnalysisResultScreen from './ResultScreen/diaryTextAnalysisResult'
-import dailyAnalysisResultScreen from './ResultScreen/dailyAnalysisResult'
 import questionListScreen from './ResultScreen/questionList'
 import diaryListScreen from './ResultScreen/diaryList'
 import diaryDetailScreen from './ResultScreen/diaryDetail'
@@ -252,11 +244,6 @@ function ResultStack () {
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="DailyAnalysis"
-          component={dailyAnalysisResultScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
           name="QuestionList"
           component={questionListScreen}
         />
@@ -330,6 +317,11 @@ function CounselorMypageStack () {
       />
       <Stack.Screen
         options={{ headerShown: false }}
+        name="passwordModification"
+        component={passwordModification2Screen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
         name="applicationFormModification"
         component={applicationFormModificationScreen}
       />
@@ -337,7 +329,6 @@ function CounselorMypageStack () {
   )
 }
 function UserStack ({ navigation, route, userType }) {
-  console.log(route.params.userType)
   return (
 
       <Stack.Navigator>
@@ -446,12 +437,9 @@ function ClientStack () {
 }
 
 class StackScreen extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
+  
+ 
   render () {
-    console.log(this.props.token)
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Login">

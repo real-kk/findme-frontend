@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';

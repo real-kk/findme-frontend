@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import { Platform, StatusBar, Image, StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-native'
 import { connect } from 'react-redux'
@@ -38,8 +30,9 @@ class CounselorMypage extends React.Component {
       link_man:0,
       datas: [
         {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
-        {key:'1', data:'상담 중인 내담자', icon:'grease-pencil'},
-        {key:'2', data:'로그아웃', icon:'logout-variant'},
+        {key:'1', data:'비밀 번호 변경', icon:'lock-outline'},
+        {key:'2', data:'상담 중인 내담자', icon:'grease-pencil'},
+        {key:'3', data:'로그아웃', icon:'logout-variant'},
       ],
       career: '',
     }
@@ -121,9 +114,12 @@ class CounselorMypage extends React.Component {
                     })
                   }
                   else if(item.key === '1'){
-                    this.props.navigation.push('clientList')
+                    this.props.navigation.push('passwordModification')
                   }
                   else if(item.key === '2'){
+                    this.props.navigation.push('clientList')
+                  }
+                  else if(item.key === '3'){
                     this._onclickLogout();
                   }
                }}

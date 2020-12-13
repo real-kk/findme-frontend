@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import { Image, StatusBar, StyleSheet,  View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
@@ -70,9 +62,7 @@ var radio_props = [
                 let userToken = user[0][1];
                 let currentuserType = user[1][1];
             
-                this.props.storeUserData({token : userToken})
-                console.log(user)
-                console.log(this.props.token.auth.token)        
+                this.props.storeUserData({token : userToken})  
                 this.props.navigation.navigate('User', {userType: currentuserType});
             })
             .catch((err) => {

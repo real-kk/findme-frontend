@@ -1,14 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
-import { Linking, StyleSheet,  View, Text, Image, Modal, TouchableOpacity } from 'react-native';
-import axios from '../../axiosConfig';
+import React from 'react'
+import { Linking, StyleSheet,  View, Text, Image, Modal, TouchableOpacity } from 'react-native'
+import axios from '../../axiosConfig'
 import { connect } from 'react-redux'
 import {
     widthPercentageToDP as wp,
@@ -25,8 +17,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 class VideoResult extends React.Component {
     constructor(props){
-        super(props);
-        //   this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
+        super(props)
+        //   this.forceUpdateHandler = this.forceUpdateHandler.bind(this)
         this.state={
             ideo: '',
             graph: '',
@@ -41,7 +33,6 @@ class VideoResult extends React.Component {
           'Authorization' : `Token ${this.props.token.auth.token}`
         }})
         .then(({data})=>{
-            console.log(data + '!!')
             this.setState({
                 name: data.client_username,
                 graph: data.graph,
@@ -51,7 +42,6 @@ class VideoResult extends React.Component {
         .catch(err=>console.log(err))
     }
     resultConfirm = async (id) => {
-        console.log(id)
         await axios.get(`/tasks/process_videos/${id}/`,
             { headers: {
             'Authorization' : `Token ${this.props.token.auth.token}`
@@ -66,7 +56,7 @@ class VideoResult extends React.Component {
         this.props.navigation.addListener('tabPress', e => {
             this.confirmGraph()
         })
-        this.confirmGraph();
+        this.confirmGraph()
         this._ismounted = true
     }
 
@@ -204,5 +194,5 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         backgroundColor: 'rgba(114,174,148,0.5)',
     }
-});
+})
 

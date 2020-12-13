@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import { StyleSheet,  View, Text, TextInput, TouchableOpacity } from 'react-native';
 import axios from '../../axiosConfig';
@@ -52,7 +44,10 @@ class DiaryScreen extends React.Component {
             alert("제출이 완료되었습니다.")
             this.props.navigation.navigate('Home')
         })
-        .catch(err => console.log(err))
+        .catch(err =>{if(err.response.status === 405){
+            alert("오늘 일기를 이미 작성하였습니다!")
+            this.props.navigation.navigate('Home')
+        }})
     }
 
     render() {

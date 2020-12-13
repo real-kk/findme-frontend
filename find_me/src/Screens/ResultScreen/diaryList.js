@@ -1,14 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-native';
-import axios from '../../axiosConfig';
+import { StyleSheet,  View, Text, TouchableOpacity, FlatList } from 'react-native'
+import axios from '../../axiosConfig'
 import { connect } from 'react-redux'
 import {
     widthPercentageToDP as wp,
@@ -25,7 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 class DiaryResultList extends React.Component {
     constructor(){
-        super();
+        super()
         this.state = {
             diaryList: [],
             refreshing : false,
@@ -43,7 +35,8 @@ class DiaryResultList extends React.Component {
         }})
         .then(({data})=>{
             this.setState({diaryList: data})
-            return data;
+          
+            return data
         })
         .catch(err=>{
             console.log(err)   
@@ -104,7 +97,7 @@ class DiaryResultList extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiaryResultList);
+export default connect(mapStateToProps, mapDispatchToProps)(DiaryResultList)
 
 const styles = StyleSheet.create({
     container : {

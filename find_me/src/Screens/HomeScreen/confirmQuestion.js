@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 import axios from '../../axiosConfig'
 import { connect } from 'react-redux'
 import React from 'react'
