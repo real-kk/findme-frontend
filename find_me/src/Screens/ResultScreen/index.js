@@ -46,8 +46,8 @@ class TopBar extends React.Component {
           <Text style={styles.result}>감정 분석 결과</Text>
           <Tab.Navigator
            tabBarOptions={{
-             labelStyle: { fontSize: 16, fontFamily:'netmarbleM'},
-             tabStyle: { width: wp('25%'), height: hp('8%')},
+             labelStyle: { fontSize: 16, fontFamily: 'netmarbleM' },
+             tabStyle: { width: wp('25%'), height: hp('8%') },
              style: {
                borderColor: 'black',
                backgroundColor: '#fff'
@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
     paddingTop: hp('3%'),
     paddingBottom: hp('3%'),
     fontFamily: 'netmarbleB',
-    color:'white',
-    backgroundColor:'rgba(114,174,148,0.9)',
-  },
+    color: 'white',
+    backgroundColor: 'rgba(114,174,148,0.9)'
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopBar)

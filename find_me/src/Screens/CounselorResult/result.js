@@ -42,7 +42,7 @@ class ResultHome extends React.Component {
               <Tab.Screen name="워드 클라우드"
               children={() => <WordCloudResult email={this.props.route.params.client.client_email} />}/>
               <Tab.Screen name="영상 분석"
-              children={({navigation}) => <CounselorQuestionList email={this.props.route.params.client.client_email} navigation={navigation} />}/>
+              children={({ navigation }) => <CounselorQuestionList email={this.props.route.params.client.client_email} navigation={navigation} />}/>
             </Tab.Navigator>
         </View>
     )

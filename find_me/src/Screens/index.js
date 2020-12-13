@@ -52,7 +52,6 @@ import questionListScreen from './ResultScreen/questionList'
 import diaryListScreen from './ResultScreen/diaryList'
 import diaryDetailScreen from './ResultScreen/diaryDetail'
 
-
 import videoResultScreen from './ResultScreen/videoResult'
 
 import CounselorDetailScreen from './CounelorsScreen/counselorDetail'
@@ -81,7 +80,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 function AuthStack (route) {
- 
   return (
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
@@ -95,8 +93,8 @@ function AuthStack (route) {
           component={Signup}
         />
       </Stack.Navigator>
-    )
-  }
+  )
+}
 function CounselorHomeStack () {
   return (
       <Stack.Navigator>
@@ -334,14 +332,14 @@ function CounselorMypageStack () {
         options={{ headerShown: false }}
         name="applicationFormModification"
         component={applicationFormModificationScreen}
-      />  
+      />
     </Stack.Navigator>
   )
 }
 function UserStack ({ navigation, route, userType }) {
   console.log(route.params.userType)
   return (
-  
+
       <Stack.Navigator>
       {route.params.userType === '0' ? (
         <Stack.Screen
@@ -424,7 +422,8 @@ function ClientStack () {
               icon = <Icon name="ios-person" size={25} />
             }
             return <Text style={{ color: focused && 'rgba(114,174,148,0.9)' || 'gray', marginTop: 5 }}>{icon}</Text>
-          }})
+          }
+        })
         }>
         <Tab.Screen
           options={{ headerShown: false }}

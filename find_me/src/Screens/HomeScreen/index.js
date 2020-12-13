@@ -16,7 +16,6 @@ import {
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen'
 
-
 class HomeScreen extends React.Component {
   constructor () {
     super()

@@ -1,13 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import { Image, Platform, StatusBar, ImageBackground, StyleSheet,  View, Text, FlatList, TouchableOpacity} from 'react-native';
+import { Image, Platform, StatusBar, ImageBackground, StyleSheet, 
+View, Text, FlatList, TouchableOpacity} from 'react-native';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
@@ -15,28 +8,40 @@ import {
 class CounselorHome extends React.Component {
     constructor(){
         super();
-        
         this.state={
             datas: [
-                {key:'0', data:'영상 질문 등록', icon: require('../../../images/camera.png'),
-                explain:'내담자에게 궁금한 것을 물어보세요'},
-                {key:'1', data:'상담 녹음 및 파일 변환', icon:require('../../../images/record.png'),
-                explain:'상담 녹음 및 녹음 내용을 확인하세요'}
+                {
+                    key:'0', 
+                    data:'영상 질문 등록', 
+                    icon: require('../../../images/camera.png'),
+                    explain:'내담자에게 궁금한 것을 물어보세요'
+                },
+                {
+                    key:'1', 
+                    data:'상담 녹음 및 파일 변환', 
+                    icon:require('../../../images/record.png'),
+                    explain:'상담 녹음 및 녹음 내용을 확인하세요'
+                }
             ],
             data: [
-                {key:'0', data:'상담 신청 확인', 
-                icon: require('../../../images/coffee.png'), explain:'상담 신청 리스트를 확인하세요'}
+                {
+                    key:'0', 
+                    data:'상담 신청 확인', 
+                    icon: require('../../../images/coffee.png'), 
+                    explain:'상담 신청 리스트를 확인하세요'
+                }
             ]
         }
-    }
+    }   
     _onPress = () => {
         this.props.navigation.push('Apply')
     }
-
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground source={require('../../../images/back.png')} style={styles.image}>
+                <ImageBackground 
+                source={require('../../../images/back.png')} 
+                style={styles.image}>
                 <Text style = {styles.logo}>FIND ME</Text>
                 <FlatList
                     data={this.state.data}
@@ -49,11 +54,10 @@ class CounselorHome extends React.Component {
                                     if(item.key === '0'){
                                         this.props.navigation.push('Apply')
                                     }
-                                }}
-                            >
+                                }}>
                                 <View style={styles.diary}>
                                     <Image source={item.icon} style={styles.icon}/>   
-                                    <Text style={styles.list_text}>{item.data}</Text>
+                                    <Text style={styles.listText}>{item.data}</Text>
                                     <Text style={styles.explain}>{item.explain}</Text>
                                 </View>
                             </TouchableOpacity>
@@ -75,20 +79,19 @@ class CounselorHome extends React.Component {
                                     else if(item.key === '1'){
                                         this.props.navigation.push('STT')
                                     }
-                                }}
-                            >
+                                }}>
                                 <View style={styles.list}>
                                     <Image source={item.icon} style={styles.smallIcon}/>
                                     <View>
-                                    <Text style={styles.smallText}>{item.data}</Text>
-                                    <Text style={styles.explain}>{item.explain}</Text>
+                                        <Text style={styles.smallText}>{item.data}</Text>
+                                        <Text style={styles.explain}>{item.explain}</Text>
                                     </View>
                                 </View>
                             </TouchableOpacity>
                         )
                     }}
                 />
-            </ImageBackground>
+                </ImageBackground>
             </View>
         )
     }
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor:"#fafafa"
     },
-    list_text: {
+    listText: {
         paddingTop: hp('2%'),
         fontSize: 25,
         fontFamily:'netmarbleM'
@@ -163,7 +166,6 @@ const styles = StyleSheet.create({
     smallText:{
         fontSize: 18,
         fontFamily:'netmarbleM'
-        
     },
     explain:{
         paddingTop: hp('1%'),
@@ -172,5 +174,5 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         fontFamily:'netmarbleL'
     }
-});
+})
 

@@ -71,7 +71,7 @@ class SignUp extends React.Component {
                         <Text style={styles.title}>회원가입</Text>
                     </View>
                     <View style={styles.radioContainer}>
-                        <Text style={{marginRight:wp('5%'), fontFamily:'netmarbleM'}}>유저 타입</Text>
+                        <Text style={{marginRight:wp('5%')}}>유저 타입 *</Text>
                         <RadioForm
                             radio_props={radio_props}
                             initial={0}

@@ -11,21 +11,16 @@ const mapStateToProps = (state) => ({
     token: state
   })
 
-const mapDispatchToProps = (dispatch) => ({
-    requestLogout: () => dispatch(requestLogout())
-  })
-
-
 class CounselorApplyScreen extends React.Component {
     constructor(){
         super();
         this.state = {
-          applicationList: [],
-          refreshing : false,
-          isLoading: false,
-          pageNum: 1,
-          isloading: true,
-      }
+            applicationList: [],
+            refreshing : false,
+            isLoading: false,
+            pageNum: 1,
+            isloading: true,
+        }
     }
 
     getApplicationList = async () => {
@@ -78,11 +73,12 @@ class CounselorApplyScreen extends React.Component {
                                     <Image 
                                     style={styles.user}
                                     source={{uri: item.client_image === null ? 
-                                    'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.client_image}}/>
+                                    'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' : 
+                                    'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + item.client_image}}/>
                                     <View style={styles.list_side}>
-                                    <Text style={styles.title}>신청자 : {item.client_username}</Text>
-                                    <Text style={styles.text}>{item.client_email}</Text>
-                                    <Text style={styles.text}>{item.content}</Text>
+                                        <Text style={styles.title}>신청자 : {item.client_username}</Text>
+                                        <Text style={styles.text}>{item.client_email}</Text>
+                                        <Text style={styles.text}>{item.content}</Text>
                                     </View>
                                 </View>
                             </TouchableOpacity>
@@ -97,7 +93,7 @@ class CounselorApplyScreen extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounselorApplyScreen);
+export default connect(mapStateToProps)(CounselorApplyScreen);
 
 const styles = StyleSheet.create({
     container : {

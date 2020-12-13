@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react'
 import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'react-native'
 import axios from '../../axiosConfig'
@@ -58,7 +50,7 @@ class passwordModificationScreen extends React.Component {
         <Text style={styles.result}>비밀번호 수정</Text>
 
         <View style={styles.input}>
-            <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>기존 비밀번호 : </Text>
+            <Text style={{fontSize: 15 , fontFamily: 'netmarbleM'}}>기존 비밀번호 : </Text>
             <TextInput style={styles.title}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
@@ -69,7 +61,7 @@ class passwordModificationScreen extends React.Component {
             }}/>
         </View>
         <View style={styles.input}>
-            <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>비밀번호 : </Text>
+            <Text style={{fontSize: 15 , fontFamily: 'netmarbleM'}}>새로운 비밀번호 : </Text>
             <TextInput style={styles.title}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
@@ -80,7 +72,7 @@ class passwordModificationScreen extends React.Component {
             }}/>
         </View>
         <View style={styles.input}>
-            <Text style={{fontSize: 18 , fontFamily: 'netmarbleM'}}>비밀번호 재입력 : </Text>
+            <Text style={{fontSize: 15 , fontFamily: 'netmarbleM'}}>비밀번호 재입력 : </Text>
             <TextInput style={styles.introduce}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
@@ -125,7 +117,7 @@ const styles = StyleSheet.create({
   },
   introduce:{
     borderRadius: 5,
-    width:wp('70%'),
+    width:wp('50%'),
     fontSize:18,
     backgroundColor:'#fafafa',
     paddingLeft:wp('5%'),

@@ -78,7 +78,7 @@ export const removeUserData = async () => {
 //           axios.defaults.headers.common.Authorization = res.data.key
 //           dispatch(loginSuccess())
 //           dispatch(storeUserData(res.data))
-//         }) 
+//         })
 //         .catch(err=>console.log(err))
 //       }).catch((error) => {
 //         console.log(error)
@@ -99,7 +99,6 @@ export function requestLogin (data) {
         axios.defaults.headers.common.Authorization = res.data.key
         dispatch(loginSuccess())
         dispatch(storeUserData(res.data))
-
       }).catch((error) => {
         // alert('Login Failed : ' + error)
         console.log(error)

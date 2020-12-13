@@ -27,7 +27,7 @@ class RecordVideo extends React.Component {
     super()
     this.state = {
       uri: '',
-      recording: '',
+      recording: ''
     }
   }
 
@@ -55,7 +55,7 @@ class RecordVideo extends React.Component {
         onPress={this.startRecording.bind(this)}
         style={styles.record}
       >
-        <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleB'}}> RECORD </Text>
+        <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}> RECORD </Text>
       </TouchableOpacity>
     )
 
@@ -65,7 +65,7 @@ class RecordVideo extends React.Component {
           onPress={this.stopRecording.bind(this)}
           style={styles.record}
         >
-          <Text style={{color:'white', fontSize:18, fontFamily:'netmarbleB'}}> STOP </Text>
+          <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}> STOP </Text>
         </TouchableOpacity>
       )
     }
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   preview: {
     flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   record: {
     marginVertical: hp('3%'),
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(114,174,148,0.5)',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius:5,
+    borderRadius: 5
   },
   result: {
     fontSize: 23,
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     paddingTop: hp('3%'),
     paddingBottom: hp('3%'),
     fontFamily: 'netmarbleB',
-    color:'white',
-    backgroundColor:'rgba(114,174,148,0.9)'
+    color: 'white',
+    backgroundColor: 'rgba(114,174,148,0.9)'
   }
 })

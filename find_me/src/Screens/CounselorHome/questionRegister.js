@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import {StyleSheet,  View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {
@@ -18,27 +10,22 @@ import { connect } from 'react-redux'
 const mapStateToProps = (state) => ({
     token: state
   })
-  
-  const mapDispatchToProps = (dispatch) => ({
-    requestLogout: () => dispatch(requestLogout())
-  })
-
-  class QuestionRegister extends React.Component {
-      constructor(){
-          super();
-          this.state={
+class QuestionRegister extends React.Component {
+    constructor(){
+        super();
+        this.state={
             question: '',
-          }
-      }
+        }
+    }
 
-      submission = async() => {
-          const data = {
-              question : this.state.question,
-              client: this.props.route.params.client.client_email
-          }
-          await axios.post('/tasks/questions/', data, 
-          { headers: {
-            'Authorization' : `Token ${this.props.token.auth.token}`
+    submission = async() => {
+        const data = {
+            question : this.state.question,
+            client: this.props.route.params.client.client_email
+        }
+        await axios.post('/tasks/questions/', data, 
+            { headers: {
+                'Authorization' : `Token ${this.props.token.auth.token}`
             }
         })
         .then(res=>{
@@ -47,41 +34,38 @@ const mapStateToProps = (state) => ({
             this.props.navigation.navigate('Home')
         })
         .catch(err=>console.log(err))
-      }
+    }
       
-      render() {
+    render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.result}>영상 질문 등록</Text>
                 <View style={styles.title}>
-                <Text style={{fontSize: 18 , fontFamily: 'netmarbleL', marginBottom:hp('1%')}}>내담자 : {this.props.route.params.client.client_username}</Text>
-                <Text style={{fontSize: 18 , fontFamily: 'netmarbleL', color:'gray'}}>이메일 : {this.props.route.params.client.client_email}</Text>
+                    <Text style={{fontSize: 18 , fontFamily: 'netmarbleL', marginBottom:hp('1%')}}>내담자 : {this.props.route.params.client.client_username}</Text>
+                    <Text style={{fontSize: 18 , fontFamily: 'netmarbleL', color:'gray'}}>이메일 : {this.props.route.params.client.client_email}</Text>
                 </View>
                 <View style={styles.input}>
-                <TextInput
-                  style={styles.diaryname}
-                  multiline={true}
-                  placeholder="내담자에게 물어보고 싶은 질문을 적어주세요!"
-                  value={this.state.question}
-                  onChangeText={(text) => {
-                  this.setState({question: text})             
-                  }}
-                />
+                    <TextInput
+                    style={styles.diaryname}
+                    multiline={true}
+                    placeholder="내담자에게 물어보고 싶은 질문을 적어주세요!"
+                    value={this.state.question}
+                    onChangeText={(text) => {
+                        this.setState({question: text})             
+                    }}/>
                 </View>
                 <TouchableOpacity
                     style={styles.apply}
                     onPress={()=>{
                         this.submission();
-                     }}
-                >
+                    }}>
                     <Text style={{ color: 'white', fontSize: 18, fontFamily:'netmarbleB' }}>제출</Text>
-                 </TouchableOpacity>
-                 
+                </TouchableOpacity>
             </View>
         )
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionRegister)
+export default connect(mapStateToProps)(QuestionRegister)
 
 const styles = StyleSheet.create({
     container : {
@@ -92,7 +76,6 @@ const styles = StyleSheet.create({
         fontSize: 18 , 
         fontFamily: 'netmarbleM', 
         padding:'4%',
-        
     },
     result: {
         fontSize: 23,

@@ -48,7 +48,7 @@ class MypageScreen extends React.Component {
             flag: false,
             datas: [
                 {key:'0', data:'회원 정보 수정', icon:'account-circle-outline'},
-                {key:'1', data:'비밀번호 수정', icon:'account-circle-outline'},
+                {key:'1', data:'비밀 번호 변경', icon:'lock-outline'},
                 {key:'2', data:'상담 신청서 수정', icon:'grease-pencil'},
                 {key:'3', data:'로그아웃', icon:'logout-variant'},
             ],

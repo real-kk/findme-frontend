@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,  View, Text, FlatList, TouchableOpacity, Platform} from 'react-native';
+import { StyleSheet,  View, Text, TouchableOpacity, Platform} from 'react-native';
 import { connect } from 'react-redux'
 import axios from '../../axiosConfig'
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
@@ -13,11 +13,7 @@ import { Buffer } from 'buffer';
 
 const mapStateToProps = (state) => ({
     token: state
-  })
-
-const mapDispatchToProps = (dispatch) => ({
-    requestLogout: () => dispatch(requestLogout())
-  })
+})
 
 class STT extends React.Component {
   constructor(props) {
@@ -41,11 +37,10 @@ class STT extends React.Component {
       bitsPerSample: 16,
       wavFile: 'test.wav'
     };
-    
     AudioRecord.init(options);
     AudioRecord.on('data', data => {
       const chunk = Buffer.from(data, 'base64')
-    });
+    })
   }
 
   onStartRecord = async() => {
@@ -62,7 +57,7 @@ class STT extends React.Component {
       })
       return;
     })
-  };
+  }
 
   onStopRecord = async () => {
     if (!this.state.recording) return
@@ -90,49 +85,44 @@ class STT extends React.Component {
     })
     .catch(err=>console.log(err))
   }
-
   render() {  
     return (
       <View style={styles.container}>
         <Text style={styles.result}>상담 녹음 및 파일 변환</Text>
         <Text style={styles.introduce}>상담 내용을 녹음한 뒤 변환하기 버튼을 누르면 텍스트로 변환된 결과가 등록된 이메일로 전송됩니다!</Text>
         <View style={styles.timer}>
-        <Icon name="mic" size={100} color='rgba(114,174,148,0.9)'/>
-        <Text style={styles.time}>{this.state.recordTime}</Text>
+          <Icon name="mic" size={100} color='rgba(114,174,148,0.9)'/>
+          <Text style={styles.time}>{this.state.recordTime}</Text>
         </View>
         <View style={{flexDirection:'row'}}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={()=>{
-            this.onStartRecord();
-          }}
-        >
-          <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>RECORD</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={()=>{
-            this.onStopRecord();
-          }}
-        >
-          <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>STOP</Text>
-        </TouchableOpacity>
-              
-        <TouchableOpacity
-          style={styles.button}
-          onPress={()=>{
-            this.onSubmission();
-          }}
-        >
-          <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>변환하기</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={()=>{
+              this.onStartRecord();
+            }}>
+            <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>RECORD</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={()=>{
+              this.onStopRecord();
+            }}>
+            <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>STOP</Text>
+          </TouchableOpacity>    
+          <TouchableOpacity
+            style={styles.button}
+            onPress={()=>{
+              this.onSubmission();
+            }}>
+            <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>변환하기</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(STT);
+export default connect(mapStateToProps)(STT);
 
 const styles = StyleSheet.create({
   container: {

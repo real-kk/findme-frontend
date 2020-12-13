@@ -7,7 +7,7 @@
  */
 
 import React from 'react'
-import { StyleSheet, View, Text, ScrollView, Platform, StatusBar } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Text, ScrollView, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import {
   widthPercentageToDP as wp,
@@ -32,11 +32,11 @@ class DiaryResult extends React.Component {
 
   render () {
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
           <Text style={styles.result}>감정일기 확인</Text>
           <View>
             <Text style={styles.diary}>
-             Diary
+             Emotional Diary
             </Text>
             <View style={styles.inside}>
             <Text style={styles.title}>{this.props.route.params.diary.title}</Text>
@@ -46,7 +46,17 @@ class DiaryResult extends React.Component {
             </Text>
             </View>
           </View>
-        </View>
+          <TouchableOpacity
+            onPress={() => {
+              /* this.props.navigation.navigate('CounselingRequest', {
+              }) */
+            }}
+                >
+            <View style={styles.store}>
+              <Text style={{ color: 'white', fontSize: 18, fontFamily: 'netmarbleB' }}>수정하기</Text>
+            </View>
+        </TouchableOpacity>
+        </ScrollView>
     )
   }
 }
@@ -60,13 +70,13 @@ const styles = StyleSheet.create({
   },
   date: {
     paddingTop: hp('2%'),
-    textAlign:'center',
+    textAlign: 'center',
     fontFamily: 'netmarbleL',
     fontSize: 14,
     color: 'gray'
   },
   diary: {
-    marginTop: hp('2%'),
+    marginVertical: hp('2%'),
     borderRadius: 2,
     fontSize: 40,
     width: wp('100%'),
@@ -79,22 +89,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#fafafa',
     borderColor: '#fafafa',
-    height: hp('70%'),
-    marginTop: hp('2%'),
-    marginRight: wp('5%'),
-    marginLeft: wp('5%'),
+    padding: '5%',
+    marginHorizontal: wp('5%')
   },
   title: {
     paddingTop: hp('3%'),
-    textAlign:'center',
+    textAlign: 'center',
     fontFamily: 'netmarbleM',
-    fontSize: 25,
+    fontSize: 25
   },
   text: {
     paddingTop: hp('5%'),
     fontSize: 15,
-    fontFamily:'netmarbleL',
-    paddingHorizontal: wp('5%'),
+    fontFamily: 'netmarbleL',
+    paddingHorizontal: wp('5%')
   },
   result: {
     fontSize: 23,
@@ -102,7 +110,17 @@ const styles = StyleSheet.create({
     paddingTop: hp('3%'),
     paddingBottom: hp('3%'),
     fontFamily: 'netmarbleB',
-    color:'white',
-    backgroundColor:'rgba(114,174,148,0.9)',
+    color: 'white',
+    backgroundColor: 'rgba(114,174,148,0.9)'
   },
+  store: {
+    marginLeft: wp('25%'),
+    marginTop: hp('5%'),
+    width: wp('50%'),
+    borderRadius: 5,
+    height: hp('6%'),
+    backgroundColor: 'rgba(114,174,148,0.5)',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 })

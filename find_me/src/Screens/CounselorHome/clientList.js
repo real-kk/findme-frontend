@@ -11,10 +11,6 @@ const mapStateToProps = (state) => ({
     token: state
   })
 
-const mapDispatchToProps = (dispatch) => ({
-    requestLogout: () => dispatch(requestLogout())
-  })
-
 class CounselorVideo extends React.Component {
     constructor(){
         super();
@@ -37,7 +33,7 @@ class CounselorVideo extends React.Component {
 
     componentDidMount(){
         this.getClientList()
-      }
+    }
     
     render() {
         return (
@@ -54,8 +50,7 @@ class CounselorVideo extends React.Component {
                                     this.props.navigation.navigate('QuestionRegister', {
                                         client: this.state.clientList[index]
                                     })
-                                }}
-                            >
+                                }}>
                                 <View style={styles.list}>
                                     <Image 
                                     style={styles.user}
@@ -77,7 +72,7 @@ class CounselorVideo extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounselorVideo);
+export default connect(mapStateToProps)(CounselorVideo);
 
 const styles = StyleSheet.create({
     container : {
