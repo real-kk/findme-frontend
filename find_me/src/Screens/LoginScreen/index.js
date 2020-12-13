@@ -52,7 +52,7 @@ var radio_props = [
                 user_type: this.state.value
             }
             await this.props.requestLogin(data)
-
+            console.log(this.props.token.auth.token)
             this.setState({
                 emailInput: '',
                 pwInput: '',
@@ -71,7 +71,8 @@ var radio_props = [
                 let currentuserType = user[1][1];
             
                 this.props.storeUserData({token : userToken})
-                        
+                console.log(user)
+                console.log(this.props.token.auth.token)        
                 this.props.navigation.navigate('User', {userType: currentuserType});
             })
             .catch((err) => {

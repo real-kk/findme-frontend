@@ -47,7 +47,6 @@ class QuestionList extends React.Component {
         'Authorization' : `Token ${this.props.token.auth.token}`
     }})
     .then(({data})=>{
-        console.log(data[0].id)
         if(this._ismounted){
         this.setState({questionList: data})
         }

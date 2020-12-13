@@ -62,6 +62,7 @@ class MypageScreen extends React.Component {
     }
 
     componentDidMount(){
+      console.log(this.props.token.auth.token)
       axios.get('/users/selfinfos/',
       { headers: {
         'Authorization' : `Token ${this.props.token.auth.token}`
@@ -77,7 +78,20 @@ class MypageScreen extends React.Component {
           introduce: res.data.introduce === '' ? 'None!' : res.data.introduce,
         })
       })
-      .catch(err=>console.log(err))
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+        else if (error.request) {
+          console.log(error.request);
+        }
+        else {
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      });
 
       axios.get('/counsels/date/',
       { headers: {

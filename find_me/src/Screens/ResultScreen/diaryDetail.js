@@ -7,7 +7,7 @@
  */
 
 import React from 'react'
-import { StyleSheet, View, Text, ScrollView, Platform, StatusBar } from 'react-native'
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity ,Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import {
   widthPercentageToDP as wp,
@@ -29,6 +29,9 @@ class DiaryResult extends React.Component {
 
     }
   }
+  delete = () => {
+    
+  }
 
   render () {
     return (
@@ -38,13 +41,27 @@ class DiaryResult extends React.Component {
             <Text style={styles.diary}>
              Diary
             </Text>
-            <View style={styles.inside}>
+            <ScrollView style={styles.inside}>
             <Text style={styles.title}>{this.props.route.params.diary.title}</Text>
             <Text style={styles.date}>{this.props.route.params.diary.create_date} </Text>
             <Text style={styles.text}>
               {this.props.route.params.diary.content}
             </Text>
-            </View>
+            </ScrollView>
+
+            {/* <TouchableOpacity
+              onPress = {()=> {
+                
+              }}>
+              <Text>수정</Text>
+            </TouchableOpacity> */}
+
+            <TouchableOpacity
+              onPress = {()=> {
+                this.delete();
+              }}>
+              <Text>삭제</Text>
+            </TouchableOpacity>
           </View>
         </View>
     )

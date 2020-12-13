@@ -38,19 +38,27 @@ class passwordModificationScreen extends React.Component {
 
   submission = async() => {
     const data = {
-      original_password : this.state.password,
+      origin_password : this.state.password,
       new_password1 : this.state.new_password,
       new_password2 : this.state.passwordConfirm
     }
-    console.log(data)
     await axios.post('/users/reset/password/', data,
       { headers: {
-          'Authorization' : `Token ${this.props.token.auth.token}`
+          'Authorization' : `Token ${this.props.token.auth.token}`,
+          "Content-Type": "application/x-www-form-urlencoded"
       }})
       .then((res)=>{
-          console.log(res)
+          alert("비밀번호 변경이 완료되었습니다.")
+          this.props.navigation.push('Mypage')
       })
-      .catch(err=>console.log(err))
+      .catch((err)=>{
+        if(err.response.status === 400){
+          alert("새 비밀번호가 일치하지 않습니다.")
+        }
+        else if(err.response.status === 403){
+          alert("기존 비밀번호가 일치하지 않습니다.")
+        }
+      })
   }
   render () {
     return (

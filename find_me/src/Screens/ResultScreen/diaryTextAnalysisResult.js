@@ -58,6 +58,7 @@ class Diarytextanalysis extends React.Component {
   componentWillUnmount(){
     this._ismounted = false
   }
+  
   render() {
     return (
       <View style={styles.container}>
