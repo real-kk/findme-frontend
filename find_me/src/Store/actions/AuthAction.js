@@ -92,13 +92,31 @@ export function requestLogin (data) {
     dispatch(login())
     return axios.post('/rest-auth/login/', data)
       .then((res) => {
-        const obj = JSON.parse(res.config.data)
-        const item = [['userToken', res.data.key], ['userType', obj.user_type]]
-        saveStorage(item)
-        // setUserData('userToken', res.data.key);
-        axios.defaults.headers.common.Authorization = res.data.key
-        dispatch(loginSuccess())
-        dispatch(storeUserData(res.data))
+        return axios.get('/users/isactive/', {
+          headers: {
+            Authorization: `Token ${res.data.key}`
+          }
+        })
+          .then(data => {
+            console.log(data.data)
+            if (data.data === false) {
+              alert('인증을 진행 하세요.')
+              dispatch(loginFailure())
+            } else {
+              const obj = JSON.parse(res.config.data)
+              const item = [['userToken', res.data.key], ['userType', obj.user_type]]
+              saveStorage(item)
+              // setUserData('userToken', res.data.key);
+              axios.defaults.headers.common.Authorization = res.data.key
+              console.log('item' + item)
+              console.log('key' + res.data.key)
+              dispatch(loginSuccess())
+              dispatch(storeUserData(res.data))
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
       }).catch((error) => {
         // alert('Login Failed : ' + error)
         console.log(error)
