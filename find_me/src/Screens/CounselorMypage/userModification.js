@@ -30,9 +30,10 @@ class userModificationScreen extends React.Component {
 
   addImage = () => {
     ImagePicker.launchImageLibrary({}, res => {
-        this.setState({
-            image: res.uri
-        })
+      if(res.uri === undefined) return
+      this.setState({
+        image: res.uri
+      })
     })
   }
 

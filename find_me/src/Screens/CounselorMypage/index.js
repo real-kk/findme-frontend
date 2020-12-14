@@ -43,8 +43,7 @@ class CounselorMypage extends React.Component {
     this.props.navigation.navigate('Login')
     alert("로그아웃 되었다.")
   }
-
-  componentDidMount(){
+  getUser = () => {
     axios.get('/users/selfinfos/',
     { headers: {
       'Authorization' : `Token ${this.props.token.auth.token}`
@@ -73,7 +72,16 @@ class CounselorMypage extends React.Component {
       })
     })
     .catch(err=>console.log(err))
+  }
+
+  componentDidMount(){
+    this.getUser()
   } 
+
+  componenDidUpdate(){
+    this.getUser()
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -83,7 +91,16 @@ class CounselorMypage extends React.Component {
             <Image 
             style={styles.user}
             source={{uri: this.state.image ? this.state.image : null}}/>
-            <Text style={{ fontSize:18, paddingTop:hp('1.5%'), fontFamily:'netmarbleB', textAlign:'center'}}>{this.state.name}</Text>
+            <View style={{flexDirection: 'row' }}>
+              <Text style={{ marginLeft: wp('4%'), fontSize:18, paddingTop:hp('2%'), fontFamily:'netmarbleB'}}>{this.state.name}</Text>
+              <TouchableOpacity
+                onPress={()=>{
+                  this.getUser()
+                }}
+              >
+                <Icon name='reload' size={22} style={{ color: 'black', paddingTop:hp('2%'), marginLeft: wp('1%')}}></Icon>
+              </TouchableOpacity>
+            </View>
           </View>
           <View style = {styles.profile_text}>
 

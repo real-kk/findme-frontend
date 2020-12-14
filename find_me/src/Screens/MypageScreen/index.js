@@ -49,6 +49,48 @@ class MypageScreen extends React.Component {
         }
     }
     getUser = () => {
+      axios.get('/users/selfinfos/',
+      { headers: {
+        'Authorization' : `Token ${this.props.token.auth.token}`
+      }})
+      .then((res)=>{
+        this.setState({
+          userid: res.data.id,
+          name: res.data.username === null ? 'None' : res.data.username,
+          email: res.data.email,
+          user_type: res.data.user_type,
+          image: res.data.image === "" ? 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' 
+          :'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
+          introduce: res.data.introduce === '' ? 'None!' : res.data.introduce,
+        })
+        console.log(this.state.userid)
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+        else if (error.request) {
+          console.log(error.request);
+        }
+        else {
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      });
+
+      axios.get('/counsels/date/',
+      { headers: {
+        'Authorization' : `Token ${this.props.token.auth.token}`
+      }})
+      .then((res)=>{
+        this.setState({
+          link_man: res.data[0].counselor_username === undefined ? '없음' : res.data[0].counselor_username
+        })
+      })
+      .catch(err=>console.log(err))
+
       axios.get('/counsels/',
       { headers: {
         'Authorization' : `Token ${this.props.token.auth.token}`
@@ -86,96 +128,13 @@ class MypageScreen extends React.Component {
     }
 
     componentDidMount(){
-      axios.get('/users/selfinfos/',
-      { headers: {
-        'Authorization' : `Token ${this.props.token.auth.token}`
-      }})
-      .then((res)=>{
-        this.setState({
-          userid: res.data.id,
-          name: res.data.username === null ? 'None' : res.data.username,
-          email: res.data.email,
-          user_type: res.data.user_type,
-          image: res.data.image === "" ? 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' 
-          :'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
-          introduce: res.data.introduce === '' ? 'None!' : res.data.introduce,
-        })
-        console.log(this.state.userid)
-      })
-      .catch(function (error) {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
-        else if (error.request) {
-          console.log(error.request);
-        }
-        else {
-          console.log('Error', error.message);
-        }
-        console.log(error.config);
-      });
-
-      axios.get('/counsels/date/',
-      { headers: {
-        'Authorization' : `Token ${this.props.token.auth.token}`
-      }})
-      .then((res)=>{
-        this.setState({
-          link_man: res.data[0].counselor_username === undefined ? '없음' : res.data[0].counselor_username
-        })
-      })
-      .catch(err=>console.log(err))
-
       this.getUser()
     }
 
     componenDidUpdate(){
-      axios.get('/users/selfinfos/',
-      { headers: {
-        'Authorization' : `Token ${this.props.token.auth.token}`
-      }})
-      .then((res)=>{
-        this.setState({
-          userid: res.data.id,
-          name: res.data.username === null ? 'None' : res.data.username,
-          email: res.data.email,
-          user_type: res.data.user_type,
-          image: res.data.image === "" ? 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' 
-          :'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
-          introduce: res.data.introduce === '' ? 'None!' : res.data.introduce,
-        })
-        console.log(this.state.userid)
-      })
-      .catch(function (error) {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
-        else if (error.request) {
-          console.log(error.request);
-        }
-        else {
-          console.log('Error', error.message);
-        }
-        console.log(error.config);
-      });
-
-      axios.get('/counsels/date/',
-      { headers: {
-        'Authorization' : `Token ${this.props.token.auth.token}`
-      }})
-      .then((res)=>{
-        this.setState({
-          link_man: res.data[0].counselor_username === undefined ? '없음' : res.data[0].counselor_username
-        })
-      })
-      .catch(err=>console.log(err))
-
       this.getUser()
     }
+
     render() {
       return (
           <View style={styles.container}>
@@ -185,7 +144,16 @@ class MypageScreen extends React.Component {
                     <Image 
                     style={styles.user}
                     source={{uri: this.state.image ? this.state.image : null}}/>
-                    <Text style={{ fontSize:18, paddingTop:hp('1.5%'), fontFamily:'netmarbleB', textAlign:'center'}}>{this.state.name}</Text>
+                    <View style={{flexDirection: 'row' }}>
+                      <Text style={{ marginLeft: wp('4%'), fontSize:18, paddingTop:hp('2%'), fontFamily:'netmarbleB'}}>{this.state.name}</Text>
+                      <TouchableOpacity
+                        onPress={()=>{
+                          this.getUser()
+                        }}
+                      >
+                        <Icon name='reload' size={22} style={{ color: 'black', paddingTop:hp('2%'), marginLeft: wp('1%')}}></Icon>
+                      </TouchableOpacity>
+                    </View>
                     </View>
                     <View style = {styles.profile_text}>
                         <Text style={{fontSize:16, marginBottom:hp('0.5%'), fontFamily:'netmarbleM', color:'gray'}}>이메일</Text>
