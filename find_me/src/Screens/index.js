@@ -265,11 +265,6 @@ function MypageStack () {
           name="Mypage"
           component={MypageScreen}
           navigation={navigation}
-          listeners={({navigation}) =>({
-            tabPress: e => {
-              navigation.navigate('Mypage', {refresh : true})
-            },
-          })}
         />
         <Stack.Screen
           options={{ headerShown: false }}
