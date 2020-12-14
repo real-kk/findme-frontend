@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
   },
   store: {
     marginLeft: wp('25%'),
+    marginBottom: hp('5%'),
     marginTop: hp('5%'),
     width: wp('50%'),
     borderRadius: 5,

@@ -29,6 +29,7 @@ class userModificationScreen extends React.Component {
 
   addImage = () => {
     ImagePicker.launchImageLibrary({}, res => {
+      if(res.uri === undefined) return;''
         this.setState({
             image: res.uri
         })
@@ -54,14 +55,22 @@ class userModificationScreen extends React.Component {
       name: `${year}-${month}-${date}_${hours}${min}${sec}.jpg`
     })
     data.append('introduce', this.state.introduce)
-    await axios.put(`/users/${this.props.route.params.id}/`, data,
+    console.log(this.props.route.params.userid)
+    await axios.put(`/users/${this.props.route.params.userid}/`, data,
       { headers: {
           'Authorization' : `Token ${this.props.token.auth.token}`
       }})
       .then((res)=>{
-          this.props.navigation.push('Mypage')
+          this.props.navigation.navigate('Mypage')
       })
-      .catch(err=>console.log(err))
+      .catch((err)=>{
+        // if(err.response){
+        //   console.log(err.response.data);
+        //   console.log(err.response.status);
+        //   console.log(err.response.headers);
+        // }
+        console.log(err)
+      })
   }
   render () {
     return (

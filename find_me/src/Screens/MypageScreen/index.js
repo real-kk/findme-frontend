@@ -22,6 +22,7 @@ class MypageScreen extends React.Component {
     constructor(){
         super();
         this.state={
+            userid: '',
             id: '',
             name: '',
             email: '',
@@ -85,14 +86,13 @@ class MypageScreen extends React.Component {
     }
 
     componentDidMount(){
-      console.log(this.props.token.auth.token)
       axios.get('/users/selfinfos/',
       { headers: {
         'Authorization' : `Token ${this.props.token.auth.token}`
       }})
       .then((res)=>{
         this.setState({
-          id: res.data.id,
+          userid: res.data.id,
           name: res.data.username === null ? 'None' : res.data.username,
           email: res.data.email,
           user_type: res.data.user_type,
@@ -100,6 +100,7 @@ class MypageScreen extends React.Component {
           :'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
           introduce: res.data.introduce === '' ? 'None!' : res.data.introduce,
         })
+        console.log(this.state.userid)
       })
       .catch(function (error) {
         if (error.response) {
@@ -130,6 +131,51 @@ class MypageScreen extends React.Component {
       this.getUser()
     }
 
+    componenDidUpdate(){
+      axios.get('/users/selfinfos/',
+      { headers: {
+        'Authorization' : `Token ${this.props.token.auth.token}`
+      }})
+      .then((res)=>{
+        this.setState({
+          userid: res.data.id,
+          name: res.data.username === null ? 'None' : res.data.username,
+          email: res.data.email,
+          user_type: res.data.user_type,
+          image: res.data.image === "" ? 'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + 'users/no_img.png' 
+          :'https://findme-app.s3.ap-northeast-2.amazonaws.com/' + res.data.image,
+          introduce: res.data.introduce === '' ? 'None!' : res.data.introduce,
+        })
+        console.log(this.state.userid)
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+        else if (error.request) {
+          console.log(error.request);
+        }
+        else {
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      });
+
+      axios.get('/counsels/date/',
+      { headers: {
+        'Authorization' : `Token ${this.props.token.auth.token}`
+      }})
+      .then((res)=>{
+        this.setState({
+          link_man: res.data[0].counselor_username === undefined ? '없음' : res.data[0].counselor_username
+        })
+      })
+      .catch(err=>console.log(err))
+
+      this.getUser()
+    }
     render() {
       return (
           <View style={styles.container}>
@@ -160,7 +206,7 @@ class MypageScreen extends React.Component {
                                 onPress={()=> {
                                     if(item.key === '0'){
                                         this.props.navigation.push('userModification', {
-                                          id: this.state.id,
+                                          userid: this.state.userid,
                                           email: this.state.email,
                                           name: this.state.name,
                                           user_type: this.state.user_type,

@@ -61,7 +61,7 @@ class userModificationScreen extends React.Component {
           'Authorization' : `Token ${this.props.token.auth.token}`
       }})
       .then((res)=>{
-          this.props.navigation.push('CounselorMypage')
+          this.props.navigation.navigate('CounselorMypage')
       })
       .catch(err=>console.log(err))
   }
