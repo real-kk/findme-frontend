@@ -55,7 +55,6 @@ class userModificationScreen extends React.Component {
       name: `${year}-${month}-${date}_${hours}${min}${sec}.jpg`
     })
     data.append('introduce', this.state.introduce)
-    console.log(this.props.route.params.userid)
     await axios.put(`/users/${this.props.route.params.userid}/`, data,
       { headers: {
           'Authorization' : `Token ${this.props.token.auth.token}`
@@ -64,11 +63,6 @@ class userModificationScreen extends React.Component {
           this.props.navigation.navigate('Mypage')
       })
       .catch((err)=>{
-        // if(err.response){
-        //   console.log(err.response.data);
-        //   console.log(err.response.status);
-        //   console.log(err.response.headers);
-        // }
         console.log(err)
       })
   }

@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     diaryname : {
         fontSize: 18 , 
         fontFamily: 'netmarbleM', 
-        padding:'4%',
+        padding:'6%',
     },
     result: {
         fontSize: 23,

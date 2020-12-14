@@ -29,7 +29,7 @@ class ApplicationDetail extends React.Component {
     })
     .then((res) => {
       alert("반려 완료!")
-      this.props.navigation.push('Home')
+      this.props.navigation.push('Apply')
     })
     .catch(err=>console.log(err))
   }   
@@ -57,7 +57,7 @@ class ApplicationDetail extends React.Component {
     })
     .then((res) => {
       alert("승인 완료!")
-      this.props.navigation.push('Home')
+      this.props.navigation.push('Apply')
     })
     .catch(err => console.log(err))
   }
